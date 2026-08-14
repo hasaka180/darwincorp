@@ -342,8 +342,8 @@ export default function CoreServices() {
         <span className="collab__label">In collaboration with</span>
         <div className="collab__logos">
           {[
-            { src: "/assets/claude.webp", alt: "Claude" },
-            { src: "/assets/webflow.svg", alt: "Webflow" },
+            { src: "/assets/webflow.png", alt: "Webflow" },
+            { src: "/assets/claude.png", alt: "Claude" },
             { src: "/assets/higgsfield.png", alt: "Higgsfield" },
           ].map((l) => (
             // eslint-disable-next-line @next/next/no-img-element

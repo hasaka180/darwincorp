@@ -3232,22 +3232,19 @@ a {
   gap: clamp(24px, 4vw, 56px);
 }
 
-/* Original-colour logos on subtle light chips so they read on the dark section. */
+/* Logos carry their own chip artwork; drop-shadow follows their shape. */
 .collab__logo {
-  height: clamp(30px, 3.4vw, 42px);
+  height: clamp(46px, 5.4vw, 68px);
   width: auto;
   object-fit: contain;
-  padding: clamp(9px, 1.1vw, 13px) clamp(16px, 1.8vw, 24px);
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
   transition: transform 0.25s cubic-bezier(0.16, 0.8, 0.24, 1),
-    box-shadow 0.25s ease;
+    filter 0.25s ease;
 }
 
 .collab__logo:hover {
   transform: translateY(-4px) scale(1.04);
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.4);
+  filter: drop-shadow(0 16px 34px rgba(0, 0, 0, 0.45));
 }
 
 @media (max-width: 720px) {
