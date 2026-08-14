@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 const STATS = [
   { num: "40+", label: "Brands Shaped" },
   { num: "15", label: "Countries Served" },
@@ -31,6 +33,35 @@ function Globe() {
 }
 
 export default function About() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Autoplay the mobile card carousel — advance one full card at a time.
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const mq = window.matchMedia("(max-width: 900px)");
+    let paused = false;
+    const onDown = () => { paused = true; };
+    const onUp = () => { setTimeout(() => (paused = false), 5000); };
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointerup", onUp);
+
+    const id = setInterval(() => {
+      if (!mq.matches || paused) return;
+      const first = el.firstElementChild as HTMLElement | null;
+      const step = first ? first.getBoundingClientRect().width + 16 : el.clientWidth;
+      const max = el.scrollWidth - el.clientWidth;
+      const next = el.scrollLeft + step > max + 4 ? 0 : el.scrollLeft + step;
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }, 4200);
+
+    return () => {
+      clearInterval(id);
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointerup", onUp);
+    };
+  }, []);
+
   return (
     <section className="about" data-theme="light">
       <div className="about__grid">
@@ -43,6 +74,7 @@ export default function About() {
           ))}
         </div>
 
+        <div className="about__cards" ref={carouselRef}>
         <a
           className="about__card about__brand"
           href="https://dubaiography.com"
@@ -109,6 +141,7 @@ export default function About() {
             <h3>Spline &amp; Motion Studio</h3>
             <span className="about__learn">Learn More →</span>
           </div>
+        </div>
         </div>
       </div>
     </section>
