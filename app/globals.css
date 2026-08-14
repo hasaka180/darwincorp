@@ -3350,3 +3350,14 @@ a {
 .fab__chat-btn:hover {
   opacity: 0.85;
 }
+
+@media (max-width: 640px) {
+  .toolbox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .toolbox__marquee {
+    width: 100%;
+  }
+}
