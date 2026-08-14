@@ -3361,3 +3361,49 @@ a {
     width: 100%;
   }
 }
+
+/* ===================== MOBILE: nav + hero ===================== */
+@media (max-width: 768px) {
+  /* Floating nav moves to the bottom */
+  .nav {
+    top: auto;
+    bottom: 20px;
+  }
+
+  /* Lift the floating action buttons above the bottom nav */
+  .fab {
+    bottom: 90px;
+  }
+
+  /* Hero: heading near the top, pitch/stats/CTA near the bottom — no overlap */
+  .hero__heading {
+    top: clamp(84px, 15vh, 150px);
+    bottom: auto;
+    left: 24px;
+    right: 24px;
+  }
+
+  .hero__pitch {
+    left: 24px;
+    right: 24px;
+    top: auto;
+    bottom: 104px;
+    transform: none;
+    width: auto;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .hero__pitch-text {
+    font-size: 13pt;
+  }
+
+  .hero__stats {
+    gap: 22px;
+    margin-top: 22px;
+  }
+
+  .cta-btn {
+    margin-top: 22px;
+  }
+}
