@@ -340,16 +340,14 @@ export default function CoreServices() {
 
       <div className="collab reveal" style={{ transitionDelay: "0.6s" }}>
         <span className="collab__label">In collaboration with</span>
-        <div className="collab__grid">
+        <div className="collab__logos">
           {[
-            { name: "Claude", role: "AI & Automation" },
-            { name: "Webflow", role: "Web & CMS" },
-            { name: "Higgsfield", role: "Motion & Video" },
-          ].map((c) => (
-            <div key={c.name} className="collab__card">
-              <span className="collab__name">{c.name}</span>
-              <span className="collab__role">{c.role}</span>
-            </div>
+            { src: "/assets/claude.webp", alt: "Claude" },
+            { src: "/assets/webflow.svg", alt: "Webflow" },
+            { src: "/assets/higgsfield.png", alt: "Higgsfield" },
+          ].map((l) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img key={l.alt} className="collab__logo" src={l.src} alt={l.alt} loading="lazy" />
           ))}
         </div>
       </div>
