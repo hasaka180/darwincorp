@@ -1,5 +1,4 @@
 import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
 import StatusWidget from "@/components/StatusWidget";
 import Preloader from "@/components/Preloader";
 import StudioSection from "@/components/StudioSection";
@@ -24,7 +23,6 @@ export default function Home() {
       <Testimonials />
       <BestOfWeek />
       <ContactFooter />
-      <Navbar />
       <StatusWidget />
     </main>
   );

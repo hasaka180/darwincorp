@@ -3440,3 +3440,47 @@ a {
     margin-top: 22px;
   }
 }
+
+/* ===================== SUBPAGE (cases, etc.) ================= */
+.subpage {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 72vh;
+  padding: clamp(120px, 20vh, 200px) clamp(24px, 5vw, 90px) clamp(56px, 8vw, 110px);
+}
+
+.subpage__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 13, 0.5);
+}
+
+.subpage__title {
+  margin-top: 14px;
+  font-family: var(--font-instrument), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.subpage__empty {
+  margin-top: 40px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(11, 11, 13, 0.55);
+}
+
+.subpage__list {
+  margin-top: 30px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+}

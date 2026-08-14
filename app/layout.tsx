@@ -3,6 +3,7 @@ import { Instrument_Serif, Handjet, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import FloatingActions from "@/components/FloatingActions";
+import Navbar from "@/components/Navbar";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -43,6 +44,7 @@ export default function RootLayout({
     >
       <body>
         <SmoothScroll />
+        <Navbar />
         {children}
         <FloatingActions />
       </body>
