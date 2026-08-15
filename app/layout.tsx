@@ -28,7 +28,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Darwin — The Mirror of Imagination",
+  title: "Darwin - The Mirror of Imagination",
   description:
     "An immersive 3D hero with a mouse-reactive jellyfish, glass navigation, and full-page menus.",
 };

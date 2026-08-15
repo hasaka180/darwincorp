@@ -158,14 +158,14 @@ export default function About() {
             <h3>The Founder</h3>
             <p>
               I build things I believe should exist. Darwin Corp is my pursuit of
-              work that&apos;s genuinely innovative — products, brands, and
+              work that&apos;s genuinely innovative, products, brands, and
               experiences (like Dubaiography) that move people and leave the world
               a little better than I found it.
             </p>
             <p>
               I hold to the idea Steve Jobs lived by: the people crazy enough to
               think they can change the world are the ones who do. Every project is
-              a chance to contribute something that lasts — crafted with intent,
+              a chance to contribute something that lasts, crafted with intent,
               built with soul, and never settling for ordinary.
             </p>
             <div className="about__founder-actions">

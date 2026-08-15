@@ -2,7 +2,7 @@ import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import { SERVICES } from "@/lib/services";
 
-export const metadata = { title: "Services — Darwin Corp" };
+export const metadata = { title: "Services - Darwin Corp" };
 
 export default function ServicesPage() {
   return (

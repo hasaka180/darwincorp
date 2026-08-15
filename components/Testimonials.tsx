@@ -27,7 +27,7 @@ const ITEMS: Item[] = [
     ],
     tag: "Testimonial",
     headline: "A partner, not just a vendor",
-    body: "Tapping into shared vision and craft, the team rebuilt our identity from the ground up — motion-first, meticulously executed, and delivered ahead of schedule. Every decision felt intentional and built to last.",
+    body: "Tapping into shared vision and craft, the team rebuilt our identity from the ground up, motion-first, meticulously executed, and delivered ahead of schedule. Every decision felt intentional and built to last.",
   },
   {
     quoteShort: "The most seamless launch we've ever had.",
@@ -45,7 +45,7 @@ const ITEMS: Item[] = [
     ],
     tag: "Testimonial",
     headline: "Clarity, intent, precision",
-    body: "From strategy to build, they stayed deeply involved. The result is a site that finally moves the way our brand should — fast, considered, and genuinely ours.",
+    body: "From strategy to build, they stayed deeply involved. The result is a site that finally moves the way our brand should, fast, considered, and genuinely ours.",
   },
 ];
 

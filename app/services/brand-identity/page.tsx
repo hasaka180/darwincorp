@@ -3,9 +3,9 @@ import ContactFooter from "@/components/ContactFooter";
 import Faq, { type QA } from "@/components/Faq";
 
 export const metadata = {
-  title: "Brand Identity Design in Dubai — Darwin Corp",
+  title: "Brand Identity Design in Dubai - Darwin Corp",
   description:
-    "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications — distinctive brand systems built to evolve.",
+    "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.",
   alternates: { canonical: "/services/brand-identity" },
 };
 
@@ -38,9 +38,9 @@ const BUILD = [
 ];
 
 const APPROACH = [
-  { n: "01", title: "Discover", sub: "Start with the why.", body: "Before we design anything, we get to know your business. We explore your ambition, audience, competitors, strengths, challenges and the space you want to own.", result: "A clear understanding of where your brand stands — and where it needs to go." },
-  { n: "02", title: "Define", sub: "Find your position.", body: "We turn research and conversations into a strategic foundation — what your brand stands for, who it speaks to, why it matters and what makes it different.", result: "A focused brand strategy that gives every creative decision a purpose." },
-  { n: "03", title: "Create", sub: "Give the brand a visual voice.", body: "We explore creative territories, develop the identity system and refine every detail — from the logo and typography to colour, imagery and graphic language.", result: "A distinctive identity designed to be recognised and remembered." },
+  { n: "01", title: "Discover", sub: "Start with the why.", body: "Before we design anything, we get to know your business. We explore your ambition, audience, competitors, strengths, challenges and the space you want to own.", result: "A clear understanding of where your brand stands, and where it needs to go." },
+  { n: "02", title: "Define", sub: "Find your position.", body: "We turn research and conversations into a strategic foundation, what your brand stands for, who it speaks to, why it matters and what makes it different.", result: "A focused brand strategy that gives every creative decision a purpose." },
+  { n: "03", title: "Create", sub: "Give the brand a visual voice.", body: "We explore creative territories, develop the identity system and refine every detail, from the logo and typography to colour, imagery and graphic language.", result: "A distinctive identity designed to be recognised and remembered." },
   { n: "04", title: "Build", sub: "Turn the identity into a system.", body: "We develop the rules, assets and applications needed to keep your brand consistent across digital, print, social and physical environments.", result: "A flexible brand system your team can confidently use." },
   { n: "05", title: "Launch", sub: "Put the brand into the world.", body: "From final artwork and brand guidelines to launch assets and key applications, we make sure your new identity is ready to perform from day one.", result: "A complete, organised brand ready to evolve." },
 ];
@@ -88,7 +88,7 @@ const jsonLd = {
       provider: { "@type": "Organization", name: "Darwin Corp", url: "https://thedarwin.co" },
       areaServed: "Worldwide",
       description:
-        "Strategy-led brand identity design — brand strategy, naming, logo design, visual identity, guidelines and applications.",
+        "Strategy-led brand identity design, brand strategy, naming, logo design, visual identity, guidelines and applications.",
     },
     {
       "@type": "FAQPage",
@@ -115,7 +115,7 @@ export default function BrandIdentityPage() {
           A brand is more than a logo. It is the idea people take away, the feeling
           they associate with you, and the consistency they experience every time
           they meet your business. At Darwin, we build distinctive brand identities
-          from the ground up — combining strategy, positioning, visual identity and
+          from the ground up, combining strategy, positioning, visual identity and
           creative direction into one cohesive system.
         </p>
         <p className="bi-hero__note">
@@ -138,7 +138,7 @@ export default function BrandIdentityPage() {
           <h2 className="bi-h2">More than a logo.</h2>
           <div className="bi-split__body">
             <p>A strong identity gives your business a clear point of view. We uncover what makes your brand different, define how it should be perceived, and translate that thinking into a visual language that feels unmistakably yours.</p>
-            <p>Whether you&apos;re launching something new, repositioning an existing business, or taking an established brand into its next chapter, we create identities that are built for real-world use — not just a presentation screen.</p>
+            <p>Whether you&apos;re launching something new, repositioning an existing business, or taking an established brand into its next chapter, we create identities that are built for real-world use, not just a presentation screen.</p>
           </div>
         </div>
       </section>
@@ -270,7 +270,7 @@ export default function BrandIdentityPage() {
         <h2 className="bi-cta__title">Your next chapter deserves more than a new logo.</h2>
         <p className="bi-cta__lead">Let&apos;s build a brand with a point of view, a system with purpose, and an identity designed to grow with you.</p>
         <Link href="/contact" className="bi-btn bi-btn--light">Start a project →</Link>
-        <p className="bi-cta__sign">Darwin Corp — <em>Designed to Evolve.</em></p>
+        <p className="bi-cta__sign">Darwin Corp - <em>Designed to Evolve.</em></p>
       </section>
 
       <ContactFooter hideCta />

@@ -10,7 +10,7 @@ export default function ContentGrid({ items }: { items: ContentItem[] }) {
   if (!items.length) {
     return (
       <p className="subpage__empty">
-        Nothing here yet — add content in the studio.
+        Nothing here yet, add content in the studio.
       </p>
     );
   }

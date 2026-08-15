@@ -145,7 +145,7 @@ export default function CaseStudyModal({ slug, onClose }: { slug: string | null;
             </div>
 
             <footer className={styles.footer}>
-              <span>Hasaka™ — Selected Work</span>
+              <span>Hasaka™ - Selected Work</span>
               <button className={styles.footerClose} onClick={onClose}>Close ✕</button>
             </footer>
           </>

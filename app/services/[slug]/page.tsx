@@ -17,7 +17,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const svc = getService(slug);
-  return { title: svc ? `${svc.title} — Darwin Corp` : "Services — Darwin Corp" };
+  return { title: svc ? `${svc.title} - Darwin Corp` : "Services - Darwin Corp" };
 }
 
 export default async function ServiceDetail({

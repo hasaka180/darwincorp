@@ -482,7 +482,7 @@ function JournalEditor({ draft, set, isNew, setSlug, folder }: {
       </div>
       <div className={styles.seoBlock}>
         <div className={styles.seoHd}>SEO overrides <span>(leave blank to use title / excerpt)</span></div>
-        <label className={styles.full}>Meta title (Google headline)<input value={(draft as JournalPost & { metaTitle?: string }).metaTitle ?? ''} placeholder={`${draft.title} — Hasaka Sasaranga`} onChange={(e) => set({ metaTitle: e.target.value } as Partial<JournalPost>)} /></label>
+        <label className={styles.full}>Meta title (Google headline)<input value={(draft as JournalPost & { metaTitle?: string }).metaTitle ?? ''} placeholder={`${draft.title} - Hasaka Sasaranga`} onChange={(e) => set({ metaTitle: e.target.value } as Partial<JournalPost>)} /></label>
         <label className={styles.full}>Meta description (Google snippet · 150–160 chars)<textarea rows={2} value={(draft as JournalPost & { metaDescription?: string }).metaDescription ?? ''} placeholder={draft.excerpt ?? 'Short summary shown in search results…'} onChange={(e) => set({ metaDescription: e.target.value } as Partial<JournalPost>)} /></label>
       </div>
 
@@ -515,7 +515,7 @@ function JournalEditor({ draft, set, isNew, setSlug, folder }: {
 
       {/* ── JSON-LD ── */}
       <div className={styles.seoBlock}>
-        <div className={styles.seoHd}>JSON-LD schema <span>(for AI engines — paste full {"{ … }"} object)</span></div>
+        <div className={styles.seoHd}>JSON-LD schema <span>(for AI engines, paste full {"{ … }"} object)</span></div>
         <label className={styles.full}>
           <textarea
             className={styles.mdArea}

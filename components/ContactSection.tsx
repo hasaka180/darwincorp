@@ -85,7 +85,7 @@ export default function ContactSection() {
       message,
     ].join("\n");
     window.location.href = `mailto:hello@thedarwin.co?subject=${encodeURIComponent(
-      `New enquiry — ${service}`
+      `New enquiry - ${service}`
     )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
@@ -97,7 +97,7 @@ export default function ContactSection() {
           <span className="contactp__eyebrow">Contact</span>
           <h1 className="contactp__title">Let&apos;s build something.</h1>
           <p className="contactp__lead">
-            Tell us about your project — brand, web, or AI creative. We reply
+            Tell us about your project, brand, web, or AI creative. We reply
             within a day.
           </p>
 
@@ -112,7 +112,7 @@ export default function ContactSection() {
             </a>
             <span className="contactp__detail">
               <span className="contactp__detail-label">Studio</span>
-              Dubai, UAE — working worldwide
+              Dubai, UAE, working worldwide
             </span>
           </div>
 

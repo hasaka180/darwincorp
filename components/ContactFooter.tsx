@@ -79,7 +79,7 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
             </button>
           </form>
           <p className="contact__note">
-            Join the newsletter — occasional notes on brand, motion, and craft. No
+            Join the newsletter, occasional notes on brand, motion, and craft. No
             spam.
           </p>
         </div>
@@ -90,7 +90,7 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/darwin.svg" alt="Darwin Corp" className="footer__logo" />
           <p className="footer__tagline">
-            Darwin Corp — a motion-first brand &amp; product studio based in
+            Darwin Corp, a motion-first brand &amp; product studio based in
             Dubai, working worldwide. Dubaiography is a Darwin Corp product.
           </p>
           <div className="footer__contactline">
@@ -98,7 +98,7 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
             <a href="https://wa.me/971555355897" target="_blank" rel="noreferrer">
               +971 55 535 5897
             </a>
-            <span>Dubai, UAE — working worldwide</span>
+            <span>Dubai, UAE, working worldwide</span>
           </div>
           <div className="footer__socials">
             {SOCIALS.map((s) => (
