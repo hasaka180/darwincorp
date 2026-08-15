@@ -127,7 +127,7 @@ export default function About() {
               a chance to contribute something that lasts — crafted with intent,
               built with soul, and never settling for ordinary.
             </p>
-            <a className="about__learn" href="#contact">Work with me →</a>
+            <a className="about__learn" href="https://hasaka.io" target="_blank" rel="noreferrer">Learn more →</a>
           </div>
         </div>
 
