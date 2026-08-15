@@ -3525,6 +3525,7 @@ a {
   cursor: pointer;
   color: inherit;
   font-family: inherit;
+  text-decoration: none;
 }
 
 .cms-card__media {

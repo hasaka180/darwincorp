@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import styles from './CaseBuilder.module.css'
-import CaseStudyModal from './CaseStudyModal'
 import type { CaseStudy, JournalPost, Section, ContentItem, ContentType } from '@/lib/cases'
 
 /* ── HTML clipboard → Markdown converter (for rich paste) ── */
@@ -234,7 +233,6 @@ export default function CaseBuilder() {
   const [draft, setDraft] = useState<ContentItem | null>(null)
   const [isNew, setIsNew] = useState(false)
   const [msg, setMsg] = useState('')
-  const [preview, setPreview] = useState<string | null>(null)
   const lastSavedRef = useRef('')
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -369,7 +367,7 @@ export default function CaseBuilder() {
               <div className={styles.actions}>
                 {msg && <span className={styles.msg}>{msg}</span>}
                 {!isJournal(draft) && (
-                  <button className={styles.ghost} onClick={async () => { if (await save()) setPreview(draft.slug) }}>Save &amp; Preview</button>
+                  <button className={styles.ghost} onClick={async () => { if (await save()) window.open(`/cases/${draft.slug}`, '_blank', 'noopener') }}>Save &amp; Preview</button>
                 )}
                 <button className={styles.primary} onClick={save}>Save</button>
                 {!isNew && <button className={styles.danger} onClick={remove}>Delete</button>}
@@ -387,8 +385,6 @@ export default function CaseBuilder() {
           </>
         )}
       </main>
-
-      <CaseStudyModal slug={preview} onClose={() => setPreview(null)} />
     </div>
   )
 }

@@ -1,0 +1,48 @@
+.wrap {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: currentColor;
+  opacity: 0.5;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 26%, transparent);
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.2s;
+}
+.btn svg { width: 17px; height: 17px; display: block; }
+.btn:hover {
+  background: currentColor;
+  border-color: currentColor;
+  transform: translateY(-1px);
+}
+/* icon flips to the sheet background colour on hover for contrast */
+.btn:hover svg { color: var(--sb, #f3f1ee); }
+.copied {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: currentColor;
+  opacity: 0.7;
+}
