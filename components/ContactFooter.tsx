@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { SOCIALS } from "@/components/ContactSection";
 
 type Item = { label: string; href: string | null; ext?: boolean };
 const LINKS: { title: string; items: Item[] }[] = [
@@ -92,6 +93,27 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
             Darwin Corp — a motion-first brand &amp; product studio based in
             Dubai, working worldwide. Dubaiography is a Darwin Corp product.
           </p>
+          <div className="footer__contactline">
+            <a href="mailto:hello@thedarwin.co">hello@thedarwin.co</a>
+            <a href="https://wa.me/971555355897" target="_blank" rel="noreferrer">
+              +971 55 535 5897
+            </a>
+            <span>Dubai, UAE — working worldwide</span>
+          </div>
+          <div className="footer__socials">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.name}
+                className="footer__social"
+                href={s.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={s.name}
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
         </div>
 
         <div className="footer__cols">

@@ -4,7 +4,10 @@ import ContactFooter from "@/components/ContactFooter";
 import { SERVICES, getService } from "@/lib/services";
 
 export function generateStaticParams() {
-  return SERVICES.map((s) => ({ slug: s.slug }));
+  // brand-identity has its own bespoke page (app/services/brand-identity)
+  return SERVICES.filter((s) => s.slug !== "brand-identity").map((s) => ({
+    slug: s.slug,
+  }));
 }
 
 export async function generateMetadata({
