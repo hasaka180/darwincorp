@@ -29,7 +29,7 @@ export default function ContentGrid({ items }: { items: ContentItem[] }) {
             <button
               key={it.slug}
               type="button"
-              className="cms-card"
+              className="cms-card reveal-up"
               onClick={() => isCase && setSlug(it.slug)}
               aria-label={it.title}
             >

@@ -48,14 +48,14 @@ export default function ServicesPage() {
   return (
     <main>
       <section className="subpage" data-theme="light">
-        <header className="subpage__head">
+        <header className="subpage__head reveal-up">
           <span className="subpage__eyebrow">Services</span>
           <h1 className="subpage__title">What we do.</h1>
         </header>
 
         <div className="svc-grid">
           {SERVICES.map((s) => (
-            <div key={s.title} className="svc-card">
+            <div key={s.title} className="svc-card reveal-up">
               <span className="svc-card__icon">{s.icon}</span>
               <h3>{s.title}</h3>
               <p className="svc-card__tag">{s.tagline}</p>

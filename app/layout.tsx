@@ -4,6 +4,7 @@ import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import FloatingActions from "@/components/FloatingActions";
 import Navbar from "@/components/Navbar";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default function RootLayout({
     >
       <body>
         <SmoothScroll />
+        <ScrollReveal />
         <Navbar />
         {children}
         <FloatingActions />

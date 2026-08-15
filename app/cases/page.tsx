@@ -11,7 +11,7 @@ export default async function CasesPage() {
   return (
     <main>
       <section className="subpage" data-theme="light">
-        <header className="subpage__head">
+        <header className="subpage__head reveal-up">
           <span className="subpage__eyebrow">Case Studies</span>
           <h1 className="subpage__title">Selected work, in depth.</h1>
         </header>

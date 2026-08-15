@@ -859,10 +859,10 @@ a {
 .studio__headline {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: clamp(1.7rem, 3.6vw, 3.3rem);
-  line-height: 1.16;
+  font-size: clamp(1.6rem, 2.9vw, 2.7rem);
+  line-height: 1.18;
   letter-spacing: -0.015em;
-  max-width: 22ch;
+  max-width: 24ch;
 }
 
 .studio__headline em {
@@ -3407,19 +3407,20 @@ a {
     bottom: 90px;
   }
 
-  /* Hero: heading near the top, pitch/stats/CTA near the bottom — no overlap */
+  /* Hero: heading centered in the middle; pitch/stats/CTA at the bottom */
   .hero__heading {
-    top: clamp(84px, 15vh, 150px);
+    top: 44%;
     bottom: auto;
     left: 24px;
     right: 24px;
+    transform: translateY(-50%);
   }
 
   .hero__pitch {
     left: 24px;
     right: 24px;
     top: auto;
-    bottom: 104px;
+    bottom: 100px;
     transform: none;
     width: auto;
     align-items: flex-start;
@@ -3427,16 +3428,38 @@ a {
   }
 
   .hero__pitch-text {
-    font-size: 13pt;
+    font-size: 11.5pt;
   }
 
   .hero__stats {
-    gap: 22px;
-    margin-top: 22px;
+    gap: 18px;
+    margin-top: 18px;
   }
 
+  .stat__num {
+    font-size: 2rem;
+  }
+
+  .stat__label {
+    font-size: 0.68rem;
+  }
+
+  /* smaller Get Started button on mobile */
   .cta-btn {
-    margin-top: 22px;
+    margin-top: 18px;
+    gap: 10px;
+    padding: 6px 22px 6px 6px;
+    font-size: 0.82rem;
+  }
+
+  .cta-btn__icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .cta-btn__icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -3633,4 +3656,29 @@ a {
   border-radius: 999px;
   background: rgba(11, 11, 13, 0.05);
   color: rgba(11, 11, 13, 0.7);
+}
+
+/* ---- global blur-in reveal (subpages / CMS grids) ----
+   Uses `translate` (not `transform`) so hover `transform` still composes. */
+.reveal-up {
+  opacity: 0;
+  filter: blur(14px);
+  translate: 0 22px;
+  transition: opacity 0.8s ease, filter 0.8s ease,
+    translate 0.8s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.reveal-up.is-in {
+  opacity: 1;
+  filter: blur(0);
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up {
+    transition: none;
+    opacity: 1;
+    filter: none;
+    translate: none;
+  }
 }
