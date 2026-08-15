@@ -1,3 +1,4 @@
+import ContactSection from "@/components/ContactSection";
 import ContactFooter from "@/components/ContactFooter";
 
 export const metadata = { title: "Contact — Darwin Corp" };
@@ -5,7 +6,8 @@ export const metadata = { title: "Contact — Darwin Corp" };
 export default function ContactPage() {
   return (
     <main>
-      <ContactFooter />
+      <ContactSection />
+      <ContactFooter hideCta />
     </main>
   );
 }

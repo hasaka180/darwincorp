@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import Spline from "@splinetool/react-spline";
 import type { Application, SPEObject } from "@splinetool/runtime";
 import Counter from "@/components/Counter";
@@ -177,7 +178,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <a className="cta-btn" href="#get-started">
+        <Link className="cta-btn" href="/contact">
           <span className="cta-btn__fluid" aria-hidden="true" />
           <span className="cta-btn__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -185,7 +186,7 @@ export default function Hero() {
             </svg>
           </span>
           <span className="cta-btn__text">Get Started</span>
-        </a>
+        </Link>
       </div>
       </div>
     </section>
