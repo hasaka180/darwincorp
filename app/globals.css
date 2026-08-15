@@ -2426,9 +2426,9 @@ a {
 .globe-canvas {
   position: absolute;
   left: 50%;
-  top: 24%;
+  bottom: -18%;
   transform: translateX(-50%);
-  width: 116%;
+  width: min(92%, 440px);
   max-width: none;
   aspect-ratio: 1 / 1;
 }
