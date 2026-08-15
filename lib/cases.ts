@@ -29,6 +29,16 @@ export interface CaseStudy {
   bg?: string // detail-view background colour
   fg?: string // detail-view text colour
   sections: Section[]
+  // SEO / AEO overrides — leave blank to fall back to title / intro
+  metaTitle?: string
+  metaDescription?: string
+  // Summary block (renders above the sections)
+  summaryTitle?: string
+  summaryDescription?: string
+  // FAQ accordion (renders below the sections)
+  faqs?: { q: string; a: string }[]
+  // Custom JSON-LD (injected as an extra <script type="application/ld+json">)
+  jsonLd?: string
 }
 
 export interface JournalPost {

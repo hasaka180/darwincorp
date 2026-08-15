@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react'
 import styles from './CaseStudyModal.module.css'
 import ShareButtons from './ShareButtons'
+import Faq from './Faq'
 import type { CaseStudy, Section } from '@/lib/cases'
 
 const VIDEO_RE = /\.(mp4|webm|mov|m4v)(\?|#|$)/i
@@ -87,7 +88,21 @@ export default function CaseStudyView({ data, shareUrl }: { data: CaseStudy; sha
       </div>
 
       <div className={styles.sections}>
+        {(data.summaryTitle || data.summaryDescription) && (
+          <div className={styles.text}>
+            {data.summaryTitle && <h2 className={styles.heading}>{data.summaryTitle}</h2>}
+            {data.summaryDescription && <p className={styles.body}>{data.summaryDescription}</p>}
+          </div>
+        )}
+
         {data.sections.map((s) => <SectionBlock key={s.id} section={s} />)}
+
+        {data.faqs && data.faqs.length > 0 && (
+          <div className={styles.text}>
+            <h2 className={styles.heading}>Frequently asked questions</h2>
+            <Faq items={data.faqs} />
+          </div>
+        )}
       </div>
 
       <footer className={styles.footer}>

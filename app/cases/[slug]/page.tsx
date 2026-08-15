@@ -26,8 +26,8 @@ export async function generateMetadata({
   const data = await getItem(slug)
   if (!data || itemType(data) === 'journal') return {}
   const c = data as CaseStudy
-  const title = `${c.title} - Darwin Corp`
-  const description = c.intro || `${c.title}, a case study by Darwin Corp.`
+  const title = c.metaTitle || `${c.title} - Darwin Corp`
+  const description = c.metaDescription || c.intro || `${c.title}, a case study by Darwin Corp.`
   return {
     title,
     description,
@@ -63,9 +63,30 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
     about: c.client || undefined,
   }
+
+  // FAQPage JSON-LD (AEO) when the case has FAQs.
+  const faqLd =
+    c.faqs && c.faqs.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: c.faqs.map((f) => ({
+            '@type': 'Question',
+            name: f.q,
+            acceptedAnswer: { '@type': 'Answer', text: f.a },
+          })),
+        }
+      : null
+
   return (
     <div className={styles.pageWrap}>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      {faqLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
+      )}
+      {c.jsonLd && c.jsonLd.trim() && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: c.jsonLd }} />
+      )}
       <ModalCloseButton className={styles.close} fallback={back} />
       <CaseStudyView data={c} shareUrl={shareUrl} />
     </div>

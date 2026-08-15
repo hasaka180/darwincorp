@@ -421,6 +421,55 @@ function CaseEditor({
         <ImageField label="Cover image (optional)" value={draft.cover ?? ''} onChange={(v) => set({ cover: v })} folder={folder} />
         <ImageField label="Card icon / logo (optional)" value={draft.icon ?? ''} onChange={(v) => set({ icon: v })} folder={folder} />
         <label className={styles.full}>Intro<textarea rows={3} value={draft.intro ?? ''} onChange={(e) => set({ intro: e.target.value })} /></label>
+
+        <div className={styles.seoBlock}>
+          <div className={styles.seoHd}>SEO overrides <span>(leave blank to use title / intro)</span></div>
+          <label className={styles.full}>Meta title (Google headline)<input value={draft.metaTitle ?? ''} placeholder={`${draft.title} - Darwin Corp`} onChange={(e) => set({ metaTitle: e.target.value })} /></label>
+          <label className={styles.full}>Meta description (Google snippet · 150–160 chars)<textarea rows={2} value={draft.metaDescription ?? ''} placeholder={draft.intro ?? 'Short summary shown in search results…'} onChange={(e) => set({ metaDescription: e.target.value })} /></label>
+        </div>
+
+        {/* ── Summary block ── */}
+        <div className={styles.seoBlock}>
+          <div className={styles.seoHd}>Summary <span>(optional intro block shown above the sections)</span></div>
+          <label className={styles.full}>Summary heading<input value={draft.summaryTitle ?? ''} placeholder="Key takeaway or section title…" onChange={(e) => set({ summaryTitle: e.target.value })} /></label>
+          <label className={styles.full}>Summary description<textarea rows={3} value={draft.summaryDescription ?? ''} placeholder="A short intro paragraph that appears before the sections…" onChange={(e) => set({ summaryDescription: e.target.value })} /></label>
+        </div>
+
+        {/* ── FAQ editor ── */}
+        <div className={styles.seoBlock}>
+          <div className={styles.seoHd}>FAQ <span>(renders as accordion below the case)</span></div>
+          {(draft.faqs ?? []).map((faq, i) => {
+            const faqs = draft.faqs ?? []
+            const patchFaq = (patch: Partial<typeof faq>) => set({ faqs: faqs.map((f, j) => j === i ? { ...f, ...patch } : f) })
+            return (
+              <div key={i} className={styles.faqItem}>
+                <div className={styles.faqHd}>
+                  <span className={styles.faqNum}>Q{i + 1}</span>
+                  <button type="button" className={`${styles.secCtrls} ${styles.x}`} onClick={() => set({ faqs: faqs.filter((_, j) => j !== i) })}>✕</button>
+                </div>
+                <label className={styles.full}>Question<input value={faq.q} placeholder="What is…?" onChange={(e) => patchFaq({ q: e.target.value })} /></label>
+                <label className={styles.full}>Answer<textarea rows={3} value={faq.a} placeholder="Answer…" onChange={(e) => patchFaq({ a: e.target.value })} /></label>
+              </div>
+            )
+          })}
+          <button type="button" className={styles.addSub} onClick={() => set({ faqs: [...(draft.faqs ?? []), { q: '', a: '' }] })}>+ Add question</button>
+        </div>
+
+        {/* ── JSON-LD ── */}
+        <div className={styles.seoBlock}>
+          <div className={styles.seoHd}>JSON-LD schema <span>(for AI engines, paste full {"{ … }"} object)</span></div>
+          <label className={styles.full}>
+            <textarea
+              className={styles.mdArea}
+              rows={10}
+              value={draft.jsonLd ?? ''}
+              placeholder={'{\n  "@context": "https://schema.org",\n  "@type": "CreativeWork",\n  "name": "Project title",\n  ...\n}'}
+              onChange={(e) => set({ jsonLd: e.target.value })}
+              spellCheck={false}
+              style={{ fontFamily: "'Courier New', monospace", fontSize: 12 }}
+            />
+          </label>
+        </div>
       </section>
 
       <h3 className={styles.sectionsHd}>Sections</h3>
