@@ -21,7 +21,6 @@ export default function Globe() {
     window.addEventListener("resize", onResize);
     onResize();
 
-    let phi = 4.2; // rotate so the Middle East / Dubai faces the viewer
     let raf = 0;
     let shown = false;
 
@@ -29,8 +28,8 @@ export default function Globe() {
       devicePixelRatio: 2,
       width: width * 2,
       height: width * 2,
-      phi: 0,
-      theta: 0.2,
+      phi: 3.75, // locked so Dubai faces the viewer (no spin — keeps the marker on-globe)
+      theta: 0.3,
       dark: 0,
       diffuse: 1.1,
       mapSamples: 18000,
@@ -38,12 +37,12 @@ export default function Globe() {
       baseColor: [0.52, 0.52, 0.56],
       markerColor: [1, 0.36, 0.22],
       glowColor: [0.92, 0.92, 0.94],
+      markerElevation: 0, // flush with the surface, not floating above it
       markers: [{ location: [25.2048, 55.2708], size: 0.04 }],
     });
 
     const tick = () => {
-      phi += 0.0035;
-      globe.update({ phi, width: width * 2, height: width * 2 });
+      globe.update({ width: width * 2, height: width * 2 });
       if (!shown) {
         shown = true;
         canvas.style.opacity = "1";
