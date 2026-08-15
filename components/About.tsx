@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Globe from "@/components/Globe";
 
 const STATS = [
   { num: "40+", label: "Brands Shaped" },
@@ -48,30 +49,6 @@ const FOUNDER_SOCIALS = [
     ),
   },
 ];
-
-function Globe() {
-  // Front-facing wireframe globe with Dubai marked (upper-right ~25°N, 55°E).
-  return (
-    <svg className="globe" viewBox="0 0 200 200" aria-label="Globe, based in Dubai">
-      <circle cx="100" cy="100" r="88" className="globe__edge" />
-      {/* latitudes */}
-      {[74, 52, 27].map((ry) => (
-        <ellipse key={`lat${ry}`} cx="100" cy="100" rx="88" ry={ry} className="globe__line" />
-      ))}
-      <line x1="12" y1="100" x2="188" y2="100" className="globe__line" />
-      {/* longitudes */}
-      {[70, 46, 22].map((rx) => (
-        <ellipse key={`lon${rx}`} cx="100" cy="100" rx={rx} ry="88" className="globe__line" />
-      ))}
-      <line x1="100" y1="12" x2="100" y2="188" className="globe__line" />
-      {/* Dubai marker */}
-      <circle cx="138" cy="74" r="9" className="globe__pin-halo" />
-      <circle cx="138" cy="74" r="3.4" className="globe__pin" />
-      <line x1="138" y1="74" x2="170" y2="46" className="globe__leader" />
-      <text x="172" y="44" className="globe__label">Dubai</text>
-    </svg>
-  );
-}
 
 export default function About() {
   const carouselRef = useRef<HTMLDivElement>(null);

@@ -2379,6 +2379,16 @@ a {
   grid-column: span 6;
   position: relative;
   overflow: hidden;
+  background: #0b0b0d;
+  min-height: clamp(320px, 32vw, 440px);
+}
+
+.about__globe-card .about__loc {
+  color: #fff;
+}
+
+.about__globe-card .about__status {
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .about__globe-head {
@@ -2419,59 +2429,16 @@ a {
   box-shadow: 0 0 8px #2ecc71;
 }
 
-.globe {
-  display: block;
-  width: clamp(210px, 24vw, 320px);
-  height: auto;
-  margin: clamp(48px, 5vw, 70px) auto 0;
-  transition: transform 0.6s cubic-bezier(0.16, 0.8, 0.24, 1);
-}
-
-.about__globe-card:hover .globe {
-  transform: scale(1.05) rotate(-5deg);
-}
-
-.globe__edge {
-  fill: none;
-  stroke: rgba(11, 11, 13, 0.18);
-  stroke-width: 1;
-}
-
-.globe__line {
-  fill: none;
-  stroke: rgba(11, 11, 13, 0.12);
-  stroke-width: 1;
-}
-
-.globe__pin {
-  fill: #ff5b3a;
-}
-
-.globe__pin-halo {
-  fill: rgba(255, 91, 58, 0.3);
-  animation: pinPulse 2s ease-in-out infinite;
-}
-
-@keyframes pinPulse {
-  0%,
-  100% {
-    opacity: 0.55;
-  }
-  50% {
-    opacity: 0.12;
-  }
-}
-
-.globe__leader {
-  stroke: rgba(11, 11, 13, 0.4);
-  stroke-width: 1;
-}
-
-.globe__label {
-  fill: var(--ink);
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
+/* COBE dotted globe — oversized and anchored low so the card crops the
+   lower hemisphere (top-of-globe view, matching the reference). */
+.globe-canvas {
+  position: absolute;
+  left: 50%;
+  bottom: -20%;
+  transform: translateX(-50%);
+  width: 122%;
+  max-width: none;
+  aspect-ratio: 1 / 1;
 }
 
 /* founder */
