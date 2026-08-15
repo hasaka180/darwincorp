@@ -3557,3 +3557,80 @@ a {
   line-height: 1.5;
   color: rgba(11, 11, 13, 0.55);
 }
+
+/* ---- Services page cards ---- */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+}
+
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 2.4vw, 38px);
+  border-radius: 18px;
+  background: #faf9f7;
+  border: 1px solid rgba(11, 11, 13, 0.1);
+  transition: transform 0.35s cubic-bezier(0.16, 0.8, 0.24, 1), box-shadow 0.35s ease;
+}
+
+.svc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 26px 55px rgba(20, 20, 30, 0.1);
+}
+
+.svc-card__icon {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #0b0b0d;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.svc-card__icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.svc-card h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 1.8vw, 1.7rem);
+  letter-spacing: -0.01em;
+}
+
+.svc-card__tag {
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(11, 11, 13, 0.5);
+}
+
+.svc-card__desc {
+  margin-top: 14px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(11, 11, 13, 0.62);
+}
+
+.svc-card__caps {
+  margin-top: 20px;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.svc-card__caps li {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.05);
+  color: rgba(11, 11, 13, 0.7);
+}
