@@ -21,6 +21,7 @@ export default function Globe() {
     window.addEventListener("resize", onResize);
     onResize();
 
+    let phi = 3.75; // start with Dubai facing the viewer
     let raf = 0;
     let shown = false;
 
@@ -28,8 +29,8 @@ export default function Globe() {
       devicePixelRatio: 2,
       width: width * 2,
       height: width * 2,
-      phi: 3.75, // locked so Dubai faces the viewer (no spin — keeps the marker on-globe)
-      theta: 0.3,
+      phi,
+      theta: 0.2,
       dark: 0,
       diffuse: 1.1,
       mapSamples: 18000,
@@ -42,7 +43,8 @@ export default function Globe() {
     });
 
     const tick = () => {
-      globe.update({ width: width * 2, height: width * 2 });
+      phi += 0.003; // slow revolve
+      globe.update({ phi, width: width * 2, height: width * 2 });
       if (!shown) {
         shown = true;
         canvas.style.opacity = "1";
