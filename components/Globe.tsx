@@ -31,13 +31,13 @@ export default function Globe() {
       height: width * 2,
       phi: 0,
       theta: 0.2,
-      dark: 1,
-      diffuse: 1.2,
+      dark: 0,
+      diffuse: 1.1,
       mapSamples: 18000,
-      mapBrightness: 6,
-      baseColor: [0.36, 0.36, 0.4],
+      mapBrightness: 3,
+      baseColor: [0.52, 0.52, 0.56],
       markerColor: [1, 0.36, 0.22],
-      glowColor: [0.06, 0.06, 0.08],
+      glowColor: [0.92, 0.92, 0.94],
       markers: [{ location: [25.2048, 55.2708], size: 0.09 }],
     });
 

@@ -2379,16 +2379,8 @@ a {
   grid-column: span 6;
   position: relative;
   overflow: hidden;
-  background: #0b0b0d;
+  background: #e9e9ec;
   min-height: clamp(320px, 32vw, 440px);
-}
-
-.about__globe-card .about__loc {
-  color: #fff;
-}
-
-.about__globe-card .about__status {
-  color: rgba(255, 255, 255, 0.5);
 }
 
 .about__globe-head {
@@ -2434,9 +2426,9 @@ a {
 .globe-canvas {
   position: absolute;
   left: 50%;
-  bottom: -20%;
+  top: 24%;
   transform: translateX(-50%);
-  width: 122%;
+  width: 116%;
   max-width: none;
   aspect-ratio: 1 / 1;
 }
