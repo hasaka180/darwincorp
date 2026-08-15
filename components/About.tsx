@@ -8,6 +8,47 @@ const STATS = [
   { num: "98%", label: "Client Retention" },
 ];
 
+const FOUNDER_SOCIALS = [
+  {
+    name: "LinkedIn",
+    href: "https://www.linkedin.com/in/hasaka/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3-.02-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4V9Z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/thehasaka/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <rect x="3" y="3" width="18" height="18" rx="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+      </svg>
+    ),
+  },
+  {
+    name: "X",
+    href: "https://x.com/Hasaka_s",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.24 2H21.5l-7.4 8.46L22.82 22h-6.6l-5.17-6.77L5.13 22H1.87l7.91-9.04L1.5 2h6.77l4.67 6.2L18.24 2Zm-1.16 18h1.83L7.03 3.9H5.07L17.08 20Z" />
+      </svg>
+    ),
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/thehasaka",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M14 9V7c0-1 .3-1.5 1.6-1.5H17V2.2C16.6 2.1 15.5 2 14.5 2 11.9 2 10.3 3.6 10.3 6.5V9H8v3.5h2.3V22h3.5v-9.5h2.5L17 9h-3Z" />
+      </svg>
+    ),
+  },
+];
+
 function Globe() {
   // Front-facing wireframe globe with Dubai marked (upper-right ~25°N, 55°E).
   return (
@@ -127,7 +168,23 @@ export default function About() {
               a chance to contribute something that lasts — crafted with intent,
               built with soul, and never settling for ordinary.
             </p>
-            <a className="about__learn" href="https://hasaka.io" target="_blank" rel="noreferrer">Learn more →</a>
+            <div className="about__founder-actions">
+              <a className="about__learn" href="https://hasaka.io" target="_blank" rel="noreferrer">Learn more →</a>
+              <div className="about__founder-socials">
+                {FOUNDER_SOCIALS.map((s) => (
+                  <a
+                    key={s.name}
+                    className="about__founder-social"
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={s.name}
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
