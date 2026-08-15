@@ -38,7 +38,7 @@ export default function Globe() {
       baseColor: [0.52, 0.52, 0.56],
       markerColor: [1, 0.36, 0.22],
       glowColor: [0.92, 0.92, 0.94],
-      markers: [{ location: [25.2048, 55.2708], size: 0.09 }],
+      markers: [{ location: [25.2048, 55.2708], size: 0.04 }],
     });
 
     const tick = () => {
