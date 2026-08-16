@@ -122,7 +122,7 @@ const SERVICES: Service[] = [
     accent: "#ff5b3a",
     icon: ICON.ai,
     video: "/video/ai-generative.mp4",
-    poster: "/video/ai-generative.png",
+    poster: "/video/ai-generative.jpg",
   },
 ];
 
