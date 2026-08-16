@@ -113,8 +113,8 @@
   font-family: var(--font-helvetica-now), var(--font-inter), sans-serif;
 }
 .heroIntro {
-  font-size: clamp(16px, 2vw, 22px);
-  line-height: 1.5;
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.55;
   max-width: 620px;
   opacity: 0.92;
 }
@@ -175,10 +175,28 @@
   font-family: var(--font-helvetica-now), var(--font-inter), sans-serif;
 }
 .body {
-  font-size: clamp(16px, 1.6vw, 19px);
+  font-size: clamp(15px, 1.3vw, 17px);
   line-height: 1.65;
   color: currentColor;
   opacity: 0.78;
+}
+
+/* FAQ accordion inherits the case's text colour (its defaults are dark and
+   become unreadable on dark case backgrounds). */
+.sheet :global(.faq),
+.sheet :global(.faq__item) {
+  border-color: color-mix(in srgb, currentColor 16%, transparent);
+}
+.sheet :global(.faq__q) {
+  color: currentColor;
+}
+.sheet :global(.faq__q svg) {
+  color: currentColor;
+  opacity: 0.5;
+}
+.sheet :global(.faq__a > p) {
+  color: currentColor;
+  opacity: 0.72;
 }
 
 /* small footer-style "note" text block (e.g. Credits) */
