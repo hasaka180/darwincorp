@@ -33,7 +33,7 @@ export default function StudioSection() {
           io.disconnect();
         }
       },
-      { threshold: 0.18 }
+      { threshold: 0, rootMargin: "0px 0px -12% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
