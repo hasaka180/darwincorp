@@ -389,6 +389,55 @@ export default function CaseBuilder() {
   )
 }
 
+/* ─────────────────────────────────────────── Services multi-select ── */
+const SERVICE_OPTIONS = [
+  'Brand Strategy', 'Brand Identity', 'Logo Design', 'Visual Identity',
+  'Brand Guidelines', 'Naming', 'Art Direction', 'Packaging',
+  'Website Design', 'Website Development', 'UX/UI Design', 'E-commerce',
+  'Motion Design', '3D & CGI', 'AI Creatives', 'Campaign',
+  'Social Media', 'Content Creation', 'Photography', 'Copywriting',
+]
+
+function ServicesField({ value, onChange }: { value: string[]; onChange: (v: string[]) => void }) {
+  const [custom, setCustom] = useState('')
+  const add = (raw: string) => {
+    const v = raw.trim()
+    if (!v || value.some((x) => x.toLowerCase() === v.toLowerCase())) return
+    onChange([...value, v])
+  }
+  const remove = (s: string) => onChange(value.filter((x) => x !== s))
+  const available = SERVICE_OPTIONS.filter((o) => !value.some((x) => x.toLowerCase() === o.toLowerCase()))
+
+  return (
+    <div className={styles.full}>
+      <span className={styles.fieldLbl}>Services</span>
+      {value.length > 0 && (
+        <div className={styles.chips}>
+          {value.map((s) => (
+            <span key={s} className={styles.chip}>
+              {s}
+              <button type="button" onClick={() => remove(s)} aria-label={`Remove ${s}`}>✕</button>
+            </span>
+          ))}
+        </div>
+      )}
+      <div className={styles.chipAdd}>
+        <select value="" onChange={(e) => add(e.target.value)}>
+          <option value="" disabled>Add a service…</option>
+          {available.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+        <input
+          value={custom}
+          placeholder="Or type a custom one"
+          onChange={(e) => setCustom(e.target.value)}
+          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); add(custom); setCustom('') } }}
+        />
+        <button type="button" className={styles.addSub} onClick={() => { add(custom); setCustom('') }}>Add</button>
+      </div>
+    </div>
+  )
+}
+
 /* ─────────────────────────────────────────── CASE / WORK editor ── */
 function CaseEditor({
   draft, set, isNew, setSlug, activeType, folder, patchSection, addSection, removeSection, moveSection,
@@ -416,8 +465,8 @@ function CaseEditor({
           <label>Accent (hero colour)<input type="color" value={draft.accent ?? '#1a1a1a'} onChange={(e) => set({ accent: e.target.value })} /></label>
           <label>Page background<input type="color" value={draft.bg ?? '#f3f1ee'} onChange={(e) => set({ bg: e.target.value })} /></label>
           <label>Page text colour<input type="color" value={draft.fg ?? '#161310'} onChange={(e) => set({ fg: e.target.value })} /></label>
-          <label>Services (comma separated)<input value={(draft.services ?? []).join(', ')} onChange={(e) => set({ services: e.target.value.split(',').map((s) => s.trim()).filter(Boolean) })} /></label>
         </div>
+        <ServicesField value={draft.services ?? []} onChange={(v) => set({ services: v })} />
         <ImageField label="Cover image (optional)" value={draft.cover ?? ''} onChange={(v) => set({ cover: v })} folder={folder} />
         <ImageField label="Card icon / logo (optional)" value={draft.icon ?? ''} onChange={(v) => set({ icon: v })} folder={folder} />
         <label className={styles.full}>Intro<textarea rows={3} value={draft.intro ?? ''} onChange={(e) => set({ intro: e.target.value })} /></label>
