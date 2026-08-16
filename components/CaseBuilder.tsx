@@ -465,6 +465,7 @@ function CaseEditor({
           <label>Accent (hero colour)<input type="color" value={draft.accent ?? '#1a1a1a'} onChange={(e) => set({ accent: e.target.value })} /></label>
           <label>Page background<input type="color" value={draft.bg ?? '#f3f1ee'} onChange={(e) => set({ bg: e.target.value })} /></label>
           <label>Page text colour<input type="color" value={draft.fg ?? '#161310'} onChange={(e) => set({ fg: e.target.value })} /></label>
+          <label className={styles.inline}><input type="checkbox" checked={!!draft.featured} onChange={(e) => set({ featured: e.target.checked })} /> Featured (homepage grid)</label>
         </div>
         <ServicesField value={draft.services ?? []} onChange={(v) => set({ services: v })} />
         <ImageField label="Cover image (optional)" value={draft.cover ?? ''} onChange={(v) => set({ cover: v })} folder={folder} />

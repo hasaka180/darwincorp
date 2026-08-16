@@ -28,6 +28,7 @@ export interface CaseStudy {
   services?: string[]
   bg?: string // detail-view background colour
   fg?: string // detail-view text colour
+  featured?: boolean // surfaced in the homepage "Featured Work" grid
   sections: Section[]
   // SEO / AEO overrides — leave blank to fall back to title / intro
   metaTitle?: string

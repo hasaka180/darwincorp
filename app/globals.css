@@ -1049,6 +1049,13 @@ a {
   transform: scale(1.045);
 }
 
+/* fallback fill when a featured item has no cover image */
+.work__fill {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
 .work--wide {
   grid-column: span 7;
   grid-row: 1;
