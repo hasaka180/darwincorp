@@ -21,9 +21,7 @@ export default function ServicesPage() {
               className="svc-row reveal-up"
             >
               <div className="svc-row__text">
-                <h2 className="svc-row__title">
-                  <span className="svc-row__num">[ {s.num} ]</span> {s.title}
-                </h2>
+                <h2 className="svc-row__title">{s.title}</h2>
                 <p className="svc-row__desc">{s.summary}</p>
                 <span className="svc-row__preview">
                   Explore

@@ -75,7 +75,7 @@ export const SERVICES: Service[] = [
     tagline: "AI Art Direction · Motion Design · Generative AI",
     summary:
       "Striking, on-brand visuals at the speed of culture, art direction fused with generative tooling.",
-    cover: "/video/ai-generative.png",
+    cover: "/video/ai-generative.jpg",
     heroSubtitle:
       "Generative campaigns, motion, and 3D, art-directed to stay on-brand and move at the speed of culture.",
     overview:

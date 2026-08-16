@@ -35,7 +35,7 @@ export default async function ServiceDetail({
     <main className="svcp">
       <section className="svcp__hero" data-theme="light">
         <Link href="/services" className="svcp__back">← Services</Link>
-        <span className="svcp__eyebrow">{svc.num} · {svc.tagline}</span>
+        <span className="svcp__eyebrow">{svc.tagline}</span>
         <h1 className="svcp__title">{svc.title}</h1>
         <p className="svcp__sub">{svc.heroSubtitle}</p>
         <div className="svcp__cta">
