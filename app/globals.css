@@ -1024,7 +1024,7 @@ a {
 .featured__grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: clamp(340px, 34vw, 500px) clamp(480px, 52vw, 760px) clamp(340px, 34vw, 500px);
+  grid-template-rows: clamp(340px, 34vw, 500px) clamp(400px, 42vw, 600px) clamp(340px, 34vw, 500px);
   gap: clamp(12px, 1.4vw, 20px);
 }
 
