@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server'
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3'
+import { S3Client, PutObjectCommand, PutBucketCorsCommand, GetBucketCorsCommand } from '@aws-sdk/client-s3'
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 
 export const runtime = 'nodejs'
@@ -72,6 +72,55 @@ async function presign(req: Request) {
   } catch (e) {
     console.error('R2 presign failed:', e)
     return NextResponse.json({ error: e instanceof Error ? e.message : 'Presign failed' }, { status: 500 })
+  }
+}
+
+// Origins allowed to upload straight to R2 (needed for direct video uploads).
+const CORS_ORIGINS = [
+  'https://www.thedarwin.co',
+  'https://thedarwin.co',
+  'http://localhost:3000',
+  'http://localhost:3001',
+]
+
+/**
+ * One-time setup: writes a CORS policy to the R2 bucket so the browser can PUT
+ * large files (video) straight to R2. Visit `/api/upload?setup=cors` while
+ * signed in to the studio. Requires an S3 token with bucket-config permission
+ * ("Admin Read & Write"); otherwise set the policy in the Cloudflare dashboard.
+ */
+export async function GET(req: Request) {
+  const setup = new URL(req.url).searchParams.get('setup')
+  if (setup !== 'cors') {
+    return NextResponse.json({ ok: true, hint: 'Append ?setup=cors to configure R2 CORS for video uploads.' })
+  }
+  if (!isConfigured()) return configError()
+  const rule = {
+    AllowedOrigins: CORS_ORIGINS,
+    AllowedMethods: ['PUT', 'GET', 'HEAD'],
+    AllowedHeaders: ['*'],
+    ExposeHeaders: ['ETag'],
+    MaxAgeSeconds: 3600,
+  }
+  try {
+    await s3().send(new PutBucketCorsCommand({ Bucket: BUCKET, CORSConfiguration: { CORSRules: [rule] } }))
+    let applied: unknown = null
+    try {
+      const got = await s3().send(new GetBucketCorsCommand({ Bucket: BUCKET }))
+      applied = got.CORSRules
+    } catch { /* read-back is best-effort */ }
+    return NextResponse.json({
+      ok: true,
+      message: 'R2 CORS policy applied. Video uploads should work now (reload the studio first).',
+      applied,
+    })
+  } catch (e) {
+    return NextResponse.json({
+      ok: false,
+      error: e instanceof Error ? e.message : 'Failed to set CORS',
+      hint: 'This S3 API token likely lacks bucket-config permission. In the Cloudflare dashboard: R2 → your bucket → Settings → CORS Policy → paste the rule below.',
+      manualPolicy: [rule],
+    }, { status: 500 })
   }
 }
 
