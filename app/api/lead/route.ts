@@ -11,11 +11,14 @@ export const dynamic = "force-dynamic";
  *
  * Delivery uses Resend's REST API (no extra dependency, just fetch):
  *   RESEND_API_KEY   → https://resend.com → API Keys
- *   LEAD_TO_EMAIL    → inbox that receives the leads
+ *   LEAD_TO_EMAIL    → inbox(es) that receive the leads, comma-separated
  *   LEAD_FROM_EMAIL  → a verified sender on your Resend domain
  */
 
-const TO = process.env.LEAD_TO_EMAIL || "hasakasasaranga@gmail.com";
+const TO = (process.env.LEAD_TO_EMAIL || "hasakasasaranga@gmail.com")
+  .split(",")
+  .map((a) => a.trim())
+  .filter(Boolean);
 const FROM = process.env.LEAD_FROM_EMAIL || "Darwin Leads <onboarding@resend.dev>";
 
 /* --- tiny in-memory throttle: 5 submissions per IP per 10 minutes --- */
@@ -128,7 +131,7 @@ export async function POST(req: Request) {
     },
     body: JSON.stringify({
       from: FROM,
-      to: [TO],
+      to: TO,
       reply_to: email,
       subject: `New website enquiry - ${name}`,
       html,
@@ -140,7 +143,13 @@ export async function POST(req: Request) {
     const detail = await res.text().catch(() => "");
     console.error("[lead] Resend failed", res.status, detail, "\n" + text);
     return NextResponse.json(
-      { ok: false, error: "We couldn't send that just now. Please try again." },
+      {
+        ok: false,
+        error: "We couldn't send that just now. Please try again.",
+        // TEMPORARY: surfaces the upstream rejection so the mail setup can be
+        // debugged without digging through platform logs. Remove once green.
+        upstream: { status: res.status, detail: detail.slice(0, 400), from: FROM, to: TO },
+      },
       { status: 502 }
     );
   }
