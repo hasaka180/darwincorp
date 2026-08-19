@@ -5,117 +5,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>High performing interactive websites</title>
 <!--
-  Email-safe rebuild of the /lp/websites creative.
+  The seasonal offer creative, exactly as designed.
 
-  Rules this file follows, because Gmail/Outlook strip everything else:
-    - table layout, no flex/grid/position
-    - every style inline (no classes, no CSS variables)
-    - fixed 600px width, fluid down on mobile
-    - system fonts only (web fonts don't load in Gmail)
-    - real text, not one big image  → far better inbox placement
+  The artwork is a flattened render of the /lp/websites creative, hosted at
+  thedarwin.co and referenced by absolute URL — the only way to keep the
+  layout, the sunset artwork and the Instrument Serif / Handjet type intact
+  in Gmail, which strips CSS variables, positioning and data: URIs.
+
+  The whole image links through to the landing page. Real text sits under it
+  so the message still reads when images are blocked, and so it doesn't look
+  like an image-only blast to spam filters.
+
+  To re-render after changing the creative:
+    Chrome --headless=new --force-device-scale-factor=2 \
+           --window-size=984,2109 --screenshot=out.png <creative>.html
+    sips -s format jpeg -s formatOptions 68 out.png \
+         --resampleWidth 1200 --out public/assets/lp/seasonal-offer.jpg
 -->
 </head>
 <body style="margin:0; padding:0; background-color:#0a1330;">
 
-<!-- preheader: the grey preview line next to the subject in the inbox -->
+<!-- preheader: the grey preview line beside the subject in the inbox -->
 <div style="display:none; font-size:1px; color:#0a1330; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden;">
   Custom-coded, interactive websites from AED 3,000 — design, build, launch and on-page SEO included.
 </div>
 
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#0a1330;">
   <tr>
-    <td align="center" style="padding:28px 12px;">
+    <td align="center" style="padding:24px 12px;">
 
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px; background-color:#0d1b47;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px; max-width:600px;">
 
-        <!-- brand -->
+        <!-- the creative -->
         <tr>
-          <td align="center" style="padding:34px 30px 0 30px;">
-            <span style="font-family:Georgia,'Times New Roman',serif; font-size:26px; font-weight:bold; letter-spacing:6px; color:#ffffff;">DARWIN</span>
-          </td>
-        </tr>
-
-        <!-- headline -->
-        <tr>
-          <td align="center" style="padding:30px 30px 0 30px;">
-            <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; letter-spacing:5px; color:#9db0e8; text-transform:uppercase;">We build</div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:14px 30px 0 30px;">
-            <div style="font-family:Georgia,'Times New Roman',serif; font-size:27px; line-height:34px; color:#ffffff; text-transform:uppercase;">High performing interactive</div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:6px 30px 0 30px;">
-            <div style="font-family:Arial,Helvetica,sans-serif; font-size:44px; line-height:50px; font-weight:bold; letter-spacing:6px; color:#ff8c96; text-transform:uppercase;">Websites</div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:18px 44px 0 44px;">
-            <div style="font-family:Arial,Helvetica,sans-serif; font-size:15px; line-height:24px; color:#c9d4f2;">
-              Interactive, fully custom-coded websites tuned for speed, Google rankings and AI search answers.
-            </div>
+          <td align="center" style="padding:0; font-size:0; line-height:0;">
+            <a href="https://www.thedarwin.co/lp/websites" style="text-decoration:none;">
+              <img src="https://www.thedarwin.co/assets/lp/seasonal-offer.jpg"
+                   width="600" alt="Darwin — we build high performing interactive websites. Season pricing from AED 3,000, design, build, launch and on-page SEO included."
+                   style="display:block; width:100%; max-width:600px; height:auto; border:0; outline:none; text-decoration:none;" />
+            </a>
           </td>
         </tr>
 
-        <!-- divider -->
+        <!-- fallback / text layer under the creative -->
         <tr>
-          <td style="padding:30px 30px 0 30px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr><td style="border-top:1px solid #2a3a72; font-size:0; line-height:0;">&nbsp;</td></tr>
-            </table>
-          </td>
-        </tr>
-
-        <!-- price -->
-        <tr>
-          <td align="center" style="padding:28px 30px 0 30px;">
-            <div style="font-family:Georgia,'Times New Roman',serif; font-size:16px; letter-spacing:2px; color:#9db0e8; text-transform:uppercase;">Season pricing &mdash; starting at</div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:10px 30px 0 30px;">
-            <div style="font-family:Arial,Helvetica,sans-serif; font-size:46px; line-height:52px; font-weight:bold; letter-spacing:3px; color:#ffffff;">AED 3,000</div>
-          </td>
-        </tr>
-        <tr>
-          <td align="center" style="padding:10px 40px 0 40px;">
+          <td style="background-color:#0d1b47; padding:26px 30px 0 30px;">
             <div style="font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#c9d4f2;">
-              Design, build, launch &amp; on-page SEO included.
+              Interactive, fully custom-coded websites tuned for speed, Google rankings and AI search
+              answers. Season pricing starts at <strong style="color:#ffffff;">AED 3,000</strong> &mdash;
+              design, build, launch and on-page SEO included.
             </div>
-          </td>
-        </tr>
-
-        <!-- three points -->
-        <tr>
-          <td style="padding:30px 30px 0 30px;">
-            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-              <tr>
-                <td style="padding:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#ffffff;">
-                  <strong style="color:#ff8c96;">Custom coded.</strong>
-                  <span style="color:#c9d4f2;">Interactive and animated, built line by line &mdash; not dragged and dropped.</span>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:0 0 16px 0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#ffffff;">
-                  <strong style="color:#ff8c96;">SEO + AEO.</strong>
-                  <span style="color:#c9d4f2;">Built to rank on Google and to get cited by ChatGPT and AI search.</span>
-                </td>
-              </tr>
-              <tr>
-                <td style="padding:0; font-family:Arial,Helvetica,sans-serif; font-size:14px; line-height:22px; color:#ffffff;">
-                  <strong style="color:#ff8c96;">Sub-second.</strong>
-                  <span style="color:#c9d4f2;">90+ PageSpeed, instant loads, mobile-first by default.</span>
-                </td>
-              </tr>
-            </table>
           </td>
         </tr>
 
         <!-- CTA: bulletproof button (table, not a styled <a>) -->
         <tr>
-          <td align="center" style="padding:34px 30px 0 30px;">
+          <td align="center" style="background-color:#0d1b47; padding:24px 30px 0 30px;">
             <table role="presentation" cellpadding="0" cellspacing="0" border="0">
               <tr>
                 <td align="center" bgcolor="#3050e8" style="border-radius:28px;">
@@ -129,7 +74,7 @@
           </td>
         </tr>
         <tr>
-          <td align="center" style="padding:16px 40px 0 40px;">
+          <td align="center" style="background-color:#0d1b47; padding:16px 40px 0 40px;">
             <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#8fa2d8;">
               Offer valid this season only &middot; Free 15-min strategy call, no obligation
             </div>
@@ -138,14 +83,14 @@
 
         <!-- footer -->
         <tr>
-          <td style="padding:30px 30px 0 30px;">
+          <td style="background-color:#0d1b47; padding:24px 30px 0 30px;">
             <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
               <tr><td style="border-top:1px solid #2a3a72; font-size:0; line-height:0;">&nbsp;</td></tr>
             </table>
           </td>
         </tr>
         <tr>
-          <td align="center" style="padding:20px 30px 34px 30px;">
+          <td align="center" style="background-color:#0d1b47; padding:18px 30px 30px 30px;">
             <div style="font-family:Arial,Helvetica,sans-serif; font-size:12px; line-height:20px; color:#8fa2d8;">
               <a href="https://thedarwin.co" style="color:#c9d4f2; text-decoration:underline;">thedarwin.co</a>
               &nbsp;&middot;&nbsp;
