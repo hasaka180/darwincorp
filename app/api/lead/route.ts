@@ -143,13 +143,7 @@ export async function POST(req: Request) {
     const detail = await res.text().catch(() => "");
     console.error("[lead] Resend failed", res.status, detail, "\n" + text);
     return NextResponse.json(
-      {
-        ok: false,
-        error: "We couldn't send that just now. Please try again.",
-        // TEMPORARY: surfaces the upstream rejection so the mail setup can be
-        // debugged without digging through platform logs. Remove once green.
-        upstream: { status: res.status, detail: detail.slice(0, 400), from: FROM, to: TO },
-      },
+      { ok: false, error: "We couldn't send that just now. Please try again." },
       { status: 502 }
     );
   }
