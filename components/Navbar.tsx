@@ -61,8 +61,8 @@ export default function Navbar() {
   const onLight = useOnLightBg();
   const scrolled = useScrolled();
 
-  // Hide the studio (admin) behind the same chrome-free view.
-  if (pathname?.startsWith("/studio")) return null;
+  // Hide the studio (admin) and ad landing pages behind a chrome-free view.
+  if (pathname?.startsWith("/studio") || pathname?.startsWith("/lp")) return null;
 
   const dark = onLight;
 

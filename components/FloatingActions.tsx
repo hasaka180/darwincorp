@@ -1,13 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 // Update these with real details.
 const WHATSAPP = "971555355897"; // country code + number, no +/spaces
 const EMAIL = "hello@thedarwin.co";
 
 export default function FloatingActions() {
+  const pathname = usePathname();
   const [chatOpen, setChatOpen] = useState(false);
+
+  // Ad landing pages stay chrome-free: the form is the only call to action.
+  if (pathname?.startsWith("/lp")) return null;
 
   return (
     <div className="fab">
