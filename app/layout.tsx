@@ -27,10 +27,37 @@ const inter = Inter({
   display: "swap",
 });
 
+// The site answers on www; the apex redirects there, so canonical and share
+// URLs point at www to avoid sending crawlers through a redirect.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
+
+const DESCRIPTION =
+  "Darwin Corp is a Dubai studio creating brands, digital experiences and stories designed to evolve with people, culture and technology.";
+
 export const metadata: Metadata = {
-  title: "Darwin - The Mirror of Imagination",
-  description:
-    "An immersive 3D hero with a mouse-reactive jellyfish, glass navigation, and full-page menus.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    template: "%s - Darwin Corp",
+  },
+  description: DESCRIPTION,
+  applicationName: "Darwin Corp",
+  alternates: { canonical: "/" },
+  // opengraph-image.png / twitter-image.png in this directory supply the
+  // image tags automatically, including dimensions.
+  openGraph: {
+    type: "website",
+    siteName: "Darwin Corp",
+    url: SITE_URL,
+    title: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    description: DESCRIPTION,
+    locale: "en_AE",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
