@@ -1,6 +1,18 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { onHeroReady } from "@/lib/heroLoad";
+
+/** Where the bar pauses to wait for the hero's 3D scene. */
+const HOLD = 92;
+/** How long the final run from HOLD to 100 takes once the scene is in. */
+const RELEASE_MS = 500;
+/**
+ * Longest the preloader will ever wait on the scene. The scene is ~10 MB, so
+ * on a slow connection this fires first and the hero reveals with its own
+ * loading ring rather than holding the whole page hostage.
+ */
+const CAP_MS = 9000;
 
 // The DARWIN wordmark paths (from darwin.svg), drawn in order D-A-R-I-N-swirl.
 const PATHS = [
@@ -30,27 +42,64 @@ export default function Preloader() {
     let exitT: ReturnType<typeof setTimeout>;
     let doneT: ReturnType<typeof setTimeout>;
 
+    // The bar runs to HOLD on its own, then waits for the hero's 3D scene
+    // before completing, so the reveal never shows a half-loaded hero.
+    // CAP_MS is the escape hatch: a slow network or a scene that fails to
+    // load must never leave a visitor staring at the preloader.
+    let released = reduce; // reduced motion: don't wait on the 3D at all
+    let releaseStart: number | null = null;
+    let releaseFrom = 0;
+
+    const unsubscribe = onHeroReady(() => {
+      released = true;
+    });
+    const capT = setTimeout(() => {
+      released = true;
+    }, CAP_MS);
+
+    const finish = () => {
+      exitT = setTimeout(() => setExiting(true), 300);
+      doneT = setTimeout(() => {
+        setDone(true);
+        document.body.style.overflow = "";
+      }, 300 + 1050);
+    };
+
     const step = (t: number) => {
       if (start === null) start = t;
       const p = Math.min((t - start) / duration, 1);
       const eased = 1 - Math.pow(1 - p, 2);
-      setProgress(Math.round(eased * 100));
-      if (p < 1) {
+      const held = Math.min(eased * 100, HOLD);
+
+      if (!released) {
+        setProgress(Math.round(held));
+        raf = requestAnimationFrame(step);
+        return;
+      }
+
+      // Released: ease whatever is left up to 100 over RELEASE_MS.
+      if (releaseStart === null) {
+        releaseStart = t;
+        releaseFrom = held;
+      }
+      const q = Math.min((t - releaseStart) / RELEASE_MS, 1);
+      const value = releaseFrom + (100 - releaseFrom) * (1 - Math.pow(1 - q, 2));
+      setProgress(Math.round(value));
+
+      if (q < 1) {
         raf = requestAnimationFrame(step);
       } else {
-        exitT = setTimeout(() => setExiting(true), 300);
-        doneT = setTimeout(() => {
-          setDone(true);
-          document.body.style.overflow = "";
-        }, 300 + 1050);
+        finish();
       }
     };
     raf = requestAnimationFrame(step);
 
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(capT);
       clearTimeout(exitT);
       clearTimeout(doneT);
+      unsubscribe();
       document.body.style.overflow = "";
     };
   }, []);

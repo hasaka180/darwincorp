@@ -1,10 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import Spline from "@splinetool/react-spline";
 import type { Application, SPEObject } from "@splinetool/runtime";
 import Counter from "@/components/Counter";
+import { markHeroReady } from "@/lib/heroLoad";
+
+// The Spline runtime is ~590 kB of JS and the scene it fetches is far larger.
+// Loading it eagerly put all of that in the homepage's first-load bundle and
+// delayed hydration of the heading, stats and CTA. Lazy-loading the canvas
+// lets the text paint and become interactive first, while the 3D streams in
+// behind it.
+const HeroScene = dynamic(() => import("@/components/HeroScene"), {
+  ssr: false,
+  loading: () => null,
+});
 
 const SCENE_URL =
   process.env.NEXT_PUBLIC_SPLINE_SCENE ||
@@ -44,6 +55,8 @@ export default function Hero() {
   function onLoad(app: Application) {
     splineRef.current = app;
     setLoading(false);
+    // Releases the preloader — it holds until the scene is actually in.
+    markHeroReady();
 
     // Pull the full object list (newer runtimes expose getAllObjects).
     const all: SPEObject[] =
@@ -137,7 +150,7 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__frame">
       <div className="hero__stage" ref={stageRef}>
-        <Spline scene={SCENE_URL} onLoad={onLoad} />
+        <HeroScene sceneUrl={SCENE_URL} onLoad={onLoad} />
       </div>
 
       {loading && (
