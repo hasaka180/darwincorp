@@ -2,7 +2,12 @@ import ContentGrid from "@/components/ContentGrid";
 import ContactFooter from "@/components/ContactFooter";
 import { getItems, type ContentItem } from "@/lib/cases";
 
-export const metadata = { title: "Cases - Darwin Corp" };
+export const metadata = {
+  title: "Case Studies",
+  description:
+    "In-depth case studies on brand identity, website development and AI creative work by Darwin Corp, Dubai.",
+  alternates: { canonical: "/cases" },
+};
 export const dynamic = "force-dynamic";
 
 export default async function CasesPage() {

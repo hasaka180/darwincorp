@@ -2,7 +2,12 @@ import ContentGrid from "@/components/ContentGrid";
 import ContactFooter from "@/components/ContactFooter";
 import { getItems, type ContentItem } from "@/lib/cases";
 
-export const metadata = { title: "Work - Darwin Corp" };
+export const metadata = {
+  title: "Work",
+  description:
+    "Selected branding, web and AI creative projects by Darwin Corp, a creative studio in Dubai.",
+  alternates: { canonical: "/work" },
+};
 export const dynamic = "force-dynamic";
 
 export default async function WorkPage() {

@@ -26,7 +26,7 @@ export async function generateMetadata({
   const data = await getItem(slug)
   if (!data || itemType(data) !== 'journal') return {}
   const p = data as JournalPost
-  const title = p.metaTitle || `${p.title} - Darwin Corp`
+  const title = p.metaTitle ? { absolute: p.metaTitle } : p.title
   const description = p.metaDescription || p.excerpt || `${p.title}, from the Darwin Corp journal.`
   return {
     title,
@@ -34,7 +34,7 @@ export async function generateMetadata({
     alternates: { canonical: `/journal/${p.slug}` },
     openGraph: {
       type: 'article',
-      title,
+      title: p.metaTitle || p.title,
       description,
       url: `/journal/${p.slug}`,
       publishedTime: p.date || undefined,
@@ -43,7 +43,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: p.metaTitle || p.title,
       description,
       images: p.cover ? [p.cover] : undefined,
     },

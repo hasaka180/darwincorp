@@ -2,7 +2,12 @@ import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import { SERVICES } from "@/lib/services";
 
-export const metadata = { title: "Services - Darwin Corp" };
+export const metadata = {
+  title: "Services",
+  description:
+    "Brand identity, website development and AI creative production from Darwin Corp, a creative studio in Dubai.",
+  alternates: { canonical: "/services" },
+};
 
 export default function ServicesPage() {
   return (

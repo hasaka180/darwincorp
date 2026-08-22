@@ -3,7 +3,7 @@ import ContactFooter from "@/components/ContactFooter";
 import Faq, { type QA } from "@/components/Faq";
 
 export const metadata = {
-  title: "Brand Identity Design in Dubai - Darwin Corp",
+  title: "Brand Identity Design in Dubai",
   description:
     "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.",
   alternates: { canonical: "/services/brand-identity" },
