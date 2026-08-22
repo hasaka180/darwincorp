@@ -39,10 +39,13 @@ const ORG_LD = {
     addressCountry: "AE",
   },
   areaServed: "Worldwide",
+  // sameAs ties this domain to the same entity Google already knows from the
+  // verified Business Profile (Knowledge Graph id /g/11zwvrt4_b).
   sameAs: [
     "https://www.instagram.com/thedarwin_co/",
     "https://www.facebook.com/thedarwincorp",
     "https://www.linkedin.com/company/darwinco/",
+    "https://share.google/TFMGbkBayNXfyVpkP",
   ],
   hasOfferCatalog: {
     "@type": "OfferCatalog",
