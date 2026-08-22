@@ -40,20 +40,17 @@ export default function ContentGrid({ items }: { items: ContentItem[] }) {
           </>
         );
 
-        // Cases/work open a full, shareable page; other items are non-interactive.
-        return isCase ? (
+        // Every item opens a full, shareable page — cases under /cases,
+        // journal posts under /journal.
+        return (
           <Link
             key={it.slug}
-            href={`/cases/${it.slug}`}
+            href={isCase ? `/cases/${it.slug}` : `/journal/${it.slug}`}
             className="cms-card reveal-up"
             aria-label={it.title}
           >
             {inner}
           </Link>
-        ) : (
-          <div key={it.slug} className="cms-card reveal-up" aria-label={it.title}>
-            {inner}
-          </div>
         );
       })}
     </div>
