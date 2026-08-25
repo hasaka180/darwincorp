@@ -159,10 +159,12 @@ export default function Hero() {
         </div>
       )}
 
-      <div className="hero__heading">
+      {/* The page's main heading. It was a plain div, which left the
+          homepage with no h1 at all. */}
+      <h1 className="hero__heading">
         <span className="line-serif blur-in">THE MIRROR OF</span>
         <span className="line-display blur-in">IMAGINATION</span>
-      </div>
+      </h1>
 
       <div className="hero__pitch blur-in">
         <p className="hero__pitch-text">

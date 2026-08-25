@@ -37,7 +37,7 @@ const DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    default: "Darwin Corp - Brand, Web and AI Creative Studio in Dubai",
     template: "%s - Darwin Corp",
   },
   description: DESCRIPTION,
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Darwin Corp",
     url: SITE_URL,
-    title: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    title: "Darwin Corp - Brand, Web and AI Creative Studio in Dubai",
     description: DESCRIPTION,
     locale: "en_AE",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Darwin Corp - Brand, Web & AI Creative Studio in Dubai",
+    title: "Darwin Corp - Brand, Web and AI Creative Studio in Dubai",
     description: DESCRIPTION,
   },
 };

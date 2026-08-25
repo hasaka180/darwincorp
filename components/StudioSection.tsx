@@ -2,19 +2,54 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Client logos (public/assets/logos)
-const LOGOS = [
-  "abcapital", "ambitionmentors", "archihq", "capitalcreators", "competence",
-  "crafted", "ds2dio", "emc", "eqwitty", "ferroic", "harpyia", "lumara-logo",
-  "naamche", "nova", "planville", "prentus", "radwave", "sadara", "sequoya",
-  "storworks", "summaforte", "tantivy", "tminus", "verde-logo",
-].map((n) => `/assets/logos/${n}.png`);
+// Client logos (public/assets/logos). The name is carried through to alt
+// text — these are clients, not decoration, so search engines should be able
+// to read who we've worked with.
+const LOGOS: { src: string; name: string }[] = [
+  ["abcapital", "AB Capital"],
+  ["ambitionmentors", "Ambition Mentors"],
+  ["archihq", "ArchiHQ"],
+  ["capitalcreators", "Capital Creators"],
+  ["competence", "Competence"],
+  ["crafted", "Crafted"],
+  ["ds2dio", "DS2DIO"],
+  ["emc", "EMC"],
+  ["eqwitty", "Eqwitty"],
+  ["ferroic", "Ferroic"],
+  ["harpyia", "Harpyia"],
+  ["lumara-logo", "Lumara"],
+  ["naamche", "Naamche"],
+  ["nova", "Nova"],
+  ["planville", "Planville"],
+  ["prentus", "Prentus"],
+  ["radwave", "Radwave"],
+  ["sadara", "Sadara"],
+  ["sequoya", "Sequoya"],
+  ["storworks", "Storworks"],
+  ["summaforte", "Summa Forte"],
+  ["tantivy", "Tantivy"],
+  ["tminus", "T-Minus"],
+  ["verde-logo", "Verde"],
+].map(([n, name]) => ({ src: `/assets/logos/${n}.png`, name }));
 
-function LogoCard({ src }: { src: string }) {
+function LogoCard({
+  src,
+  name,
+  "aria-hidden": ariaHidden,
+}: {
+  src: string
+  name: string
+  "aria-hidden"?: boolean
+}) {
   return (
-    <div className="logo-card">
+    <div className="logo-card" aria-hidden={ariaHidden || undefined}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="logo-card__img" src={src} alt="" loading="lazy" />
+      <img
+        className="logo-card__img"
+        src={src}
+        alt={ariaHidden ? "" : `${name} logo`}
+        loading="lazy"
+      />
     </div>
   );
 }
@@ -78,8 +113,15 @@ export default function StudioSection() {
 
       <div className="studio__marquee reveal" style={{ transitionDelay: "0.3s" }}>
         <div className="studio__track">
-          {loop.map((src, i) => (
-            <LogoCard key={i} src={src} />
+          {loop.map((logo, i) => (
+            // The set is duplicated for the marquee loop; only the first pass
+            // is exposed to assistive tech and crawlers.
+            <LogoCard
+              key={i}
+              src={logo.src}
+              name={logo.name}
+              aria-hidden={i >= LOGOS.length}
+            />
           ))}
         </div>
       </div>
