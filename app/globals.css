@@ -3545,56 +3545,198 @@ a {
   text-decoration: none;
 }
 
+/* The card is the image: category and title sit on it permanently, the
+   blurb and CTA blur in on hover. Taller than wide so the revealed copy
+   has somewhere to go without the image feeling cropped. */
 .cms-card__media {
+  position: relative;
   display: block;
-  aspect-ratio: 16 / 11;
-  border-radius: 16px;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
   overflow: hidden;
   background: #dcdcd6;
+  isolation: isolate;
 }
 
 .cms-card__media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.cms-card:hover .cms-card__media img {
-  transform: scale(1.045);
+.cms-card:hover .cms-card__media img,
+.cms-card:focus-visible .cms-card__media img {
+  transform: scale(1.05);
+}
+
+/* Permanent scrim: keeps the title legible over any photograph. */
+.cms-card__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(6, 8, 18, 0.82) 0%,
+    rgba(6, 8, 18, 0.45) 26%,
+    rgba(6, 8, 18, 0) 55%
+  );
+  transition: opacity 0.45s ease;
+}
+
+/* Deeper wash + blur behind the revealed copy. */
+.cms-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  background: linear-gradient(
+    to top,
+    rgba(6, 8, 18, 0.92) 0%,
+    rgba(10, 16, 46, 0.72) 45%,
+    rgba(10, 16, 46, 0.28) 100%
+  );
+  backdrop-filter: blur(3px) saturate(115%);
+  -webkit-backdrop-filter: blur(3px) saturate(115%);
+}
+
+.cms-card:hover .cms-card__media::after,
+.cms-card:focus-visible .cms-card__media::after {
+  opacity: 1;
 }
 
 .cms-card__body {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: block;
-  padding: 14px 4px 0;
+  padding: clamp(16px, 1.6vw, 22px);
+  color: #fff;
 }
 
 .cms-card__cat {
   display: block;
   font-family: var(--font-body);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(11, 11, 13, 0.5);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .cms-card__title {
   display: block;
-  margin-top: 6px;
+  margin-top: 5px;
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: clamp(1.1rem, 1.4vw, 1.35rem);
+  font-size: clamp(0.98rem, 1.05vw, 1.12rem);
+  line-height: 1.25;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: #fff;
+}
+
+/* Collapsed until hover. grid-template-rows animates height without needing
+   a fixed pixel value, so any blurb length works. */
+.cms-card__reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  filter: blur(8px);
+  translate: 0 8px;
+  transition:
+    grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    filter 0.35s ease,
+    translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cms-card__reveal > * {
+  min-height: 0;
+}
+
+.cms-card:hover .cms-card__reveal,
+.cms-card:focus-visible .cms-card__reveal {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  filter: blur(0);
+  translate: 0 0;
 }
 
 .cms-card__blurb {
   display: block;
-  margin-top: 6px;
+  overflow: hidden;
+  padding-top: 10px;
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   line-height: 1.5;
-  color: rgba(11, 11, 13, 0.55);
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.cms-card__cta {
+  /* The reveal is a grid, whose children stretch by default — without this
+     the pill spans the full card width. */
+  justify-self: start;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 14px;
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #fff;
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+.cms-card__cta svg {
+  width: 15px;
+  height: 15px;
+}
+
+.cms-card:hover .cms-card__cta {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Touch devices have no hover: show the blurb outright and drop the button,
+   since a tap opens the case anyway. */
+@media (hover: none) {
+  .cms-card__reveal {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    filter: none;
+    translate: 0 0;
+  }
+
+  .cms-card__media::after {
+    opacity: 1;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .cms-card__cta {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cms-card__media img,
+  .cms-card__scrim,
+  .cms-card__media::after,
+  .cms-card__reveal {
+    transition: none;
+  }
 }
 
 /* ---- Services page cards ---- */
