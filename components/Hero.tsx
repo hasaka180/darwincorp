@@ -5,7 +5,29 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { Application, SPEObject } from "@splinetool/runtime";
 import Counter from "@/components/Counter";
+import SceneBoundary from "@/components/SceneBoundary";
 import { markHeroReady } from "@/lib/heroLoad";
+
+/**
+ * Can this device actually give us a WebGL context?
+ *
+ * Probing first means a device that can't run the scene never downloads the
+ * runtime or the scene file at all, and never hits the throw that used to
+ * take the whole page down.
+ */
+function hasWebGL(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = (canvas.getContext("webgl2") ||
+      canvas.getContext("webgl")) as WebGLRenderingContext | null;
+    if (!gl) return false;
+    // Release the probe's context so it doesn't count against the limit.
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return true;
+  } catch {
+    return false;
+  }
+}
 
 // The Spline runtime is ~590 kB of JS and the scene it fetches is far larger.
 // Loading it eagerly put all of that in the homepage's first-load bundle and
@@ -51,6 +73,20 @@ export default function Hero() {
   const rafId = useRef<number>(0);
 
   const [loading, setLoading] = useState(true);
+  // null = not probed yet, so nothing renders during the first pass
+  const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
+
+  // Give up on the 3D permanently: stop the spinner and let the preloader go.
+  function skipScene() {
+    setCanRender3D(false);
+    setLoading(false);
+    markHeroReady();
+  }
+
+  useEffect(() => {
+    if (hasWebGL()) setCanRender3D(true);
+    else skipScene();
+  }, []);
 
   function onLoad(app: Application) {
     splineRef.current = app;
@@ -149,8 +185,15 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero__frame">
-      <div className="hero__stage" ref={stageRef}>
-        <HeroScene sceneUrl={SCENE_URL} onLoad={onLoad} />
+      <div
+        className={`hero__stage${canRender3D === false ? " hero__stage--flat" : ""}`}
+        ref={stageRef}
+      >
+        {canRender3D && (
+          <SceneBoundary onFail={skipScene}>
+            <HeroScene sceneUrl={SCENE_URL} onLoad={onLoad} />
+          </SceneBoundary>
+        )}
       </div>
 
       {loading && (
