@@ -5,7 +5,32 @@ export const dynamic = "force-dynamic";
 
 const has = (v?: string) => Boolean(v && v.trim());
 
-export async function GET() {
+/**
+ * Is this caller allowed to see the configuration detail?
+ *
+ * Vercel Cron sends `Authorization: Bearer $CRON_SECRET`; a human can use the
+ * studio password over Basic auth. Everyone else still triggers the Appwrite
+ * read (that is the whole point of the keep-alive) but gets back nothing but
+ * a liveness result.
+ */
+function isTrusted(req: Request): boolean {
+  const auth = req.headers.get("authorization") ?? "";
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && auth === `Bearer ${cronSecret}`) return true;
+
+  const studio = process.env.STUDIO_PASSWORD;
+  if (studio && auth.startsWith("Basic ")) {
+    try {
+      const [, pwd] = atob(auth.slice(6)).split(":");
+      if (pwd === studio) return true;
+    } catch {
+      /* malformed header — treat as untrusted */
+    }
+  }
+  return false;
+}
+
+export async function GET(req: Request) {
   const aw = {
     endpoint: has(process.env.APPWRITE_ENDPOINT),
     project: has(process.env.APPWRITE_PROJECT_ID),
@@ -48,5 +73,17 @@ export async function GET() {
     }
   }
 
-  return NextResponse.json({ appwrite: aw, appwriteConnect, hints, r2 });
+  // The ping has already run by this point, so the free tier's inactivity
+  // timer is reset either way; only the detail is withheld.
+  if (!isTrusted(req)) {
+    return NextResponse.json(
+      { ok: appwriteConnect.startsWith("ok"), pinged: new Date().toISOString() },
+      { headers: { "Cache-Control": "no-store" } }
+    );
+  }
+
+  return NextResponse.json(
+    { appwrite: aw, appwriteConnect, hints, r2 },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }
