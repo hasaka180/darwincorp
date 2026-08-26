@@ -2683,7 +2683,73 @@ a {
   justify-content: space-between;
   gap: 24px;
   color: #fff;
-  background: linear-gradient(130deg, #f6a5c0 0%, #b57be0 46%, #7db4f0 100%);
+  overflow: hidden;
+  /* isolate so the negative-z layers below stay inside this panel */
+  isolation: isolate;
+  background: linear-gradient(165deg, #0a1140 0%, #151a5e 48%, #090d2e 100%);
+}
+
+/* Drifting colour blooms — the light in the panel. Heavily blurred so they
+   read as atmosphere rather than as circles. */
+.tst__media::before {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -2;
+  background:
+    radial-gradient(closest-side, rgba(255, 77, 126, 0.9), transparent 72%) 16% 20% / 58% 62% no-repeat,
+    radial-gradient(closest-side, rgba(255, 138, 75, 0.75), transparent 72%) 74% 16% / 52% 56% no-repeat,
+    radial-gradient(closest-side, rgba(42, 109, 255, 0.9), transparent 72%) 64% 84% / 62% 66% no-repeat,
+    radial-gradient(closest-side, rgba(126, 63, 224, 0.75), transparent 72%) 24% 80% / 56% 60% no-repeat;
+  filter: blur(34px) saturate(125%);
+  will-change: transform;
+  animation: tstDrift 26s ease-in-out infinite alternate;
+}
+
+/* Fine light rays sweeping across, masked to fade at the edges. */
+.tst__media::after {
+  content: "";
+  position: absolute;
+  inset: -45%;
+  z-index: -1;
+  opacity: 0.5;
+  background: repeating-linear-gradient(
+    74deg,
+    rgba(255, 255, 255, 0.14) 0 2px,
+    transparent 2px 24px
+  );
+  mask-image: radial-gradient(62% 58% at 50% 50%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(62% 58% at 50% 50%, #000 0%, transparent 78%);
+  will-change: transform;
+  animation: tstSweep 22s ease-in-out infinite alternate;
+}
+
+@keyframes tstDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(3%, -2.5%, 0) scale(1.14);
+  }
+  100% {
+    transform: translate3d(-3%, 3%, 0) scale(1.06);
+  }
+}
+
+@keyframes tstSweep {
+  0% {
+    transform: translate3d(-7%, 2%, 0) rotate(-1.5deg);
+  }
+  100% {
+    transform: translate3d(7%, -2%, 0) rotate(1.5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tst__media::before,
+  .tst__media::after {
+    animation: none;
+  }
 }
 
 .tst__avatars {
