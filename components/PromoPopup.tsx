@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import LeadForm from "@/components/LeadForm";
-import { CONSENT_EVENT, readConsent } from "@/lib/consent";
 import { onPageRevealed } from "@/lib/pageReveal";
 import { lockScroll, unlockScroll } from "@/lib/lenis";
 
@@ -44,30 +43,18 @@ export default function PromoPopup() {
     if (!isHome || alreadySeen()) return;
 
     let timer: ReturnType<typeof setTimeout> | undefined;
-    let stopWaiting = () => {};
 
     // The eight seconds run from the moment the page is actually on screen —
     // the preloader can hold the home page for far longer than that.
-    const armed = () => {
-      stopWaiting = onPageRevealed(() => {
-        timer = setTimeout(() => setOpen(true), DELAY_MS);
-      });
-    };
-
-    // Never stack two overlays: if the cookie banner is still waiting for an
-    // answer, hold the countdown until the visitor has dealt with it.
-    if (readConsent()) {
-      armed();
-    } else {
-      window.addEventListener(CONSENT_EVENT, armed, { once: true });
-    }
+    const stopWaiting = onPageRevealed(() => {
+      timer = setTimeout(() => setOpen(true), DELAY_MS);
+    });
 
     // Leaving the home page before it fires cancels it; the visit doesn't
     // count as "seen", so it can still appear on a later home-page visit.
     return () => {
       clearTimeout(timer);
       stopWaiting();
-      window.removeEventListener(CONSENT_EVENT, armed);
     };
   }, [isHome]);
 
@@ -81,6 +68,10 @@ export default function PromoPopup() {
     if (!open) return;
     restoreFocusRef.current = document.activeElement;
     lockScroll();
+    // Two overlays must never stack. The cookie banner steps aside while this
+    // is up and comes back on close — waiting on the visitor to answer it
+    // first would strand the popup, since most people never do.
+    document.body.classList.add("is-promo-open");
     panelRef.current?.focus();
 
     const onKey = (e: KeyboardEvent) => {
@@ -107,6 +98,7 @@ export default function PromoPopup() {
     window.addEventListener("keydown", onKey);
     return () => {
       window.removeEventListener("keydown", onKey);
+      document.body.classList.remove("is-promo-open");
       unlockScroll();
       (restoreFocusRef.current as HTMLElement | null)?.focus?.();
     };

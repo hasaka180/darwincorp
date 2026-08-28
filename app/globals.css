@@ -5275,6 +5275,11 @@ a.contactp__detail:hover {
   }
 }
 
+/* The promo modal takes the screen; the banner returns when it closes. */
+.is-promo-open .cc {
+  display: none;
+}
+
 .cc__panel {
   padding: clamp(18px, 2.2vw, 24px);
   border-radius: 20px;
