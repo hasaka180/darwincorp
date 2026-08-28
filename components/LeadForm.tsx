@@ -39,7 +39,23 @@ const CODES = [
   { c: "+55", n: "Brazil", f: "🇧🇷" },
 ];
 
-export default function LeadForm({ source = "lp/websites" }: { source?: string }) {
+export default function LeadForm({
+  source = "lp/websites",
+  cx = "lpw",
+  title = "Claim the seasonal rate",
+  sub = "Leave your details, we'll be in touch within one business day.",
+  submitLabel = "Claim the seasonal rate",
+  onDone,
+}: {
+  source?: string;
+  /** BEM prefix for the markup, so a host can bring its own styles. */
+  cx?: string;
+  title?: string;
+  sub?: string;
+  submitLabel?: string;
+  /** Fired once the lead has been accepted. */
+  onDone?: () => void;
+}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cc, setCc] = useState("+971");
@@ -66,6 +82,7 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
         return;
       }
       setState("done");
+      onDone?.();
     } catch {
       setError("Network error. Please check your connection and try again.");
       setState("idle");
@@ -74,9 +91,9 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
 
   if (state === "done") {
     return (
-      <div className="lpw__form">
-        <div className="lpw__done">
-          <div className="lpw__done-tick">
+      <div className={`${cx}__form`}>
+        <div className={`${cx}__done`}>
+          <div className={`${cx}__done-tick`}>
             <svg viewBox="0 0 24 24">
               <path d="m5 12.5 4.5 4.5L19 7.5" />
             </svg>
@@ -93,16 +110,14 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
   }
 
   return (
-    <form className="lpw__form" onSubmit={onSubmit} noValidate>
-      <h2 className="lpw__form-title">Claim the seasonal rate</h2>
-      <p className="lpw__form-sub">
-        Leave your details, we&apos;ll be in touch within one business day.
-      </p>
+    <form className={`${cx}__form`} onSubmit={onSubmit} noValidate>
+      <h2 className={`${cx}__form-title`}>{title}</h2>
+      <p className={`${cx}__form-sub`}>{sub}</p>
 
-      <label className="lpw__field">
-        <span className="lpw__label">Full name</span>
+      <label className={`${cx}__field`}>
+        <span className={`${cx}__label`}>Full name</span>
         <input
-          className="lpw__input"
+          className={`${cx}__input`}
           type="text"
           name="name"
           autoComplete="name"
@@ -113,10 +128,10 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
         />
       </label>
 
-      <label className="lpw__field">
-        <span className="lpw__label">Email</span>
+      <label className={`${cx}__field`}>
+        <span className={`${cx}__label`}>Email</span>
         <input
-          className="lpw__input"
+          className={`${cx}__input`}
           type="email"
           name="email"
           autoComplete="email"
@@ -128,11 +143,11 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
         />
       </label>
 
-      <div className="lpw__field">
-        <span className="lpw__label">Phone number</span>
-        <div className="lpw__phone">
+      <div className={`${cx}__field`}>
+        <span className={`${cx}__label`}>Phone number</span>
+        <div className={`${cx}__phone`}>
           <select
-            className="lpw__select"
+            className={`${cx}__select`}
             name="cc"
             aria-label="Country code"
             value={cc}
@@ -145,7 +160,7 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
             ))}
           </select>
           <input
-            className="lpw__input"
+            className={`${cx}__input`}
             type="tel"
             name="phone"
             autoComplete="tel-national"
@@ -160,7 +175,7 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
 
       {/* honeypot — hidden from humans, catches bots */}
       <input
-        className="lpw__hp"
+        className={`${cx}__hp`}
         type="text"
         name="website"
         tabIndex={-1}
@@ -170,11 +185,11 @@ export default function LeadForm({ source = "lp/websites" }: { source?: string }
         onChange={(e) => setWebsite(e.target.value)}
       />
 
-      <button className="lpw__submit" type="submit" disabled={state === "sending"}>
-        {state === "sending" ? "Sending…" : "Claim the seasonal rate"}
+      <button className={`${cx}__submit`} type="submit" disabled={state === "sending"}>
+        {state === "sending" ? "Sending…" : submitLabel}
       </button>
 
-      {error && <p className="lpw__error">{error}</p>}
+      {error && <p className={`${cx}__error`}>{error}</p>}
     </form>
   );
 }

@@ -5,6 +5,8 @@ import SmoothScroll from "@/components/SmoothScroll";
 import FloatingActions from "@/components/FloatingActions";
 import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
+import CookieConsent from "@/components/CookieConsent";
+import PromoPopup from "@/components/PromoPopup";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -76,6 +78,8 @@ export default function RootLayout({
         <Navbar />
         {children}
         <FloatingActions />
+        <CookieConsent />
+        <PromoPopup />
       </body>
     </html>
   );

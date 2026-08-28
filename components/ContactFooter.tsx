@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { SOCIALS } from "@/components/ContactSection";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 
 type Item = { label: string; href: string | null; ext?: boolean };
 const LINKS: { title: string; items: Item[] }[] = [
@@ -21,6 +22,14 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "Instagram", href: "https://www.instagram.com/thedarwin_co/", ext: true },
       { label: "Facebook", href: "https://www.facebook.com/thedarwincorp", ext: true },
       { label: "LinkedIn", href: "https://www.linkedin.com/company/darwinco/", ext: true },
+    ],
+  },
+  {
+    title: "Legal",
+    items: [
+      { label: "Privacy Policy", href: "/privacy" },
+      { label: "Terms of Service", href: "/terms" },
+      { label: "Cookie Policy", href: "/cookies" },
     ],
   },
   {
@@ -134,8 +143,10 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
         <div className="footer__bottom">
           <span>© {new Date().getFullYear()} Darwin Corp. All rights reserved.</span>
           <span className="footer__bottom-links">
-            <a href="#">Privacy</a>
-            <a href="#">Terms</a>
+            <Link href="/privacy">Privacy</Link>
+            <Link href="/terms">Terms</Link>
+            <Link href="/cookies">Cookies</Link>
+            <CookieSettingsButton className="footer__cookie-btn" />
           </span>
         </div>
       </footer>

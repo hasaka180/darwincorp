@@ -3225,7 +3225,7 @@ a {
 
 .footer__cols {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
 }
 
@@ -3272,7 +3272,36 @@ a {
 
 .footer__bottom-links {
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
+}
+
+.footer__bottom-links a,
+.footer__cookie-btn {
+  color: inherit;
+  transition: color 0.2s ease;
+}
+
+.footer__bottom-links a:hover,
+.footer__cookie-btn:hover {
+  color: #fff;
+}
+
+/* Looks and sits like the links beside it, but has to be a button so it can
+   re-open the consent panel. */
+.footer__cookie-btn {
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 1100px) {
+  .footer__cols {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 820px) {
@@ -4923,5 +4952,825 @@ a.contactp__detail:hover {
   }
   .bi-why__row p {
     grid-column: 1;
+  }
+}
+
+/* ===================== LEGAL PAGES (privacy / terms / cookies) =====================
+   Paper background like the other subpages, with a sticky contents rail on
+   wide screens and a measure-limited prose column. */
+.legal {
+  position: relative;
+  z-index: 1;
+  background: var(--paper);
+  color: var(--ink);
+  padding: clamp(120px, 20vh, 200px) clamp(24px, 5vw, 90px) clamp(56px, 8vw, 110px);
+}
+
+.legal__head {
+  max-width: 780px;
+  margin-bottom: clamp(38px, 5vw, 64px);
+}
+
+.legal__eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 13, 0.5);
+}
+
+.legal__title {
+  margin-top: 14px;
+  font-family: var(--font-instrument), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5.4vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+
+.legal__lead {
+  margin-top: 20px;
+  max-width: 60ch;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(11, 11, 13, 0.65);
+}
+
+.legal__updated {
+  margin-top: 22px;
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.05);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: rgba(11, 11, 13, 0.6);
+}
+
+.legal__grid {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 88px);
+  align-items: start;
+}
+
+/* ---- contents rail ---- */
+.legal__toc {
+  position: sticky;
+  top: 110px;
+  font-family: var(--font-body);
+}
+
+.legal__toc-title {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 13, 0.4);
+}
+
+.legal__toc ol {
+  list-style: none;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.legal__toc a {
+  display: flex;
+  gap: 10px;
+  font-size: 0.86rem;
+  line-height: 1.35;
+  color: rgba(11, 11, 13, 0.6);
+  transition: color 0.2s ease;
+}
+
+.legal__toc a:hover {
+  color: var(--ink);
+}
+
+.legal__toc-n {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  color: rgba(11, 11, 13, 0.3);
+}
+
+/* ---- sections ---- */
+.legal__body {
+  max-width: 74ch;
+}
+
+.legal__section {
+  padding-top: clamp(28px, 3.5vw, 44px);
+  /* Clears the fixed top bar when jumping in from the contents list. */
+  scroll-margin-top: 100px;
+}
+
+.legal__section + .legal__section {
+  border-top: 1px solid rgba(11, 11, 13, 0.1);
+}
+
+.legal__h2 {
+  display: flex;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.legal__n {
+  flex: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.8em;
+  padding-top: 0.18em;
+  color: rgba(11, 11, 13, 0.3);
+}
+
+.legal__prose {
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: rgba(11, 11, 13, 0.72);
+}
+
+.legal__prose p + p,
+.legal__prose ul + p,
+.legal__prose p + ul {
+  margin-top: 14px;
+}
+
+.legal__prose ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.legal__prose li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.legal__prose li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 0.68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(11, 11, 13, 0.3);
+}
+
+.legal__prose strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.legal__prose a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(11, 11, 13, 0.3);
+  transition: text-decoration-color 0.2s ease, color 0.2s ease;
+}
+
+.legal__prose a:hover {
+  color: #ff5b3a;
+  text-decoration-color: #ff5b3a;
+}
+
+.legal__btn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 11px 22px;
+  border: none;
+  border-radius: 999px;
+  background: #0b0b0d;
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.86rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.legal__btn:hover {
+  background: #ff5b3a;
+}
+
+/* ---- cookie table ---- */
+.legal__tablewrap {
+  margin-top: 18px;
+  overflow-x: auto;
+}
+
+.legal__table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  text-align: left;
+}
+
+.legal__table th {
+  padding: 0 14px 10px 0;
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 13, 0.45);
+  border-bottom: 1px solid rgba(11, 11, 13, 0.15);
+}
+
+.legal__table td {
+  padding: 14px 14px 14px 0;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(11, 11, 13, 0.08);
+}
+
+.legal__table code {
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  font-size: 1.05em;
+  color: var(--ink);
+}
+
+/* ---- closing block ---- */
+.legal__contact {
+  margin-top: clamp(36px, 5vw, 60px);
+  padding: clamp(24px, 3vw, 34px);
+  border-radius: 20px;
+  background: rgba(11, 11, 13, 0.04);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: rgba(11, 11, 13, 0.72);
+}
+
+.legal__contact .legal__h2 {
+  margin-bottom: 10px;
+}
+
+.legal__contact a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(11, 11, 13, 0.3);
+}
+
+.legal__contact a:hover {
+  color: #ff5b3a;
+}
+
+.legal__crosslinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 18px;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 900px) {
+  .legal__grid {
+    grid-template-columns: 1fr;
+  }
+  .legal__toc {
+    position: static;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(11, 11, 13, 0.1);
+  }
+  .legal__toc ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px 20px;
+  }
+}
+
+/* ===================== COOKIE CONSENT =====================
+   Bottom-left card so it never covers the floating action buttons on the
+   right. Non-blocking: the page stays readable and scrollable behind it. */
+.cc {
+  position: fixed;
+  z-index: 120;
+  left: clamp(14px, 2.5vw, 28px);
+  bottom: clamp(14px, 2.5vw, 28px);
+  width: min(440px, calc(100vw - 28px));
+  animation: cc-in 0.45s cubic-bezier(0.16, 0.8, 0.24, 1) both;
+}
+
+@keyframes cc-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cc__panel {
+  padding: clamp(18px, 2.2vw, 24px);
+  border-radius: 20px;
+  /* Frosted glass: light enough to read over the dark hero and over the
+     #e9e9e9 sections, with the shadow doing the separating. */
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  /* Opaque enough that busy sections (logo walls, imagery) don't read through
+     the copy, still clearly frosted rather than solid. */
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.cc__title {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cc__body {
+  margin-top: 8px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(11, 11, 13, 0.62);
+}
+
+.cc__body a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(11, 11, 13, 0.32);
+}
+
+.cc__body a:hover {
+  text-decoration-color: var(--ink);
+}
+
+.cc__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.cc__btn {
+  flex: 1 1 auto;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.82rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cc__btn--ghost {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(11, 11, 13, 0.16);
+  color: rgba(11, 11, 13, 0.78);
+}
+
+.cc__btn--ghost:hover {
+  border-color: rgba(11, 11, 13, 0.42);
+  color: var(--ink);
+}
+
+.cc__btn--solid {
+  background: #0b0b0d;
+  color: #fff;
+}
+
+.cc__btn--solid:hover {
+  background: #ff5b3a;
+  color: #fff;
+}
+
+/* ---- preferences ---- */
+.cc__cats {
+  list-style: none;
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-height: min(46vh, 340px);
+  overflow-y: auto;
+}
+
+.cc__cat-row {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cc__cat-row:hover {
+  background: rgba(11, 11, 13, 0.045);
+}
+
+.cc__cat-row:has(.cc__check:disabled) {
+  cursor: default;
+}
+
+/* The real checkbox stays in the DOM for keyboard and screen readers; the
+   pill beside it is what's actually drawn. */
+.cc__check {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.cc__switch {
+  flex: none;
+  position: relative;
+  margin-top: 2px;
+  width: 34px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(11, 11, 13, 0.18);
+  transition: background 0.2s ease;
+}
+
+.cc__switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #fff;
+  /* The knob is white on a light track, so it needs its own edge. */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+  transition: translate 0.2s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+.cc__check:checked + .cc__switch {
+  background: #ff5b3a;
+}
+
+.cc__check:checked + .cc__switch::after {
+  translate: 14px 0;
+}
+
+.cc__check:disabled + .cc__switch {
+  background: rgba(11, 11, 13, 0.32);
+}
+
+.cc__check:focus-visible + .cc__switch {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.cc__cat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(11, 11, 13, 0.6);
+}
+
+.cc__cat-text strong {
+  font-weight: 600;
+  font-size: 0.86rem;
+  color: var(--ink);
+}
+
+@media (max-width: 520px) {
+  .cc {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+  }
+  .cc__btn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cc {
+    animation: none;
+  }
+}
+
+/* ===================== SEASONAL OFFER POPUP =====================
+   Home-page modal: campaign artwork on the left, lead form on the right.
+   Sits above everything except the preloader. */
+.promo {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 32px);
+}
+
+.promo__backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  background: rgba(6, 8, 20, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  cursor: pointer;
+  animation: promo-fade 0.35s ease both;
+}
+
+.promo__panel {
+  position: relative;
+  outline: none;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  width: min(1000px, 100%);
+  max-height: min(860px, calc(100dvh - 24px));
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.5);
+  animation: promo-in 0.5s cubic-bezier(0.16, 0.8, 0.24, 1) both;
+}
+
+@keyframes promo-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes promo-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---- artwork ---- */
+.promo__art {
+  position: relative;
+  overflow: hidden;
+  background: #0a1a4a;
+}
+
+.promo__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  display: block;
+}
+
+/* ---- close ---- */
+.promo__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(11, 11, 13, 0.06);
+  color: #0b0b0d;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.promo__close:hover {
+  background: #0b0b0d;
+  color: #fff;
+}
+
+.promo__close svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ---- form side ---- */
+.promo__side {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: clamp(26px, 3.4vw, 44px) clamp(22px, 3vw, 40px) clamp(20px, 2.6vw, 30px);
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.promo__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.promo__form-title {
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.9vw, 1.4rem);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  padding-right: 40px;
+}
+
+.promo__form-sub {
+  margin-top: -4px;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: rgba(11, 11, 13, 0.6);
+}
+
+.promo__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.promo__label {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(11, 11, 13, 0.45);
+}
+
+.promo__input,
+.promo__select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid rgba(11, 11, 13, 0.16);
+  border-radius: 12px;
+  background: rgba(11, 11, 13, 0.03);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.promo__input::placeholder {
+  color: rgba(11, 11, 13, 0.35);
+}
+
+.promo__input:focus,
+.promo__select:focus {
+  outline: none;
+  border-color: #4b5bf0;
+  background: #fff;
+}
+
+.promo__phone {
+  display: grid;
+  grid-template-columns: 116px minmax(0, 1fr);
+  gap: 8px;
+}
+
+.promo__select {
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+/* honeypot — off-screen, never shown to a person */
+.promo__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.promo__submit {
+  margin-top: 6px;
+  padding: 15px 24px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(100deg, #3b4de0 0%, #6d63f5 100%);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+
+.promo__submit:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.promo__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.promo__error {
+  font-size: 0.84rem;
+  color: #d33a3a;
+}
+
+.promo__fine {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: rgba(11, 11, 13, 0.45);
+}
+
+/* ---- success state ---- */
+.promo__done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: clamp(20px, 4vw, 40px) 0;
+}
+
+.promo__done-tick {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(59, 77, 224, 0.12);
+}
+
+.promo__done-tick svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #3b4de0;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.promo__done h3 {
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: -0.01em;
+}
+
+.promo__done p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(11, 11, 13, 0.6);
+}
+
+/* ---- narrow screens: artwork becomes a banner above the form ---- */
+@media (max-width: 780px) {
+  .promo__panel {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    max-height: calc(100dvh - 24px);
+  }
+  .promo__art {
+    height: clamp(170px, 28vh, 250px);
+  }
+  /* Anchor to the bottom: the banner shows the car and the price, and the
+     close button sits over open sky instead of clipping the headline. */
+  .promo__art img {
+    object-position: 50% 100%;
+  }
+  .promo__close {
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .promo__form-title {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .promo__phone {
+    grid-template-columns: 100px minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo__panel,
+  .promo__backdrop {
+    animation: none;
   }
 }

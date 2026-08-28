@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Lenis from "lenis";
+import { setLenis } from "@/lib/lenis";
 import "lenis/dist/lenis.css";
 
 // Global Lenis smooth scrolling. Lenis drives the real document scroll (no
@@ -15,6 +16,8 @@ export default function SmoothScroll() {
       smoothWheel: true,
     });
 
+    setLenis(lenis);
+
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -24,6 +27,7 @@ export default function SmoothScroll() {
 
     return () => {
       cancelAnimationFrame(raf);
+      setLenis(null);
       lenis.destroy();
     };
   }, []);

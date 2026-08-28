@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { onHeroReady } from "@/lib/heroLoad";
+import { markPageCovered, markPageRevealed } from "@/lib/pageReveal";
 
 /** Where the bar pauses to wait for the hero's 3D scene. */
 const HOLD = 92;
@@ -31,6 +32,7 @@ export default function Preloader() {
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
+    markPageCovered();
 
     const reduce = window.matchMedia?.(
       "(prefers-reduced-motion: reduce)"
@@ -62,6 +64,7 @@ export default function Preloader() {
       doneT = setTimeout(() => {
         setDone(true);
         document.body.style.overflow = "";
+        markPageRevealed();
       }, 300 + 1050);
     };
 
@@ -101,6 +104,7 @@ export default function Preloader() {
       clearTimeout(doneT);
       unsubscribe();
       document.body.style.overflow = "";
+      markPageRevealed();
     };
   }, []);
 
