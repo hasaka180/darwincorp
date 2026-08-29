@@ -1,9 +1,9 @@
 /**
  * A one-shot signal that the hero's 3D scene has finished loading.
  *
- * The skybox is a multi-megabyte download, so the preloader holds until it's
- * ready rather than revealing an empty hero. Hero calls `markHeroReady()` when
- * the glTF resolves; Preloader subscribes with `onHeroReady()`.
+ * The preloader holds until the hero's canvas has actually painted, rather
+ * than revealing an empty stage. Hero calls `markHeroReady()` on the scene's
+ * first frame; Preloader subscribes with `onHeroReady()`.
  *
  * Deliberately module-scope rather than context: the two components are
  * siblings under the page, and this needs no re-render to propagate.

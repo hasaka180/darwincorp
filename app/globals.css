@@ -179,16 +179,6 @@ a {
   inset: 0;
 }
 
-/* The jellyfish runs in its own document. It is click-through so the hero's
-   own buttons still work; the cursor is forwarded in by postMessage. */
-.hero__frame-embed {
-  width: 100%;
-  height: 100%;
-  border: 0;
-  display: block;
-  pointer-events: none;
-}
-
 /* Shown when the device can't run the 3D scene — without it the frame is
    plain white and the white hero type disappears. */
 .hero__stage--flat {
