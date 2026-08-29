@@ -141,7 +141,44 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
         </div>
 
         <div className="footer__bottom">
-          <span>© {new Date().getFullYear()} Darwin Corp. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} Darwin Corp. All rights reserved.
+            {" · "}
+            {/* CC-BY-4.0 requires visible attribution for the hero skybox. */}
+            <span className="footer__credit">
+              Hero skybox{" "}
+              <a
+                href="https://sketchfab.com/3d-models/deep-space-skybox-2d87bae35cff40598c859f2163b4b3b0"
+                target="_blank"
+                rel="noreferrer"
+              >
+                &ldquo;Deep Space skybox&rdquo;
+              </a>{" "}
+              by Jungle Jim,{" "}
+              <a
+                href="http://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                CC BY 4.0
+              </a>
+            </span>
+            {" · "}
+            <span className="footer__credit">
+              Jellyfish{" "}
+              <a href="https://holtsetio.com/lab/aurelia/" target="_blank" rel="noreferrer">
+                Aurelia
+              </a>{" "}
+              by Holtsetio,{" "}
+              <a
+                href="https://github.com/holtsetio/aurelia/blob/master/LICENSE"
+                target="_blank"
+                rel="noreferrer"
+              >
+                MIT
+              </a>
+            </span>
+          </span>
           <span className="footer__bottom-links">
             <Link href="/privacy">Privacy</Link>
             <Link href="/terms">Terms</Link>

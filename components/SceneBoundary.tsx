@@ -5,9 +5,9 @@ import { Component, type ReactNode } from "react";
 /**
  * Keeps a failing 3D scene from taking the page down with it.
  *
- * The Spline runtime throws "Error creating WebGL context" when the GPU can't
- * give it a context — common on low-end phones, in Low Power Mode, in in-app
- * browsers, and under memory pressure. Without a boundary that error reaches
+ * three.js throws "Error creating WebGL context" when the GPU can't give it
+ * one — common on low-end phones, in Low Power Mode, in in-app browsers, and
+ * under memory pressure. Without a boundary that error reaches
  * Next's root error boundary, which replaces the whole document: no hero, no
  * sections, no carousels. Here it degrades to the fallback instead.
  */

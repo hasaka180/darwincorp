@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import type { Application, SPEObject } from "@splinetool/runtime";
 import Counter from "@/components/Counter";
 import SceneBoundary from "@/components/SceneBoundary";
 import { markHeroReady } from "@/lib/heroLoad";
@@ -29,157 +28,94 @@ function hasWebGL(): boolean {
   }
 }
 
-// The Spline runtime is ~590 kB of JS and the scene it fetches is far larger.
-// Loading it eagerly put all of that in the homepage's first-load bundle and
-// delayed hydration of the heading, stats and CTA. Lazy-loading the canvas
-// lets the text paint and become interactive first, while the 3D streams in
-// behind it.
+// three.js plus the glTF loader is a lot of JS, and the skybox it fetches is
+// ~2 MB on top. Loading it eagerly put all of that in the homepage's
+// first-load bundle and delayed hydration of the heading, stats and CTA.
+// Lazy-loading the canvas lets the text paint and become interactive first,
+// while the 3D streams in behind it.
 const HeroScene = dynamic(() => import("@/components/HeroScene"), {
   ssr: false,
   loading: () => null,
 });
 
-const SCENE_URL =
-  process.env.NEXT_PUBLIC_SPLINE_SCENE ||
-  "https://prod.spline.design/ZxF4urNm-snNBqhQ/scene.splinecode";
+// The jellyfish needs WebGPU, so it can never be the only hero. Everyone
+// without it falls back to HeroScene's skybox.
+const HeroSceneAurelia = dynamic(() => import("@/components/HeroSceneAurelia"), {
+  ssr: false,
+  loading: () => null,
+});
 
-// Preferred object names — the first match is driven directly by the cursor.
-// "CompassJellyfish" is the actual group name in this scene.
-const JELLYFISH_NAMES = [
-  "CompassJellyfish",
-  "Jellyfish",
-  "jellyfish",
-  "Jelly",
-  "Group",
-];
-
-// A target plus its resting transform, so cursor motion is an offset (never
-// accumulates frame to frame).
-type Target = {
-  obj: SPEObject;
-  baseRX: number;
-  baseRY: number;
-  basePX: number;
-  basePY: number;
-};
+type Variant = "aurelia" | "sky";
 
 export default function Hero() {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const splineRef = useRef<Application | null>(null);
-  const targetRef = useRef<Target | null>(null);
-
-  const mouse = useRef({ x: 0, y: 0 });
-  const eased = useRef({ x: 0, y: 0 });
-  const rafId = useRef<number>(0);
-
   const [loading, setLoading] = useState(true);
+  // null until the GPU probe settles, so we never mount one scene and then
+  // swap to the other (which would download both).
+  const [variant, setVariant] = useState<Variant | null>(null);
   // null = not probed yet, so nothing renders during the first pass
   const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
 
   // Give up on the 3D permanently: stop the spinner and let the preloader go.
-  function skipScene() {
+  const skipScene = useCallback(() => {
     setCanRender3D(false);
     setLoading(false);
     markHeroReady();
-  }
+  }, []);
 
   useEffect(() => {
     if (hasWebGL()) setCanRender3D(true);
     else skipScene();
+  }, [skipScene]);
+
+  // Read from the URL directly rather than useSearchParams, which would opt
+  // the whole homepage out of static rendering.
+  useEffect(() => {
+    const forced = new URLSearchParams(window.location.search).get("hero");
+    if (forced === "sky" || forced === "aurelia") {
+      setVariant(forced);
+      return;
+    }
+
+    // `navigator.gpu` existing is NOT enough — headless Chrome and machines
+    // with a blocklisted GPU expose the object but hand back a null adapter,
+    // which would drop the visitor into the embed's own error screen. Only a
+    // real adapter earns the jellyfish.
+    const gpu = (navigator as Navigator & {
+      gpu?: { requestAdapter: () => Promise<unknown | null> };
+    }).gpu;
+
+    if (!gpu) {
+      setVariant("sky");
+      return;
+    }
+
+    let settled = false;
+    const decide = (v: Variant) => {
+      if (settled) return;
+      settled = true;
+      setVariant(v);
+    };
+    // Don't let a hanging probe leave the hero empty behind the preloader.
+    const t = setTimeout(() => decide("sky"), 2500);
+
+    gpu
+      .requestAdapter()
+      .then((adapter) => decide(adapter ? "aurelia" : "sky"))
+      .catch(() => decide("sky"))
+      .finally(() => clearTimeout(t));
+
+    return () => {
+      settled = true;
+      clearTimeout(t);
+    };
   }, []);
 
-  function onLoad(app: Application) {
-    splineRef.current = app;
+  // Stable identity: HeroScene keys its whole WebGL setup on this, so a new
+  // function every render would tear the context down and rebuild it.
+  const onLoad = useCallback(() => {
     setLoading(false);
     // Releases the preloader — it holds until the scene is actually in.
     markHeroReady();
-
-    // Pull the full object list (newer runtimes expose getAllObjects).
-    const all: SPEObject[] =
-      typeof app.getAllObjects === "function" ? app.getAllObjects() : [];
-
-    if (process.env.NODE_ENV !== "production") {
-      // Read these names in the browser console to fine-tune JELLYFISH_NAMES.
-      console.log(
-        "[Spline] objects:",
-        all.map((o) => o.name)
-      );
-    }
-
-    // Hide the scene's baked-in "Drag any balloon..." hint text.
-    for (const o of all) {
-      if (o.name && /balloon|drag|hint|text/i.test(o.name)) {
-        o.visible = false;
-      }
-    }
-
-    // 1) Try a named match. 2) Otherwise prefer anything "jelly". 3) Else the
-    // first real mesh (skipping camera / lights / the hint text).
-    let obj: SPEObject | undefined;
-    for (const name of JELLYFISH_NAMES) {
-      const found = app.findObjectByName(name);
-      if (found) {
-        obj = found;
-        break;
-      }
-    }
-    if (!obj) {
-      obj =
-        all.find((o) => o.name && /jelly/i.test(o.name)) ||
-        all.find((o) => o.name && !/camera|light|balloon|drag|text/i.test(o.name));
-    }
-
-    if (obj) {
-      targetRef.current = {
-        obj,
-        baseRX: obj.rotation.x,
-        baseRY: obj.rotation.y,
-        basePX: obj.position.x,
-        basePY: obj.position.y,
-      };
-    }
-  }
-
-  useEffect(() => {
-    function handleMove(e: PointerEvent) {
-      mouse.current = {
-        x: (e.clientX / window.innerWidth) * 2 - 1, // -1 .. 1
-        y: (e.clientY / window.innerHeight) * 2 - 1,
-      };
-    }
-    window.addEventListener("pointermove", handleMove, { passive: true });
-
-    const tick = () => {
-      eased.current.x += (mouse.current.x - eased.current.x) * 0.08;
-      eased.current.y += (mouse.current.y - eased.current.y) * 0.08;
-      const { x, y } = eased.current;
-
-      // Move the whole rendered scene toward the cursor. This is immune to the
-      // scene's looping idle animation (which overrides per-object transforms),
-      // so the jellyfish reliably follows the pointer. Scaled up so the canvas
-      // edges never show while it pans/tilts.
-      if (stageRef.current) {
-        stageRef.current.style.transform =
-          `scale(1.16) perspective(1400px) ` +
-          `rotateX(${-y * 7}deg) rotateY(${x * 7}deg) ` +
-          `translate3d(${-x * 26}px, ${-y * 26}px, 0)`;
-      }
-
-      // Also nudge the object directly — harmless if the idle animation wins.
-      const t = targetRef.current;
-      if (t) {
-        t.obj.rotation.y = t.baseRY + x * 0.6;
-        t.obj.rotation.x = t.baseRX + y * 0.35;
-      }
-
-      rafId.current = requestAnimationFrame(tick);
-    };
-    rafId.current = requestAnimationFrame(tick);
-
-    return () => {
-      window.removeEventListener("pointermove", handleMove);
-      cancelAnimationFrame(rafId.current);
-    };
   }, []);
 
   return (
@@ -187,14 +123,19 @@ export default function Hero() {
       <div className="hero__frame">
       <div
         className={`hero__stage${canRender3D === false ? " hero__stage--flat" : ""}`}
-        ref={stageRef}
       >
-        {canRender3D && (
+        {canRender3D && variant && (
           <SceneBoundary onFail={skipScene}>
-            <HeroScene sceneUrl={SCENE_URL} onLoad={onLoad} />
+            {variant === "aurelia" ? (
+              <HeroSceneAurelia onLoad={onLoad} />
+            ) : (
+              <HeroScene onLoad={onLoad} />
+            )}
           </SceneBoundary>
         )}
       </div>
+
+      <div className="hero__scrim" aria-hidden="true" />
 
       {loading && (
         <div className="hero__loader">
