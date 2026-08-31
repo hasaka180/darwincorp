@@ -27,7 +27,7 @@ export default function MotionDebug() {
 
     let frames = 0;
     let raf = 0;
-    const t0 = performance.now();
+    let t0 = performance.now();
     const count = () => {
       frames++;
       raf = requestAnimationFrame(count);
@@ -41,10 +41,11 @@ export default function MotionDebug() {
       return { t: cs.transform, name: cs.animationName, state: cs.animationPlayState };
     };
 
-    const before = new Map(WATCH.map(([sel]) => [sel, snap(sel)]));
+    let before = new Map(WATCH.map(([sel]) => [sel, snap(sel)]));
 
-    const timer = setTimeout(() => {
-      cancelAnimationFrame(raf);
+    // Re-sample on a loop: a carousel that is still off-screen at first read
+    // would otherwise look frozen, and iOS may genuinely pause offscreen work.
+    const sample = () => {
       const secs = (performance.now() - t0) / 1000;
       const out: Row[] = [];
 
@@ -62,19 +63,32 @@ export default function MotionDebug() {
           continue;
         }
         const moving = a.t !== b.t;
+        const onScreen = (() => {
+          const r = (document.querySelector(sel) as HTMLElement).getBoundingClientRect();
+          return r.bottom > 0 && r.top < window.innerHeight;
+        })();
         out.push({
           label,
-          value: `anim=${a.name} state=${a.state} moving=${moving ? "YES ✓" : "NO ⚠️"}`,
+          value:
+            `anim=${a.name} state=${a.state} ` +
+            `moving=${moving ? "YES ✓" : "NO ⚠️"} ${onScreen ? "(on screen)" : "(off screen)"}`,
         });
       }
 
       out.push({ label: "ua", value: navigator.userAgent });
       setRows(out);
-    }, 2500);
+
+      // Reset the window for the next pass.
+      before = new Map(WATCH.map(([sel]) => [sel, snap(sel)]));
+      frames = 0;
+      t0 = performance.now();
+    };
+
+    const timer = setInterval(sample, 2000);
 
     return () => {
       cancelAnimationFrame(raf);
-      clearTimeout(timer);
+      clearInterval(timer);
     };
   }, []);
 
