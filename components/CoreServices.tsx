@@ -330,6 +330,10 @@ export default function CoreServices() {
                 key={i}
                 className="tool"
                 style={{ color: t.color, background: t.bg }}
+                // The set is duplicated for the marquee loop; only the first
+                // pass is exposed to assistive tech, and the copy is what gets
+                // hidden when the loop is off.
+                aria-hidden={i >= TOOLS.length || undefined}
               >
                 {t.label}
               </span>

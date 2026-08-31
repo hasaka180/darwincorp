@@ -911,7 +911,6 @@ a {
       #000 6%,
       #000 94%,
       transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
@@ -993,10 +992,6 @@ a {
     opacity: 1;
     filter: none;
     transform: none;
-  }
-
-  .studio__track {
-    animation: none;
   }
 }
 
@@ -1615,7 +1610,6 @@ a {
     #000 92%,
     transparent
   );
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 92%, transparent);
 }
 
@@ -1711,10 +1705,6 @@ a {
     opacity: 1;
     filter: none;
     transform: none;
-  }
-
-  .toolbox__track {
-    animation: none;
   }
 }
 
@@ -5817,5 +5807,70 @@ a.contactp__detail:hover {
   .promo__panel,
   .promo__backdrop {
     animation: none;
+  }
+}
+
+
+/* ============ REDUCED MOTION: make the resting state deliberate ============
+   Switching the animations off is right, but leaving them switched off
+   mid-flight is not: the marquees froze wherever the loop happened to be,
+   with logos sliced by the container, and the SVG scenes sat at whatever
+   position their keyframes started from. Everything below gives those
+   elements a composed state to stop in. */
+@media (prefers-reduced-motion: reduce) {
+  /* Auto-scrolling stops, but the content stays reachable — the rows become
+     swipeable instead. The mask fade doubles as the "more this way" hint. */
+  .studio__marquee,
+  .toolbox__marquee {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .studio__marquee::-webkit-scrollbar,
+  .toolbox__marquee::-webkit-scrollbar {
+    display: none;
+  }
+
+  .studio__track,
+  .toolbox__track {
+    animation: none;
+    transform: none;
+  }
+
+  /* The second pass exists only to make the loop seamless. With no loop it is
+     just every logo repeated, so it goes. */
+  .studio__track > [aria-hidden="true"],
+  .toolbox__track > [aria-hidden="true"] {
+    display: none;
+  }
+
+  /* Park each figure where its animation looks composed, rather than at the
+     raw SVG origin its keyframes were written to move it away from. */
+  .pv-search {
+    transform: translate(48px, 50px);
+  }
+  .pv-arrow {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  .pv-block {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  .pv-rocket {
+    transform: translateY(0);
+  }
+  .pv-rays {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  .pv-dot,
+  .proc__vec .pv-bull {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  .pv-bulb {
+    stroke: rgba(255, 255, 255, 0.62);
   }
 }
