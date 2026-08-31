@@ -911,6 +911,7 @@ a {
       #000 6%,
       #000 94%,
       transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
 
@@ -1614,6 +1615,7 @@ a {
     #000 92%,
     transparent
   );
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 92%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 4%, #000 92%, transparent);
 }
 
