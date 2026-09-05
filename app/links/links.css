@@ -1,0 +1,447 @@
+/* ===================================================================
+   /links — retro-arcade "link in bio" hub.
+   Self-contained styles; nothing here leaks into the main site.
+   A Three.js CRT setup renders inside .linksos__device; the link list is
+   real DOM (.linksos__screen) mounted on the glass through CSS3DRenderer,
+   so it tilts with the monitor.
+   =================================================================== */
+
+.linksos {
+  /* The device frame's width, and 1% of it as a layout unit. Container
+     queries would be the natural fit, but a container-type ancestor stops
+     the CSS3D layer from painting, so the unit is derived arithmetically
+     from the very same expression that sizes the frame. */
+  --padx: clamp(8px, 4vw, 28px);
+  --pady: clamp(10px, 3vh, 32px);
+  /* Whichever runs out first: the width left between the stage's padding,
+     or the width a full-height frame of this aspect would need. */
+  --dw: min(
+    calc(100vw - var(--padx) * 2 - 1px),
+    calc((100svh - var(--pady) * 2) * 0.53880)
+  );
+  --u: calc(var(--dw) / 100);
+
+  --blue: #5f8bff;
+  --red: #ff4d5e;
+  --amber: #ffb84d;
+  --ink: #eef2ff;
+  --dim: rgba(230, 236, 255, 0.62);
+  --line: rgba(180, 200, 255, 0.24);
+
+  position: relative;
+  min-height: 100svh;
+  background: #04050a;
+  color: var(--ink);
+}
+
+.linksos__stage {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pady) var(--padx);
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(47, 107, 255, 0.16) 0%, transparent 60%),
+    radial-gradient(90% 60% at 80% 100%, rgba(255, 47, 69, 0.12) 0%, transparent 60%),
+    #04050a;
+}
+
+/* ---- device frame: fixed aspect, scales as one card ------------------ */
+.linksos__device {
+  position: relative;
+  width: var(--dw);
+  aspect-ratio: 854 / 1585;
+  flex: none;
+  border-radius: clamp(14px, 2.4vw, 26px);
+  overflow: hidden;
+  background: #060810;
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.linksos__canvas {
+  position: absolute;
+  inset: 0;
+  background: #04050a;
+  z-index: 1;
+}
+.linksos__gl,
+.linksos__css {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+.linksos__gl { display: block; z-index: 1; }
+.linksos__css { z-index: 2; }
+
+/* ---- the screen: real DOM on the glass ------------------------------- */
+.linksos__screen {
+  overflow: hidden;
+  background: transparent;
+  font-family: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  border-radius: calc(var(--u) * 1.2);
+  -webkit-font-smoothing: antialiased;
+}
+/* No WebGL: park the list where the glass would be. */
+.linksos__screen.is-static {
+  position: absolute;
+  left: 12.9%;
+  top: 16.3%;
+  width: 74.2%;
+  height: 54.5%;
+}
+
+.linksos__inner {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: calc(var(--u) * 3.2) calc(var(--u) * 3.2) calc(var(--u) * 2.4);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(180, 200, 255, 0.4) transparent;
+  overscroll-behavior: contain;
+}
+.linksos__inner::-webkit-scrollbar { width: 5px; }
+.linksos__inner::-webkit-scrollbar-thumb {
+  background: rgba(180, 200, 255, 0.35);
+  border-radius: 4px;
+}
+
+.linksos__scan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.045) 0px,
+    rgba(255, 255, 255, 0.045) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0;
+  animation: linksosFlicker 7s ease-in-out infinite;
+}
+.is-on .linksos__scan { opacity: 1; }
+
+/* ---- power on / off ----------------------------------------------------- */
+.linksos__boot {
+  position: absolute;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  background: #000;
+  opacity: 1;
+}
+.linksos__boot::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: #fff;
+  box-shadow: 0 0 14px 5px rgba(180, 220, 255, 0.95);
+  transform: translateY(-50%) scaleX(0);
+  opacity: 0;
+}
+.is-on .linksos__boot { animation: linksosBootLift 0.34s ease 0.5s both; }
+.is-on .linksos__boot::after {
+  animation:
+    linksosBeamX 0.2s ease-out both,
+    linksosBeamY 0.42s ease-in 0.2s both;
+}
+.is-off .linksos__boot { animation: linksosBootDrop 0.14s ease 0.26s both; }
+.is-off .linksos__boot::after { animation: linksosCollapse 0.34s ease-in both; }
+
+@keyframes linksosBootLift { from { opacity: 1; } to { opacity: 0; } }
+@keyframes linksosBootDrop { from { opacity: 0; } to { opacity: 1; } }
+@keyframes linksosBeamX {
+  from { opacity: 1; transform: translateY(-50%) scaleX(0); }
+  to { opacity: 1; transform: translateY(-50%) scaleX(1); }
+}
+@keyframes linksosBeamY {
+  from { opacity: 1; transform: translateY(-50%) scaleX(1) scaleY(1); }
+  70% { opacity: 0.9; }
+  to { opacity: 0; transform: translateY(-50%) scaleX(1) scaleY(600); }
+}
+@keyframes linksosCollapse {
+  from { opacity: 1; transform: translateY(-50%) scaleX(1) scaleY(600); }
+  55% { opacity: 1; transform: translateY(-50%) scaleX(1) scaleY(1); }
+  to { opacity: 0; transform: translateY(-50%) scaleX(0) scaleY(1); }
+}
+@keyframes linksosFlicker {
+  0%, 96%, 100% { opacity: 1; }
+  97% { opacity: 1.5; }
+  98% { opacity: 0.6; }
+}
+@keyframes linksosIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes linksosOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* content wakes up behind the beam, row by row */
+.linksos__head,
+.linksos__ticker,
+.linksos__slot { opacity: 0; }
+.is-on .linksos__head { animation: linksosIn 0.4s ease 0.58s both; }
+.is-on .linksos__slot {
+  animation: linksosIn 0.4s ease both;
+  animation-delay: calc(0.66s + var(--i, 0) * 70ms);
+}
+.is-on .linksos__ticker { animation: linksosIn 0.4s ease 1.14s both; }
+.is-off .linksos__head,
+.is-off .linksos__ticker,
+.is-off .linksos__slot { animation: linksosOut 0.14s ease both; }
+
+/* Resting state, pinned once the intro window has passed (every intro
+   animation has finished by then, so cancelling them changes nothing —
+   it just guarantees a readable screen if they never ran). */
+.is-ready .linksos__boot { animation: none; opacity: 0; }
+.is-ready .linksos__boot::after { animation: none; opacity: 0; }
+.is-ready .linksos__head,
+.is-ready .linksos__slot,
+.is-ready .linksos__ticker { animation: none; opacity: 1; }
+
+/* ---- header --------------------------------------------------------- */
+.linksos__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: calc(var(--u) * 2);
+  padding-bottom: calc(var(--u) * 2);
+  margin-bottom: calc(var(--u) * 2.2);
+  border-bottom: 1px solid var(--line);
+}
+.linksos__os {
+  margin: 0;
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  letter-spacing: 0.04em;
+  font-size: clamp(11px, calc(var(--u) * 4.6), 21px);
+  font-weight: 600;
+  color: var(--ink);
+}
+.linksos__os span {
+  color: var(--dim);
+  font-size: 0.6em;
+  margin-left: 0.4em;
+}
+.linksos__tag {
+  margin: 0.2em 0 0;
+  font-size: clamp(7px, calc(var(--u) * 2.2), 10.5px);
+  line-height: 1.3;
+  letter-spacing: 0.05em;
+  color: var(--dim);
+  text-transform: uppercase;
+}
+.linksos__time {
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  font-size: clamp(9px, calc(var(--u) * 3), 13px);
+  color: var(--ink);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ---- link list -------------------------------------------------------- */
+.linksos__list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--u) * 1.4);
+}
+
+.linksos__row {
+  --row-accent: var(--blue);
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  border-radius: clamp(6px, calc(var(--u) * 1.6), 12px);
+  border: 1px solid var(--line);
+  background: rgba(10, 16, 32, 0.66);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+}
+.linksos__row--red { --row-accent: var(--red); }
+.linksos__row--amber { --row-accent: var(--amber); }
+
+.linksos__row:hover,
+.linksos__row:focus-visible {
+  transform: translateX(3px);
+  border-color: var(--row-accent);
+  background: rgba(14, 22, 42, 0.86);
+}
+.linksos__row:focus-visible {
+  outline: 2px solid var(--row-accent);
+  outline-offset: 2px;
+}
+.linksos__row:active { transform: translateX(1px) scale(0.995); }
+
+.linksos__thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(40px, calc(var(--u) * 18), 88px);
+  align-self: stretch;
+  min-height: clamp(34px, calc(var(--u) * 10.4), 54px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--line);
+  background: rgba(20, 30, 54, 0.9);
+  background: color-mix(in srgb, var(--row-accent) 22%, #0b0e18);
+  color: var(--row-accent);
+}
+.linksos__thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.linksos__thumb-logo {
+  object-fit: contain !important;
+  padding: 26%;
+  filter: brightness(0) invert(1);
+}
+.linksos__thumb svg {
+  width: 36%;
+  height: 36%;
+}
+.linksos__index {
+  position: absolute;
+  top: 5%;
+  left: 7%;
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  font-size: clamp(7px, calc(var(--u) * 2.3), 11px);
+  color: rgba(238, 242, 255, 0.85);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+.linksos__copy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15em;
+  padding: calc(var(--u) * 1.5) calc(var(--u) * 2.2);
+}
+.linksos__title {
+  font-size: clamp(9.5px, calc(var(--u) * 3.2), 14.5px);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.linksos__subtitle {
+  font-size: clamp(7.5px, calc(var(--u) * 2.15), 10.5px);
+  line-height: 1.3;
+  color: var(--dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.linksos__go {
+  flex-shrink: 0;
+  align-self: center;
+  width: clamp(16px, calc(var(--u) * 4.4), 22px);
+  height: clamp(16px, calc(var(--u) * 4.4), 22px);
+  margin-right: calc(var(--u) * 2.2);
+  color: var(--row-accent);
+  transition: transform 0.18s ease;
+}
+.linksos__row:hover .linksos__go { transform: translateX(3px); }
+.linksos__go svg { width: 100%; height: 100%; }
+
+.linksos__ticker {
+  margin: calc(var(--u) * 2.2) 0 0;
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  font-size: clamp(6.5px, calc(var(--u) * 1.9), 9.5px);
+  letter-spacing: 0.1em;
+  color: var(--dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.linksos__ticker span { color: var(--ink); }
+
+/* ---- corner HUD (outside the monitor, on the poster) ----------------- */
+.linksos__hud {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  font-family: var(--font-handjet), ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(230, 236, 255, 0.78);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.75);
+  animation: linksosHud 0.8s ease 0.3s both;
+}
+.linksos__hud p { margin: 0; }
+.linksos__hud--tl { top: calc(var(--u) * 3.4); left: calc(var(--u) * 4.2); }
+.linksos__hud--tr { top: calc(var(--u) * 3.4); right: calc(var(--u) * 4.2); text-align: right; }
+.linksos__hud--bl { bottom: calc(var(--u) * 3.6); left: calc(var(--u) * 4.2); }
+.linksos__hud--br { bottom: calc(var(--u) * 3.6); right: calc(var(--u) * 4.2); text-align: right; }
+.linksos__hud-title {
+  font-size: clamp(9px, calc(var(--u) * 3), 14px);
+  color: var(--ink);
+  padding-left: calc(var(--u) * 2.4);
+  border-left: 1px solid rgba(230, 236, 255, 0.5);
+}
+.linksos__hud-sub {
+  font-size: clamp(7px, calc(var(--u) * 2.1), 10px);
+  line-height: 1.35;
+}
+.linksos__hud--tl .linksos__hud-sub { padding-left: calc(var(--u) * 2.4); border-left: 1px solid rgba(230, 236, 255, 0.5); }
+@keyframes linksosHud {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.linksos__socials {
+  display: flex;
+  gap: calc(var(--u) * 1.8);
+  list-style: none;
+  margin: calc(var(--u) * 2.2) 0 0;
+  padding: 0;
+  pointer-events: auto;
+}
+.linksos__socials a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(24px, calc(var(--u) * 6.6), 32px);
+  height: clamp(24px, calc(var(--u) * 6.6), 32px);
+  border-radius: 50%;
+  border: 1px solid rgba(230, 236, 255, 0.35);
+  color: var(--ink);
+  transition: transform 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+.linksos__socials a svg { width: 48%; height: 48%; }
+.linksos__socials a:hover,
+.linksos__socials a:focus-visible {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+}
+.linksos__socials a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .linksos__scan,
+  .linksos__hud,
+  .linksos__boot::after { animation: none !important; }
+  .linksos__row, .linksos__go, .linksos__socials a { transition: none !important; }
+  .is-on .linksos__boot { animation: none; opacity: 0; }
+  .is-on .linksos__head,
+  .is-on .linksos__slot,
+  .is-on .linksos__ticker { animation: none; opacity: 1; }
+}

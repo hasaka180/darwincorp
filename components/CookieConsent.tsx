@@ -98,7 +98,9 @@ export default function CookieConsent() {
   }, [open, showPrefs]);
 
   // The studio is our own password-gated admin area, not a public page.
-  if (pathname?.startsWith("/studio")) return null;
+  // /links is a chrome-free retro hub meant to be opened straight from a
+  // social bio link — keep it free of the banner too.
+  if (pathname?.startsWith("/studio") || pathname?.startsWith("/links")) return null;
   if (!open) return null;
 
   return (

@@ -11,8 +11,8 @@ export default function FloatingActions() {
   const pathname = usePathname();
   const [chatOpen, setChatOpen] = useState(false);
 
-  // Ad landing pages stay chrome-free: the form is the only call to action.
-  if (pathname?.startsWith("/lp")) return null;
+  // Ad landing pages and the retro /links hub stay chrome-free.
+  if (pathname?.startsWith("/lp") || pathname?.startsWith("/links")) return null;
 
   return (
     <div className="fab">

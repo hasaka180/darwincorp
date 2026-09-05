@@ -62,7 +62,7 @@ export default function Navbar() {
   const scrolled = useScrolled();
 
   // Hide the studio (admin) and ad landing pages behind a chrome-free view.
-  if (pathname?.startsWith("/studio") || pathname?.startsWith("/lp")) return null;
+  if (pathname?.startsWith("/studio") || pathname?.startsWith("/lp") || pathname?.startsWith("/links")) return null;
 
   const dark = onLight;
 
