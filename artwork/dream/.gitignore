@@ -1,0 +1,3 @@
+*.blend1
+# Cycles previews are generated locally; the web captures are versioned.
+dream-poster*.png

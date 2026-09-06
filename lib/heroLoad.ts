@@ -1,9 +1,8 @@
 /**
- * A one-shot signal that the hero's 3D scene has finished loading.
+ * A one-shot signal that the hero has a background ready to reveal.
  *
- * The preloader holds until the hero's canvas has actually painted, rather
- * than revealing an empty stage. Hero calls `markHeroReady()` on the scene's
- * first frame; Preloader subscribes with `onHeroReady()`.
+ * Hero calls `markHeroReady()` when its Blender poster loads or the live
+ * scene paints its first frame. Preloader subscribes with `onHeroReady()`.
  *
  * Deliberately module-scope rather than context: the two components are
  * siblings under the page, and this needs no re-render to propagate.

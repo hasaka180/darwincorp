@@ -9,9 +9,8 @@ const HOLD = 92;
 /** How long the final run from HOLD to 100 takes once the scene is in. */
 const RELEASE_MS = 500;
 /**
- * Longest the preloader will ever wait on the scene. The scene is ~10 MB, so
- * on a slow connection this fires first and the hero reveals with its own
- * loading ring rather than holding the whole page hostage.
+ * Longest the preloader will wait for the hero poster or the live scene.
+ * A slow or failed request must still allow the page to appear.
  */
 const CAP_MS = 9000;
 

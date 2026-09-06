@@ -17,8 +17,7 @@ import { markHeroReady } from "@/lib/heroLoad";
 function hasWebGL(): boolean {
   try {
     const canvas = document.createElement("canvas");
-    const gl = (canvas.getContext("webgl2") ||
-      canvas.getContext("webgl")) as WebGLRenderingContext | null;
+    const gl = canvas.getContext("webgl2");
     if (!gl) return false;
     // Release the probe's context so it doesn't count against the limit.
     gl.getExtension("WEBGL_lose_context")?.loseContext();
@@ -28,60 +27,75 @@ function hasWebGL(): boolean {
   }
 }
 
-// The shader itself is tiny, but three.js is not. Lazy-loading the canvas lets
-// the heading, stats and CTA paint and hydrate first, with the light arriving
-// behind them a moment later.
-const HeroLightLeak = dynamic(() => import("@/components/HeroLightLeak"), {
+// The Blender render paints first; the live scene arrives behind the content.
+const HeroDreamScene = dynamic(() => import("@/components/HeroDreamScene"), {
   ssr: false,
   loading: () => null,
 });
 
 export default function Hero() {
-  const [loading, setLoading] = useState(true);
+  const [sceneReady, setSceneReady] = useState(false);
   // null = not probed yet, so nothing renders during the first pass
   const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
 
-  // Give up on the 3D permanently: stop the spinner and let the preloader go.
+  // Keep the Blender poster visible if the live scene cannot run.
   const skipScene = useCallback(() => {
     setCanRender3D(false);
-    setLoading(false);
+    setSceneReady(false);
     markHeroReady();
   }, []);
 
   useEffect(() => {
-    if (hasWebGL()) setCanRender3D(true);
-    else skipScene();
+    const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    const update = () => {
+      if (!motion.matches && !connection?.saveData && hasWebGL()) setCanRender3D(true);
+      else skipScene();
+    };
+    update();
+    motion.addEventListener("change", update);
+    return () => motion.removeEventListener("change", update);
   }, [skipScene]);
 
   // Stable identity: the scene keys its whole WebGL setup on this, so a new
   // function every render would tear the context down and rebuild it.
   const onLoad = useCallback(() => {
-    setLoading(false);
-    // Releases the preloader — it holds until the scene is actually in.
+    setSceneReady(true);
+    // Also releases the preloader if the poster hasn't finished loading yet.
     markHeroReady();
   }, []);
 
   return (
-    <section className="hero">
+    <section className={`hero${sceneReady ? " hero--interactive" : ""}`}>
+      <div className="hero__sticky">
       <div className="hero__frame">
       <div
-        className={`hero__stage${canRender3D === false ? " hero__stage--flat" : ""}`}
+        className={`hero__stage${sceneReady ? " hero__stage--ready" : ""}`}
       >
+        <picture>
+          <source media="(orientation: portrait)" srcSet="/assets/dream/dream-poster-mobile.webp?v=mars-dolly-3" />
+          {/* Already compressed locally; picture selects the matching Blender camera. */}
+          <img
+            className="hero__poster"
+            src="/assets/dream/dream-poster.webp?v=mars-dolly-3"
+            alt=""
+            width={1920}
+            height={1200}
+            fetchPriority="high"
+            onLoad={markHeroReady}
+            onError={markHeroReady}
+          />
+        </picture>
         {canRender3D && (
           <SceneBoundary onFail={skipScene}>
-            <HeroLightLeak onLoad={onLoad} />
+            <HeroDreamScene onLoad={onLoad} onFail={skipScene} />
           </SceneBoundary>
         )}
       </div>
 
       <div className="hero__scrim" aria-hidden="true" />
 
-      {loading && (
-        <div className="hero__loader">
-          <div className="ring" />
-        </div>
-      )}
-
+      <div className="hero__copy">
       {/* The page's main heading. It was a plain div, which left the
           homepage with no h1 at all. */}
       <h1 className="hero__heading">
@@ -125,6 +139,9 @@ export default function Hero() {
           </span>
           <span className="cta-btn__text">Get Started</span>
         </Link>
+      </div>
+      </div>
+      {sceneReady && <div className="hero__scroll-hint" aria-hidden="true">Scroll to step inside <span>↓</span></div>}
       </div>
       </div>
     </section>

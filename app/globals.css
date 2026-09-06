@@ -154,9 +154,53 @@ a {
   position: relative;
   height: 100svh;
   width: 100%;
-  overflow: hidden;
   /* White frame revealed around the inset, rounded hero. */
   background: #fff;
+}
+
+.hero--interactive {
+  height: 260svh;
+}
+
+.hero__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.hero__copy {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.hero__copy .hero__pitch {
+  pointer-events: auto;
+}
+
+.hero__scroll-hint {
+  position: absolute;
+  z-index: 2;
+  bottom: 30px;
+  left: clamp(24px, 6vw, 110px);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: calc(1 - var(--hero-travel, 0));
+  pointer-events: none;
+}
+
+.hero__scroll-hint span { margin-left: 16px; }
+
+@media (max-width: 768px) {
+  .hero__scroll-hint { bottom: 77px; font-size: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero--interactive { height: 100svh; }
 }
 
 .hero__frame {
@@ -170,22 +214,34 @@ a {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background: #211024;
 }
 
-/* The three.js canvas mounts here. The camera sits inside the skybox sphere,
-   so the render always fills the frame — no overscale needed to hide edges. */
+/* A Blender render stays underneath the live scene, including on load failure. */
+.hero__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 44% center;
+}
+
 .hero__canvas {
   position: absolute;
   inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s ease;
 }
 
-/* Shown when the device can't run the 3D scene — without it the frame is
-   plain white and the white hero type disappears. */
-.hero__stage--flat {
-  background:
-    radial-gradient(90% 70% at 22% 18%, rgba(90, 120, 255, 0.55) 0%, transparent 60%),
-    radial-gradient(80% 60% at 82% 74%, rgba(232, 84, 132, 0.42) 0%, transparent 62%),
-    linear-gradient(160deg, #0b1c52 0%, #16204f 45%, #090c22 100%);
+.hero__stage--ready .hero__canvas {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__canvas {
+    transition: none;
+  }
 }
 
 .hero__stage canvas {
@@ -195,45 +251,23 @@ a {
   outline: none;
 }
 
-/* The skybox has a bright horizon and a sun flare that drifts with the
-   cursor, so the white type can't rely on whatever happens to be behind it.
-   This keeps contrast under the heading, pitch and stats at all angles. */
+/* Keep the moonlit room visible above the darker area beneath the copy. */
 .hero__scrim {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
+  opacity: calc(0.85 + var(--hero-travel, 0) * 0.15);
   background:
     linear-gradient(
       to top,
-      rgba(6, 10, 28, 0.62) 0%,
-      rgba(6, 10, 28, 0.26) 26%,
-      transparent 52%
+      rgba(13, 5, 19, 0.92) 0%,
+      rgba(13, 5, 19, 0.72) 25%,
+      rgba(13, 5, 19, 0.30) 54%,
+      transparent 82%
     ),
-    linear-gradient(to right, rgba(6, 10, 28, 0.34) 0%, transparent 38%);
-}
-
-.hero__loader {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-}
-
-.hero__loader .ring {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  border-top-color: #fff;
-  animation: spin 0.9s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+    linear-gradient(to right, rgba(13, 5, 19, 0.32), transparent 65%),
+    linear-gradient(to bottom, rgba(4, 7, 22, 0.15), transparent 28%);
 }
 
 /* Headline overlay, lower-left like the reference. */
@@ -309,7 +343,7 @@ a {
   top: 53%;
   right: clamp(28px, 5vw, 185px);
   transform: translateY(-50%);
-  width: min(560px, 80vw);
+  width: min(560px, 40vw);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -479,11 +513,17 @@ a {
 }
 
 @media (max-width: 880px) {
+  .hero__heading {
+    top: 35%;
+    bottom: auto;
+  }
+
   .hero__pitch {
     right: auto;
     left: clamp(24px, 6vw, 110px);
     top: auto;
-    bottom: clamp(80px, 22vh, 230px);
+    bottom: 10%;
+    width: min(560px, 80vw);
     transform: none;
   }
 
