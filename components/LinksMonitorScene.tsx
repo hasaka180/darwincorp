@@ -155,7 +155,7 @@ function makeLabelTexture(text: string) {
   ctx.lineWidth = 3;
   ctx.strokeRect(6, 6, 244, 84);
   ctx.fillStyle = "#e9e9e9";
-  ctx.font = "bold 40px ui-monospace, Menlo, monospace";
+  ctx.font = '500 36px "Helvetica Neue", Helvetica, Arial, sans-serif';
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(text, 128, 50);
@@ -624,7 +624,7 @@ export default function LinksMonitorScene({ className, onScreenElement }: Props)
 
       const plaque = new THREE.Mesh(
         track(new THREE.PlaneGeometry(1.7, 0.64)),
-        track(new THREE.MeshBasicMaterial({ map: track(makeLabelTexture("HASAKA")) })),
+        track(new THREE.MeshBasicMaterial({ map: track(makeLabelTexture("Macintosh")) })),
       );
       plaque.position.set(0, bandY, 0.03);
       monitor.add(plaque);

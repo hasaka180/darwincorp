@@ -5,19 +5,14 @@ import { createPortal } from "react-dom";
 import LinksMonitorScene from "@/components/LinksMonitorScene";
 import "./links.css";
 
-type IconName = "layers" | "eye" | "film" | "linkedin" | "facebook" | "instagram" | "arrow";
-
-type Thumb =
-  | { type: "image"; src: string }
-  | { type: "logo"; src: string }
-  | { type: "icon"; icon: IconName };
+type IconName = "linkedin" | "facebook" | "instagram";
 
 type LinkItem = {
   index: string;
   title: string;
   subtitle: string;
   href: string;
-  thumb: Thumb;
+  src: string;
   accent: "blue" | "red" | "amber";
 };
 
@@ -27,39 +22,39 @@ const LINKS: LinkItem[] = [
     title: "DARWIN CORP",
     subtitle: "Designed to evolve.",
     href: "https://thedarwin.co/",
-    thumb: { type: "logo", src: "/darwin.svg" },
+    src: "/assets/darwin_thumb.webp",
     accent: "blue",
   },
   {
     index: "02",
     title: "HASAKA.IO",
-    subtitle: "Portfolio. 3D. Web. Ideas.",
+    subtitle: "Portfolio. 3D. Web.",
     href: "https://hasaka.io/",
-    thumb: { type: "image", src: "/assets/hasaka.webp" },
+    src: "/assets/hasaka_thumb.webp",
     accent: "blue",
   },
   {
     index: "03",
     title: "DUBAIOGRAPHY",
-    subtitle: "Dubai news, people, places.",
+    subtitle: "Dubai news & stories.",
     href: "https://dubaiography.com/",
-    thumb: { type: "image", src: "/assets/dubaiography.webp" },
+    src: "/assets/dubaiography_thumb.webp",
     accent: "blue",
   },
   {
     index: "04",
-    title: "MOTION REPOSITORY",
-    subtitle: "Free assets. Textures. More.",
+    title: "MOTION",
+    subtitle: "Free creative assets.",
     href: "https://motion.thedarwin.co/",
-    thumb: { type: "icon", icon: "layers" },
+    src: "/assets/motion_thumb.webp",
     accent: "blue",
   },
   {
     index: "05",
     title: "GLITCH DECODED",
-    subtitle: "Unpopular truths, decoded.",
+    subtitle: "Unpopular truths.",
     href: "https://www.glitchdecoded.com/",
-    thumb: { type: "icon", icon: "eye" },
+    src: "/assets/glitch_thumb.webp",
     accent: "red",
   },
   {
@@ -67,7 +62,7 @@ const LINKS: LinkItem[] = [
     title: "BORN CINEMA",
     subtitle: "Be a creator.",
     href: "http://borncinema.com/",
-    thumb: { type: "icon", icon: "film" },
+    src: "/assets/cinema_thumb.webp",
     accent: "amber",
   },
 ];
@@ -80,27 +75,6 @@ const SOCIALS = [
 
 function Icon({ name }: { name: IconName }) {
   switch (name) {
-    case "layers":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M12 3 3 8l9 5 9-5-9-5Z" strokeLinejoin="round" />
-          <path d="M3 13l9 5 9-5" strokeLinejoin="round" />
-        </svg>
-      );
-    case "eye":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <path d="M2 12s3.8-7 10-7 10 7 10 7-3.8 7-10 7-10-7-10-7Z" strokeLinejoin="round" />
-          <circle cx="12" cy="12" r="3" />
-        </svg>
-      );
-    case "film":
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-          <rect x="3" y="4.5" width="18" height="15" rx="1.4" />
-          <path d="M7.5 4.5v15M16.5 4.5v15M3 9h4.5M16.5 9H21M3 15h4.5M16.5 15H21" />
-        </svg>
-      );
     case "linkedin":
       return (
         <svg viewBox="0 0 24 24" fill="currentColor">
@@ -114,6 +88,7 @@ function Icon({ name }: { name: IconName }) {
         </svg>
       );
     case "instagram":
+    default:
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
           <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="4.6" />
@@ -121,14 +96,23 @@ function Icon({ name }: { name: IconName }) {
           <circle cx="17.15" cy="6.85" r="1" fill="currentColor" stroke="none" />
         </svg>
       );
-    case "arrow":
-    default:
-      return (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-          <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      );
   }
+}
+
+/** The compact Macintosh, drawn as a mark rather than set in type. */
+function MacMark() {
+  return (
+    <svg className="linksos__mac" viewBox="0 0 24 24" aria-hidden="true">
+      <rect x="3.6" y="2" width="16.8" height="20" rx="2.2" fill="none" stroke="currentColor" strokeWidth="1.5" />
+      <rect x="6.2" y="4.6" width="11.6" height="8.8" rx="1" fill="currentColor" opacity="0.16" />
+      <rect x="6.2" y="4.6" width="11.6" height="8.8" rx="1" fill="none" stroke="currentColor" strokeWidth="1.1" />
+      <circle cx="9.9" cy="8" r="0.85" fill="currentColor" />
+      <circle cx="14.1" cy="8" r="0.85" fill="currentColor" />
+      <path d="M9.7 10.4c.6.7 1.35 1.05 2.3 1.05s1.7-.35 2.3-1.05" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />
+      <path d="M7.4 16.4h6.1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M7.4 19h3.2" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.55" />
+    </svg>
+  );
 }
 
 function useClock() {
@@ -152,7 +136,11 @@ function ScreenContent({ time }: { time: string }) {
       <div className="linksos__inner">
         <header className="linksos__head">
           <div>
-            <p className="linksos__os">HASAKA_OS <span>v1.0</span></p>
+            <p className="linksos__os">
+              <MacMark />
+              <span className="linksos__osname">Macintosh</span>
+              <span className="linksos__osver">v1.0</span>
+            </p>
             <p className="linksos__tag">Same human, more ideas.</p>
           </div>
           <span className="linksos__time" suppressHydrationWarning>{time}</span>
@@ -165,26 +153,16 @@ function ScreenContent({ time }: { time: string }) {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`linksos__row linksos__row--${item.accent}`}
+                className={`linksos__card linksos__card--${item.accent}`}
               >
-                <span className="linksos__thumb" aria-hidden="true">
-                  {item.thumb.type === "image" && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.thumb.src} alt="" loading="lazy" />
-                  )}
-                  {item.thumb.type === "logo" && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.thumb.src} alt="" className="linksos__thumb-logo" loading="lazy" />
-                  )}
-                  {item.thumb.type === "icon" && <Icon name={item.thumb.icon} />}
-                  <span className="linksos__index">{item.index}</span>
+                <span className="linksos__shot">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={item.src} alt="" width={431} height={431} loading="lazy" />
+                  <span className="linksos__index" aria-hidden="true">{item.index}</span>
                 </span>
                 <span className="linksos__copy">
                   <span className="linksos__title">{item.title}</span>
                   <span className="linksos__subtitle">{item.subtitle}</span>
-                </span>
-                <span className="linksos__go" aria-hidden="true">
-                  <Icon name="arrow" />
                 </span>
               </a>
             </div>
@@ -216,7 +194,7 @@ export default function LinksPageClient() {
 
           {/* corner HUD, printed on the backdrop like the poster */}
           <div className="linksos__hud linksos__hud--tl">
-            <p className="linksos__hud-title">HASAKA_OS</p>
+            <p className="linksos__hud-title">MACINTOSH</p>
             <p className="linksos__hud-sub">Same human,<br />more ideas.</p>
           </div>
           <div className="linksos__hud linksos__hud--tr" suppressHydrationWarning>
