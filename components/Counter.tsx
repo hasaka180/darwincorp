@@ -7,6 +7,8 @@ type Props = {
   suffix?: string;
   duration?: number; // ms
   delay?: number; // ms
+  /** Hold at zero until the number is actually on screen. */
+  start?: boolean;
 };
 
 export default function Counter({
@@ -14,10 +16,12 @@ export default function Counter({
   suffix = "",
   duration = 1600,
   delay = 0,
+  start = true,
 }: Props) {
   const [n, setN] = useState(0);
 
   useEffect(() => {
+    if (!start) return;
     const reduce =
       typeof window !== "undefined" &&
       window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
@@ -27,12 +31,12 @@ export default function Counter({
     }
 
     let raf = 0;
-    let start: number | null = null;
+    let began: number | null = null;
 
     const timer = setTimeout(() => {
       const step = (t: number) => {
-        if (start === null) start = t;
-        const p = Math.min((t - start) / duration, 1);
+        if (began === null) began = t;
+        const p = Math.min((t - began) / duration, 1);
         const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
         setN(Math.round(eased * value));
         if (p < 1) raf = requestAnimationFrame(step);
@@ -44,7 +48,7 @@ export default function Counter({
       clearTimeout(timer);
       cancelAnimationFrame(raf);
     };
-  }, [value, duration, delay]);
+  }, [value, duration, delay, start]);
 
   return (
     <>

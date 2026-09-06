@@ -8,9 +8,11 @@ import { createDreamParticles } from "@/lib/dreamParticles";
 import { addDuneRadiance, createDreamEnvironment, createDreamSky } from "@/lib/dreamLighting";
 
 /** Geometry, materials and camera are exported from artwork/dream/darwin-dream.blend. */
-export default function HeroDreamScene({ onLoad, onFail }: {
+export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
   onLoad: () => void;
   onFail: () => void;
+  /** Fires when the dolly reaches the point where the hero copy takes over. */
+  onReveal: (revealed: boolean) => void;
 }) {
   const mountRef = useRef<HTMLDivElement>(null);
 
@@ -50,6 +52,7 @@ export default function HeroDreamScene({ onLoad, onFail }: {
     let lastFrame = 0;
     let elapsed = 0;
     let announced = false;
+    let revealed = false;
 
     const disposeObjects = (root: THREE.Object3D) => {
       const materials = new Set<THREE.Material>();
@@ -106,8 +109,15 @@ export default function HeroDreamScene({ onLoad, onFail }: {
       camera.lookAt(cameraTarget);
       // Keep the moon framed in the circular opening as in the close reference.
       moon.position.set(4.6 * travel, -3.1 * travel, 0);
-      // Keep copy and the CTA present throughout the approach; deepen its backdrop.
+      // The copy and its gradient are keyed off this, arriving only near the end.
       hero?.style.setProperty("--hero-travel", String(travel));
+      // Past the pitch's fade-in, so the CTA is legible before it takes clicks.
+      // Hysteresis so a scroll resting on the threshold can't flicker the copy.
+      const nextRevealed = revealed ? travel > 0.68 : travel > 0.76;
+      if (nextRevealed !== revealed) {
+        revealed = nextRevealed;
+        onReveal(revealed);
+      }
       camera.updateMatrixWorld();
       raycaster.setFromCamera(pointer, camera);
       const hit = pointerActive ? raycaster.ray.intersectPlane(groundPlane, groundHit) : null;
@@ -306,7 +316,7 @@ export default function HeroDreamScene({ onLoad, onFail }: {
       renderer?.dispose();
       renderer?.domElement.remove();
     };
-  }, [onLoad, onFail]);
+  }, [onLoad, onFail, onReveal]);
 
   return <div ref={mountRef} className="hero__canvas" aria-hidden="true" />;
 }

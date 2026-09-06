@@ -37,11 +37,14 @@ export default function Hero() {
   const [sceneReady, setSceneReady] = useState(false);
   // null = not probed yet, so nothing renders during the first pass
   const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
+  // The dolly hands over to the copy near the end of the sticky scroll.
+  const [revealed, setRevealed] = useState(false);
 
   // Keep the Blender poster visible if the live scene cannot run.
   const skipScene = useCallback(() => {
     setCanRender3D(false);
     setSceneReady(false);
+    setRevealed(false);
     markHeroReady();
   }, []);
 
@@ -65,8 +68,18 @@ export default function Hero() {
     markHeroReady();
   }, []);
 
+  // Scroll drives the whole hero once WebGL is in play, so the tall sticky
+  // section is set up from the capability probe rather than from first paint of
+  // the scene — otherwise the copy would show and then blink away.
+  const scrollDriven = canRender3D === true;
+  // Counting up behind a hidden layer would waste the effect entirely.
+  const counting = !scrollDriven || revealed;
+
   return (
-    <section className={`hero${sceneReady ? " hero--interactive" : ""}`}>
+    <section
+      className={`hero${scrollDriven ? " hero--interactive" : ""}`}
+      data-hero-revealed={scrollDriven && revealed ? "true" : undefined}
+    >
       <div className="hero__sticky">
       <div className="hero__frame">
       <div
@@ -88,7 +101,7 @@ export default function Hero() {
         </picture>
         {canRender3D && (
           <SceneBoundary onFail={skipScene}>
-            <HeroDreamScene onLoad={onLoad} onFail={skipScene} />
+            <HeroDreamScene onLoad={onLoad} onFail={skipScene} onReveal={setRevealed} />
           </SceneBoundary>
         )}
       </div>
@@ -112,19 +125,19 @@ export default function Hero() {
         <div className="hero__stats">
           <div className="stat">
             <span className="stat__num">
-              <Counter value={100} suffix="+" delay={700} />
+              <Counter value={100} suffix="+" delay={700} start={counting} />
             </span>
             <span className="stat__label">Projects</span>
           </div>
           <div className="stat">
             <span className="stat__num">
-              <Counter value={8} suffix="+Y" delay={850} />
+              <Counter value={8} suffix="+Y" delay={850} start={counting} />
             </span>
             <span className="stat__label">Experience</span>
           </div>
           <div className="stat">
             <span className="stat__num">
-              <Counter value={1000} suffix="+" duration={1900} delay={1000} />
+              <Counter value={1000} suffix="+" duration={1900} delay={1000} start={counting} />
             </span>
             <span className="stat__label">Deliverables</span>
           </div>

@@ -156,10 +156,31 @@ a {
   width: 100%;
   /* White frame revealed around the inset, rounded hero. */
   background: #fff;
+
+  /* The headline's metrics, shared so the right-hand column can start at the
+     headline's top edge instead of guessing a percentage. */
+  --hero-serif-size: clamp(2.6rem, 6.6vw, 6.2rem);
+  --hero-serif-lh: 0.95;
+  --hero-display-size: clamp(2.7rem, 7.4vw, 7rem);
+  --hero-display-lh: 0.92;
+  --hero-display-gap: 2px;
+  --hero-baseline: clamp(80px, 22vh, 230px);
+  /* The floor clears the tallest the column ever gets (332px, just above the
+     880px breakpoint), so a short or narrow window can't push the CTA past the
+     frame's bottom edge. Above it the natural value wins and the tops align. */
+  --hero-heading-top: max(344px, calc(
+    var(--hero-baseline) + var(--hero-serif-size) * var(--hero-serif-lh) +
+    var(--hero-display-size) * var(--hero-display-lh) + var(--hero-display-gap)
+  ));
 }
 
 .hero--interactive {
   height: 260svh;
+  /* Nothing is laid over the opening frame: the gradient, then the headline,
+     then the pitch each ride in over the last stretch of the sticky dolly. */
+  --hero-scrim-in: clamp(0, calc((var(--hero-travel, 0) - 0.46) / 0.3), 1);
+  --hero-heading-in: clamp(0, calc((var(--hero-travel, 0) - 0.56) / 0.28), 1);
+  --hero-pitch-in: clamp(0, calc((var(--hero-travel, 0) - 0.64) / 0.28), 1);
 }
 
 .hero__sticky {
@@ -177,6 +198,16 @@ a {
 }
 
 .hero__copy .hero__pitch {
+  pointer-events: auto;
+}
+
+/* Until the copy has arrived the CTA is invisible, so it must not take clicks
+   aimed at the scene behind it. */
+.hero--interactive .hero__copy .hero__pitch {
+  pointer-events: none;
+}
+
+.hero--interactive[data-hero-revealed="true"] .hero__copy .hero__pitch {
   pointer-events: auto;
 }
 
@@ -257,7 +288,7 @@ a {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: calc(0.85 + var(--hero-travel, 0) * 0.15);
+  opacity: 0.85;
   background:
     linear-gradient(
       to top,
@@ -270,12 +301,16 @@ a {
     linear-gradient(to bottom, rgba(4, 7, 22, 0.15), transparent 28%);
 }
 
+.hero--interactive .hero__scrim {
+  opacity: var(--hero-scrim-in);
+}
+
 /* Headline overlay, lower-left like the reference. */
 .hero__heading {
   position: absolute;
   z-index: 2;
   left: clamp(24px, 6vw, 110px);
-  bottom: clamp(80px, 22vh, 230px);
+  bottom: var(--hero-baseline);
   display: flex;
   flex-direction: column;
   pointer-events: none;
@@ -285,8 +320,8 @@ a {
 .line-serif {
   font-family: var(--font-instrument), Georgia, serif;
   font-weight: 400;
-  font-size: clamp(2.6rem, 6.6vw, 6.2rem);
-  line-height: 0.95;
+  font-size: var(--hero-serif-size);
+  line-height: var(--hero-serif-lh);
   letter-spacing: 0.5px;
   color: #fff;
 }
@@ -294,12 +329,12 @@ a {
 .line-display {
   font-family: var(--font-handjet), ui-monospace, monospace;
   font-weight: 500;
-  font-size: clamp(2.7rem, 7.4vw, 7rem);
-  line-height: 0.92;
+  font-size: var(--hero-display-size);
+  line-height: var(--hero-display-lh);
   letter-spacing: 2px;
   text-transform: uppercase;
   color: #fff;
-  margin-top: 2px;
+  margin-top: var(--hero-display-gap);
 }
 
 /* Dramatic blur-in entrance. */
@@ -330,6 +365,26 @@ a {
   animation-delay: 0.5s;
 }
 
+/* On the interactive hero the scroll reveal replaces the load-time entrance,
+   so the first frame is the scene and nothing else. */
+.hero--interactive .blur-in {
+  animation: none;
+}
+
+/* `translate` rather than `transform`, so the breakpoints that re-centre the
+   heading and the pitch keep their own transforms. */
+.hero--interactive .hero__heading {
+  opacity: var(--hero-heading-in);
+  translate: 0 calc((1 - var(--hero-heading-in)) * 26px);
+  will-change: opacity, translate;
+}
+
+.hero--interactive .hero__pitch {
+  opacity: var(--hero-pitch-in);
+  translate: 0 calc((1 - var(--hero-pitch-in)) * 26px);
+  will-change: opacity, translate;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .blur-in {
     animation: none;
@@ -340,9 +395,10 @@ a {
 .hero__pitch {
   position: absolute;
   z-index: 2;
-  top: 53%;
+  top: auto;
+  bottom: var(--hero-heading-top);
   right: clamp(28px, 5vw, 185px);
-  transform: translateY(-50%);
+  transform: translateY(100%);
   width: min(560px, 40vw);
   display: flex;
   flex-direction: column;
