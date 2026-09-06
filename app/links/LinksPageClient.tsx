@@ -115,11 +115,6 @@ function MacMark() {
   );
 }
 
-/** Longest unbreakable run in a name, which is what has to fit the card. */
-function longestWord(title: string) {
-  return Math.max(...title.split(" ").map((w) => w.length));
-}
-
 function useClock() {
   const [now, setNow] = useState<Date | null>(null);
   useEffect(() => {
@@ -166,9 +161,7 @@ function ScreenContent({ time }: { time: string }) {
                   <span className="linksos__index" aria-hidden="true">{item.index}</span>
                 </span>
                 <span className="linksos__copy">
-                  <span className="linksos__title" data-tight={longestWord(item.title) >= 10 ? "" : undefined}>
-                    {item.title}
-                  </span>
+                  <span className="linksos__title">{item.title}</span>
                   <span className="linksos__subtitle">{item.subtitle}</span>
                 </span>
               </a>
