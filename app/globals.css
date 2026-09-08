@@ -954,7 +954,7 @@ a {
   z-index: 1;
   background: #fff;
   color: var(--ink);
-  padding: clamp(40px, 5vw, 70px) var(--page-gutter) clamp(50px, 7vw, 96px);
+  padding: clamp(40px, 5vw, 70px) var(--page-gutter) clamp(8px, 1vw, 16px);
 }
 
 .studio__meta {
@@ -1002,6 +1002,10 @@ a {
   gap: clamp(38px, 7vh, 84px);
   height: 100vh;
   height: 100svh;
+  /* Centres the composition in the box below this padding, which drops it
+     toward the foot of the panel and closes the dead space under the
+     carousel where the next section begins. */
+  padding-top: clamp(80px, 24vh, 280px);
   overflow: hidden;
 }
 
@@ -1230,7 +1234,7 @@ a {
   z-index: 1;
   background: #fff;
   color: var(--ink);
-  padding: clamp(40px, 5vw, 80px) var(--page-gutter) clamp(56px, 7vw, 110px);
+  padding: clamp(10px, 1.4vw, 20px) var(--page-gutter) clamp(56px, 7vw, 110px);
 }
 
 .featured__head {
@@ -2977,7 +2981,9 @@ a {
   position: relative;
   z-index: 5;
   overflow: hidden;
-  background: #0b0b0d;
+  /* Matches the scene's sky, so a device that cannot run WebGL still lands
+     in the same plum as the hero and the process section. */
+  background: #241634;
   color: #fff;
   padding: clamp(60px, 8vw, 120px) var(--page-gutter) clamp(30px, 4vw, 50px);
 }
@@ -3007,9 +3013,9 @@ a {
   pointer-events: none;
   background: linear-gradient(
     180deg,
-    rgba(11, 11, 13, 0.72) 0%,
-    rgba(11, 11, 13, 0.5) 42%,
-    rgba(11, 11, 13, 0.78) 100%
+    rgba(22, 11, 37, 0.52) 0%,
+    rgba(22, 11, 37, 0.24) 42%,
+    rgba(22, 11, 37, 0.6) 100%
   );
 }
 

@@ -12,10 +12,16 @@ import * as THREE from "three";
  * writing matrices, which is why the grid is sized down on small screens.
  */
 
-const DEEP = new THREE.Color("#2b0f30");
-const MID = new THREE.Color("#7a2358");
-const HOT = new THREE.Color("#ff6fa8");
-const SKY = new THREE.Color("#150819");
+// Lifted straight from the process city so the two scenes read as one world:
+// its stone, its lit edges and its emissive trim, over the plum its sky
+// fades to. The hero's poster sits in the same range — deep violet above,
+// warm plum below.
+const DEEP = new THREE.Color("#372c42");
+const MID = new THREE.Color("#84607f");
+const HOT = new THREE.Color("#e395b1");
+const SKY = new THREE.Color("#241634");
+// The horizon runs warmer than the sky, the way it does in the city.
+const HAZE = new THREE.Color("#674158");
 
 // World units between block centres.
 const STEP = 0.62;
@@ -42,19 +48,24 @@ export default function FooterScene() {
 
     const scene = new THREE.Scene();
     scene.background = SKY;
-    scene.fog = new THREE.Fog(SKY, 9, 30);
+    scene.fog = new THREE.Fog(HAZE, 9, 30);
 
     const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 60);
     camera.position.set(0, 3.15, 9.4);
     camera.lookAt(0, 0.15, -2.4);
 
-    scene.add(new THREE.HemisphereLight(0xd08cc0, 0x1a0a20, 1.15));
-    const key = new THREE.DirectionalLight(0xffc4dd, 2.4);
+    // Same rig as the process city: mauve bounce, a pale pink key and the
+    // warm coral rim that gives the plum its edge.
+    scene.add(new THREE.HemisphereLight(0xb491b8, 0x2b1326, 1.05));
+    const key = new THREE.DirectionalLight(0xe5c2df, 2.8);
     key.position.set(-6, 9, 5);
     scene.add(key);
-    const rim = new THREE.DirectionalLight(0xff5d8f, 1.5);
+    const rim = new THREE.DirectionalLight(0xdc795f, 1.9);
     rim.position.set(7, 3, -7);
     scene.add(rim);
+    const fill = new THREE.DirectionalLight(0xb69acf, 1.1);
+    fill.position.set(5, 4, 4);
+    scene.add(fill);
 
     // Pivot at the base, so scaling y grows the block upward off the ground.
     const geometry = new THREE.BoxGeometry(STEP * 0.78, 1, STEP * 0.78);
