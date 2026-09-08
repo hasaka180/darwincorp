@@ -15,7 +15,9 @@ export default function FloatingActions() {
   if (pathname?.startsWith("/lp") || pathname?.startsWith("/links")) return null;
 
   return (
-    <div className="fab">
+    // On phones the panel is dropped and this flag reveals the two contact
+    // buttons instead — see the mobile block in globals.css.
+    <div className={`fab ${chatOpen ? "is-open" : ""}`}>
       {chatOpen && (
         <div className="fab__chat" role="dialog" aria-label="Chat">
           <div className="fab__chat-head">

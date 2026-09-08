@@ -1141,6 +1141,38 @@ a {
   }
 }
 
+/* The three items are nowrap and space-between, so at the desktop size they
+   simply ran past the right padding instead of sitting flush with it. */
+@media (max-width: 700px) {
+  .studio__meta {
+    gap: 10px;
+    padding-bottom: 13px;
+    font-size: 0.7rem;
+  }
+
+  .studio__meta-item {
+    gap: 6px;
+  }
+
+  .studio__star {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 430px) {
+  .studio__meta {
+    gap: 6px;
+    font-size: 0.6rem;
+    letter-spacing: -0.01em;
+  }
+
+  .studio__star {
+    width: 12px;
+    height: 12px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .studio .reveal {
     transition: none;
@@ -3911,9 +3943,48 @@ a {
     bottom: 20px;
   }
 
-  /* Lift the floating action buttons above the bottom nav */
+  /* The widget moves into the gutter beside the bottom nav, vertically
+     centred on it, and collapses to just the message button: 20px nav offset
+     plus half the difference between the 54px nav and the 42px button. */
   .fab {
-    bottom: 90px;
+    right: 10px;
+    bottom: 26px;
+    gap: 10px;
+  }
+
+  .fab__btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .fab__btn svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  /* The panel duplicated what the two buttons now do, so it goes. */
+  .fab__chat {
+    display: none;
+  }
+
+  .fab__btn--wa,
+  .fab__btn--mail {
+    display: none;
+  }
+
+  /* Tapping the message button springs them out above it, nearest first. */
+  .fab.is-open .fab__btn--wa,
+  .fab.is-open .fab__btn--mail {
+    display: grid;
+    animation: fabPop 0.24s cubic-bezier(0.16, 0.8, 0.24, 1) both;
+  }
+
+  .fab.is-open .fab__btn--mail {
+    animation-delay: 0.04s;
+  }
+
+  .fab.is-open .fab__btn--wa {
+    animation-delay: 0.09s;
   }
 
   /* Hero: heading centered in the middle; pitch/stats/CTA at the bottom */
@@ -3969,6 +4040,23 @@ a {
   .cta-btn__icon svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+/* Below this the centred nav leaves too little gutter for the widget. */
+@media (max-width: 400px) {
+  .nav {
+    gap: 4px;
+    padding: 6px 8px;
+  }
+
+  .nav__icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fab {
+    bottom: 22px;
   }
 }
 
