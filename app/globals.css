@@ -175,6 +175,7 @@ a {
 }
 
 .hero--interactive {
+  height: 260vh;
   height: 260svh;
   /* Nothing is laid over the opening frame: the gradient, then the headline,
      then the pitch each ride in over the last stretch of the sticky dolly. */
@@ -186,6 +187,7 @@ a {
 .hero__sticky {
   position: sticky;
   top: 0;
+  height: 100vh;
   height: 100svh;
   overflow: hidden;
 }
@@ -231,7 +233,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero--interactive { height: 100svh; }
+  .hero--interactive { height: 100vh; height: 100svh; }
 }
 
 .hero__frame {
@@ -963,8 +965,8 @@ a {
 
 /* ---- sticky burn-on line ---- */
 /* The wrapper is the scroll runway; the panel inside pins the line in place
-   while the flame front sweeps across it word by word. --burn (0-1) is the
-   overall progress, set from the component. */
+   while the flame front sweeps across it word by word. The component writes
+   --reveal (0-1) here for the carousel, and --t / --e onto each word. */
 .studio__burn {
   position: relative;
   height: 260vh;
@@ -979,6 +981,7 @@ a {
   align-items: center;
   justify-content: center;
   gap: clamp(38px, 7vh, 84px);
+  height: 100vh;
   height: 100svh;
   overflow: hidden;
 }
@@ -1017,17 +1020,20 @@ a {
 /* Per word: --t is how far it has burnt in, --e how hot its ember is. Unlit
    words sit as a faint impression in the paper, then char in and cool to ink. */
 .burn-w {
-  --t: 0;
+  /* Lit is the resting state: if the script does not run, the line still
+     reads. The effect paints the unlit values inline as soon as it mounts,
+     long before the section is scrolled to. */
+  --t: 1;
   --e: 0;
   display: inline-block;
   opacity: calc(0.07 + var(--t) * 0.93);
   transform: translateY(calc((1 - var(--t)) * 0.16em)) scale(calc(1 + (1 - var(--t)) * 0.03));
   filter: blur(calc((1 - var(--t)) * 7px));
+  color: var(--ink);
   color: color-mix(in oklab, #ff4a12 calc(var(--e) * 100%), var(--ink));
   text-shadow:
     0 0 calc(var(--e) * 30px) rgba(255, 108, 40, calc(var(--e) * 0.8)),
     0 0 calc(var(--e) * 9px) rgba(255, 226, 168, calc(var(--e) * 0.65));
-  will-change: opacity, filter, transform;
 }
 
 /* Handjet runs small and narrow next to the serif, so it is sized up to sit on
@@ -1050,8 +1056,8 @@ a {
   width: min(100%, calc(var(--logo-w) * 4 + var(--logo-gap) * 3));
   margin-inline: auto;
   overflow: hidden;
-  opacity: clamp(0, calc((var(--burn, 0) - 0.55) * 3), 1);
-  transform: translateY(calc((1 - clamp(0, calc((var(--burn, 0) - 0.55) * 3), 1)) * 20px));
+  opacity: var(--reveal, 1);
+  transform: translateY(calc((1 - var(--reveal, 1)) * 20px));
   -webkit-mask-image: linear-gradient(90deg,
       transparent,
       #000 15%,
@@ -1067,6 +1073,9 @@ a {
   /* Only four cards are in view at a time, so the loop is slowed right down —
      each logo gets a moment before it leaves the window. */
   animation: marquee 45s linear infinite;
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .studio__marquee:hover .studio__track {
@@ -1571,10 +1580,18 @@ a {
   100% { transform: translate3d(0, 0, 0); }
 }
 
-/* Phones get the same picture with less compositing work. */
-@media (max-width: 700px) {
+/* Phones get the same picture with far less compositing work. iOS keeps a
+   hard cap on layer memory, and once it is hit WebKit stops compositing
+   animations across the whole page — not just this section. */
+@media (max-width: 900px) {
   .services__blob--magenta {
     display: none;
+  }
+
+  .services__blob,
+  .services__beam,
+  .services__grain {
+    will-change: auto;
   }
 
   .services__grain {
@@ -1582,8 +1599,11 @@ a {
     opacity: 0.16;
   }
 
+  /* A blurred, blended, animated layer is the single most expensive thing
+     here; the gradient alone carries the streak well enough. */
   .services__beam {
-    filter: blur(20px);
+    filter: none;
+    opacity: 0.55;
   }
 }
 
@@ -2079,6 +2099,7 @@ a {
 .proc__sticky {
   position: sticky;
   top: 0;
+  height: 100vh;
   height: 100svh;
   overflow: hidden;
 }

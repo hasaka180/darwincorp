@@ -123,7 +123,7 @@ export default function StudioSection() {
 
       // Nothing to burn through if motion is off — hand over the settled line.
       if (reduce.matches) {
-        wrap.style.setProperty("--burn", "1");
+        wrap.style.setProperty("--reveal", "1");
         words.forEach((w) => w && paintWord(w, 1, 0));
         return;
       }
@@ -134,7 +134,8 @@ export default function StudioSection() {
       // Finish early so the whole line sits lit and readable before the
       // section scrolls away.
       const burn = clamp01(p / 0.72);
-      wrap.style.setProperty("--burn", burn.toFixed(3));
+      // The carousel arrives once the line is a little over half lit.
+      wrap.style.setProperty("--reveal", clamp01((burn - 0.55) * 3).toFixed(3));
 
       const front = burn * (words.length + FLAME_WIDTH);
       words.forEach((w, i) => {
@@ -152,10 +153,16 @@ export default function StudioSection() {
     update();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
+    // iOS resizes the visual viewport as the URL bar collapses without always
+    // firing resize, which would leave the burn stuck a frame behind.
+    window.visualViewport?.addEventListener("resize", onScroll);
+    window.addEventListener("orientationchange", onScroll);
     reduce.addEventListener("change", update);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
+      window.visualViewport?.removeEventListener("resize", onScroll);
+      window.removeEventListener("orientationchange", onScroll);
       reduce.removeEventListener("change", update);
       if (raf) cancelAnimationFrame(raf);
     };
