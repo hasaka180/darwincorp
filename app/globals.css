@@ -2529,6 +2529,20 @@ a {
     grid-column: auto;
   }
 
+  /* The carousel stretches every card to the tallest of them, which left the
+     portrait artwork running most of the screen. This one opts out of the
+     stretch, sits centred against its taller siblings, and is capped so the
+     whole card — overlay included — is on screen at once. */
+  .about__brand {
+    align-self: center;
+    min-height: 0;
+    height: min(52vh, 400px);
+  }
+
+  .about__brand-img {
+    object-position: center;
+  }
+
   .about__founder {
     flex-direction: column;
   }
