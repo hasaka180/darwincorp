@@ -1,9 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
+import SceneBoundary from "@/components/SceneBoundary";
 import { SOCIALS } from "@/components/ContactSection";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
+
+// Client-only, and behind a boundary: a footer must still render if the GPU
+// cannot give the scene a context.
+const FooterScene = dynamic(() => import("@/components/FooterScene"), {
+  ssr: false,
+  loading: () => null,
+});
 
 type Item = { label: string; href: string | null; ext?: boolean };
 const LINKS: { title: string; items: Item[] }[] = [
@@ -64,6 +73,10 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
 
   return (
     <section className={`contact ${hideCta ? "contact--nocta" : ""}`} id="newsletter">
+      <SceneBoundary>
+        <FooterScene />
+      </SceneBoundary>
+
       {!hideCta && (
         <div className="contact__cta">
           <span className="contact__eyebrow">Let&apos;s work together</span>
