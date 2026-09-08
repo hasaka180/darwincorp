@@ -15,42 +15,9 @@ export default function FloatingActions() {
   if (pathname?.startsWith("/lp") || pathname?.startsWith("/links")) return null;
 
   return (
-    // On phones the panel is dropped and this flag reveals the two contact
-    // buttons instead — see the mobile block in globals.css.
+    // The widget rests as the message button alone; this flag reveals the
+    // WhatsApp and email buttons above it.
     <div className={`fab ${chatOpen ? "is-open" : ""}`}>
-      {chatOpen && (
-        <div className="fab__chat" role="dialog" aria-label="Chat">
-          <div className="fab__chat-head">
-            <strong>Darwin Corp</strong>
-            <button
-              className="fab__chat-close"
-              aria-label="Close chat"
-              onClick={() => setChatOpen(false)}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                <path d="M6 6l12 12M18 6 6 18" strokeLinecap="round" />
-              </svg>
-            </button>
-          </div>
-          <p className="fab__chat-msg">
-            👋 Hi! How can we help? Reach us instantly below.
-          </p>
-          <div className="fab__chat-actions">
-            <a
-              className="fab__chat-btn"
-              href={`https://wa.me/${WHATSAPP}`}
-              target="_blank"
-              rel="noreferrer"
-            >
-              WhatsApp us
-            </a>
-            <a className="fab__chat-btn fab__chat-btn--ghost" href={`mailto:${EMAIL}`}>
-              Email us
-            </a>
-          </div>
-        </div>
-      )}
-
       <a
         className="fab__btn fab__btn--wa"
         href={`https://wa.me/${WHATSAPP}`}
@@ -77,7 +44,7 @@ export default function FloatingActions() {
       <button
         className={`fab__btn fab__btn--chat ${chatOpen ? "is-open" : ""}`}
         onClick={() => setChatOpen((v) => !v)}
-        aria-label="Chat"
+        aria-label={chatOpen ? "Hide contact options" : "Contact options"}
         aria-expanded={chatOpen}
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">

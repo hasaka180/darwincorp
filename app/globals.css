@@ -5,6 +5,10 @@
      rhythm; only the side gutter is shared, so nothing runs edge to edge.
      Backgrounds and full-bleed scenes sit outside it. */
   --page-gutter: clamp(24px, 12vw, 210px);
+  /* Every page and section title is set the same way — the treatment
+     "Digital Design Powerhouse" already had. */
+  --title-font: var(--font-handjet), ui-monospace, monospace;
+  --title-size: clamp(2.5rem, 5.6vw, 4.1rem);
   /* Body / UI font: Helvetica Now Display if installed, else Inter, else system. */
   --font-body: "Helvetica Now Display", var(--font-sans), "Helvetica Neue",
     Helvetica, Arial, sans-serif;
@@ -178,9 +182,9 @@ a {
   /* Same scale as .proc__headline, so the hero sits on the site's type
      system rather than above it. The line heights open up a little, since
      0.92 was set for type twice this size. */
-  --hero-serif-size: clamp(28px, 3vw, 48px);
+  --hero-serif-size: var(--title-size);
   --hero-serif-lh: 1.06;
-  --hero-display-size: clamp(28px, 3vw, 48px);
+  --hero-display-size: var(--title-size);
   --hero-display-lh: 1.02;
   --hero-display-gap: 2px;
   --hero-baseline: clamp(80px, 22vh, 230px);
@@ -429,7 +433,7 @@ a {
 .hero__pitch-text {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: 16pt;
+  font-size: clamp(0.72rem, 0.95vw, 0.88rem);
   line-height: 1.42;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -1249,10 +1253,12 @@ a {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-body);
+  font-family: var(--title-font);
   font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-  letter-spacing: -0.015em;
+  font-size: var(--title-size);
+  letter-spacing: 0.02em;
+  line-height: 1.04;
+  text-transform: uppercase;
 }
 
 .featured__title svg {
@@ -1492,11 +1498,11 @@ a {
 
 .services__title {
   margin-top: 18px;
-  font-family: var(--font-handjet), ui-monospace, monospace;
+  font-family: var(--title-font);
   font-weight: 500;
   /* Handjet sets narrower and shorter than the sans it replaces, so it needs
      a size bump and positive tracking to hold the same weight on the page. */
-  font-size: clamp(2.5rem, 5.6vw, 4.1rem);
+  font-size: var(--title-size);
   line-height: 1.04;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -2578,10 +2584,12 @@ a {
 
 .tst__title {
   margin-top: 12px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
-  line-height: 1.1;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .tst__card {
@@ -2752,11 +2760,13 @@ a {
   align-items: baseline;
   flex-wrap: wrap;
   gap: 16px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(2rem, 4.5vw, 3.6rem);
-  letter-spacing: -0.01em;
+  font-family: var(--title-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: var(--title-size);
+  letter-spacing: 0.02em;
+  line-height: 1.04;
+  text-transform: uppercase;
 }
 
 .botw__title-link {
@@ -3041,10 +3051,12 @@ a {
 
 .contact__title {
   margin-top: 16px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2rem, 5vw, 3.6rem);
-  line-height: 1.06;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .contact__form {
@@ -3316,18 +3328,6 @@ a {
   background: #ff5b3a;
 }
 
-.fab__chat {
-  width: min(300px, 78vw);
-  margin-bottom: 4px;
-  padding: 18px;
-  border-radius: 18px;
-  background: #14151b;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  color: #fff;
-  animation: fabPop 0.28s cubic-bezier(0.16, 0.8, 0.24, 1);
-}
-
 @keyframes fabPop {
   from {
     opacity: 0;
@@ -3339,64 +3339,25 @@ a {
   }
 }
 
-.fab__chat-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-body);
-  font-size: 0.95rem;
+/* The widget rests as a single message button; tapping it springs the two
+   contact buttons out above, nearest first. */
+.fab__btn--wa,
+.fab__btn--mail {
+  display: none;
 }
 
-.fab__chat-close {
-  width: 30px;
-  height: 30px;
+.fab.is-open .fab__btn--wa,
+.fab.is-open .fab__btn--mail {
   display: grid;
-  place-items: center;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  cursor: pointer;
+  animation: fabPop 0.24s cubic-bezier(0.16, 0.8, 0.24, 1) both;
 }
 
-.fab__chat-close svg {
-  width: 18px;
-  height: 18px;
+.fab.is-open .fab__btn--mail {
+  animation-delay: 0.04s;
 }
 
-.fab__chat-msg {
-  margin: 14px 0 16px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.fab__chat-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.fab__chat-btn {
-  padding: 11px 16px;
-  border-radius: 999px;
-  text-align: center;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.88rem;
-  background: #25d366;
-  color: #062b12;
-  transition: opacity 0.2s ease;
-}
-
-.fab__chat-btn--ghost {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-}
-
-.fab__chat-btn:hover {
-  opacity: 0.85;
+.fab.is-open .fab__btn--wa {
+  animation-delay: 0.09s;
 }
 
 @media (max-width: 640px) {
@@ -3437,30 +3398,6 @@ a {
     height: 21px;
   }
 
-  /* The panel duplicated what the two buttons now do, so it goes. */
-  .fab__chat {
-    display: none;
-  }
-
-  .fab__btn--wa,
-  .fab__btn--mail {
-    display: none;
-  }
-
-  /* Tapping the message button springs them out above it, nearest first. */
-  .fab.is-open .fab__btn--wa,
-  .fab.is-open .fab__btn--mail {
-    display: grid;
-    animation: fabPop 0.24s cubic-bezier(0.16, 0.8, 0.24, 1) both;
-  }
-
-  .fab.is-open .fab__btn--mail {
-    animation-delay: 0.04s;
-  }
-
-  .fab.is-open .fab__btn--wa {
-    animation-delay: 0.09s;
-  }
 
   /* Hero: heading centered in the middle; pitch/stats/CTA at the bottom */
   .hero__heading {
@@ -3555,11 +3492,12 @@ a {
 
 .subpage__title {
   margin-top: 14px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2rem, 4vw, 3.4rem);
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .subpage__empty {
@@ -4028,11 +3966,12 @@ a {
 
 .svcp__title {
   margin-top: 16px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(2.6rem, 7vw, 5.2rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .svcp__sub {
@@ -4245,11 +4184,12 @@ a {
 
 .contactp__title {
   margin-top: 14px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
-  line-height: 1.03;
-  letter-spacing: -0.02em;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .contactp__lead {
@@ -4550,12 +4490,13 @@ a.contactp__detail:hover {
 }
 .bi-hero__title {
   margin-top: 16px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: clamp(2.6rem, 6.5vw, 5rem);
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
   max-width: 16ch;
+  text-transform: uppercase;
 }
 .bi-hero__lead {
   margin-top: 22px;
@@ -4943,11 +4884,12 @@ a.contactp__detail:hover {
 
 .legal__title {
   margin-top: 14px;
-  font-family: var(--font-instrument), Georgia, serif;
-  font-weight: 400;
-  font-size: clamp(2.4rem, 5.4vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.01em;
+  font-family: var(--title-font);
+  font-weight: 500;
+  font-size: var(--title-size);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .legal__lead {
