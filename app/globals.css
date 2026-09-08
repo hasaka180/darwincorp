@@ -2149,6 +2149,11 @@ a {
   display: contents;
 }
 
+/* The height every card is cut to once they stack, on phones. */
+.about {
+  --about-card-h: min(52vh, 400px);
+}
+
 .about__stats {
   grid-column: span 3;
   display: flex;
@@ -2504,22 +2509,11 @@ a {
     gap: 10px;
   }
 
-  /* content cards → horizontal swipe carousel (one full card per swipe) */
+  /* Content cards stack, one per row, all cut to the same box. */
   .about__cards {
     display: flex;
-    align-items: stretch;
+    flex-direction: column;
     gap: 16px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .about__cards::-webkit-scrollbar {
-    display: none;
-  }
-  .about__cards > .about__card {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
   }
 
   .about__brand,
@@ -2527,20 +2521,19 @@ a {
   .about__founder,
   .about__expert {
     grid-column: auto;
-  }
-
-  /* The carousel stretches every card to the tallest of them, which left the
-     portrait artwork running most of the screen. This one opts out of the
-     stretch, sits centred against its taller siblings, and is capped so the
-     whole card — overlay included — is on screen at once. */
-  .about__brand {
-    align-self: center;
     min-height: 0;
-    height: min(52vh, 400px);
+    height: var(--about-card-h);
+    overflow: hidden;
   }
 
   .about__brand-img {
     object-position: center;
+  }
+
+  /* The globe is drawn to the card's width, so at this height it would run
+     past the bottom; it sits centred in what is left under the heading. */
+  .about__globe-card {
+    justify-content: flex-start;
   }
 
   .about__founder {
@@ -2548,7 +2541,21 @@ a {
   }
   .about__founder-photo {
     width: 100%;
-    height: 190px;
+    /* Shorter than it was, to leave the bio as much of the fixed card as
+       possible. */
+    height: 150px;
+    flex: 0 0 150px;
+  }
+  /* The bio is longer than the shared card height, so it scrolls inside the
+     card rather than being cut off mid-sentence. */
+  .about__founder-body {
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .about__founder-body::-webkit-scrollbar {
+    display: none;
   }
   .about__founder-photo img {
     object-position: center 20%;
