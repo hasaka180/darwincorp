@@ -53,9 +53,35 @@ const BURN_WORDS = BURN_LINES.flatMap((line, li) =>
   }))
 );
 
-// Words alight at once, so the flame front is a soft band rather than a
-// single word flicking on.
+// How many words are mid-ignition at any moment, so they overlap into each
+// other instead of flicking on one at a time.
 const FLAME_WIDTH = 3.2;
+
+/**
+ * The order the words light in — scattered, not left to right.
+ *
+ * Seeded rather than Math.random so the sequence is identical on the server
+ * and the client and stays the same between loads; a fresh shuffle per render
+ * would tear the hydrated markup.
+ */
+function scatterRanks(count: number): number[] {
+  const order = Array.from({ length: count }, (_, i) => i);
+  let seed = 0x5f3a7c;
+  const next = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+  for (let i = count - 1; i > 0; i--) {
+    const j = Math.floor(next() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+  // order[k] is the word that lights kth; invert it so a word index can look
+  // up its own position in the sequence.
+  const ranks: number[] = new Array(count);
+  order.forEach((word, rank) => {
+    ranks[word] = rank;
+  });
+  return ranks;
+}
+
+const BURN_ORDER = scatterRanks(BURN_WORDS.length);
 
 const clamp01 = (n: number) => Math.min(Math.max(n, 0), 1);
 
@@ -110,7 +136,7 @@ export default function StudioSection() {
   }, []);
 
   // Scroll drives the burn: the sticky panel holds the line still while the
-  // flame front sweeps across it.
+  // words catch in scattered order across it.
   useEffect(() => {
     const wrap = burnRef.current;
     if (!wrap) return;
@@ -140,7 +166,8 @@ export default function StudioSection() {
       const front = burn * (words.length + FLAME_WIDTH);
       words.forEach((w, i) => {
         if (!w) return;
-        const t = clamp01((front - i) / FLAME_WIDTH);
+        // Position in the scattered sequence, not position in the line.
+        const t = clamp01((front - BURN_ORDER[i]) / FLAME_WIDTH);
         // The ember peaks halfway through a word's ignition, then cools to ink.
         paintWord(w, t, 1 - Math.abs(t * 2 - 1));
       });

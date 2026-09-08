@@ -102,7 +102,7 @@ export default function About() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className="about__brand-img"
-            src="/assets/dubaiography.webp"
+            src="/assets/city.webp"
             alt="Dubaiography"
             loading="lazy"
           />

@@ -288,18 +288,13 @@ export default function CoreServices() {
   const others = SERVICES.filter((s) => s.id !== activeId);
 
   return (
-    <section ref={ref} className={`services ${inView ? "is-in" : ""}`}>
-      {/* Prismatic light-leak backdrop. Purely decorative, so it is hidden
-          from assistive tech and takes no pointer events. */}
-      <div className="services__aurora" aria-hidden="true">
-        <span className="services__beam" />
-        <span className="services__blob services__blob--violet" />
-        <span className="services__blob services__blob--azure" />
-        <span className="services__blob services__blob--ember" />
-        <span className="services__blob services__blob--magenta" />
-        <span className="services__grain" />
-      </div>
-
+    // data-theme flags the section as light so the floating nav and wordmark
+    // flip to black over it — see useOnLightBg.
+    <section
+      ref={ref}
+      data-theme="light"
+      className={`services ${inView ? "is-in" : ""}`}
+    >
       <header className="services__head">
         <span className="services__eyebrow reveal">
           [ Services &amp; Expertise ]
