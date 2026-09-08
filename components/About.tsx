@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Globe from "@/components/Globe";
 
 const STATS = [
@@ -51,35 +50,6 @@ const FOUNDER_SOCIALS = [
 ];
 
 export default function About() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-
-  // Autoplay the mobile card carousel — advance one full card at a time.
-  useEffect(() => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const mq = window.matchMedia("(max-width: 900px)");
-    let paused = false;
-    const onDown = () => { paused = true; };
-    const onUp = () => { setTimeout(() => (paused = false), 5000); };
-    el.addEventListener("pointerdown", onDown);
-    el.addEventListener("pointerup", onUp);
-
-    const id = setInterval(() => {
-      if (!mq.matches || paused) return;
-      const first = el.firstElementChild as HTMLElement | null;
-      const step = first ? first.getBoundingClientRect().width + 16 : el.clientWidth;
-      const max = el.scrollWidth - el.clientWidth;
-      const next = el.scrollLeft + step > max + 4 ? 0 : el.scrollLeft + step;
-      el.scrollTo({ left: next, behavior: "smooth" });
-    }, 4200);
-
-    return () => {
-      clearInterval(id);
-      el.removeEventListener("pointerdown", onDown);
-      el.removeEventListener("pointerup", onUp);
-    };
-  }, []);
-
   return (
     <section className="about" data-theme="light">
       <div className="about__grid">
@@ -92,9 +62,9 @@ export default function About() {
           ))}
         </div>
 
-        <div className="about__cards" ref={carouselRef}>
+        <div className="about__cards">
         <a
-          className="about__card about__brand"
+          className="about__card about__brand reveal-up"
           href="https://dubaiography.com"
           target="_blank"
           rel="noreferrer"
@@ -112,7 +82,7 @@ export default function About() {
           </div>
         </a>
 
-        <div className="about__card about__globe-card">
+        <div className="about__card about__globe-card reveal-up">
           <div className="about__globe-head">
             <span className="about__loc">Based in Dubai, UAE</span>
             <span className="about__status">
@@ -122,7 +92,7 @@ export default function About() {
           <Globe />
         </div>
 
-        <div className="about__card about__founder">
+        <div className="about__card about__founder reveal-up">
           <div className="about__founder-photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/assets/hasaka.webp" alt="Hasaka" loading="lazy" />
@@ -165,7 +135,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="about__card about__expert">
+        <div className="about__card about__expert reveal-up">
           <span className="about__brand-mark" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="currentColor">
               <path d="M12 2c.7 4.8 4.5 8.6 9.3 9.3-4.8.7-8.6 4.5-9.3 9.3-.7-4.8-4.5-8.6-9.3-9.3C7.5 10.6 11.3 6.8 12 2Z" />

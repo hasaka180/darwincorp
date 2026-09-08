@@ -3,14 +3,14 @@
 export default function BestOfWeek() {
   return (
     <section className="botw" id="journal" data-theme="light">
-      <header className="botw__head">
+      <header className="botw__head reveal-up">
         <h2 className="botw__title">
           Best of the week <span className="botw__title-link">See all posts →</span>
         </h2>
       </header>
 
       <div className="botw__grid">
-        <a className="botw__feature" href="#">
+        <a className="botw__feature reveal-up" href="#">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=1200&q=80&auto=format&fit=crop"
@@ -30,7 +30,7 @@ export default function BestOfWeek() {
         </a>
 
         <div className="botw__side">
-          <div className="botw__ad">
+          <div className="botw__ad reveal-up">
             <div className="botw__ad-top">
               <span className="botw__ad-tag">• ADS</span>
               <span className="botw__ad-plus" aria-hidden="true">+</span>
@@ -40,7 +40,7 @@ export default function BestOfWeek() {
             <a className="botw__ad-link" href="#">Learn more</a>
           </div>
 
-          <a className="botw__pick" href="#">
+          <a className="botw__pick reveal-up" href="#">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=800&q=80&auto=format&fit=crop"

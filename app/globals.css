@@ -2509,11 +2509,21 @@ a {
     gap: 10px;
   }
 
-  /* Content cards stack, one per row, all cut to the same box. */
+  /* Content cards stack, one per row, all cut to the same box. The carousel
+     this replaced sized each card to 100% of a scrolling row, so a row parked
+     between snap points left uneven margins; these are plain full-width rows
+     with the section's own padding either side. */
   .about__cards {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .about__cards > .about__card {
+    width: 100%;
+    margin: 0;
   }
 
   .about__brand,
