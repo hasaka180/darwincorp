@@ -30,6 +30,9 @@
 }
 
 .sheet {
+  /* The article's reading measure. The hero copy, the byline row and the body
+     all centre on it, so they share one left edge. */
+  --measure: 820px;
   position: relative;
   width: 100%;
   min-height: 100dvh;
@@ -102,7 +105,7 @@
   width: 100%;
   /* Same 820px measure as the body below, centred, so the title and the
      article share one left edge instead of stepping. */
-  max-width: calc(820px + 48px);
+  max-width: calc(var(--measure) + 48px);
   margin: 0 auto;
   padding: clamp(28px, 6vw, 80px) 24px;
 }
@@ -134,7 +137,9 @@
   display: flex;
   flex-wrap: wrap;
   gap: 48px;
-  padding: 36px clamp(28px, 6vw, 80px);
+  /* max() rather than a wrapper: the divider keeps running edge to edge while
+     the byline sits on the column, and narrow screens fall back to 24px. */
+  padding: 36px max(24px, calc((100% - var(--measure)) / 2));
   border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
 }
 .meta div {
@@ -163,7 +168,7 @@
 
 .text {
   width: 100%;
-  max-width: 820px;
+  max-width: var(--measure);
 }
 .text.center {
   max-width: 760px;
@@ -313,7 +318,8 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 28px clamp(28px, 6vw, 80px) 48px;
+  /* Same column as the byline row above it, for the same reason. */
+  padding: 28px max(24px, calc((100% - var(--measure)) / 2)) 48px;
   border-top: 1px solid color-mix(in srgb, currentColor 14%, transparent);
   font-size: 12px;
   color: currentColor;
