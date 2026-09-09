@@ -4209,6 +4209,29 @@ a {
   color: rgba(11, 11, 13, 0.5);
 }
 
+/* Honeypot: off-screen rather than display:none, which some bots skip. */
+.contactp__hp {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contactp__status {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(11, 11, 13, 0.6);
+}
+
+.contactp__submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
 .contactp__title {
   margin-top: 14px;
   font-family: var(--title-font);

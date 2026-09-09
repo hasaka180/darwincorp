@@ -72,22 +72,45 @@ export default function ContactSection() {
   const [cc, setCc] = useState("+971");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [sent, setSent] = useState(false);
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
+  // Honeypot: real people leave it empty, bots fill it in.
+  const [website, setWebsite] = useState("");
 
-  const onSubmit = (e: React.FormEvent) => {
+  // Posts to the server rather than handing off to mailto: an enquiry should
+  // not depend on the visitor having a mail client, and this way it is
+  // delivered whether or not they follow through in one.
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Phone: ${cc} ${phone}`,
-      `Service: ${service}`,
-      "",
-      message,
-    ].join("\n");
-    window.location.href = `mailto:hello@thedarwin.co?subject=${encodeURIComponent(
-      `New enquiry - ${service}`
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    if (state === "sending") return;
+    setError("");
+    setState("sending");
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          cc,
+          phone,
+          service,
+          message,
+          website,
+          source: "contact page",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        setState("idle");
+        return;
+      }
+      setState("done");
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+      setState("idle");
+    }
   };
 
   return (
@@ -160,7 +183,7 @@ export default function ContactSection() {
                   <option key={o.c + o.n} value={o.c}>{o.f} {o.c}</option>
                 ))}
               </select>
-              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="50 123 4567" />
+              <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} required placeholder="50 123 4567" />
             </div>
           </label>
 
@@ -169,9 +192,26 @@ export default function ContactSection() {
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4} placeholder="Tell us a little about the project…" />
           </label>
 
-          <button type="submit" className="contactp__submit">
-            {sent ? "Opening email…" : "Send enquiry"}
+          <input
+            className="contactp__hp"
+            type="text"
+            name="website"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+          />
+
+          <button type="submit" className="contactp__submit" disabled={state !== "idle"}>
+            {state === "done" ? "Enquiry sent ✓" : state === "sending" ? "Sending…" : "Send enquiry"}
           </button>
+
+          {(error || state === "done") && (
+            <p className="contactp__status" role={error ? "alert" : "status"}>
+              {error || "Thanks — we'll be in touch shortly."}
+            </p>
+          )}
         </form>
       </div>
     </section>

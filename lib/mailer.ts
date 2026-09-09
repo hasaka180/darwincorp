@@ -12,7 +12,11 @@ export const TO = (process.env.LEAD_TO_EMAIL || "hello@thedarwin.co")
   .map((a) => a.trim())
   .filter(Boolean)
 
-export const FROM = process.env.LEAD_FROM_EMAIL || "Darwin Leads <onboarding@resend.dev>"
+// thedarwin.co is verified in Resend, so mail is sent from the domain rather
+// than Resend's shared sandbox sender — the latter is unauthenticated for us
+// and lands in spam far more often. A distinct sender keeps the enquiry out
+// of a from-and-to-hello@ loop.
+export const FROM = process.env.LEAD_FROM_EMAIL || "Darwin Website <leads@thedarwin.co>"
 
 export type SendResult =
   | { ok: true; delivered: boolean }
