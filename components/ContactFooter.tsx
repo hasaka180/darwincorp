@@ -64,11 +64,33 @@ function FooterLink({ item }: { item: Item }) {
 
 export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }) {
   const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [error, setError] = useState("");
+  // Honeypot: real people leave it empty, bots fill it in.
+  const [website, setWebsite] = useState("");
 
-  const submit = (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.trim()) setSent(true);
+    if (state === "sending" || !email.trim()) return;
+    setError("");
+    setState("sending");
+    try {
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, website }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        setState("idle");
+        return;
+      }
+      setState("done");
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+      setState("idle");
+    }
   };
 
   return (
@@ -94,15 +116,28 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={state === "done"}
               aria-label="Email address"
             />
-            <button type="submit" className="contact__btn">
-              {sent ? "Subscribed ✓" : "Get in touch"}
+            <input
+              className="contact__hp"
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+            <button type="submit" className="contact__btn" disabled={state !== "idle"}>
+              {state === "done" ? "Subscribed ✓" : state === "sending" ? "Sending…" : "Get in touch"}
             </button>
           </form>
-          <p className="contact__note">
-            Join the newsletter, occasional notes on brand, motion, and craft. No
-            spam.
+          <p className="contact__note" role={error ? "alert" : undefined}>
+            {error ||
+              (state === "done"
+                ? "Thanks — you're on the list."
+                : "Join the newsletter, occasional notes on brand, motion, and craft. No spam.")}
           </p>
         </div>
       )}

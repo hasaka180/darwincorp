@@ -15,7 +15,7 @@ export const dynamic = "force-dynamic";
  *   LEAD_FROM_EMAIL  → a verified sender on your Resend domain
  */
 
-const TO = (process.env.LEAD_TO_EMAIL || "hasakasasaranga@gmail.com")
+const TO = (process.env.LEAD_TO_EMAIL || "hello@thedarwin.co")
   .split(",")
   .map((a) => a.trim())
   .filter(Boolean);
