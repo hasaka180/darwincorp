@@ -135,17 +135,26 @@ export default function About() {
           </div>
         </div>
 
-        <div className="about__card about__expert reveal-up">
-          <span className="about__brand-mark" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2c.7 4.8 4.5 8.6 9.3 9.3-4.8.7-8.6 4.5-9.3 9.3-.7-4.8-4.5-8.6-9.3-9.3C7.5 10.6 11.3 6.8 12 2Z" />
-            </svg>
-          </span>
-          <div className="about__card-foot">
-            <h3>Spline &amp; Motion Studio</h3>
-            <span className="about__learn">Learn More →</span>
+        {/* Shares the brand card's treatment: both are products, so they
+            should read as a pair rather than as two different card types. */}
+        <a
+          className="about__card about__brand about__expert reveal-up"
+          href="https://glitchdecoded.com/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            className="about__brand-img"
+            src="/assets/wallpapermob.jpg"
+            alt="Glitch Decoded"
+            loading="lazy"
+          />
+          <div className="about__brand-overlay">
+            <h3>Glitch Decoded</h3>
+            <span className="about__learn">Visit site →</span>
           </div>
-        </div>
+        </a>
         </div>
       </div>
     </section>

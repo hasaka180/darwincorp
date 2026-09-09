@@ -2278,35 +2278,6 @@ a {
   grid-column: span 3;
 }
 
-.about__expert:hover .about__brand-mark {
-  transform: rotate(12deg) scale(1.08);
-}
-
-.about__brand-mark {
-  transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.24, 1);
-}
-
-.about__brand-mark {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  background: #0b0b0d;
-  color: #fff;
-}
-
-.about__brand-mark svg {
-  width: 24px;
-  height: 24px;
-}
-
-.about__card-foot h3 {
-  font-family: var(--font-body);
-  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-  font-weight: 500;
-}
-
 .about__learn {
   display: inline-block;
   margin-top: 8px;

@@ -354,6 +354,8 @@ export default function CoreServices() {
           {[
             { src: "/assets/webflow.png", alt: "Webflow" },
             { src: "/assets/claude.png", alt: "Claude" },
+            { src: "/assets/openai.png", alt: "OpenAI" },
+            { src: "/assets/threejs.png", alt: "Three.js" },
             { src: "/assets/higgsfield.png", alt: "Higgsfield" },
           ].map((l) => (
             // eslint-disable-next-line @next/next/no-img-element
