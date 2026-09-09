@@ -2774,8 +2774,16 @@ a {
 .botw__title-link {
   font-family: var(--font-body);
   font-style: normal;
+  font-weight: 400;
   font-size: 0.82rem;
+  letter-spacing: 0;
+  text-transform: none;
   color: rgba(11, 11, 13, 0.5);
+  transition: color 0.2s ease;
+}
+
+.botw__title-link:hover {
+  color: var(--ink);
 }
 
 .botw__grid {
@@ -2790,6 +2798,7 @@ a {
   min-height: clamp(360px, 42vw, 560px);
   border-radius: 20px;
   overflow: hidden;
+  background: linear-gradient(150deg, #241634, #674158);
 }
 
 .botw__feature img {
@@ -2936,6 +2945,7 @@ a {
   display: block;
   border-radius: 20px;
   overflow: hidden;
+  background: linear-gradient(150deg, #241634, #674158);
 }
 
 .botw__pick img {

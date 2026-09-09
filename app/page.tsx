@@ -9,7 +9,7 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
-import { getItems, type CaseStudy } from "@/lib/cases";
+import { getItems, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
 
 export const revalidate = 600;
@@ -67,6 +67,16 @@ export default async function Home() {
   const cases = all.filter((i): i is CaseStudy => "sections" in i);
   // Featured items take the prominent slots; fill the rest to keep the grid full.
   const ordered = [...cases.filter((c) => c.featured), ...cases.filter((c) => !c.featured)];
+  // Newest journal posts for the "Best of the week" grid; flagged posts lead,
+  // then most recent first. Undated posts sort last rather than to the top.
+  const posts = all
+    .filter((i): i is JournalPost => !("sections" in i))
+    .sort((a, b) => {
+      if (!!a.featured !== !!b.featured) return a.featured ? -1 : 1;
+      return (b.date ?? "").localeCompare(a.date ?? "");
+    })
+    .slice(0, 2);
+
   const featuredItems: FeaturedItem[] = ordered.slice(0, 6).map((c) => ({
     title: c.title,
     slug: c.slug,
@@ -89,7 +99,7 @@ export default async function Home() {
       <WhatWeDo />
       <About />
       <Testimonials />
-      <BestOfWeek />
+      <BestOfWeek posts={posts} />
       <ContactFooter />
       <StatusWidget />
     </main>
