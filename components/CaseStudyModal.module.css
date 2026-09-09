@@ -161,9 +161,8 @@
 .sections {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: clamp(12px, 1.6vw, 22px);
-  padding: clamp(28px, 4vw, 56px) var(--page-gutter, clamp(28px, 6vw, 80px));
+  padding: clamp(28px, 4vw, 56px) max(24px, calc((100% - var(--measure)) / 2));
 }
 
 .text {
@@ -260,12 +259,12 @@
 }
 /* full-bleed media breaks out of the section padding */
 .media.full {
-  width: calc(100% + 2 * clamp(28px, 6vw, 80px));
-  margin-left: calc(-1 * clamp(28px, 6vw, 80px));
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
   border-radius: 0;
 }
 .media.full figcaption {
-  padding: 0 clamp(28px, 6vw, 80px);
+  padding: 0 max(24px, calc((100vw - var(--measure)) / 2));
 }
 
 /* columns */
