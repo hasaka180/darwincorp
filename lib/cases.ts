@@ -97,6 +97,27 @@ const parseRow = (row: Record<string, unknown>): ContentItem =>
 
 const toRow = (item: ContentItem) => ({ slug: item.slug, title: item.title, data: JSON.stringify(item) })
 
+/**
+ * Appwrite row id for a slug.
+ *
+ * Appwrite caps ids at 36 chars and wants them to start alphanumeric, but
+ * slugs are written for readers and routinely run longer than that — saving
+ * one used to fail outright. A slug that already fits is used unchanged, so
+ * every row written before this stays addressable; anything else is truncated
+ * and given a hash of the full slug, which keeps two long slugs sharing an
+ * opening from colliding.
+ */
+const VALID_ROW_ID = /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,35}$/
+
+export function rowIdFor(slug: string): string {
+  if (VALID_ROW_ID.test(slug)) return slug
+  let hash = 5381
+  for (let i = 0; i < slug.length; i++) hash = ((hash * 33) ^ slug.charCodeAt(i)) >>> 0
+  const suffix = hash.toString(36).padStart(7, '0')
+  const head = slug.replace(/[^a-zA-Z0-9._-]/g, '-').replace(/^[^a-zA-Z0-9]+/, '').slice(0, 28)
+  return `${head || 'row'}-${suffix}`
+}
+
 /* ── file fallback (local dev) ── */
 async function readFileStore(): Promise<Store> {
   try {
@@ -138,7 +159,7 @@ async function ensureSeeded(): Promise<void> {
         const seed = (await readFileStore()).cases
         const toSeed = seed.filter((s) => !haveTypes.has(itemType(s)))
         for (const it of toSeed) {
-          await tables.upsertRow({ databaseId: AW.db!, tableId: AW.col!, rowId: it.slug, data: toRow(it) })
+          await tables.upsertRow({ databaseId: AW.db!, tableId: AW.col!, rowId: rowIdFor(it.slug), data: toRow(it) })
         }
       } catch {
         seedPromise = null // allow retry next request
@@ -159,8 +180,20 @@ export async function getItem(slug: string): Promise<ContentItem | null> {
   if (tables) {
     await ensureSeeded()
     try {
-      return parseRow((await tables.getRow({ databaseId: AW.db!, tableId: AW.col!, rowId: slug })) as Record<string, unknown>)
+      return parseRow((await tables.getRow({ databaseId: AW.db!, tableId: AW.col!, rowId: rowIdFor(slug) })) as Record<string, unknown>)
     } catch {
+      // The id is derived from the slug, so a row written under an older
+      // scheme still answers to its slug column.
+      try {
+        const res = await tables.listRows({
+          databaseId: AW.db!,
+          tableId: AW.col!,
+          queries: [Query.equal('slug', slug), Query.limit(1)],
+        })
+        if (res.rows.length) return parseRow(res.rows[0] as Record<string, unknown>)
+      } catch {
+        // fall through to the seed file
+      }
       // row missing, or Appwrite down — fall back to the seed file before giving up
       return (await readFileStore()).cases.find((c) => c.slug === slug) ?? null
     }
@@ -170,7 +203,7 @@ export async function getItem(slug: string): Promise<ContentItem | null> {
 
 export async function upsertItem(item: ContentItem): Promise<ContentItem> {
   if (tables) {
-    await tables.upsertRow({ databaseId: AW.db!, tableId: AW.col!, rowId: item.slug, data: toRow(item) })
+    await tables.upsertRow({ databaseId: AW.db!, tableId: AW.col!, rowId: rowIdFor(item.slug), data: toRow(item) })
     return item
   }
   const store = await readFileStore()
@@ -196,7 +229,7 @@ export async function ping(): Promise<{ ok: boolean; total?: number; error?: str
 export async function deleteItem(slug: string): Promise<boolean> {
   if (tables) {
     try {
-      await tables.deleteRow({ databaseId: AW.db!, tableId: AW.col!, rowId: slug })
+      await tables.deleteRow({ databaseId: AW.db!, tableId: AW.col!, rowId: rowIdFor(slug) })
       return true
     } catch {
       return false
