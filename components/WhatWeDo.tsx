@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import useNearViewport from "@/components/useNearViewport";
+import SceneBoundary from "@/components/SceneBoundary";
 
 const ProcessStageScene = dynamic(() => import("./ProcessStageScene"), { ssr: false });
 
@@ -91,6 +93,7 @@ const STEPS: Step[] = [
 export default function WhatWeDo() {
   const sectionRef = useRef<HTMLElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
+  const nearViewport = useNearViewport(stickyRef);
   const progressRef = useRef(0);
   const objectRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -137,7 +140,9 @@ export default function WhatWeDo() {
     <section ref={sectionRef} className="proc" aria-label="Our process">
       <div ref={stickyRef} className="proc__sticky" data-step={STEPS[active].title}>
         <div className="proc__bg" aria-hidden="true">
-          <ProcessStageScene progressRef={progressRef} anchorRef={objectRef} />
+          <SceneBoundary>
+            {nearViewport && <ProcessStageScene progressRef={progressRef} anchorRef={objectRef} />}
+          </SceneBoundary>
           <span className="proc__scrim" />
         </div>
         <header className="proc__masthead">

@@ -1,6 +1,11 @@
 "use client";
 
-import Globe from "@/components/Globe";
+import { useRef } from "react";
+import dynamic from "next/dynamic";
+import useNearViewport from "@/components/useNearViewport";
+import SceneBoundary from "@/components/SceneBoundary";
+
+const Globe = dynamic(() => import("@/components/Globe"), { ssr: false });
 
 const STATS = [
   { num: "40+", label: "Brands Shaped" },
@@ -50,6 +55,8 @@ const FOUNDER_SOCIALS = [
 ];
 
 export default function About() {
+  const globeRef = useRef<HTMLDivElement>(null);
+  const nearViewport = useNearViewport(globeRef);
   return (
     <section className="about" data-theme="light">
       <div className="about__grid">
@@ -82,14 +89,14 @@ export default function About() {
           </div>
         </a>
 
-        <div className="about__card about__globe-card reveal-up">
+        <div ref={globeRef} className="about__card about__globe-card reveal-up">
           <div className="about__globe-head">
             <span className="about__loc">Based in Dubai, UAE</span>
             <span className="about__status">
               <i className="about__dot" /> Available Worldwide
             </span>
           </div>
-          <Globe />
+          <SceneBoundary>{nearViewport && <Globe />}</SceneBoundary>
         </div>
 
         <div className="about__card about__founder reveal-up">

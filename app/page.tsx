@@ -1,6 +1,5 @@
 import Hero from "@/components/Hero";
 import StatusWidget from "@/components/StatusWidget";
-import Preloader from "@/components/Preloader";
 import StudioSection from "@/components/StudioSection";
 import FeaturedWork, { type FeaturedItem } from "@/components/FeaturedWork";
 import CoreServices from "@/components/CoreServices";
@@ -94,7 +93,6 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }}
       />
-      <Preloader />
       <Hero />
       <StudioSection />
       <FeaturedWork items={featuredItems} />

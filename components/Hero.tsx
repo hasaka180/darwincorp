@@ -5,26 +5,12 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Counter from "@/components/Counter";
 import SceneBoundary from "@/components/SceneBoundary";
-import { markHeroReady } from "@/lib/heroLoad";
 
-/**
- * Can this device actually give us a WebGL context?
- *
- * Probing first means a device that can't run the scene never downloads the
- * runtime or the scene file at all, and never hits the throw that used to
- * take the whole page down.
+/** Feature check only: creating a throwaway context stalls GPU startup twice.
+ * The renderer checks actual context availability and uses onFail for fallback.
  */
 function hasWebGL(): boolean {
-  try {
-    const canvas = document.createElement("canvas");
-    const gl = canvas.getContext("webgl2");
-    if (!gl) return false;
-    // Release the probe's context so it doesn't count against the limit.
-    gl.getExtension("WEBGL_lose_context")?.loseContext();
-    return true;
-  } catch {
-    return false;
-  }
+  return typeof window.WebGL2RenderingContext !== "undefined";
 }
 
 // The Blender render paints first; the live scene arrives behind the content.
@@ -35,6 +21,8 @@ const HeroDreamScene = dynamic(() => import("@/components/HeroDreamScene"), {
 
 export default function Hero() {
   const [sceneReady, setSceneReady] = useState(false);
+  const [startScene, setStartScene] = useState(false);
+  const [posterReady, setPosterReady] = useState(false);
   // null = not probed yet, so nothing renders during the first pass
   const [canRender3D, setCanRender3D] = useState<boolean | null>(null);
   // The dolly hands over to the copy near the end of the sticky scroll.
@@ -45,7 +33,6 @@ export default function Hero() {
     setCanRender3D(false);
     setSceneReady(false);
     setRevealed(false);
-    markHeroReady();
   }, []);
 
   useEffect(() => {
@@ -60,12 +47,41 @@ export default function Hero() {
     return () => motion.removeEventListener("change", update);
   }, [skipScene]);
 
+  useEffect(() => {
+    if (!canRender3D || !posterReady) return;
+    // Paint the lightweight poster before importing and compiling the scene.
+    // This is automatic for every visitor with hardware WebGL support.
+    let idle = 0;
+    let frame = 0;
+    let timer: ReturnType<typeof setTimeout>;
+    const firstFrame = requestAnimationFrame(() => {
+      frame = requestAnimationFrame(() => {
+        if ("requestIdleCallback" in window) {
+          idle = window.requestIdleCallback(() => setStartScene(true), { timeout: 1500 });
+        } else {
+          timer = setTimeout(() => setStartScene(true), 100);
+        }
+      });
+    });
+    return () => {
+      cancelAnimationFrame(firstFrame);
+      cancelAnimationFrame(frame);
+      if (idle) window.cancelIdleCallback(idle);
+      clearTimeout(timer);
+    };
+  }, [canRender3D, posterReady]);
+
+  useEffect(() => {
+    if (!canRender3D || sceneReady) return;
+    // A stalled scene download must leave a usable poster, heading and CTA.
+    const timeout = setTimeout(skipScene, 8000);
+    return () => clearTimeout(timeout);
+  }, [canRender3D, sceneReady, skipScene]);
+
   // Stable identity: the scene keys its whole WebGL setup on this, so a new
   // function every render would tear the context down and rebuild it.
   const onLoad = useCallback(() => {
     setSceneReady(true);
-    // Also releases the preloader if the poster hasn't finished loading yet.
-    markHeroReady();
   }, []);
 
   // Scroll drives the whole hero once WebGL is in play, so the tall sticky
@@ -86,7 +102,9 @@ export default function Hero() {
         className={`hero__stage${sceneReady ? " hero__stage--ready" : ""}`}
       >
         <picture>
+          <source media="(orientation: portrait)" type="image/avif" srcSet="/assets/dream/dream-poster-mobile.avif" />
           <source media="(orientation: portrait)" srcSet="/assets/dream/dream-poster-mobile.webp?v=mars-dolly-3" />
+          <source type="image/avif" srcSet="/assets/dream/dream-poster.avif" />
           {/* Already compressed locally; picture selects the matching Blender camera. */}
           <img
             className="hero__poster"
@@ -95,11 +113,13 @@ export default function Hero() {
             width={1920}
             height={1200}
             fetchPriority="high"
-            onLoad={markHeroReady}
-            onError={markHeroReady}
+            decoding="async"
+            ref={(image) => { if (image?.complete) setPosterReady(true); }}
+            onLoad={() => setPosterReady(true)}
+            onError={() => setPosterReady(true)}
           />
         </picture>
-        {canRender3D && (
+        {canRender3D && startScene && (
           <SceneBoundary onFail={skipScene}>
             <HeroDreamScene onLoad={onLoad} onFail={skipScene} onReveal={setRevealed} />
           </SceneBoundary>

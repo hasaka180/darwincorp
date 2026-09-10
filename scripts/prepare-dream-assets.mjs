@@ -8,4 +8,7 @@ for (const name of ["dream-poster", "dream-poster-mobile"]) {
   await sharp(fileURLToPath(new URL(`artwork/dream/${source}.png`, root)))
     .webp({ quality: 86 })
     .toFile(fileURLToPath(new URL(`public/assets/dream/${name}.webp`, root)));
+  await sharp(fileURLToPath(new URL(`public/assets/dream/${name}.webp`, root)))
+    .avif({ quality: 55, effort: 6 })
+    .toFile(fileURLToPath(new URL(`public/assets/dream/${name}.avif`, root)));
 }

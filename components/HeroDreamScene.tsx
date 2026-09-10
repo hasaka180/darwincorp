@@ -159,8 +159,7 @@ export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
     const onContextLost = (event: Event) => { event.preventDefault(); fail(); };
 
     try {
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: "low-power" });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+      renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false, powerPreference: "low-power", failIfMajorPerformanceCaveat: true });
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.10;
@@ -170,7 +169,7 @@ export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
 
       const pmrem = new THREE.PMREMGenerator(renderer);
       const reflection = createDreamEnvironment();
-      environment = pmrem.fromScene(reflection.scene, 0.035);
+      environment = pmrem.fromScene(reflection.scene, 0.035, 0.1, 100, { size: 128 });
       scene.environment = environment.texture;
       scene.environmentIntensity = 0.85;
       reflection.dispose();
@@ -230,6 +229,8 @@ export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
         closeTarget.set(portrait ? 0.3 : 0.5, 2.8, -3.2);
         camera.fov = portrait ? 40 : 28.6845;
         camera.updateProjectionMatrix();
+        // Bound GPU memory and fragment work on large / high-DPI displays.
+        renderer?.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5, Math.sqrt(1_300_000 / (width * height))));
         renderer?.setSize(width, height, false);
         onScroll();
         resume();
@@ -284,6 +285,10 @@ export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
           // The floor is an instanced field, so thousands of cubes share one draw.
           particles = createDreamParticles(window.matchMedia("(max-width: 768px)").matches);
           scene.add(particles.group);
+          // Let the GPU compile in parallel instead of blocking the first
+          // visible render on every material's shader program.
+          await renderer?.compileAsync(scene, camera);
+          if (disposed) return;
           loaded = true;
           resume();
         } catch {
@@ -314,6 +319,7 @@ export default function HeroDreamScene({ onLoad, onFail, onReveal }: {
         moonGlow.material.dispose();
       }
       renderer?.dispose();
+      renderer?.forceContextLoss();
       renderer?.domElement.remove();
     };
   }, [onLoad, onFail, onReveal]);

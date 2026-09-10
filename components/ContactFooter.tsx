@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import useNearViewport from "@/components/useNearViewport";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import SceneBoundary from "@/components/SceneBoundary";
@@ -63,6 +64,8 @@ function FooterLink({ item }: { item: Item }) {
 }
 
 export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const nearViewport = useNearViewport(sectionRef);
   const [email, setEmail] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState("");
@@ -94,9 +97,9 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
   };
 
   return (
-    <section className={`contact ${hideCta ? "contact--nocta" : ""}`} id="newsletter">
+    <section ref={sectionRef} className={`contact ${hideCta ? "contact--nocta" : ""}`} id="newsletter">
       <SceneBoundary>
-        <FooterScene />
+        {nearViewport && <FooterScene />}
       </SceneBoundary>
 
       {!hideCta && (
