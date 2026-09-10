@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 
 export type FeaturedItem = {
   title: string;
@@ -11,9 +11,42 @@ export type FeaturedItem = {
   accent?: string;
 };
 
-type Size = "wide" | "narrow" | "full" | "third";
-// Bento layout pattern for up to 6 cards. The "full" (index 2) is the hero row.
-const SIZES: Size[] = ["wide", "narrow", "full", "third", "third", "third"];
+type Size = "wide" | "narrow" | "full" | "half" | "third";
+
+// Bento patterns, one per card count. The spans in each row add up to the
+// full twelve columns, so no row is ever left with a hole in it; placement is
+// automatic, so a row ends as soon as its spans are used up.
+const LAYOUTS: Size[][] = [
+  [],
+  ["full"],
+  ["wide", "narrow"],
+  ["wide", "narrow", "full"],
+  ["wide", "narrow", "half", "half"],
+  ["wide", "narrow", "full", "half", "half"],
+  ["wide", "narrow", "full", "third", "third", "third"],
+];
+
+// Row heights, in order: the middle row is the tall one. A layout that uses
+// fewer rows takes the first of these, so an unused row cannot leave a gap.
+const ROW_HEIGHTS = [
+  "clamp(340px, 34vw, 500px)",
+  "clamp(400px, 42vw, 600px)",
+  "clamp(340px, 34vw, 500px)",
+];
+
+/** How many rows a pattern occupies, by adding spans until twelve is reached. */
+const SPANS: Record<Size, number> = { wide: 7, narrow: 5, full: 12, half: 6, third: 4 };
+
+function rowCount(sizes: Size[]): number {
+  let rows = 0;
+  let filled = 0;
+  for (const size of sizes) {
+    if (filled === 0) rows++;
+    filled += SPANS[size];
+    if (filled >= 12) filled = 0;
+  }
+  return Math.max(rows, 1);
+}
 
 export default function FeaturedWork({ items }: { items: FeaturedItem[] }) {
   const ref = useRef<HTMLElement>(null);
@@ -38,6 +71,8 @@ export default function FeaturedWork({ items }: { items: FeaturedItem[] }) {
   if (!items.length) return null;
 
   const cards = items.slice(0, 6);
+  const sizes = LAYOUTS[cards.length] ?? LAYOUTS[6];
+  const rows = ROW_HEIGHTS.slice(0, rowCount(sizes)).join(" ");
 
   return (
     <section
@@ -60,9 +95,12 @@ export default function FeaturedWork({ items }: { items: FeaturedItem[] }) {
         </Link>
       </header>
 
-      <div className="featured__grid">
+      <div
+        className="featured__grid"
+        style={{ "--featured-rows": rows } as CSSProperties}
+      >
         {cards.map((w, i) => {
-          const size = SIZES[i] ?? "third";
+          const size = sizes[i] ?? "third";
           return (
             <Link
               key={w.slug}

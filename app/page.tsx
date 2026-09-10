@@ -9,7 +9,7 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
-import { getItems, type CaseStudy, type JournalPost } from "@/lib/cases";
+import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
 
 export const revalidate = 600;
@@ -64,7 +64,10 @@ const ORG_LD = {
 
 export default async function Home() {
   const all = await getItems();
-  const cases = all.filter((i): i is CaseStudy => "sections" in i);
+  // Only our own projects. Filtering on "sections" alone also caught type
+  // 'case' — the studies we write about other studios' work — which then
+  // filled a slot in a grid headed "Featured Work".
+  const cases = all.filter((i): i is CaseStudy => itemType(i) === "work");
   // Featured items take the prominent slots; fill the rest to keep the grid full.
   const ordered = [...cases.filter((c) => c.featured), ...cases.filter((c) => !c.featured)];
   // Newest journal posts for the "Best of the week" grid; flagged posts lead,
