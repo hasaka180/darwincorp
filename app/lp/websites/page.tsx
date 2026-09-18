@@ -24,12 +24,10 @@ export default function WebsitesLandingPage() {
           <span className="lpw__h1-pixel">Websites</span>
         </h1>
 
-        <LeadForm source="lp/websites" />
-
-        <p className="lpw__fine">
-          Offer valid this season only &middot; Free 15-min strategy call, no
-          obligation
-        </p>
+        <LeadForm
+          source="lp/websites"
+          title="Websites shouldn’t just be visited. They should be experienced."
+        />
 
         <div className="lpw__footer">
           <a href="https://thedarwin.co">thedarwin.co</a>

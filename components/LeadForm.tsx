@@ -101,8 +101,8 @@ export default function LeadForm({
           <h3>Got it, {name.split(" ")[0] || "thanks"}.</h3>
           <p>
             Your details are with us. We&apos;ll call or WhatsApp you on{" "}
-            {cc} {phone} within one business day to book your free 15-minute
-            strategy call.
+            {cc} {phone} as soon as we can to schedule a call and collect your
+            requirements.
           </p>
         </div>
       </div>
