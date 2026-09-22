@@ -3503,7 +3503,7 @@ a {
   }
 }
 
-/* Smallest phones: seven icons only clear the widget at this size. */
+/* Smallest phones: keep all eight destinations clear of the widget. */
 @media (max-width: 340px) {
   .nav {
     gap: 2px;

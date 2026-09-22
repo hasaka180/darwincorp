@@ -14,6 +14,12 @@ const I = {
       <path d="M5 10v9h14v-9" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
+  about: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+      <circle cx="12" cy="8" r="3.2" />
+      <path d="M5.5 20c.5-4 2.7-6 6.5-6s6 2 6.5 6" strokeLinecap="round" />
+    </svg>
+  ),
   grid: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
       <rect x="4" y="4" width="6.5" height="6.5" rx="1.4" />
@@ -56,6 +62,7 @@ const I = {
 type NavLink = { href: string; label: string; icon: ReactNode };
 const LINKS: NavLink[] = [
   { href: "/", label: "Home", icon: I.home },
+  { href: "/about", label: "About", icon: I.about },
   { href: "/work", label: "Work", icon: I.grid },
   { href: "/cases", label: "Cases", icon: I.layers },
   { href: "/journal", label: "Journal", icon: I.pulse },
