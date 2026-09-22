@@ -65,13 +65,15 @@ export const SOCIALS = [
   },
 ];
 
-export default function ContactSection() {
+export default function ContactSection({ projectBrief = false }: { projectBrief?: boolean }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [service, setService] = useState(SERVICES[0]);
   const [cc, setCc] = useState("+971");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [budget, setBudget] = useState("");
+  const [timeline, setTimeline] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
   const [error, setError] = useState("");
   // Honeypot: real people leave it empty, bots fill it in.
@@ -95,9 +97,9 @@ export default function ContactSection() {
           cc,
           phone,
           service,
-          message,
+          message: projectBrief ? `${message}\n\nBudget: ${budget || "To discuss"}\nTarget launch: ${timeline || "Flexible"}` : message,
           website,
-          source: "contact page",
+          source: projectBrief ? "start a project page" : "contact page",
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -117,11 +119,10 @@ export default function ContactSection() {
     <section className="contactp" data-theme="light" id="contact">
       <div className="contactp__grid">
         <div className="contactp__info reveal-up">
-          <span className="contactp__eyebrow">Contact</span>
-          <h1 className="contactp__title">Let&apos;s build something.</h1>
+          <span className="contactp__eyebrow">{projectBrief ? "Start a project" : "Contact"}</span>
+          <h1 className="contactp__title">{projectBrief ? "Tell us about your next chapter." : "Let’s build something."}</h1>
           <p className="contactp__lead">
-            Tell us about your project, brand, web, or AI creative. We reply
-            within a day.
+            {projectBrief ? "Share what you are building, what needs to change and any requirements you already know. A short brief is enough to start the conversation." : "Tell us about your project, brand, web, or AI creative. We reply within a day."}
           </p>
 
           <div className="contactp__details">
@@ -191,6 +192,11 @@ export default function ContactSection() {
             <span>Message</span>
             <textarea value={message} onChange={(e) => setMessage(e.target.value)} rows={4} placeholder="Tell us a little about the project…" />
           </label>
+
+          {projectBrief && <>
+            <label className="field"><span>Budget range (optional)</span><input value={budget} onChange={e => setBudget(e.target.value)} placeholder="Amount and currency, or to discuss" maxLength={120} /></label>
+            <label className="field"><span>Target launch (optional)</span><input value={timeline} onChange={e => setTimeline(e.target.value)} placeholder="A date, month or flexible" maxLength={120} /></label>
+          </>}
 
           <input
             className="contactp__hp"

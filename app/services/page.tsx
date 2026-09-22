@@ -1,6 +1,7 @@
 import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import { SERVICES } from "@/lib/services";
+import ExpertiseCards from "@/components/ExpertiseCards";
 
 export const metadata = {
   title: "Services",
@@ -42,6 +43,11 @@ export default function ServicesPage() {
             </Link>
           ))}
         </div>
+        <section style={{ paddingTop: 80 }}>
+          <span className="subpage__eyebrow">Explore our capabilities</span>
+          <h2 className="subpage__title">Find the right expertise.</h2>
+          <ExpertiseCards />
+        </section>
       </section>
       <ContactFooter />
     </main>

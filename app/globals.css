@@ -3863,11 +3863,15 @@ a {
 /* ---- global blur-in reveal (subpages / CMS grids) ----
    Uses `translate` (not `transform`) so hover `transform` still composes. */
 .reveal-up {
+  transition: opacity 0.8s ease, filter 0.8s ease,
+    translate 0.8s cubic-bezier(0.16, 0.8, 0.24, 1);
+}
+
+/* Content is readable before JavaScript runs. Only observed elements hide. */
+.reveal-up.is-pending:not(.is-in) {
   opacity: 0;
   filter: blur(14px);
   translate: 0 22px;
-  transition: opacity 0.8s ease, filter 0.8s ease,
-    translate 0.8s cubic-bezier(0.16, 0.8, 0.24, 1);
 }
 
 .reveal-up.is-in {
@@ -3877,7 +3881,7 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-up {
+  .reveal-up, .reveal-up.is-pending:not(.is-in) {
     transition: none;
     opacity: 1;
     filter: none;

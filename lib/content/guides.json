@@ -1,0 +1,376 @@
+[
+  {
+    "slug": "website-design-cost-dubai",
+    "title": "How Much Does a Custom Website Cost in Dubai?",
+    "category": "website-design",
+    "excerpt": "Understand the scope behind a website quote, from page templates and content to integrations, motion and ongoing costs.",
+    "body": "A useful website budget starts with a description of the work. A brochure site, an editable portfolio and an interactive product experience may all be called a custom website, but they require different design and engineering effort. Comparing their headline prices alone tells you very little.\n\nDarwin provides a quotation after reviewing the brief. This guide explains how to prepare for that conversation; it does not present an unverified market average or a fixed package price.\n\n## Count page types, not only pages\n\nTen projects using one template are different from ten pages with unrelated layouts. List the types of pages you need: service, project, article, product, team or location. Then identify unusual behaviour. This gives an agency a more useful starting point than a page count alone.\n\n## Account for content work\n\nCopy, photography, project descriptions and brand assets have to exist before launch. Supplying final, organised content is a different scope from an engagement that includes writing, image production or migration. Name a content owner and agree review deadlines before production begins.\n\n## Separate functionality from presentation\n\nA contact form and a property listing feed are both features, but their dependencies are different. For each integration, share the provider and what information should move between systems. For animation, explain the story you want to tell before specifying an effect.\n\n## Understand continuing costs\n\nAsk who pays for the domain, hosting, CMS plan, fonts and other licensed services. Clarify launch support and how later improvements are estimated. Separating the initial build from recurring services makes the total commitment easier to understand.\n\n## Compare proposals on the same basis\n\nCheck deliverables, review rounds, content responsibility, responsive behaviour, editing access and handover. A lower quote may cover less work; a higher quote still needs a clear explanation. Ask each provider to identify assumptions and exclusions.\n\n## Prepare a brief that can be priced\n\nSend your current site, objective, required page types, essential features, content status and intended launch date. Include a budget range if you have one. It helps the team recommend a realistic first phase and distinguish essential work from later additions.",
+    "related": [
+      [
+        "Website pricing",
+        "/pricing/websites"
+      ],
+      [
+        "Custom website development",
+        "/services/custom-web-development"
+      ]
+    ]
+  },
+  {
+    "slug": "wordpress-vs-custom-websites",
+    "title": "WordPress vs Custom-Coded Websites",
+    "category": "website-design",
+    "excerpt": "Compare the editing, design and maintenance decisions behind each approach before choosing a platform.",
+    "body": "WordPress or custom is an incomplete question. WordPress can itself use custom design and code. A more useful comparison looks at the editing system, frontend implementation and maintenance model separately.\n\n## Start with the editorial workflow\n\nWordPress includes publishing tools and can be extended through themes and plugins. Review the actual requirements against the platform rather than assuming a plugin solves them without configuration. [WordPress describes its core features here](https://wordpress.org/about/features/).\n\n## Define what custom means\n\nA custom frontend gives the development team control over layout and behaviour. It still needs a plan for editing: a headless CMS, a limited set of editable fields or a developer-managed site. Ask to see that experience, not only the public pages.\n\nA bespoke frontend can also be connected to WordPress as a content source. This is why the conversation needs to separate where content is managed from how the visitor sees it.\n\n## Compare the ownership model\n\nFor either approach, somebody must maintain dependencies, hosting and integrations. Establish who changes content, who handles technical updates and what happens if you move to another provider. Request documentation of those responsibilities.\n\n## Choose against the brief\n\nFor a publishing-heavy business, editorial convenience may carry the most weight. For an unusual interactive experience, frontend flexibility may be central. Ask for a recommendation that names the tradeoffs and includes the continuing cost of ownership.\n\nA useful proposal explains the chosen architecture in terms your team can evaluate: what you can edit, what requires development and which services need an ongoing subscription.",
+    "related": [
+      [
+        "Website development",
+        "/services/custom-web-development"
+      ],
+      [
+        "Next.js vs WordPress",
+        "/journal/nextjs-vs-wordpress"
+      ]
+    ]
+  },
+  {
+    "slug": "what-makes-a-website-premium",
+    "title": "What Makes a Website Feel Premium?",
+    "category": "website-design",
+    "excerpt": "Quality comes from clear decisions, consistent detail and an experience that respects the visitor’s time.",
+    "body": "A website can use a large serif headline and still feel unfinished. Quality comes from the relationship between content, layout, imagery and behaviour. The pieces need to support the same idea.\n\n## Give the page a clear hierarchy\n\nDecide what someone should understand first, what evidence comes next and which action matters. Fewer competing messages can make a page feel more confident because it is easier to read. Space helps when it clarifies relationships; empty space alone is not a strategy.\n\n## Use images that carry information\n\nStrong photography shows the product, work or environment with intention. A project gallery benefits from a sequence: context, overall result, details and credits. Repeated decorative images can add length without adding understanding.\n\n## Resolve the small states\n\nButtons, form errors, navigation and mobile layouts are part of the brand experience. A refined homepage cannot compensate for an awkward enquiry form. Review the journey on a phone and with a keyboard, including what happens when information is missing.\n\n## Make expression serve usability\n\nMotion can add character, but visitors should remain in control. Give text time to be read and keep essential information available without a complex reveal. Ask whether an effect makes the message clearer.\n\n## Apply the standard throughout\n\nConsistency across services, projects and contact information makes the whole site feel intentional. Invest in reusable templates as carefully as the hero. The pages a visitor reaches from search may be their first encounter with the business.",
+    "related": [
+      [
+        "Interactive website design",
+        "/services/interactive-web-design"
+      ],
+      [
+        "UI/UX design",
+        "/services/ui-ux-design"
+      ]
+    ]
+  },
+  {
+    "slug": "website-redesign-cost",
+    "title": "How Much Does Website Redesign Cost?",
+    "category": "website-design",
+    "excerpt": "Budget for the transition from the old site as well as the design and development of the new one.",
+    "body": "A redesign cost depends on what can be retained and what must change. Establish whether the problem is content, consistency, navigation, functionality or the platform. Each points to a different scope.\n\n## Begin with an inventory\n\nList current pages, forms, integrations and downloadable resources. Identify useful content and pages that attract relevant enquiries. This distinguishes a targeted improvement from a full rebuild.\n\n## Budget for migration\n\nMoving content is work even when the design becomes simpler. Old and new fields may not match, images may need preparation and changed URLs need a plan. Ask whether migration, redirect mapping and content entry are included in the estimate.\n\n## Review hidden dependencies\n\nYour site may connect to a CRM, booking provider, newsletter tool or analytics setup. Record which accounts exist and who controls access. Rebuilding visible pages does not automatically preserve those connections.\n\n## Agree what success means\n\nChoose outcomes you can review: a clearer service structure, an editable portfolio, working mobile enquiries or a simpler publishing process. Commercial results require observation after launch and cannot be inferred from a new design alone.\n\n## Phase deliberately\n\nWhere the budget is constrained, launch a complete core experience first. It still needs content, functional forms and migration checks. Additional sections can follow when their purpose and content are ready.\n\nShare your current site and those priorities with the agency. A scope based on an audit is more useful than a price based only on the number of pages you want to replace.",
+    "related": [
+      [
+        "Website redesign",
+        "/services/website-redesign"
+      ],
+      [
+        "Website pricing",
+        "/pricing/websites"
+      ]
+    ]
+  },
+  {
+    "slug": "what-is-an-interactive-website",
+    "title": "What Is an Interactive Website?",
+    "category": "website-design",
+    "excerpt": "Interaction beyond decoration, from useful feedback to scroll storytelling and product exploration.",
+    "body": "An interactive website responds to a visitor’s actions. At its simplest, that includes navigation, forms and state changes. In creative website design, the term often refers to an expressive experience built around motion, exploration or a guided story.\n\n## Change understanding\n\nA product viewer helps someone inspect an object. A before-and-after control explains a transformation. A staged story reveals how a service works. Each interaction earns its place by doing something a static image would struggle to do as clearly.\n\n## Match the task\n\nFor an interior studio, an image sequence may be more useful than a complex 3D scene. For a technical product, a controllable model could explain important details. Begin with the audience’s question, then choose the format.\n\n## Plan the quiet version\n\nSome visitors prefer reduced motion, use a keyboard or browse on a device that cannot comfortably run a demanding visual. The content and actions still need a usable presentation. Design that alternative alongside the main concept.\n\n## Prototype before committing\n\nA working prototype reveals timing and control issues that static frames cannot show. Test the central idea early, including mobile behaviour. This is also the point to estimate asset preparation, development and testing.\n\n## Keep content accessible\n\nA compelling opening is only part of the experience. Services, evidence and contact information should remain clear and reachable. The interaction supports those tasks; it should not become a barrier between visitors and the information they came to find.",
+    "related": [
+      [
+        "Interactive website design",
+        "/services/interactive-web-design"
+      ],
+      [
+        "Creative development",
+        "/services/creative-web-development"
+      ]
+    ]
+  },
+  {
+    "slug": "signs-you-need-a-website-redesign",
+    "title": "10 Signs Your Business Needs a Website Redesign",
+    "category": "website-design",
+    "excerpt": "Use concrete symptoms to decide whether you need targeted improvements or a broader rethink.",
+    "body": "An old visual style alone does not prove a website needs rebuilding. Look for problems affecting how customers understand the business or how your team maintains the site.\n\n1. **Your offer has changed.** The homepage describes a business you no longer run.\n2. **The main action is buried.** Enquiries, bookings or product information are difficult to find.\n3. **Mobile tasks are awkward.** Forms, menus or galleries require unnecessary effort on a phone.\n4. **Publishing is difficult.** Your team avoids updates because the editing workflow is fragile.\n5. **Pages repeat without adding value.** Several pages answer the same question while important information is missing.\n6. **The identity is inconsistent.** Typography, imagery and messaging differ across key journeys.\n7. **Your best work is absent.** Recent projects are missing or cannot be presented properly.\n8. **Integrations interrupt enquiries.** Forms or handoffs fail and require investigation.\n9. **Ownership is unclear.** Nobody can explain who controls the domain, hosting or CMS.\n10. **Changes keep producing workarounds.** New requirements cannot fit into a coherent structure.\n\n## Choose the smallest complete solution\n\nSome symptoms call for content editing, a form repair or a new template. Others justify a redesign. Gather examples, note the affected pages and describe the impact before commissioning work.\n\n## Establish a baseline\n\nRecord the current enquiry journey, publishing workflow and available performance data. These observations give you a more useful way to judge the new site than a preference for one visual style.\n\n## Prioritise the visitor journey\n\nA visually dated page with clear information may be less urgent than a polished page with a broken form. Address issues that prevent people completing useful actions, then decide whether the wider experience needs to change.",
+    "related": [
+      [
+        "Website redesign",
+        "/services/website-redesign"
+      ],
+      [
+        "Redesign cost guide",
+        "/journal/website-redesign-cost"
+      ]
+    ]
+  },
+  {
+    "slug": "brand-identity-cost-dubai",
+    "title": "How Much Does Brand Identity Design Cost in Dubai?",
+    "category": "branding",
+    "excerpt": "Understand the difference between pricing a logo, an identity system and a full rollout.",
+    "body": "A branding quote should identify the business decisions and design deliverables it covers. A logo package and a full identity engagement are different purchases, even when both are called branding.\n\n## Separate strategy from visual production\n\nPositioning, audience definition, naming and messaging require discovery. If those foundations exist, the work may focus on a visual system. If they are unresolved, jumping straight to logo concepts leaves the real problem untouched.\n\n## List the applications\n\nAn identity used on a website and deck needs different production work from one spanning packaging, signage and multiple product ranges. Identify the first applications and agree how many variations are included.\n\n## Review the handover\n\nFinal artwork, colour specifications, typography guidance and usage examples help the team apply the identity. Editable templates and extensive guidelines take additional work. Fonts and imagery may carry separate licence costs.\n\n## Compare complete scopes\n\nReview discovery, concepts, feedback rounds, applications and file formats. A proposal should identify assumptions that could change the fee and separate physical production from design.\n\n## Prepare a useful brief\n\nShare the current identity, why it needs to change, your audience and the materials required at launch. Darwin provides a custom quotation from that brief rather than publishing an unsupported average for the Dubai market.\n\nAn initial budget range can help shape a smaller first phase. The important thing is to agree a complete set of useful deliverables, with enough guidance for the team to apply them consistently.",
+    "related": [
+      [
+        "Branding pricing",
+        "/pricing/branding"
+      ],
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ]
+    ]
+  },
+  {
+    "slug": "brand-identity-vs-logo-design",
+    "title": "Brand Identity vs Logo Design: What’s the Difference?",
+    "category": "branding",
+    "excerpt": "A logo identifies a business. An identity system helps it communicate consistently.",
+    "body": "A logo is a recognisable mark. Brand identity is the wider system that gives a business consistent expression: typography, colour, imagery, composition and, where scoped, messaging and motion.\n\n## What a logo project solves\n\nA focused engagement can improve recognition, reproduction and consistency of the mark itself. It is useful when positioning is clear and the surrounding visual system needs limited work. Agree variations, small-size behaviour and final file formats.\n\n## What identity adds\n\nA system explains how elements work together on real applications. A presentation, social post and website should feel related without being identical. Guidelines help teams make those decisions after handover.\n\n## Strategy is another layer\n\nIf the business cannot explain who it serves or why it is different, visual design may not be the first decision. Discovery and positioning clarify what the identity needs to express. Confirm whether that work is included.\n\n## Choose around the problem\n\nIf the mark is difficult to reproduce but the business story is settled, a targeted refresh may be enough. If the whole business feels inconsistent or is changing audience, a broader scope is useful.\n\n## Ask for real examples\n\nBefore approving a direction, review it on the materials you will use. A logo can look convincing on a presentation slide but need adjustment for a small social avatar or a particular production format. Context makes the decision more practical.",
+    "related": [
+      [
+        "Logo and visual identity",
+        "/services/logo-visual-identity"
+      ],
+      [
+        "Full brand identity",
+        "/services/brand-identity"
+      ]
+    ]
+  },
+  {
+    "slug": "premium-brand-small-budget",
+    "title": "How to Build a Premium Brand on a Small Budget",
+    "category": "branding",
+    "excerpt": "Focus on clear positioning, a useful identity foundation and the touchpoints customers actually see.",
+    "body": "A limited budget makes priorities more important. Trying to launch every possible application spreads the work thin. Start with decisions that improve several touchpoints at once.\n\n## Make the offer clear\n\nWrite a plain description of who you help, what you provide and why someone should choose you. Test it against customer questions. A coherent message works across a website, deck, proposal and social profile.\n\n## Build a compact visual system\n\nA practical logo, considered typography, controlled palette and clear image direction can go a long way. The value lies in consistent application. Avoid elements the team cannot reproduce reliably.\n\n## Prioritise the buying journey\n\nChoose the materials people see before deciding to contact or buy: perhaps a service page, portfolio and proposal template. Make those complete before investing in low-use applications.\n\n## Spend on evidence\n\nGood project photography or a well-explained case study may communicate more than generic visuals. Use work you can document and secure permission to show it. Context makes a small portfolio more informative.\n\n## Plan an expandable first phase\n\nAsk for a system that can grow, with guidance for future applications. A small budget benefits from a smaller scope, clear feedback and organised content.\n\nThe aim is to communicate the real business with care. Consistent detail, a clear offer and an easy next step can create a stronger impression than a large set of disconnected promotional materials.",
+    "related": [
+      [
+        "Branding pricing",
+        "/pricing/branding"
+      ],
+      [
+        "Personal brand websites",
+        "/industries/personal-brands"
+      ]
+    ]
+  },
+  {
+    "slug": "when-to-rebrand",
+    "title": "When Should a Business Rebrand?",
+    "category": "branding",
+    "excerpt": "Distinguish a change in business direction from a need for better consistency.",
+    "body": "A rebrand is useful when it responds to a meaningful change: a new audience, a different offer, a merger or a persistent gap between what the business delivers and how it is perceived.\n\n## Identify the mismatch\n\nCollect examples. Does the name create confusion? Does the website attract the wrong enquiries? Can the team explain the offer consistently? A clear diagnosis separates a strategic issue from a visual preference.\n\n## Preserve useful recognition\n\nAn established colour, symbol or naming structure may already be recognised. Review which elements carry value and which create friction. Evolution can be more appropriate than replacing everything.\n\n## Count the rollout\n\nA new identity affects websites, packaging, documents, signage and partner materials. List those applications before approving the scope. Design and operational transition need a shared plan.\n\n## Explain the change\n\nYour team should understand what is changing and why. An internal narrative and practical guidance help the identity become part of everyday work. Otherwise, old and new materials can coexist without a clear purpose.\n\n## Choose the scale deliberately\n\nSometimes a messaging update or visual cleanup is enough. Sometimes a new position requires a broader identity. Start with the business reason and let the scope follow.\n\nBefore committing, agree what would make the project successful. Clearer service communication, a coherent product family or a more usable identity system are specific outcomes the team can review.",
+    "related": [
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ],
+      [
+        "Our process",
+        "/process"
+      ]
+    ]
+  },
+  {
+    "slug": "how-to-choose-a-branding-agency",
+    "title": "How to Choose a Branding Agency",
+    "category": "branding",
+    "excerpt": "Evaluate how an agency thinks, defines scope and delivers usable systems.",
+    "body": "A portfolio helps you judge craft. It does not tell you how an agency will understand your business, handle feedback or prepare the system for use. Those questions belong in the selection process.\n\n## Ask about the problem behind the work\n\nFor a relevant project, ask what the brief was and which decisions shaped the result. Clear explanations reveal whether the design connected to a business need. Distinguish client work from independent analysis or concepts.\n\n## Review the process\n\nUnderstand who will work on the project, what discovery involves and how concepts are reviewed. Ask how feedback is consolidated and when decisions become final. A useful process makes collaboration understandable.\n\n## Compare complete scopes\n\nCheck strategy, naming, messaging, visual identity, guidelines and applications. Ask about file formats and licences. Similar prices may represent different work.\n\n## Consider the relationship\n\nYou should be able to explain uncertainty and ask questions. Look for direct answers and a willingness to discuss tradeoffs. A good proposal reflects the actual brief instead of repeating a standard list of services.\n\n## Prepare your side\n\nName decision makers, collect assets and identify launch applications. An organised team makes useful work easier to deliver.\n\nWhen comparing agencies, keep a short record of what each proposal includes and what remains unclear. That makes the final decision easier to explain internally and reduces surprises once production starts.",
+    "related": [
+      [
+        "About Darwin",
+        "/about"
+      ],
+      [
+        "Branding pricing",
+        "/pricing/branding"
+      ]
+    ]
+  },
+  {
+    "slug": "nextjs-vs-wordpress",
+    "title": "Next.js vs WordPress for Business Websites",
+    "category": "design-technology",
+    "excerpt": "Compare a development framework and a publishing platform through the needs of your website team.",
+    "body": "Next.js and WordPress occupy different places in a website architecture. Next.js is used to build the frontend experience; WordPress provides a publishing platform that can also serve content to a separate frontend. The choice is not always either-or.\n\n## Separate presentation from publishing\n\nNext.js supports server and client components, allowing content rendering and browser interaction to be considered separately. The relevant question for a business is how that flexibility serves its website. [Next.js documents the distinction here](https://nextjs.org/docs/app/getting-started/server-and-client-components).\n\nWordPress offers publishing tools with themes and plugins. It may suit an established editorial workflow, but the implementation still needs design and maintenance decisions. [See WordPress’s feature overview](https://wordpress.org/about/features/).\n\n## Ask about everyday editing\n\nWho adds a project, changes a service description or publishes an article? Which fields are editable? Can someone preview changes? Request a demonstration of these tasks before approving a platform recommendation.\n\n## Specify the unusual requirements\n\nA bespoke product exploration or complex integration may influence frontend architecture. A large publishing operation may prioritise editorial roles and familiar workflows. Write these requirements down rather than choosing from a technology name.\n\n## Compare the complete setup\n\nThe proposal should identify the CMS, hosting, integrations and maintenance responsibilities. Ask what requires a developer and what the team can change independently. Also consider how the site will be handed to a future provider.\n\nThe practical choice is the one that fits the required experience and leaves the team with a maintainable system.",
+    "related": [
+      [
+        "Technologies",
+        "/technologies"
+      ],
+      [
+        "Custom website development",
+        "/services/custom-web-development"
+      ]
+    ]
+  },
+  {
+    "slug": "motion-design-website-experience",
+    "title": "How Motion Design Changes Website Experiences",
+    "category": "design-technology",
+    "excerpt": "Use timing, transitions and feedback to support the story and the visitor’s task.",
+    "body": "Motion changes how a visitor moves through information. A transition can connect two states, a reveal can establish hierarchy and feedback can confirm that an action worked. These are useful roles to define before choosing an animation style.\n\n## Give each movement a job\n\nFor every effect, write down its purpose. Does it explain a relationship, direct attention or acknowledge input? If it only fills an empty moment, consider whether the page would be clearer without it.\n\n## Design the timing in context\n\nA sequence that looks good in isolation may delay the visitor during repeated use. Review it as part of the complete journey. Navigation and forms need a different rhythm from an opening brand story.\n\n## Consider input methods\n\nA hover effect needs a sensible touch and keyboard equivalent. Content revealed during scrolling still needs a logical reading order. Motion preferences should influence how the experience behaves, without removing essential information.\n\n## Prototype the important transition\n\nStatic frames cannot show pacing. A small working prototype can reveal whether a sequence feels too slow or whether an interaction is difficult to discover. Use that review to make decisions before full production.\n\n## Plan content changes\n\nAn animation should tolerate longer headings, new imagery and different device sizes. Define the content constraints clearly and test realistic variations. The finished experience needs to remain coherent after the first content update.",
+    "related": [
+      [
+        "Motion design",
+        "/services/motion-design"
+      ],
+      [
+        "Interactive website design",
+        "/services/interactive-web-design"
+      ]
+    ]
+  },
+  {
+    "slug": "webgl-3d-brand-experiences",
+    "title": "WebGL and 3D Experiences for Brands",
+    "category": "design-technology",
+    "excerpt": "When an interactive 3D idea deserves a place in the brief, and what its production requires.",
+    "body": "A 3D experience can make an object or spatial relationship easier to explore. For a brand website, the starting point should be the question it answers: what does the visitor understand better by moving through or around the subject?\n\n## Choose a useful interaction\n\nA product model might reveal construction details. A spatial scene might communicate scale or layout. A decorative object may establish atmosphere, but it should still justify the attention and production work it requires.\n\n## Include asset production\n\nA visual concept needs an appropriate model, materials, lighting and export plan. Assets prepared for a high-resolution film may need substantial adaptation for a website. Establish what already exists and who will prepare the browser-ready version.\n\n## Keep the story available\n\nVisitors on less capable devices still need the important information. Plan a still image, video or simpler presentation alongside the interactive version. The alternative should communicate the same essential point.\n\n## Prototype on representative devices\n\nA desktop demonstration is only one test. Review the interaction on the devices and input methods relevant to the audience. Loading behaviour, text readability and control discoverability are part of the creative review.\n\n## Scope the whole experience\n\nThe estimate should include modelling or adaptation, creative development, responsive behaviour and testing. A small prototype can make the uncertain parts visible before a larger commitment.",
+    "related": [
+      [
+        "Creative development",
+        "/services/creative-web-development"
+      ],
+      [
+        "Interactive websites",
+        "/services/interactive-web-design"
+      ]
+    ]
+  },
+  {
+    "slug": "headless-cms-explained",
+    "title": "Headless CMS Explained for Business Owners",
+    "category": "design-technology",
+    "excerpt": "Understand the separation between content editing and the website people visit.",
+    "body": "A headless CMS stores and manages content separately from its public presentation. The website retrieves that content and decides how to display it. For a business owner, the important consequence is that editing and design can be planned as related but distinct systems.\n\n## Start with content types\n\nA project, article and service page need different fields. Defining those structures helps editors publish consistently. Instead of giving every page an unrestricted layout, a structured CMS can guide the team through the information each item requires.\n\n## Understand the editing experience\n\nAsk how drafts, previews, images and publishing work. A flexible frontend is only useful if the people maintaining the content can use the system comfortably. Review the actual fields and tasks rather than a generic product demonstration.\n\n## Identify what is not editable\n\nSome design changes still require development. Be explicit about the boundary: can editors change the layout, or only the content inside agreed components? Neither approach is inherently better; it depends on the team's needs.\n\n## Account for the connections\n\nThe site and CMS must remain connected. Hosting, access, deployment and preview behaviour need clear ownership. Ask what happens when content changes and who investigates a publishing problem.\n\n## Choose for the workflow\n\nA headless setup may suit a custom experience with structured, recurring content. It can be unnecessary for a tiny site with rare updates. Define the publishing job first, then decide whether the architecture is a good fit.",
+    "related": [
+      [
+        "Technologies",
+        "/technologies"
+      ],
+      [
+        "Website pricing",
+        "/pricing/websites"
+      ]
+    ]
+  },
+  {
+    "slug": "ai-creative-production",
+    "title": "How AI Is Changing Creative Production",
+    "category": "design-technology",
+    "excerpt": "A studio perspective on where generative tools fit between the brief and the finished brand asset.",
+    "body": "Generative tools can produce visual possibilities quickly, but possibility is different from a finished asset. The useful creative work still includes deciding what to communicate, choosing a direction and checking whether the result fits the application.\n\n## Start with a brief, not a prompt\n\nDefine the audience, message, format and details that must remain accurate. This makes it easier to judge an output. Without those constraints, a sequence of visually interesting images can drift away from the business problem.\n\n## Use exploration deliberately\n\nGenerated variations can help compare compositions, environments or moods. Review them together against the same criteria. A consistent selection process is more useful than treating every new output as a new direction.\n\n## Preserve important details\n\nProduct geometry, logos and readable text may need supplied artwork, conventional compositing or another production method. Decide which details can be interpretive and which must be reproduced accurately.\n\n## Plan the finishing work\n\nSelected imagery may need cleanup, cropping, colour adjustment and adaptations across formats. The final deliverable should be checked in its real placement. A strong concept image can still fail when text or platform constraints are added.\n\n## Keep responsibilities clear\n\nAgree the source assets, intended usage and approval process. Different briefs may require photography, illustration or 3D alongside generative tools. The production approach should serve the result rather than force every task through one tool.",
+    "related": [
+      [
+        "AI creative production",
+        "/services/ai-creative-production"
+      ],
+      [
+        "Social media creative",
+        "/services/social-media-design"
+      ]
+    ]
+  },
+  {
+    "slug": "search-accessible-websites",
+    "title": "What Makes a Website Accessible to Search Engines and AI Search?",
+    "category": "design-technology",
+    "excerpt": "Build clear content and navigable pages before looking for specialised optimisation shortcuts.",
+    "body": "A useful starting point is simple: publish information that people can read and navigate, in pages with a clear purpose. Search visibility depends on more than a visual design, and no markup pattern guarantees inclusion in results or AI-generated answers.\n\n## Make the core content readable\n\nPut essential explanations in page text rather than only inside images or interactive scenes. Meaningful headings and links help describe the structure. Google’s guidance emphasises useful content, crawlable links and helping search systems understand pages. [Read the SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide).\n\n## Answer the real question\n\nA service page should explain what is offered, who it is for, what is included and what happens next. A case study should identify the work actually delivered. Clear answers are more useful than repeating a phrase across several nearly identical pages.\n\n## Use metadata accurately\n\nTitles and descriptions should describe the page. Canonical URLs, sitemaps and structured data should agree with the visible content. These are supporting signals, not substitutes for a useful page.\n\n## Keep interaction from hiding the story\n\nAn animation may enrich the experience, but the main content should remain available without waiting for a long sequence. Keyboard access, readable text and understandable controls also improve the human experience. [W3C introduces web accessibility here](https://www.w3.org/WAI/fundamentals/accessibility-intro/).\n\n## Observe after launch\n\nCheck that important pages are discoverable and monitor the available search data. Review which enquiries are relevant, not only total traffic. Content quality and technical maintenance remain ongoing work; a launch checklist is a starting point.",
+    "related": [
+      [
+        "Custom development",
+        "/services/custom-web-development"
+      ],
+      [
+        "Technologies",
+        "/technologies"
+      ]
+    ]
+  },
+  {
+    "slug": "apple-product-launch-design",
+    "title": "The Design Strategy Behind Apple’s Product Launches",
+    "category": "brand-intelligence",
+    "excerpt": "An independent reading of how a launch page creates a path from announcement to product detail.",
+    "body": "This is Darwin’s independent editorial analysis of Apple’s public presentation. Darwin did not create the work discussed here.\n\nApple’s event page connects an event presentation with individual product announcements and further reading. That relationship is visible in the [official Apple Events page](https://www.apple.com/apple-events/). Our interest is the structure of the experience, rather than an assertion about Apple’s internal strategy or commercial results.\n\n## Give the audience an entry point\n\nA launch contains many possible messages. An opening presentation can establish what is new before product pages carry the detailed explanations. Our interpretation is that this separation helps people choose their level of attention.\n\n## Give each product room\n\nA clearly bounded product section can pair imagery with a concise proposition and a next step. For a smaller business, the lesson is to avoid compressing every feature into one opening paragraph.\n\n## Connect the story to action\n\nA launch experience should make it clear where someone can learn more after the announcement. The next page needs to continue the same promise with evidence and useful detail.\n\n## Apply the principle, not the surface\n\nCopying a colour palette or headline treatment does not recreate the underlying clarity. Start with the offer and the sequence of questions a customer needs answered. Then decide how visual hierarchy and motion can support that sequence.\n\nFor a business launch, one practical exercise is to separate the announcement, the explanation and the action. Give each a clear role before designing the page.",
+    "related": [
+      [
+        "Interactive website design",
+        "/services/interactive-web-design"
+      ],
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ]
+    ]
+  },
+  {
+    "slug": "luxury-minimalist-web-design",
+    "title": "Why Minimalist Web Design Can Suit Luxury Brands",
+    "category": "brand-intelligence",
+    "excerpt": "A design perspective on restraint, evidence and the difference between simplicity and missing information.",
+    "body": "Minimalism can be useful when the product or experience has enough substance to carry the page. This is a design perspective, not a claim that all luxury brands follow one trend or that a sparse layout automatically increases sales.\n\n## Let the evidence carry weight\n\nDistinctive photography, material detail and a coherent product story can communicate more than layers of decorative interface. Space helps when it gives that evidence a clear hierarchy.\n\n## Retain useful information\n\nA restrained page still needs practical answers: what the offer is, what makes it relevant and how to enquire or buy. Hiding navigation or reducing text until it becomes cryptic can undermine the experience.\n\n## Make every detail deliberate\n\nWith fewer elements, inconsistencies become more visible. Typography, spacing, image crops and button behaviour need to work together. The standard should extend to mobile pages and form states.\n\n## Match the business\n\nA highly considered interior portfolio may benefit from a different pace than a frequently updated product catalogue. The appropriate level of restraint follows the content and task, not a generic idea of luxury.\n\n## Review the complete journey\n\nAsk someone unfamiliar with the business to explain the offer after browsing the site. If they can describe the atmosphere but not the service, the design may need more clarity.\n\nA premium impression is strongest when expression and usefulness reinforce each other. Simplicity should make a confident offer easier to understand.",
+    "related": [
+      [
+        "Premium website design guide",
+        "/journal/what-makes-a-website-premium"
+      ],
+      [
+        "Interior design websites",
+        "/industries/interior-design"
+      ]
+    ]
+  },
+  {
+    "slug": "nike-digital-experiences",
+    "title": "How Nike Builds Digital Experiences Beyond E-commerce",
+    "category": "brand-intelligence",
+    "excerpt": "An independent look at the relationship between shopping, activity and membership.",
+    "body": "This is Darwin’s independent editorial analysis of Nike’s public digital offering. Darwin did not create the Nike work discussed here.\n\nNike’s membership page presents shopping alongside experiences including Nike Run Club, Nike Training Club, SNKRS and product customisation. These are visible in [Nike’s own membership overview](https://www.nike.com/membership). We are examining how those different reasons to engage relate to a brand experience, not claiming access to internal performance data.\n\n## Give people more than one reason to return\n\nOur interpretation is that useful activity-based experiences can extend a relationship beyond the moment of purchase. For another business, the relevant equivalent might be guidance, tools or learning content connected to its actual offer.\n\n## Keep the offer coherent\n\nDifferent experiences need clear roles. A shopping journey, a training activity and a community feature should be understandable on their own while still feeling connected to the same brand.\n\n## Start smaller than the reference\n\nA small business does not need a collection of apps to use this principle. One useful resource or recurring service can create a reason to return if it addresses a real customer need.\n\n## Plan the ongoing work\n\nA digital experience that promises continuing value needs editorial or operational ownership. Before adding a new feature, decide who maintains it and how the team will know whether it is useful.\n\nThe practical lesson is to design around the customer relationship as well as the transaction. That starts with understanding what people need before and after they buy.",
+    "related": [
+      [
+        "UI/UX design",
+        "/services/ui-ux-design"
+      ],
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ]
+    ]
+  },
+  {
+    "slug": "on-brand-identity-visual-language",
+    "title": "On’s Brand Identity and Visual Language: A Design Reading",
+    "category": "brand-intelligence",
+    "excerpt": "Independent observations on connecting a product story, brand origin and a wider visual identity.",
+    "body": "This is independent Darwin editorial analysis, not a Darwin client project or an account of On’s internal design process.\n\nOn’s public brand story connects its origins with a focus on movement and product development. The source for that context is [On’s own about page](https://www.on.com/en-us/explore/about-on). This article considers how a business can connect an origin story to its wider presentation; it does not reconstruct an undocumented logo history.\n\n## Give the story a concrete anchor\n\nAn origin story becomes more useful when it explains a problem the business set out to address. The reader can then connect the brand narrative with the product or service they are evaluating.\n\n## Build recognition beyond the mark\n\nA logo is only one element of a visual language. Product presentation, photography, typography and the organisation of information all contribute to recognition. The useful design question is whether those elements communicate a consistent point of view.\n\n## Leave room for extension\n\nAs a business expands its offer, the identity needs to hold different products together without making every application identical. Guidelines are most useful when they explain both the stable elements and the areas where expression can vary.\n\n## Apply this to a growing business\n\nIdentify which part of your story remains true across all your offers. Then review the first touchpoints customers see and ask whether that idea is visible and understandable.\n\nThe goal is a system that can evolve with the business while retaining a recognisable centre. That is a strategic design decision, not just a choice of logo placement.",
+    "related": [
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ],
+      [
+        "When to rebrand",
+        "/journal/when-to-rebrand"
+      ]
+    ]
+  },
+  {
+    "slug": "what-makes-a-brand-premium",
+    "title": "What Makes a Brand Feel Premium?",
+    "category": "brand-intelligence",
+    "excerpt": "A premium impression is built through a consistent promise and the evidence that supports it.",
+    "body": "Premium is a perception, not a font category. A brand can look expensive and still feel unconvincing if its offer is unclear or its everyday experience is inconsistent.\n\n## Make a specific promise\n\nExplain who the offer is for and why the business takes its particular approach. A precise statement gives the audience something to evaluate. Broad claims of excellence provide little useful information on their own.\n\n## Show evidence of care\n\nDetailed project stories, considered photography and clear product information can demonstrate attention. Choose evidence connected to the promise rather than adding decorative signals of luxury.\n\n## Carry the standard into service\n\nThe enquiry form, proposal, delivery communication and aftercare are brand touchpoints too. An expressive homepage creates an expectation that the rest of the experience needs to meet.\n\n## Use restraint with a reason\n\nA controlled palette and thoughtful typography can create coherence. Their usefulness depends on the context. The visual system should make the business recognisable and the content easier to understand.\n\n## Review consistency\n\nCompare the website, social profile, presentation and customer documents together. Note where the tone or visual language changes without a clear purpose. Fixing these inconsistencies may create more value than adding another campaign asset.\n\nFor a growing business, a premium impression is often the result of making fewer promises and fulfilling them carefully. Design helps express that standard; it cannot replace the substance behind it.",
+    "related": [
+      [
+        "Brand identity",
+        "/services/brand-identity"
+      ],
+      [
+        "Branding pricing",
+        "/pricing/branding"
+      ]
+    ]
+  }
+]

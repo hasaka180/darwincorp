@@ -1,9 +1,12 @@
+import { getPublishedItems as getItems, getPublishedItem as getItem } from "@/lib/published-content";
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getItems, getItem, itemType, type JournalPost } from '@/lib/cases'
+import { itemType, type JournalPost } from '@/lib/cases'
 import JournalView from '@/components/JournalView'
 import ModalCloseButton from '@/components/ModalCloseButton'
 import styles from '@/components/CaseStudyModal.module.css'
+import StructuredData from '@/components/StructuredData'
+import { breadcrumbData } from '@/lib/seo'
 
 export const revalidate = 600
 
@@ -88,6 +91,7 @@ export default async function JournalPostPage({ params }: { params: Promise<{ sl
 
   return (
     <div className={styles.pageWrap}>
+      <StructuredData data={breadcrumbData([{ label: 'Home', href: '/' }, { label: 'Journal', href: '/journal' }, { label: p.title, href: `/journal/${p.slug}` }])} />
       {/* A post can supply its own JSON-LD in the studio; when it does, that
           replaces these defaults rather than duplicating them. */}
       {p.jsonLd && p.jsonLd.trim() ? (

@@ -16,7 +16,7 @@ export default function ScrollReveal() {
       const els = Array.from(
         document.querySelectorAll<HTMLElement>(".reveal-up:not(.is-in)")
       );
-      if (!els.length) return;
+      if (!els.length || !("IntersectionObserver" in window)) return;
 
       io = new IntersectionObserver(
         (entries) => {
@@ -31,6 +31,7 @@ export default function ScrollReveal() {
       );
 
       els.forEach((el, i) => {
+        el.classList.add("is-pending");
         // subtle stagger for grouped elements
         el.style.transitionDelay = `${(i % 8) * 0.06}s`;
         io!.observe(el);

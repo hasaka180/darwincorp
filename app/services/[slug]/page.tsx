@@ -2,10 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContactFooter from "@/components/ContactFooter";
 import { SERVICES, getService } from "@/lib/services";
+import { SERVICE_PAGES } from "@/lib/content/services";
+import ExplorePage from "@/components/ExplorePage";
+import StructuredData from "@/components/StructuredData";
+import { pageMetadata, breadcrumbData, SITE_URL } from "@/lib/seo";
 
 export function generateStaticParams() {
   // brand-identity has its own bespoke page (app/services/brand-identity)
-  return SERVICES.filter((s) => s.slug !== "brand-identity").map((s) => ({
+  return [...SERVICES.filter((s) => s.slug !== "brand-identity"), ...SERVICE_PAGES].map((s) => ({
     slug: s.slug,
   }));
 }
@@ -16,6 +20,8 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const page = SERVICE_PAGES.find(p => p.slug === slug);
+  if (page) return pageMetadata(`${page.title} in Dubai`, page.description, `/services/${slug}`, page.image);
   const svc = getService(slug);
   if (!svc) return { title: "Services" };
   return {
@@ -31,6 +37,8 @@ export default async function ServiceDetail({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
+  const page = SERVICE_PAGES.find(p => p.slug === slug);
+  if (page) return <ExplorePage page={page} path={`/services/${slug}`} parent={{ label: "Services", href: "/services" }} service />;
   const svc = getService(slug);
   if (!svc) notFound();
 
@@ -38,6 +46,8 @@ export default async function ServiceDetail({
 
   return (
     <main className="svcp">
+      <StructuredData data={breadcrumbData([{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: svc.title, href: `/services/${slug}` }])} />
+      <StructuredData data={{ "@context": "https://schema.org", "@type": "Service", name: svc.title, description: svc.summary, provider: { "@id": `${SITE_URL}/#organization` } }} />
       <section className="svcp__hero" data-theme="light">
         <Link href="/services" className="svcp__back">← Services</Link>
         <span className="svcp__eyebrow">{svc.tagline}</span>
@@ -78,6 +88,7 @@ export default async function ServiceDetail({
         <div className="svcp__more reveal-up">
           <span className="svcp__more-label">More services</span>
           <div className="svcp__more-links">
+            {SERVICE_PAGES.map(p => <Link key={p.slug} href={`/services/${p.slug}`} className="svcp__more-link">{p.title} ↗</Link>)}
             {others.map((o) => (
               <Link key={o.slug} href={`/services/${o.slug}`} className="svcp__more-link">
                 {o.title}

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import Faq, { type QA } from "@/components/Faq";
+import StructuredData from "@/components/StructuredData";
+import { breadcrumbData } from "@/lib/seo";
+import { LinkCards } from "@/components/ExplorePage";
 
 export const metadata = {
   title: "Brand Identity Design in Dubai",
@@ -104,6 +107,7 @@ const jsonLd = {
 export default function BrandIdentityPage() {
   return (
     <main className="bi">
+      <StructuredData data={breadcrumbData([{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Brand identity", href: "/services/brand-identity" }])} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* Hero */}
@@ -273,6 +277,10 @@ export default function BrandIdentityPage() {
         <p className="bi-cta__sign">Darwin Corp - <em>Designed to Evolve.</em></p>
       </section>
 
+      <section className="bi-section" data-theme="light">
+        <h2 className="bi-h2">Explore the next step.</h2>
+        <LinkCards links={[{ label: "Branding pricing", href: "/pricing/branding" }, { label: "Logo and visual identity", href: "/services/logo-visual-identity" }, { label: "Brand identity vs logo", href: "/journal/brand-identity-vs-logo-design" }]} />
+      </section>
       <ContactFooter hideCta />
     </main>
   );

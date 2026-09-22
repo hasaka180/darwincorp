@@ -6,6 +6,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Let production QA build alongside an already-running development server.
+  distDir: process.env.DARWIN_BUILD_DIR || ".next",
   // Pin the workspace root so a parent-folder lockfile doesn't confuse Next.
   outputFileTracingRoot: __dirname,
   // Hide the Next.js dev-tools / build-activity widget.

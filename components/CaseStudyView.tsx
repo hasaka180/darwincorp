@@ -64,7 +64,7 @@ function SectionBlock({ section }: { section: Section }) {
 }
 
 /** Presentational case-study sheet rendered as a full page. */
-export default function CaseStudyView({ data, shareUrl }: { data: CaseStudy; shareUrl?: string }) {
+export default function CaseStudyView({ data, shareUrl, heading }: { data: CaseStudy; shareUrl?: string; heading?: string }) {
   return (
     <article
       className={styles.sheet}
@@ -77,7 +77,7 @@ export default function CaseStudyView({ data, shareUrl }: { data: CaseStudy; sha
         {data.cover && <div className={styles.heroMedia} style={{ backgroundImage: `url(${data.cover})` }} />}
         <div className={styles.heroInner}>
           {data.category && <div className={styles.heroCat}>{data.category}</div>}
-          <h1 className={styles.heroTitle}>{data.title}</h1>
+          <h1 className={styles.heroTitle}>{heading || data.title}</h1>
           {data.intro && <p className={styles.heroIntro}>{data.intro}</p>}
         </div>
       </header>

@@ -1,3 +1,4 @@
+import { getPublishedItems as getItems } from "@/lib/published-content";
 import Hero from "@/components/Hero";
 import StatusWidget from "@/components/StatusWidget";
 import StudioSection from "@/components/StudioSection";
@@ -8,7 +9,7 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
-import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
+import { itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
 
 export const revalidate = 600;
@@ -27,7 +28,7 @@ const ORG_LD = {
   name: "Darwin Corp",
   url: SITE_URL,
   logo: `${SITE_URL}/icon.png`,
-  image: `${SITE_URL}/opengraph-image.png`,
+  image: `${SITE_URL}/opengraph-image.jpg`,
   description:
     "Darwin Corp is a Dubai studio creating brands, digital experiences and stories designed to evolve with people, culture and technology.",
   email: "hello@thedarwin.co",

@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import CookieConsent from "@/components/CookieConsent";
 import PromoPopup from "@/components/PromoPopup";
+import StructuredData from "@/components/StructuredData";
+import { organizationData } from "@/lib/seo";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -73,6 +75,7 @@ export default function RootLayout({
       className={`${instrument.variable} ${handjet.variable} ${inter.variable}`}
     >
       <body>
+        <StructuredData data={organizationData} />
         <SmoothScroll />
         <ScrollReveal />
         <Navbar />

@@ -1,0 +1,352 @@
+[
+  {
+    "type": "work",
+    "slug": "nadz-home-healthcare",
+    "title": "Nadz Home Healthcare",
+    "client": "Dr. Nadia Choudhry",
+    "category": "Healthcare",
+    "tab": "Branding",
+    "year": "2026",
+    "accent": "#dfb680",
+    "cover": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/0f9c1c41-6f9.webp",
+    "intro": "Darwin Corp built Nadz Home Healthcare from strategy up, delivering brand identity, website and social media that position at-home care in the UAE as precision, technology-led medicine.",
+    "services": [
+      "Brand Identity",
+      "Website Development"
+    ],
+    "sections": [
+      {
+        "id": "76ec0261",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/d12dfbdd-62c.webp",
+        "caption": "nadz logo",
+        "full": false
+      },
+      {
+        "id": "a406b811",
+        "type": "grid",
+        "columns": 2,
+        "items": [
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/b04b80db-5f7.webp",
+            "caption": "NADZ business card design"
+          },
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/4afcc71e-060.webp",
+            "caption": "NADZ uniform design"
+          }
+        ]
+      },
+      {
+        "id": "533f22ca",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/df90c595-30d.webp",
+        "caption": "NAD IV",
+        "full": false
+      },
+      {
+        "id": "efc7cda5",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/5c4cc53b-ba4.webp",
+        "caption": "NADZ car",
+        "full": false
+      },
+      {
+        "id": "e07e985c",
+        "type": "video",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/afb299e2-3ad.mp4",
+        "poster": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/a1d52395-649.webp",
+        "full": false
+      }
+    ],
+    "bg": "#331828",
+    "fg": "#ffffff",
+    "icon": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/238f707f-24c.webp",
+    "featured": true,
+    "metaDescription": "Darwin Corp created the brand identity, website and social system for Nadz Home Healthcare, future-facing design for at-home medical care in the UAE.",
+    "metaTitle": "NADZ Home Healthcare Branding & Website Case Study",
+    "summaryTitle": "Summary",
+    "summaryDescription": "The category default is soft blues, stock photos of smiling nurses, and language that quietly frames home care as the option you settle for. We inverted it. NADZ was positioned as clinical-grade care that happens to arrive at your door, a system of monitoring, continuity and specialist expertise. The identity uses a restrained deep-teal and light palette, precise geometric marks derived from vital-sign waveforms, and photography direction that shows equipment, technique and human contact in the same frame. Every page was structured for search and for answer engines, so NADZ surfaces when a family in Dubai asks an AI assistant who provides post-surgical nursing at home.",
+    "faqs": [
+      {
+        "q": "What did Darwin Corp do for NADZ Home Healthcare?",
+        "a": "Darwin Corp delivered brand strategy, full visual identity, website design and development, and an ongoing social media system for Nadz Home Healthcare. The scope covered positioning and naming architecture, logo and identity system, photography and motion direction, a multi-service website with booking flows, and SEO and AEO structuring across every page."
+      },
+      {
+        "q": "How do you brand a home healthcare company without looking generic?",
+        "a": "By replacing category clich\u00e9s with proof of clinical capability. For Nadz we built the identity around instrumentation, precision and continuity of care, using waveform-derived marks, a disciplined deep-teal palette, and photography that shows real technique rather than stock reassurance, so the brand signals competence before it signals comfort."
+      },
+      {
+        "q": "What is AEO and why did Nadz need it?",
+        "a": "AEO, or Answer Engine Optimisation, is the practice of structuring content so AI assistants and search summaries can quote it directly as an answer. Families researching home nursing increasingly ask a chatbot before they open a search results page, so every Nadz service page uses direct-answer openings, entity-clear naming, structured FAQ blocks and JSON-LD schema to make the brand machine-readable."
+      },
+      {
+        "q": "How long did the Nadz Home Healthcare project take?",
+        "a": "The NADZ Home Healthcare project ran across two months. Brand strategy and identity were completed in the first month, and the website was designed, built and launched in the second, with the social media system rolling out from launch."
+      },
+      {
+        "q": "Does Darwin Corp work with healthcare brands beyond identity design?",
+        "a": "Yes. Darwin Corp handles healthcare brands end to end: strategy, identity, web design and build, content, SEO and AEO, and ongoing social media. Nadz Home Healthcare is a full-stack example, where the same team defined the positioning and shipped the site that sells it."
+      }
+    ],
+    "jsonLd": "{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"https://darwincorp.com/work/nadz-home-healthcare#case\",\n      \"name\": \"Nadz Home Healthcare - Brand Identity, Website & Social Media\",\n      \"headline\": \"Making at-home care look like the future of medicine\",\n      \"description\": \"Darwin Corp created the brand strategy, visual identity, website and social media system for Nadz Home Healthcare, positioning at-home medical care in the UAE as precision, technology-led healthcare. Delivered in two months, identity to live site.\",\n      \"url\": \"https://darwincorp.com/work/nadz-home-healthcare\",\n      \"genre\": \"Case Study\",\n      \"inLanguage\": \"en\",\n      \"datePublished\": \"[YYYY-MM-DD]\",\n      \"keywords\": \"home healthcare branding, healthcare brand identity, medical website design, home nursing UAE, healthcare SEO, AEO, social media design\",\n      \"creator\": {\n        \"@type\": \"Organization\",\n        \"@id\": \"https://darwincorp.com/#organization\",\n        \"name\": \"Darwin Corp\",\n        \"url\": \"https://darwincorp.com\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"Dubai\",\n          \"addressCountry\": \"AE\"\n        }\n      },\n      \"about\": {\n        \"@type\": \"MedicalBusiness\",\n        \"name\": \"Nadz Home Healthcare\",\n        \"url\": \"[https://nadz.ae]\",\n        \"areaServed\": {\n          \"@type\": \"Country\",\n          \"name\": \"United Arab Emirates\"\n        }\n      },\n      \"hasPart\": [\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Strategy & Positioning\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Visual Identity System\" },\n        { \"@type\": \"WebSite\", \"name\": \"Nadz Home Healthcare Website\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Social Media Design System\" }\n      ]\n    },\n    {\n      \"@type\": \"FAQPage\",\n      \"@id\": \"https://darwincorp.com/work/nadz-home-healthcare#faq\",\n      \"mainEntity\": [\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What did Darwin Corp do for Nadz Home Healthcare?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Darwin Corp delivered brand strategy, full visual identity, website design and development, and an ongoing social media system for Nadz Home Healthcare, including SEO and AEO structuring across every page.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you brand a home healthcare company without looking generic?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By replacing category clich\u00e9s with proof of clinical capability: instrumentation-led marks, a disciplined palette, and photography showing real technique rather than stock reassurance, so the brand signals competence before comfort.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What is AEO and why did Nadz need it?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"AEO, or Answer Engine Optimisation, structures content so AI assistants can quote it directly. Nadz service pages use direct-answer openings, entity-clear naming, structured FAQs and JSON-LD schema so the brand surfaces in AI answers about home nursing in the UAE.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How long did the Nadz Home Healthcare project take?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"The Nadz Home Healthcare project ran across two months. Brand strategy and identity were completed in the first month, and the website was designed, built and launched in the second, with the social media system rolling out from launch.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"Does Darwin Corp work with healthcare brands beyond identity design?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Yes. Darwin Corp handles healthcare brands end to end: strategy, identity, web design and build, content, SEO and AEO, and ongoing social media. Nadz Home Healthcare is a full-stack example, where the same team defined the positioning and shipped the site that sells it.\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+  },
+  {
+    "type": "work",
+    "slug": "realpha",
+    "title": "reAlpha",
+    "client": "reAlpha Tech Corp",
+    "category": "Real Estate Technology",
+    "tab": "Branding",
+    "year": "2024",
+    "accent": "#d3ffb5",
+    "cover": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/afdda036-6f3.webp",
+    "intro": "Darwin Corp built the brand and digital presence for reAlpha, the NASDAQ-listed AI real estate platform, translating an AI-first home buying product into a brand that reads as credible to buyers and to markets.",
+    "services": [
+      "Brand Identity",
+      "Logo Design",
+      "Motion Design"
+    ],
+    "sections": [],
+    "bg": "#173b3d",
+    "fg": "#ffffff",
+    "featured": true,
+    "metaDescription": "Darwin Corp created the brand identity, website and content system for reAlpha, an AI-powered homebuying platform, built for search and answer engine visibility.",
+    "metaTitle": "reAlpha Branding & Website Case Study",
+    "summaryTitle": "Summary",
+    "summaryDescription": "reAlpha operates where two trust problems meet: people are cautious about AI making decisions for them, and more cautious still when the decision is the largest purchase of their lives. The platform runs on Claire, a generative AI buyer's agent offering round-the-clock support across the homebuying journey, alongside integrated title and escrow services. Brand identity system was built to make that capability legible rather than futuristic for its own sake. The visual system stays deliberately restrained, letting data density, product interface and transaction clarity do the persuading, and every page is structured so that answer engines can quote reAlpha directly when someone asks an AI assistant how commission-free home buying works.",
+    "faqs": [
+      {
+        "q": "What is reAlpha?",
+        "a": "reAlpha Tech Corp. (Nasdaq: AIRE) is an AI-powered real estate technology company building an end-to-end platform that streamlines transactions through integrated brokerage, mortgage and title services. Its platform is led by Claire, a generative AI buyer's agent that matches buyers to properties using hundreds of data attributes and supports document review and market insight."
+      },
+      {
+        "q": "How do you brand an AI product without leaning on tech clich\u00e9s?",
+        "a": "By designing for comprehension instead of spectacle. For reAlpha the system avoids the usual AI signals, glowing gradients and abstract neural motifs, and instead uses interface-led art direction, plain-language copy and transaction transparency, so the technology is proven by what it does rather than announced by how it looks."
+      },
+      {
+        "q": "How is a fintech or proptech brand optimised for AI answer engines?",
+        "a": "Through entity clarity and structure. Every page names the company, product and category explicitly rather than relying on pronouns or brand shorthand, leads each section with a direct answer sentence, and carries JSON-LD schema describing the organisation, the software product and the FAQ, so AI assistants can attribute answers to reAlpha correctly."
+      }
+    ],
+    "jsonLd": "{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"https://darwincorp.com/work/realpha#case\",\n      \"name\": \"reAlpha - Brand Identity, Website & Content System\",\n      \"headline\": \"Making an AI agent feel like a real estate professional\",\n      \"description\": \"Darwin Corp created the brand identity, website and content system for reAlpha, a NASDAQ-listed AI-powered real estate technology company, structured for search and answer engine visibility.\",\n      \"url\": \"https://darwincorp.com/work/realpha\",\n      \"genre\": \"Case Study\",\n      \"inLanguage\": \"en\",\n      \"datePublished\": \"[YYYY-MM-DD]\",\n      \"keywords\": \"proptech branding, AI product branding, real estate website design, fintech brand identity, SEO, AEO, content strategy\",\n      \"creator\": {\n        \"@type\": \"Organization\",\n        \"@id\": \"https://darwincorp.com/#organization\",\n        \"name\": \"Darwin Corp\",\n        \"url\": \"https://darwincorp.com\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"Dubai\",\n          \"addressCountry\": \"AE\"\n        }\n      },\n      \"about\": {\n        \"@type\": \"Corporation\",\n        \"name\": \"reAlpha Tech Corp.\",\n        \"url\": \"https://www.realpha.com\",\n        \"tickerSymbol\": \"AIRE\",\n        \"industry\": \"Real Estate Technology\"\n      },\n      \"hasPart\": [\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Strategy & Positioning\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Visual Identity System\" },\n        { \"@type\": \"WebSite\", \"name\": \"reAlpha Website\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Content & SEO Architecture\" }\n      ]\n    },\n    {\n      \"@type\": \"FAQPage\",\n      \"@id\": \"https://darwincorp.com/work/realpha#faq\",\n      \"mainEntity\": [\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What did Darwin Corp do for reAlpha?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"[Fill from actual scope]\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What is reAlpha?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"reAlpha Tech Corp. (Nasdaq: AIRE) is an AI-powered real estate technology company building an end-to-end platform across brokerage, mortgage and title services, led by Claire, its generative AI buyer's agent.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you brand an AI product without leaning on tech clich\u00e9s?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By designing for comprehension instead of spectacle: interface-led art direction, plain-language copy and transaction transparency, so the technology is proven by what it does rather than announced by how it looks.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How is a proptech brand optimised for AI answer engines?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Through entity clarity and structure: explicit naming of company, product and category on every page, direct-answer opening sentences, and JSON-LD schema describing the organisation, product and FAQ so AI assistants attribute answers correctly.\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+  },
+  {
+    "type": "work",
+    "slug": "nexera-robotics",
+    "title": "Nexera Robotics",
+    "client": "Nexera Robotics",
+    "category": "Deep Tech",
+    "tab": "Branding",
+    "year": "2024",
+    "accent": "#d8fb01",
+    "cover": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/2d793ce7-57e.webp",
+    "intro": "Darwin Corp created the brand identity and logo for Nexera Robotics, a Vancouver deep-tech company solving robotic grasping, building a mark precise enough for engineers and legible enough for investors.",
+    "services": [
+      "Brand Identity",
+      "Logo Design",
+      "Brand Guidelines"
+    ],
+    "sections": [],
+    "bg": "#000000",
+    "fg": "#ffffff",
+    "featured": true,
+    "metaTitle": "Nexera Robotics Brand Identity & Logo Design Case Study",
+    "metaDescription": "Darwin Corp designed the brand identity and logo for Nexera Robotics, a Vancouver deep-tech company building AI-powered robotic grasping technology.",
+    "summaryTitle": "Summary",
+    "summaryDescription": "Nexera set out to let robots grasp almost anything, one of the genuinely unsolved problems in automation. Its NeuraGrasp platform combines soft robotics and AI to handle diverse and delicate goods reliably. That gave us a clear brief: build an identity that signals engineering credibility to system integrators and warehouse operators, while staying open enough for investors and press. The logo is drawn from the mechanics of contact and compliance, the moment a gripper meets an irregular surface, rendered as a precise geometric mark rather than an illustration of a robot. The wider system is deliberately industrial, graphite and off-white with restrained accent use, so the technology stays the loudest thing in the room. Every asset was specified to survive the contexts deep tech actually lives in: trade show stands, technical documentation, spec sheets, pitch decks and machine-mounted branding.",
+    "faqs": [
+      {
+        "q": "What did Darwin Corp do for Nexera Robotics?",
+        "a": "Darwin Corp designed the complete brand identity for Nexera Robotics, including the logo, wordmark, colour system, typography, iconography and brand guidelines. The work covered positioning language and art direction, with assets specified for technical documentation, trade shows, investor materials and product application."
+      },
+      {
+        "q": "What is Nexera Robotics?",
+        "a": "Nexera Robotics is a robotics company founded in 2021 and based in North Vancouver, Canada, specialising in advanced robotic grasping through its proprietary NeuraGrasp technology, which combines soft grasping mechanisms and artificial intelligence to handle diverse objects. The company was acquired by Locus Robotics in May 2026."
+      },
+      {
+        "q": "How do you design a logo for a deep tech or robotics company?",
+        "a": "By designing for the engineer before the marketer. Robotics buyers are technical, so the Nexera mark avoids literal robot imagery and mascot logic in favour of a precise geometric form derived from the physics of the product itself, built to reproduce cleanly at very small sizes, in single colour, in engraving and on physical hardware."
+      },
+      {
+        "q": "Why does brand identity matter for a hardware startup?",
+        "a": "Because deep tech sells credibility before it sells product. Long sales cycles, technical buyers and repeated fundraising mean the same identity has to work in a spec sheet, on a trade show floor and in a term sheet conversation, and inconsistency in any of those contexts reads as immaturity."
+      },
+      {
+        "q": "How long did the Nexera Robotics identity take?",
+        "a": "The Nexera Robotics engagement ran across three months, covering brand identity, UI/UX design and presentation design, with interface and presentation work built directly on the identity system."
+      }
+    ],
+    "jsonLd": "{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"https://darwincorp.com/work/nexera-robotics#case\",\n      \"name\": \"Nexera Robotics - Brand Identity, UI/UX & Presentation Design\",\n      \"headline\": \"An identity for the hardest unsolved problem in robotics\",\n      \"description\": \"Darwin Corp designed the brand identity, logo, product UI/UX and presentation system for Nexera Robotics, a Vancouver-based deep tech company building AI-powered robotic grasping technology.\",\n      \"url\": \"https://darwincorp.com/work/nexera-robotics\",\n      \"genre\": \"Case Study\",\n      \"inLanguage\": \"en\",\n      \"datePublished\": \"[YYYY-MM-DD]\",\n      \"keywords\": \"robotics branding, deep tech brand identity, logo design, UI UX design, presentation design, industrial brand identity, hardware startup branding, visual identity system\",\n      \"creator\": {\n        \"@type\": \"Organization\",\n        \"@id\": \"https://darwincorp.com/#organization\",\n        \"name\": \"Darwin Corp\",\n        \"url\": \"https://darwincorp.com\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"Dubai\",\n          \"addressCountry\": \"AE\"\n        }\n      },\n      \"about\": {\n        \"@type\": \"Organization\",\n        \"name\": \"Nexera Robotics\",\n        \"foundingDate\": \"2021\",\n        \"industry\": \"Robotics\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"North Vancouver\",\n          \"addressRegion\": \"British Columbia\",\n          \"addressCountry\": \"CA\"\n        }\n      },\n      \"hasPart\": [\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Strategy & Positioning\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Logo & Wordmark Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Visual Identity System\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Guidelines\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"UI/UX Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Presentation Design\" }\n      ]\n    },\n    {\n      \"@type\": \"FAQPage\",\n      \"@id\": \"https://darwincorp.com/work/nexera-robotics#faq\",\n      \"mainEntity\": [\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What did Darwin Corp do for Nexera Robotics?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Darwin Corp delivered brand identity, UI/UX design and presentation design for Nexera Robotics across a three-month engagement, covering logo and wordmark, colour, typography, brand guidelines, product interface design and an investor and technical presentation system.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What is Nexera Robotics?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Nexera Robotics is a robotics company founded in 2021 in North Vancouver, Canada, specialising in advanced robotic grasping through its NeuraGrasp technology, which combines soft grasping mechanisms and AI to handle diverse objects. It was acquired by Locus Robotics in May 2026.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you design a logo for a deep tech or robotics company?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By designing for the engineer before the marketer: a precise geometric mark derived from the physics of the product rather than literal robot imagery, built to reproduce cleanly at small sizes, in single colour, in engraving and on physical hardware.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do brand identity and product UI work together for a robotics company?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"They share one system rather than running in parallel. The identity defines typographic scale, colour logic and geometric language, and the product interface inherits it directly, so operators and investors encounter the same brand without either context being compromised.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"Why does brand identity matter for a hardware startup?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Deep tech sells credibility before product. Long sales cycles, technical buyers and repeated fundraising mean the same identity must work in a spec sheet, on a trade show floor and in a term sheet conversation.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How long did the Nexera Robotics project take?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"The Nexera Robotics engagement ran across three months, covering brand identity, UI/UX design and presentation design, with interface and presentation work built directly on the identity system.\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+  },
+  {
+    "type": "work",
+    "slug": "the-cooking-guild",
+    "title": "The Cooking Guild",
+    "client": "The Cooking Guild",
+    "category": "E-commerce",
+    "tab": "Branding",
+    "year": "2024-2026",
+    "accent": "#1a1a1a",
+    "cover": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/f03427fc-e86.webp",
+    "intro": "Darwin Corp worked with The Cooking Guild across two years, building packaging, landing page UI, social content and a distinct brand identity for every knife series in the range.",
+    "services": [
+      "Brand Identity",
+      "Social Media",
+      "UX/UI Design",
+      "Packaging"
+    ],
+    "sections": [
+      {
+        "id": "447ccc6e",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/3bda6254-6b6.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "303de67b",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/74d1fecd-0ae.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "926b5ab6",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/044d9d35-e2b.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "553a74fa",
+        "type": "grid",
+        "columns": 2,
+        "items": [
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/8caf3dbe-5af.webp",
+            "caption": ""
+          },
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/50de341a-3bf.webp",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "bg": "#ffffff",
+    "fg": "#000000",
+    "featured": true,
+    "metaTitle": "The Cooking Guild Packaging & Brand Design Case Study",
+    "metaDescription": "Darwin Corp designed packaging, landing pages and series brand identities for The Cooking Guild, a direct-to-consumer knife brand, across a two-year partnership.",
+    "summaryTitle": "Summary",
+    "summaryDescription": "The Cooking Guild does not sell one knife, it sells collections, and each drop has to feel like its own world while still reading as the same house. Torii, Bara Forge, Feather Forge, Dynasty, Nomad, Kaiju and the officially licensed Ford F-150 range each carry their own story, from Japanese forging tradition to American truck heritage. Our work was to build that architecture and keep it coherent: a distinct identity, palette and packaging system per series, held together by a shared master brand and the line the company leads with, blades with honor. Packaging was designed as the first physical moment of the brand, since a direct-to-consumer knife arrives in a box before it arrives in a hand, and the unboxing is the only tactile brand experience a customer gets. On screen, we designed landing page UI built for conversion rather than decoration, with hierarchy that gets a buyer from steel specification to add-to-cart without friction. Social ran alongside as the engine that made each drop land, translating the same series identities into short-form content across Instagram, TikTok and YouTube.",
+    "faqs": [
+      {
+        "q": "What did Darwin Corp do for The Cooking Guild?",
+        "a": "Darwin Corp delivered packaging design, landing page UI design, individual brand identities for each knife series, and social media design and content across a two-year partnership. The work covered brand architecture across seven product series, retail and unboxing packaging systems, conversion-focused e-commerce page design, and ongoing campaign assets for each product launch."
+      },
+      {
+        "q": "What is The Cooking Guild?",
+        "a": "The Cooking Guild is a direct-to-consumer kitchen knife brand selling Japanese and American steel knives across multiple series, including an officially licensed Ford F-150 collaboration, backed by a lifetime guarantee and a 99-day home trial."
+      },
+      {
+        "q": "How do you give each product series its own identity without breaking the master brand?",
+        "a": "By fixing what stays constant and defining what is allowed to change. For The Cooking Guild the master logo, typographic system and brand voice hold across everything, while each series gets its own colour story, pattern language, packaging finish and photographic treatment. A customer can tell a Torii box from a Kaiju box at a glance and still know both came from the same house."
+      },
+      {
+        "q": "Why does packaging matter so much for a direct-to-consumer brand?",
+        "a": "Because packaging is the only physical brand experience an online buyer ever has. There is no shelf, no store and no sales floor, so the box carries the entire tactile impression of quality, justifies the price at the moment of unboxing, and drives the unboxing content customers post themselves."
+      },
+      {
+        "q": "How do you design a landing page for a high-consideration product?",
+        "a": "By sequencing proof before persuasion. Knife buyers research steel, hardness, balance and warranty, so the page structure leads with the product and its specification, layers social proof and guarantee terms at the points where hesitation happens, and keeps the purchase path visible throughout rather than saving it for the bottom of the page."
+      },
+      {
+        "q": "How long did the project run?",
+        "a": "The Cooking Guild engagement ran across two years as an ongoing partnership rather than a single project, spanning multiple series launches, packaging systems, landing pages and continuous social output."
+      }
+    ],
+    "jsonLd": "{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"https://darwincorp.com/work/the-cooking-guild#case\",\n      \"name\": \"The Cooking Guild - Packaging, Series Identity & E-commerce Design\",\n      \"headline\": \"Seven series, one brand, two years of shelf and screen\",\n      \"description\": \"Darwin Corp designed packaging, landing page UI, social media content and individual series brand identities for The Cooking Guild, a direct-to-consumer kitchen knife brand, across a two-year partnership.\",\n      \"url\": \"https://darwincorp.com/work/the-cooking-guild\",\n      \"genre\": \"Case Study\",\n      \"inLanguage\": \"en\",\n      \"datePublished\": \"[YYYY-MM-DD]\",\n      \"keywords\": \"packaging design, brand architecture, sub-brand identity, e-commerce design, landing page UI, DTC branding, knife brand, social media design, Shopify design\",\n      \"creator\": {\n        \"@type\": \"Organization\",\n        \"@id\": \"https://darwincorp.com/#organization\",\n        \"name\": \"Darwin Corp\",\n        \"url\": \"https://darwincorp.com\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"Dubai\",\n          \"addressCountry\": \"AE\"\n        }\n      },\n      \"about\": {\n        \"@type\": \"Brand\",\n        \"name\": \"The Cooking Guild\",\n        \"url\": \"https://thecookingguild.com\",\n        \"slogan\": \"Blades With Honor\"\n      },\n      \"hasPart\": [\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Architecture & Series Identity\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Packaging Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Landing Page UI Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Social Media Design & Content\" }\n      ]\n    },\n    {\n      \"@type\": \"FAQPage\",\n      \"@id\": \"https://darwincorp.com/work/the-cooking-guild#faq\",\n      \"mainEntity\": [\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What did Darwin Corp do for The Cooking Guild?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Darwin Corp delivered packaging design, landing page UI design, individual brand identities for each knife series, and social media design and content across a two-year partnership, covering brand architecture for seven product series, packaging systems, conversion-focused e-commerce pages and ongoing campaign assets.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What is The Cooking Guild?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"The Cooking Guild is a direct-to-consumer kitchen knife brand selling Japanese and American steel knives across multiple series, including an officially licensed Ford F-150 collaboration, backed by a lifetime guarantee and a 99-day home trial.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you give each product series its own identity without breaking the master brand?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By fixing what stays constant and defining what can change. The master logo, typographic system and brand voice hold across everything, while each series gets its own colour story, pattern language, packaging finish and photographic treatment.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"Why does packaging matter so much for a direct-to-consumer brand?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Packaging is the only physical brand experience an online buyer has. With no shelf or store, the box carries the tactile impression of quality, justifies the price at unboxing, and drives the unboxing content customers post themselves.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you design a landing page for a high-consideration product?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By sequencing proof before persuasion: lead with product and specification, layer social proof and guarantee terms at the points where hesitation happens, and keep the purchase path visible throughout.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How long did the project run?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"The Cooking Guild engagement ran across two years as an ongoing partnership rather than a single project, spanning multiple series launches, packaging systems, landing pages and continuous social output.\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+  },
+  {
+    "type": "work",
+    "slug": "summa-forte",
+    "title": "Summa Forte",
+    "client": "Summa Forte",
+    "category": "Sports & Performance",
+    "tab": "Branding",
+    "year": "2022",
+    "accent": "#2b39e8",
+    "cover": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/b8f5c692-355.webp",
+    "intro": "Darwin Corp built the brand identity, packaging and campaign system for Summa Forte, a recovery brand for esports athletes, treating competitive gaming as the physical sport it has quietly become.",
+    "services": [
+      "Brand Identity",
+      "Packaging"
+    ],
+    "sections": [
+      {
+        "id": "c3851a08",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/043c8987-07f.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "347224eb",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/742d9340-776.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "5626958a",
+        "type": "image",
+        "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/bd2765df-87d.webp",
+        "caption": "",
+        "full": false
+      },
+      {
+        "id": "b697cc9f",
+        "type": "grid",
+        "columns": 2,
+        "items": [
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/1dafdeaf-010.webp",
+            "caption": ""
+          },
+          {
+            "src": "https://pub-1936e974a8184be6b53ec4dba5ed4f05.r2.dev/work/a360ed73-24d.webp",
+            "caption": ""
+          }
+        ]
+      }
+    ],
+    "bg": "#000000",
+    "fg": "#ffffff",
+    "featured": false,
+    "metaTitle": "Summa Forte Brand Identity & Packaging Case Study",
+    "metaDescription": "Darwin Corp created the brand identity, packaging and campaign design for Summa Forte, a CBD and kinesiology tape recovery brand built for esports athletes.",
+    "summaryTitle": "Summary",
+    "summaryDescription": "Competitive gaming produces real injuries. Wrist strain, forearm tension, neck and shoulder load, hours held in one position at high intensity. The products that treat those conditions, kinesiology tape and CBD topicals, are branded for a different customer entirely, all clinical whites and pharmacy blues aimed at someone recovering from a marathon. Summa Forte was built to close that gap. The identity centres on a mark drawn from converging arrows, four vectors meeting at a point, reading as both a directional push and a body under load. The palette is deliberately screen-native, electric blue and hot orange against black, colours that belong to an RGB keyboard and a stream overlay rather than a physiotherapy clinic. Packaging carries a fractured pattern system derived from the mark, applied across the CBD bottle and the SummaTape range so the products hold together as a family without either one softening into medical territory. The campaign line, taking you to the next level, works in both registers at once: competitive progression and physical recovery, which is the entire brand argument in five words.",
+    "faqs": [
+      {
+        "q": "What did Darwin Corp do for Summa Forte?",
+        "a": "Darwin Corp created the complete brand identity for Summa Forte, including logo, colour system, typography and pattern language, alongside packaging design for the CBD and SummaTape product lines, stationery, out-of-home and poster campaign design, and social media art direction."
+      },
+      {
+        "q": "What is Summa Forte?",
+        "a": "Summa Forte is a performance recovery brand built for esports athletes and gamers, offering CBD-based products and kinesiology tape designed for the specific physical strain of competitive gaming, including wrist, forearm, neck and shoulder load."
+      },
+      {
+        "q": "Why does esports need its own recovery brand?",
+        "a": "Because the injuries are real but the category is invisible. Professional and semi-professional gamers train for the same hours as traditional athletes and develop repetitive strain conditions accordingly, yet recovery products are branded for runners, gym users and older consumers, which leaves a competitive audience with no product that speaks to them."
+      },
+      {
+        "q": "How do you design a health product that does not look like a health product?",
+        "a": "By taking cues from the audience rather than the category. Summa Forte borrows its visual language from gaming hardware and stream culture, using saturated RGB-adjacent colour, black-dominant layouts and angular geometry, so the product signals performance rather than treatment while still holding the clarity a health product requires."
+      }
+    ],
+    "jsonLd": "{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"CreativeWork\",\n      \"@id\": \"https://darwincorp.com/work/summa-forte#case\",\n      \"name\": \"Summa Forte - Brand Identity, Packaging & Campaign Design\",\n      \"headline\": \"Recovery gear for athletes nobody calls athletes\",\n      \"description\": \"Darwin Corp created the brand identity, packaging and campaign system for Summa Forte, a CBD and kinesiology tape recovery brand built for esports athletes and competitive gamers.\",\n      \"url\": \"https://darwincorp.com/work/summa-forte\",\n      \"genre\": \"Case Study\",\n      \"inLanguage\": \"en\",\n      \"datePublished\": \"[YYYY-MM-DD]\",\n      \"keywords\": \"esports branding, sports recovery branding, CBD packaging design, brand identity, logo design, campaign design, out of home advertising, gaming brand design\",\n      \"creator\": {\n        \"@type\": \"Organization\",\n        \"@id\": \"https://darwincorp.com/#organization\",\n        \"name\": \"Darwin Corp\",\n        \"url\": \"https://darwincorp.com\",\n        \"address\": {\n          \"@type\": \"PostalAddress\",\n          \"addressLocality\": \"Dubai\",\n          \"addressCountry\": \"AE\"\n        }\n      },\n      \"about\": {\n        \"@type\": \"Brand\",\n        \"name\": \"Summa Forte\",\n        \"slogan\": \"Taking you to the next level\"\n      },\n      \"hasPart\": [\n        { \"@type\": \"CreativeWork\", \"name\": \"Brand Strategy & Positioning\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Logo & Visual Identity System\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Packaging Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Campaign & Out-of-Home Design\" },\n        { \"@type\": \"CreativeWork\", \"name\": \"Social Media Art Direction\" }\n      ]\n    },\n    {\n      \"@type\": \"FAQPage\",\n      \"@id\": \"https://darwincorp.com/work/summa-forte#faq\",\n      \"mainEntity\": [\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What did Darwin Corp do for Summa Forte?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Darwin Corp created the complete brand identity for Summa Forte, including logo, colour system, typography and pattern language, alongside packaging design for the CBD and SummaTape product lines, stationery, out-of-home and poster campaign design, and social media art direction.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"What is Summa Forte?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"Summa Forte is a performance recovery brand built for esports athletes and gamers, offering CBD-based products and kinesiology tape designed for the physical strain of competitive gaming, including wrist, forearm, neck and shoulder load.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"Why does esports need its own recovery brand?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"The injuries are real but the category is invisible. Competitive gamers train for the same hours as traditional athletes and develop repetitive strain conditions, yet recovery products are branded for runners and gym users, leaving that audience unaddressed.\"\n          }\n        },\n        {\n          \"@type\": \"Question\",\n          \"name\": \"How do you design a health product that does not look like a health product?\",\n          \"acceptedAnswer\": {\n            \"@type\": \"Answer\",\n            \"text\": \"By taking cues from the audience rather than the category. Summa Forte borrows from gaming hardware and stream culture, using saturated colour, black-dominant layouts and angular geometry, so the product signals performance rather than treatment.\"\n          }\n        }\n      ]\n    }\n  ]\n}"
+  }
+]

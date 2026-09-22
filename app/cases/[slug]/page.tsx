@@ -1,13 +1,18 @@
+import { getPublishedItems as getItems, getPublishedItem as getItem } from "@/lib/published-content";
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getItems, getItem, itemType, type CaseStudy } from '@/lib/cases'
+import { itemType, type CaseStudy } from '@/lib/cases'
 import CaseStudyView from '@/components/CaseStudyView'
 import ModalCloseButton from '@/components/ModalCloseButton'
 import styles from '@/components/CaseStudyModal.module.css'
+import StructuredData from '@/components/StructuredData'
+import { breadcrumbData } from '@/lib/seo'
+import { PROJECT_CONTEXT } from '@/lib/content/project-links'
+import { LinkCards } from '@/components/ExplorePage'
 
 export const revalidate = 600
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://thedarwin.co'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 
 const abs = (src?: string) =>
   !src ? undefined : src.startsWith('http') ? src : `${SITE_URL}${src.startsWith('/') ? '' : '/'}${src}`
@@ -53,10 +58,9 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: c.title,
+    headline: PROJECT_CONTEXT[c.slug]?.heading || c.title,
     description: c.intro || `${c.title}, a case study by Darwin Corp.`,
     image: abs(c.cover) ? [abs(c.cover)] : undefined,
-    datePublished: c.year ? `${c.year}-01-01` : undefined,
     author: { '@type': 'Organization', name: 'Darwin Corp' },
     publisher: { '@type': 'Organization', name: 'Darwin Corp', url: SITE_URL },
     url: shareUrl,
@@ -80,6 +84,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
 
   return (
     <div className={styles.pageWrap}>
+      <StructuredData data={breadcrumbData([{ label: 'Home', href: '/' }, { label: 'Work', href: '/work' }, { label: c.title, href: `/cases/${c.slug}` }])} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {faqLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
@@ -88,7 +93,10 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: c.jsonLd }} />
       )}
       <ModalCloseButton className={styles.close} fallback={back} />
-      <CaseStudyView data={c} shareUrl={shareUrl} />
+      <CaseStudyView data={c} shareUrl={shareUrl} heading={PROJECT_CONTEXT[c.slug]?.heading} />
+      {PROJECT_CONTEXT[c.slug] && <section className="subpage" data-theme="light" style={{ minHeight: 0, paddingTop: 60, paddingBottom: 80 }}>
+        <h2>Explore the related expertise.</h2><LinkCards links={PROJECT_CONTEXT[c.slug].links} />
+      </section>}
     </div>
   )
 }

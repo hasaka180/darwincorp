@@ -20,6 +20,7 @@ const LINKS: { title: string; items: Item[] }[] = [
   {
     title: "Studio",
     items: [
+      { label: "About Darwin", href: "/about" },
       { label: "Work", href: "/work" },
       { label: "Services", href: "/services" },
       { label: "Journal", href: "/journal" },
@@ -28,11 +29,15 @@ const LINKS: { title: string; items: Item[] }[] = [
     ],
   },
   {
-    title: "Connect",
+    title: "Explore",
     items: [
-      { label: "Instagram", href: "https://www.instagram.com/thedarwin_co/", ext: true },
-      { label: "Facebook", href: "https://www.facebook.com/thedarwincorp", ext: true },
-      { label: "LinkedIn", href: "https://www.linkedin.com/company/darwinco/", ext: true },
+      { label: "Industries", href: "/industries" },
+      { label: "Locations", href: "/locations" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Our process", href: "/process" },
+      { label: "Technologies", href: "/technologies" },
+      { label: "FAQs", href: "/faq" },
+      { label: "Start a project", href: "/start-a-project" },
     ],
   },
   {

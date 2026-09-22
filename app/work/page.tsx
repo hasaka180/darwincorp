@@ -1,6 +1,7 @@
+import { getPublishedItems as getItems } from "@/lib/published-content";
 import ContentGrid from "@/components/ContentGrid";
 import ContactFooter from "@/components/ContactFooter";
-import { getItems, type ContentItem } from "@/lib/cases";
+import { type ContentItem } from "@/lib/cases";
 
 export const metadata = {
   title: "Work",
