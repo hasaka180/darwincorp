@@ -1,4 +1,3 @@
-import { getPublishedItems as getItems } from "@/lib/published-content";
 import Hero from "@/components/Hero";
 import StatusWidget from "@/components/StatusWidget";
 import StudioSection from "@/components/StudioSection";
@@ -9,7 +8,7 @@ import About from "@/components/About";
 import Testimonials from "@/components/Testimonials";
 import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
-import { itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
+import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
 
 export const revalidate = 600;

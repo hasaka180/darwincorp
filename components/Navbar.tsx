@@ -55,10 +55,12 @@ const I = {
 
 type NavLink = { href: string; label: string; icon: ReactNode };
 const LINKS: NavLink[] = [
-  { href: "/about", label: "Studio", icon: I.home },
-  { href: "/services", label: "Services", icon: I.bars },
+  { href: "/", label: "Home", icon: I.home },
   { href: "/work", label: "Work", icon: I.grid },
+  { href: "/cases", label: "Cases", icon: I.layers },
   { href: "/journal", label: "Journal", icon: I.pulse },
+  { href: "/services", label: "Services", icon: I.bars },
+  { href: "/careers", label: "Careers", icon: I.briefcase },
   { href: "/contact", label: "Contact", icon: I.mail },
 ];
 

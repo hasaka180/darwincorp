@@ -8,8 +8,10 @@ import { EDITORIAL_POSTS } from "./content/journal";
 const bundled: ContentItem[] = [...portfolio as CaseStudy[], ...EDITORIAL_POSTS];
 export const getPublishedItems = cache(async (type?: ContentType): Promise<ContentItem[]> => {
   const remote = await getItems();
-  const merged = new Map(bundled.map(item => [item.slug, item]));
-  for (const item of remote) merged.set(item.slug, item);
+  const merged = new Map(remote.map(item => [item.slug, item]));
+  for (const item of bundled) {
+    if (!merged.has(item.slug)) merged.set(item.slug, item);
+  }
   return [...merged.values()].filter(item => !type || itemType(item) === type);
 });
 export const getPublishedItem = cache(async (slug: string): Promise<ContentItem | null> =>
