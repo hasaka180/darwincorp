@@ -38,6 +38,13 @@ const I = {
       <path d="M6 20V10M12 20V4M18 20v-7" strokeLinecap="round" />
     </svg>
   ),
+  briefcase: (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
+      <rect x="3" y="7.5" width="18" height="12" rx="2.2" />
+      <path d="M9 7.5V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1.5" strokeLinecap="round" />
+      <path d="M3 12.5h18" strokeLinecap="round" />
+    </svg>
+  ),
   mail: (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7">
       <rect x="3" y="5.5" width="18" height="13" rx="2.4" />
@@ -53,6 +60,7 @@ const LINKS: NavLink[] = [
   { href: "/cases", label: "Cases", icon: I.layers },
   { href: "/journal", label: "Journal", icon: I.pulse },
   { href: "/services", label: "Services", icon: I.bars },
+  { href: "/careers", label: "Careers", icon: I.briefcase },
   { href: "/contact", label: "Contact", icon: I.mail },
 ];
 

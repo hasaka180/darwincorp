@@ -3489,17 +3489,35 @@ a {
 /* Below this the centred nav leaves too little gutter for the widget. */
 @media (max-width: 400px) {
   .nav {
-    gap: 4px;
+    gap: 3px;
     padding: 6px 8px;
   }
 
   .nav__icon {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
   }
 
   .fab {
     bottom: 22px;
+  }
+}
+
+/* Smallest phones: seven icons only clear the widget at this size. */
+@media (max-width: 340px) {
+  .nav {
+    gap: 2px;
+    padding: 5px 6px;
+  }
+
+  .nav__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav__icon svg {
+    width: 16px;
+    height: 16px;
   }
 }
 
@@ -5779,4 +5797,31 @@ a.contactp__detail:hover {
   }
 
 
+}
+
+/* ===================== CAREERS ============================== */
+.careers__intro {
+  margin: 22px 0 clamp(34px, 5vw, 60px);
+  max-width: 62ch;
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.3vw, 1.12rem);
+  line-height: 1.7;
+  color: rgba(11, 11, 13, 0.68);
+}
+
+.careers__open {
+  margin: clamp(34px, 5vw, 60px) 0 0;
+  max-width: 62ch;
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: rgba(11, 11, 13, 0.6);
+}
+.careers__open a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.careers__open a:hover {
+  color: var(--ink);
 }

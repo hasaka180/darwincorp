@@ -23,6 +23,7 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "Work", href: "/work" },
       { label: "Services", href: "/services" },
       { label: "Journal", href: "/journal" },
+      { label: "Careers", href: "/careers" },
       { label: "Contact", href: "/contact" },
     ],
   },

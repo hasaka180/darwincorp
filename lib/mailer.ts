@@ -22,6 +22,12 @@ export type SendResult =
   | { ok: true; delivered: boolean }
   | { ok: false; status: number; error: string }
 
+export type Attachment = {
+  filename: string
+  /** Base64-encoded file contents. */
+  content: string
+}
+
 export async function sendMail(opts: {
   subject: string
   html: string
@@ -29,6 +35,7 @@ export async function sendMail(opts: {
   replyTo?: string
   /** Prefixes the server-side log line when delivery is skipped or fails. */
   tag: string
+  attachments?: Attachment[]
 }): Promise<SendResult> {
   const key = process.env.RESEND_API_KEY
   if (!key) {
@@ -55,6 +62,7 @@ export async function sendMail(opts: {
       subject: opts.subject,
       html: opts.html,
       text: opts.text,
+      ...(opts.attachments?.length ? { attachments: opts.attachments } : {}),
     }),
   })
 
