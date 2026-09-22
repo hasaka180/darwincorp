@@ -43,13 +43,46 @@ export const RESOURCE_PAGES: LandingPage[] = [
     faqs: COMMON_FAQS, related: [{ label: "Our process", href: "/process" }, { label: "Pricing", href: "/pricing" }, { label: "Start a project", href: "/start-a-project" }],
   },
   {
-    slug: "about", title: "About Darwin Corp", heading: "A studio for brands ready to evolve.", eyebrow: "Darwin Corp · The studio",
-    description: "Darwin Corp is a creative studio based in Dubai, working worldwide across brand identity, custom websites, motion and digital creative production.",
-    image: "/assets/hasaka.webp", imageAlt: "Darwin founder Hasaka",
-    intro: "We bring design and technology into the same conversation. The work connects how a business looks, what it says and how people experience it online.",
-    sections: [{ title: "Brand thinking", body: "We shape the visual and verbal foundations that help a business express a clear point of view. Identity decisions are considered in the context of everyday use." }, { title: "Digital craft", body: "We design and develop websites with attention to structure, typography, interaction and the details that make a digital experience feel considered." }, { title: "Creative production", body: "Motion, campaign imagery and emerging creative tools extend the brand into new formats. The idea and art direction stay central to the production process." }],
-    scope: { title: "Based in Dubai. Working worldwide.", body: "We collaborate with businesses and teams through clear briefs, shared reviews and an agreed delivery process. Tell us what you are building and where you want it to go.", items: ["Brand identity and visual systems", "Website design and development", "UI/UX and interactive experiences", "Motion and AI creative production"] },
-    faqs: [COMMON_FAQS[1], COMMON_FAQS[4]], related: [{ label: "Selected work", href: "/work" }, { label: "Our process", href: "/process" }, { label: "Journal", href: "/journal" }], projects: ["nadz-home-healthcare", "nexera-robotics"],
+    slug: "about", title: "About Darwin Corp", heading: "Where technology meets creative instinct.", eyebrow: "Hasaka · Founder & Creative Director",
+    description: "Founded by Hasaka, Darwin Corp connects more than eight years of brand identity experience with technology, digital experiences and original products.",
+    image: "/assets/hasaka.webp", imageAlt: "Hasaka, Founder and Creative Director of Darwin Corp",
+    intro: "Darwin began with Hasaka’s belief that technology and creativity belong in the same room. A brand should be more than a logo, and a digital product should be more than functional. The strongest ideas connect clear thinking, a memorable visual language and an experience people want to use.",
+    sections: [
+      {
+        title: "The founder",
+        body: "Hasaka is the Founder and Creative Director of Darwin Corp. Across more than eight years as a brand identity designer, he has developed identities and creative visual systems that help businesses express who they are with clarity, character and consistency.",
+        items: ["Brand identity design", "Creative direction", "Visual systems", "Digital product thinking"],
+      },
+      {
+        title: "Our mission",
+        body: "To connect technology with creativity and turn ambitious ideas into brands, websites and products that feel clear, useful and distinct. Darwin brings strategy, design and development together so every part of an experience speaks the same language.",
+      },
+      {
+        title: "Our vision",
+        body: "To build a growing family of original products and creative platforms that move culture forward. Inspired by Steve Jobs’s belief in the meeting point between technology and the humanities, Hasaka sees design as the force that can make powerful technology understandable, human and worth caring about.",
+      },
+    ],
+    scope: {
+      title: "One studio. A growing creative ecosystem.",
+      body: "Darwin Corp is both a creative partner and a home for ideas of its own. Alongside client work, Hasaka is building independent projects across publishing, cinema and digital culture, with more products envisioned for the future.",
+      items: [
+        "Darwin Corp — brand identity, digital experiences and creative technology",
+        "Glitch Decoded — unpopular opinions, untold stories and editor-chosen long reads",
+        "Born Cinema — a developing platform for cinema, visual storytelling and film culture",
+        "Future products designed where creativity, culture and technology meet",
+      ],
+    },
+    faqs: [
+      { q: "Who founded Darwin Corp?", a: "Darwin Corp was founded by Hasaka, its Creative Director and a brand identity designer with more than eight years of experience creating identities, visual systems and digital brand experiences." },
+      { q: "What is Darwin Corp’s mission?", a: "Darwin’s mission is to connect technology with creativity, bringing strategy, design and development together to create brands and products that are clear, useful and memorable." },
+      COMMON_FAQS[1],
+    ],
+    related: [
+      { label: "Glitch Decoded", href: "https://glitchdecoded.com", description: "An independent magazine for unpopular opinions, untold stories and editor-chosen long reads." },
+      { label: "Born Cinema", href: "https://borncinema.com", description: "A developing creative platform for cinema, visual storytelling and film culture." },
+      { label: "Selected work", href: "/work", description: "Explore identities and digital experiences created through Darwin Corp." },
+    ],
+    projects: ["nadz-home-healthcare", "nexera-robotics"],
   },
 ];
 

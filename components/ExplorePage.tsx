@@ -7,10 +7,13 @@ import portfolio from "@/lib/content/portfolio.json";
 import styles from "./ExplorePage.module.css";
 
 export function LinkCards({ links }: { links: ContentLink[] }) {
-  return <div className={styles.links}>{links.map((link, i) => <Link className={styles.linkCard} key={link.href} href={link.href}>
-    <span className={styles.number}>{String(i + 1).padStart(2, "0")} <span aria-hidden="true">↗</span></span>
-    <h3>{link.label}</h3>{link.description && <p>{link.description}</p>}
-  </Link>)}</div>;
+  return <div className={styles.links}>{links.map((link, i) => {
+    const external = link.href.startsWith("http");
+    return <Link className={styles.linkCard} key={link.href} href={link.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+      <span className={styles.number}>{String(i + 1).padStart(2, "0")} <span aria-hidden="true">↗</span></span>
+      <h3>{link.label}</h3>{link.description && <p>{link.description}</p>}
+    </Link>;
+  })}</div>;
 }
 
 export function PageBreadcrumbs({ items }: { items: ContentLink[] }) {
