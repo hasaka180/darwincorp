@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import styles from './CaseStudyModal.module.css'
+import CaseVideo from './CaseVideo'
 import ShareButtons from './ShareButtons'
 import Faq from './Faq'
 import type { CaseStudy, Section } from '@/lib/cases'
@@ -27,7 +28,7 @@ function SectionBlock({ section }: { section: Section }) {
     case 'video':
       return (
         <figure className={`${styles.media} ${section.full ? styles.full : ''}`}>
-          <video src={section.src} poster={section.poster} autoPlay muted loop playsInline />
+          <CaseVideo src={section.src} poster={section.poster} />
         </figure>
       )
     case 'columns':
@@ -47,7 +48,7 @@ function SectionBlock({ section }: { section: Section }) {
           {section.items.map((it, i) => (
             <figure key={i} className={styles.gridItem}>
               {VIDEO_RE.test(it.src) ? (
-                <video src={it.src} autoPlay muted loop playsInline preload="metadata" />
+                <CaseVideo src={it.src} preload="metadata" />
               ) : (
                 /* eslint-disable-next-line @next/next/no-img-element */
                 <img src={it.src} alt={it.caption ?? ''} loading="lazy" decoding="async" />
