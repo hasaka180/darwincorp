@@ -17,6 +17,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 const abs = (src?: string) =>
   !src ? undefined : src.startsWith('http') ? src : `${SITE_URL}${src.startsWith('/') ? '' : '/'}${src}`
 
+/**
+ * Article schema requires a publication date. The CMS only stores a `year`,
+ * which may be a single year or a range like "2024-2026", so take the latest
+ * four-digit year it contains.
+ */
+const datePublished = (year?: string) => {
+  const years = year?.match(/\d{4}/g)
+  return years?.length ? `${years[years.length - 1]}-01-01` : undefined
+}
+
 export async function generateStaticParams() {
   const items = await getItems()
   return items.filter((i) => itemType(i) !== 'journal').map((i) => ({ slug: i.slug }))
@@ -61,6 +71,7 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     headline: PROJECT_CONTEXT[c.slug]?.heading || c.title,
     description: c.intro || `${c.title}, a case study by Darwin Corp.`,
     image: abs(c.cover) ? [abs(c.cover)] : undefined,
+    datePublished: datePublished(c.year),
     author: { '@type': 'Organization', name: 'Darwin Corp' },
     publisher: { '@type': 'Organization', name: 'Darwin Corp', url: SITE_URL },
     url: shareUrl,

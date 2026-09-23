@@ -22,6 +22,16 @@ export type Role = {
   responsibilities: string[]
   requirements: string[]
   niceToHave?: string[]
+  /** Publication date (ISO 8601). Google requires this on every JobPosting. */
+  posted: string
+  /** Listing expiry (ISO 8601). Google drops postings that never expire. */
+  validThrough: string
+  /**
+   * Countries a remote applicant may be based in (ISO 3166-1 alpha-2).
+   * Google requires this whenever a role is open to remote work; it is
+   * ignored for onsite-only roles.
+   */
+  applicantCountries?: string[]
 }
 
 export const ROLES: Role[] = [
@@ -53,6 +63,8 @@ export const ROLES: Role[] = [
       'Agency or studio background.',
       'Experience with UAE-based clients.',
     ],
+    posted: '2026-09-22',
+    validThrough: '2027-03-31',
   },
   {
     slug: 'motion-designer',
@@ -81,6 +93,9 @@ export const ROLES: Role[] = [
       'Cinema 4D, Blender or another 3D package.',
       'AI-assisted production tooling in your workflow.',
     ],
+    posted: '2026-09-22',
+    validThrough: '2027-03-31',
+    applicantCountries: ['AE'],
   },
   {
     slug: 'junior-graphic-designer',
@@ -109,6 +124,8 @@ export const ROLES: Role[] = [
       'Internship or freelance experience.',
       'Basic motion or 3D skills.',
     ],
+    posted: '2026-09-22',
+    validThrough: '2027-03-31',
   },
   {
     slug: 'vibe-coder',
@@ -140,6 +157,9 @@ export const ROLES: Role[] = [
       'Backend and database experience.',
       'An eye for design, not just implementation.',
     ],
+    posted: '2026-09-22',
+    validThrough: '2027-03-31',
+    applicantCountries: ['AE'],
   },
 ]
 
