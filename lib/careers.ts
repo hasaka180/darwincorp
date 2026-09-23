@@ -32,11 +32,14 @@ export type Role = {
    * ignored for onsite-only roles.
    */
   applicantCountries?: string[]
+  /** Gross monthly base salary in AED, published in the JobPosting schema. */
+  salaryAedPerMonth: number
 }
 
 export const ROLES: Role[] = [
   {
     slug: 'project-manager',
+    salaryAedPerMonth: 5000,
     title: 'Project Manager',
     team: 'Operations',
     types: ['Full-time', 'Freelance'],
@@ -68,6 +71,7 @@ export const ROLES: Role[] = [
   },
   {
     slug: 'motion-designer',
+    salaryAedPerMonth: 8000,
     title: 'Motion Designer',
     team: 'Design',
     types: ['Full-time', 'Freelance', 'Project-based'],
@@ -99,6 +103,7 @@ export const ROLES: Role[] = [
   },
   {
     slug: 'junior-graphic-designer',
+    salaryAedPerMonth: 3000,
     title: 'Junior Graphic Designer',
     team: 'Design',
     types: ['Full-time'],
@@ -129,6 +134,7 @@ export const ROLES: Role[] = [
   },
   {
     slug: 'vibe-coder',
+    salaryAedPerMonth: 8000,
     title: 'Vibe Coder',
     team: 'Technology',
     types: ['Full-time', 'Freelance', 'Project-based'],

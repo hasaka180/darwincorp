@@ -1,6 +1,7 @@
 import ContactFooter from "@/components/ContactFooter";
 import CareersBoard from "@/components/CareersBoard";
 import { ROLES } from "@/lib/careers";
+import { STUDIO_ADDRESS } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
@@ -41,10 +42,15 @@ export default function CareersPage() {
       },
       jobLocation: {
         "@type": "Place",
-        address: {
-          "@type": "PostalAddress",
-          addressLocality: "Dubai",
-          addressCountry: "AE",
+        address: STUDIO_ADDRESS,
+      },
+      baseSalary: {
+        "@type": "MonetaryAmount",
+        currency: "AED",
+        value: {
+          "@type": "QuantitativeValue",
+          value: role.salaryAedPerMonth,
+          unitText: "MONTH",
         },
       },
       // Google rejects TELECOMMUTE unless it is paired with the countries an

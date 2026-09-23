@@ -14,9 +14,19 @@ export function breadcrumbData(items: { label: string; href: string }[]) {
     "@type": "ListItem", position: index + 1, name: item.label, item: absoluteUrl(item.href),
   })) };
 }
+/** The studio address, shared by the Organization and JobPosting schemas. */
+export const STUDIO_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: "6th Floor, Al Meydan Road, Nad Al Sheba 1, Nad Al Sheba",
+  addressLocality: "Dubai",
+  addressRegion: "Dubai",
+  postalCode: "00000",
+  addressCountry: "AE",
+} as const;
+
 export const organizationData = {
   "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#organization`,
   name: "Darwin Corp", url: SITE_URL, logo: absoluteUrl("/darwin_black.svg"),
   email: "hello@thedarwin.co", telephone: "+971555355897",
-  address: { "@type": "PostalAddress", streetAddress: "6th Floor, Al Meydan Road, Nad Al Sheba 1, Nad Al Sheba", addressLocality: "Dubai", addressRegion: "Dubai", addressCountry: "AE" },
+  address: STUDIO_ADDRESS,
 };
