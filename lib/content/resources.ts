@@ -2,7 +2,7 @@ import type { LandingPage } from "./types";
 
 export const COMMON_FAQS = [
   { q: "What does Darwin do?", a: "Darwin Corp creates brand identities, custom websites and digital creative work. A project can focus on one service or combine strategy, design, development and creative production." },
-  { q: "Where are you based?", a: "Our studio is based in Dubai, UAE. We work with clients internationally through remote discovery, shared design reviews and a documented delivery process." },
+  { q: "Where are you based?", a: "Our studio is at 6th Floor, Al Meydan Road, Nad Al Sheba 1, Nad Al Sheba, Dubai, UAE. We work with clients internationally through remote discovery, shared design reviews and a documented delivery process." },
   { q: "How do you price a project?", a: "We quote against the agreed deliverables and complexity. Your proposal identifies the scope, review stages, payment milestones and third-party costs. Send a brief for a custom quotation." },
   { q: "How long will the project take?", a: "The schedule depends on scope, content readiness, integrations and feedback availability. We confirm a timeline after reviewing the brief and identifying dependencies." },
   { q: "What should we prepare before getting in touch?", a: "Share a short description of your business, the problem you want to solve, the deliverables you have in mind, an intended launch date and any budget range. An existing website and visual references are useful too." },

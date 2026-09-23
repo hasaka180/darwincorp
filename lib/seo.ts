@@ -18,5 +18,5 @@ export const organizationData = {
   "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#organization`,
   name: "Darwin Corp", url: SITE_URL, logo: absoluteUrl("/darwin_black.svg"),
   email: "hello@thedarwin.co", telephone: "+971555355897",
-  address: { "@type": "PostalAddress", addressLocality: "Dubai", addressCountry: "AE" },
+  address: { "@type": "PostalAddress", streetAddress: "6th Floor, Al Meydan Road, Nad Al Sheba 1, Nad Al Sheba", addressLocality: "Dubai", addressRegion: "Dubai", addressCountry: "AE" },
 };
