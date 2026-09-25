@@ -61,6 +61,27 @@ const ORG_LD = {
   },
 };
 
+/**
+ * Names the square Darwin card as the page's main image. Without it Google
+ * picks its own search thumbnail from the <img> tags and landed on a client
+ * logo from the logo wall; the wide og:image loses its title to the square
+ * crop.
+ */
+const PAGE_LD = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: "Darwin Corp - Motion Driven Creative Agency in Dubai",
+  about: { "@id": `${SITE_URL}/#organization` },
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}/assets/darwin_thumb.webp`,
+    width: 431,
+    height: 431,
+  },
+};
+
 export default async function Home() {
   const all = await getItems();
   // Only our own projects. Filtering on "sections" alone also caught type
@@ -92,6 +113,10 @@ export default async function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(ORG_LD) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(PAGE_LD) }}
       />
       <Hero />
       <StudioSection />
