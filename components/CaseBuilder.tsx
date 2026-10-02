@@ -1,8 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import MarkdownBody, { embedUrl } from './MarkdownBody'
 import styles from './CaseBuilder.module.css'
 import type { CaseStudy, JournalPost, Section, ContentItem, ContentType } from '@/lib/cases'
 
@@ -63,7 +62,7 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
 
   function insertAtCursor(text: string) {
     const ta = taRef.current
-    if (!ta) return
+    if (!ta) { onChange(value + text); setPreview(false); return }  // in preview: append
     const start = ta.selectionStart
     const next = value.slice(0, start) + text + value.slice(ta.selectionEnd)
     onChange(next)
@@ -155,6 +154,41 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
             }}
           />
         </label>
+        {/* Video upload: large files go straight to R2 */}
+        <label
+          className={styles.mdBtn}
+          title="Upload video"
+          style={{ cursor: imgBusy ? 'wait' : 'pointer' }}
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          {imgBusy ? '…' : '🎬'}
+          <input
+            type="file"
+            accept="video/mp4,video/webm,video/quicktime"
+            hidden
+            onChange={async (e) => {
+              const f = e.target.files?.[0]; if (!f) return
+              const url = await upload(f)
+              if (url) insertAtCursor(`\n![video](${url})\n`)
+              e.target.value = ''
+            }}
+          />
+        </label>
+        {/* YouTube / Vimeo embed */}
+        <button
+          type="button"
+          title="Embed YouTube or Vimeo video"
+          className={styles.mdBtn}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            const link = window.prompt('Paste a YouTube or Vimeo link')?.trim()
+            if (!link) return
+            if (!embedUrl(link)) { alert('That link is not a YouTube or Vimeo video.'); return }
+            insertAtCursor(`\n![video](${link})\n`)
+          }}
+        >
+          ▶
+        </button>
         {/* Preview toggle */}
         <button
           type="button"
@@ -169,7 +203,7 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
       {preview ? (
         <div className={styles.mdPreview}>
           {value.trim()
-            ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{value}</ReactMarkdown>
+            ? <MarkdownBody>{value}</MarkdownBody>
             : <span style={{ color: '#bbb', fontSize: 13 }}>Nothing to preview yet.</span>
           }
         </div>

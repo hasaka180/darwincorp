@@ -1,9 +1,8 @@
 'use client'
 
 import type { CSSProperties } from 'react'
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import type { JournalPost } from '@/lib/cases'
+import MarkdownBody from './MarkdownBody'
 import ShareButtons from './ShareButtons'
 import Faq from './Faq'
 import styles from './CaseStudyModal.module.css'
@@ -97,7 +96,7 @@ export default function JournalView({
 
         {data.body && (
           <div className={`${styles.text} ${styles.prose}`}>
-            <ReactMarkdown remarkPlugins={[remarkGfm]}>{data.body}</ReactMarkdown>
+            <MarkdownBody>{data.body}</MarkdownBody>
           </div>
         )}
 

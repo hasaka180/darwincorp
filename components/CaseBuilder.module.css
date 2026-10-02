@@ -264,6 +264,9 @@
 .mdPreview pre code { background: none; padding: 0; }
 .mdPreview hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px 0; }
 .mdPreview img { max-width: 100%; border-radius: 8px; margin: 8px 0; display: block; }
+.mdPreview :global(.md-video) { width: 100%; border-radius: 8px; margin: 8px 0; display: block; background: #000; }
+.mdPreview :global(.md-embed) { display: block; position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; margin: 8px 0; background: #000; }
+.mdPreview :global(.md-embed iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
 .mdArea {
   width: 100%;
