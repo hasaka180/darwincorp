@@ -197,6 +197,22 @@
   color: currentColor;
   opacity: 0.78;
 }
+/* Text-section bodies are Markdown, so space out the blocks it produces. */
+.body > :global(* + *) {
+  margin-top: 0.9em;
+}
+.body :global(ul),
+.body :global(ol) {
+  padding-left: 22px;
+}
+.body :global(a) {
+  color: currentColor;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.body :global(strong) {
+  font-weight: 600;
+}
 
 /* FAQ accordion inherits the case's text colour (its defaults are dark and
    become unreadable on dark case backgrounds). */
@@ -488,13 +504,16 @@
   padding: 0;
   background: none;
 }
-.prose :global(table) {
+.prose :global(table),
+.body :global(table) {
   width: 100%;
   border-collapse: collapse;
   font-size: 15px;
 }
 .prose :global(th),
-.prose :global(td) {
+.prose :global(td),
+.body :global(th),
+.body :global(td) {
   padding: 10px 12px;
   text-align: left;
   border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);

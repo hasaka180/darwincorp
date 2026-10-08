@@ -4,6 +4,7 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { createPortal } from 'react-dom'
 import styles from './CaseStudyModal.module.css'
 import CaseVideo from './CaseVideo'
+import MarkdownBody from './MarkdownBody'
 import type { CaseStudy, Section } from '@/lib/cases'
 
 const VIDEO_RE = /\.(mp4|webm|mov|m4v)(\?|#|$)/i
@@ -15,7 +16,7 @@ function SectionBlock({ section }: { section: Section }) {
         <div className={`${styles.text} ${section.align === 'center' ? styles.center : ''} ${section.note ? styles.noteBlock : ''}`}>
           {section.eyebrow && <div className={styles.eyebrow}>{section.eyebrow}</div>}
           {section.heading && <h3 className={styles.heading}>{section.heading}</h3>}
-          {section.body && <p className={styles.body}>{section.body}</p>}
+          {section.body && <div className={styles.body}><MarkdownBody>{section.body}</MarkdownBody></div>}
         </div>
       )
     case 'image':

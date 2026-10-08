@@ -684,7 +684,10 @@ function SectionEditor({ section, patch, folder }: { section: Section; patch: (p
       <div className={styles.fields}>
         <label>Eyebrow<input value={section.eyebrow ?? ''} onChange={(e) => patch({ eyebrow: e.target.value })} /></label>
         <label>Heading<input value={section.heading ?? ''} onChange={(e) => patch({ heading: e.target.value })} /></label>
-        <label>Body<textarea rows={3} value={section.body ?? ''} onChange={(e) => patch({ body: e.target.value })} /></label>
+        <div>
+          <span className={styles.fieldLbl}>Body</span>
+          <MarkdownEditor value={section.body ?? ''} onChange={(v) => patch({ body: v })} folder={folder} />
+        </div>
         <label className={styles.inline}><input type="checkbox" checked={section.align === 'center'} onChange={(e) => patch({ align: e.target.checked ? 'center' : 'left' })} /> Center</label>
         <label className={styles.inline}><input type="checkbox" checked={!!section.note} onChange={(e) => patch({ note: e.target.checked })} /> Small note / footer style</label>
       </div>
