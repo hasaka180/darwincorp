@@ -31,12 +31,28 @@ function htmlToMd(html: string): string {
       case 'code': return el.closest('pre') ? inner : `\`${inner}\``
       case 'pre': return `\`\`\`\n${inner.trim()}\n\`\`\`\n\n`
       case 'hr': return `---\n\n`
+      case 'table': {
+        // First row becomes the header, since Markdown tables require one.
+        const rows = Array.from(el.querySelectorAll('tr')).filter(tr => tr.closest('table') === el)
+          .map(tr => Array.from(tr.children).filter(c => /^t[hd]$/i.test(c.tagName))
+            .map(c => walk(c).replace(/\s*\n+\s*/g, ' ').trim().replace(/\|/g, '\\|')))
+          .filter(r => r.length)
+        if (!rows.length) return inner
+        const cols = Math.max(...rows.map(r => r.length))
+        const row = (r: string[]) => `| ${Array.from({ length: cols }, (_, i) => r[i] ?? '').join(' | ')} |\n`
+        return `\n\n${row(rows[0])}|${' --- |'.repeat(cols)}\n${rows.slice(1).map(row).join('')}\n`
+      }
       case 'div': case 'section': case 'article': return inner.endsWith('\n') ? inner : inner + '\n'
       default: return inner
     }
   }
   return walk(doc.body).replace(/\n{3,}/g, '\n\n').trim()
 }
+
+// Copies from Claude, ChatGPT or a Markdown editor already carry Markdown as
+// plain text (tables, headings, bold, links, code fences); converting their
+// HTML instead only loses detail.
+const MD_SOURCE = /^\s*(?:#{1,6}\s|```|\|?\s*:?-{3,}:?\s*\|)|\*\*[^*\n]+\*\*|\[[^\]\n]+\]\([^)\s]+\)/m
 
 /* ── Markdown toolbar editor ── */
 type MdCmd = { label: string; title: string; wrap?: [string, string]; line?: string; placeholder?: string }
@@ -106,7 +122,7 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
 
   function handlePaste(e: React.ClipboardEvent<HTMLTextAreaElement>) {
     const html = e.clipboardData.getData('text/html')
-    if (!html) return
+    if (!html || MD_SOURCE.test(e.clipboardData.getData('text/plain'))) return
     const md = htmlToMd(html)
     if (!md) return
     e.preventDefault()

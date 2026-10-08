@@ -263,6 +263,9 @@
 .mdPreview pre { background: rgba(0,0,0,0.07); border-radius: 8px; padding: 12px; overflow-x: auto; margin-bottom: 14px; }
 .mdPreview pre code { background: none; padding: 0; }
 .mdPreview hr { border: none; border-top: 1px solid rgba(0,0,0,0.1); margin: 20px 0; }
+.mdPreview table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+.mdPreview th, .mdPreview td { padding: 8px 10px; text-align: left; border-bottom: 1px solid rgba(0,0,0,0.1); }
+.mdPreview th { font-weight: 700; }
 .mdPreview img { max-width: 100%; border-radius: 8px; margin: 8px 0; display: block; }
 .mdPreview :global(.md-video) { width: 100%; border-radius: 8px; margin: 8px 0; display: block; background: #000; }
 .mdPreview :global(.md-embed) { display: block; position: relative; aspect-ratio: 16 / 9; border-radius: 8px; overflow: hidden; margin: 8px 0; background: #000; }
