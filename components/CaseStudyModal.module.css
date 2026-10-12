@@ -518,3 +518,22 @@
   text-align: left;
   border-bottom: 1px solid color-mix(in srgb, currentColor 14%, transparent);
 }
+
+/* A YouTube/Vimeo video section. The file player fills its parent, but an
+   iframe has no intrinsic size, so the 16:9 box has to be declared. */
+.embedWrap {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+}
+.embedWrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

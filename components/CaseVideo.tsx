@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { embedUrl } from '@/lib/embed'
 import styles from './CaseStudyModal.module.css'
 
 /* Every case video on the page, so unmuting one can silence the rest. */
@@ -25,8 +26,41 @@ const SpeakerOff = () => (
 /**
  * Case-study video: autoplays silently like a showreel (browsers block
  * autoplay with sound), with a toggle so the viewer can hear the audio.
+ *
+ * A YouTube or Vimeo link gets the platform's own player instead. <video>
+ * can only play a video *file*, so feeding it a watch URL rendered an empty
+ * box — the section looked like a gap in the article.
  */
 export default function CaseVideo({
+  src,
+  poster,
+  preload,
+}: {
+  src: string
+  poster?: string
+  preload?: 'none' | 'metadata' | 'auto'
+}) {
+  const embed = embedUrl(src)
+  if (embed) return <EmbeddedVideo src={embed} />
+  return <FileVideo src={src} poster={poster} preload={preload} />
+}
+
+/** Third-party player. No autoplay or sound toggle — the platform owns those. */
+function EmbeddedVideo({ src }: { src: string }) {
+  return (
+    <span className={styles.embedWrap}>
+      <iframe
+        src={src}
+        title="Embedded video"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </span>
+  )
+}
+
+function FileVideo({
   src,
   poster,
   preload,

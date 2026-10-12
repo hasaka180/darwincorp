@@ -356,3 +356,7 @@
   .side { position: static; height: auto; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.1); }
   .grid2 { grid-template-columns: 1fr; }
 }
+
+.hintOk, .hintWarn { margin: -4px 0 0; font-size: 12px; line-height: 1.4; }
+.hintOk { color: #2f7d4f; }
+.hintWarn { color: #b4432b; }

@@ -1,8 +1,9 @@
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
-import MarkdownBody, { embedUrl } from './MarkdownBody'
+import MarkdownBody from './MarkdownBody'
 import styles from './CaseBuilder.module.css'
+import { VIDEO_FILE, embedUrl } from '@/lib/embed'
 import type { CaseStudy, JournalPost, Section, ContentItem, ContentType } from '@/lib/cases'
 
 /* ── HTML clipboard → Markdown converter (for rich paste) ── */
@@ -697,6 +698,7 @@ function SectionEditor({ section, patch, folder }: { section: Section; patch: (p
     return (
       <div className={styles.fields}>
         <ImageField label="Source" value={section.src} onChange={(v) => patch({ src: v })} folder={folder} accept={section.type === 'video' ? 'video/*' : 'image/*'} />
+        {section.type === 'video' && <VideoSrcHint src={section.src} />}
         {section.type === 'image'
           ? <label>Caption<input value={section.caption ?? ''} onChange={(e) => patch({ caption: e.target.value })} /></label>
           : <ImageField label="Poster" value={section.poster ?? ''} onChange={(v) => patch({ poster: v })} folder={folder} />}
@@ -787,6 +789,24 @@ function useUpload(folder: string) {
     }
   }
   return { busy, upload }
+}
+
+/**
+ * Says up front whether a video source will actually play. A watch URL that
+ * can't be parsed — a mistyped host, say — used to publish as a silent gap in
+ * the article, with nothing to show the author anything was wrong.
+ */
+function VideoSrcHint({ src }: { src: string }) {
+  const v = src.trim()
+  if (!v) return null
+  if (embedUrl(v)) return <p className={styles.hintOk}>YouTube / Vimeo embed ✓</p>
+  if (VIDEO_FILE.test(v)) return <p className={styles.hintOk}>Video file ✓</p>
+  return (
+    <p className={styles.hintWarn}>
+      Not a playable source — this will render as an empty gap. Use a direct
+      video file (.mp4, .webm, .mov) or a full YouTube / Vimeo link.
+    </p>
+  )
 }
 
 function ImageField({ label, value, onChange, folder, accept = 'image/*' }: { label: string; value: string; onChange: (v: string) => void; folder: string; accept?: string }) {
