@@ -6,6 +6,7 @@ import FloatingActions from "@/components/FloatingActions";
 import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import CookieConsent from "@/components/CookieConsent";
+import AdSense from "@/components/AdSense";
 import PromoPopup from "@/components/PromoPopup";
 import StructuredData from "@/components/StructuredData";
 import { organizationData } from "@/lib/seo";
@@ -62,6 +63,8 @@ export const metadata: Metadata = {
     title: "Darwin Corp - Motion Driven Creative Agency in Dubai",
     description: DESCRIPTION,
   },
+  // Verifies the site for AdSense without loading the ad script (see AdSense.tsx).
+  other: { "google-adsense-account": "ca-pub-5661938637436853" },
 };
 
 export default function RootLayout({
@@ -82,6 +85,7 @@ export default function RootLayout({
         {children}
         <FloatingActions />
         <CookieConsent />
+        <AdSense />
         <PromoPopup />
       </body>
     </html>
