@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import MarkdownBody from './MarkdownBody'
 import styles from './CaseBuilder.module.css'
-import { VIDEO_FILE, embedUrl } from '@/lib/embed'
+import { VIDEO_FILE, embedUrl, instagramEmbed } from '@/lib/embed'
 import type { CaseStudy, JournalPost, Section, ContentItem, ContentType } from '@/lib/cases'
 
 /* ── HTML clipboard → Markdown converter (for rich paste) ── */
@@ -191,16 +191,17 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
             }}
           />
         </label>
-        {/* YouTube / Vimeo embed */}
+        {/* YouTube / Vimeo / Instagram embed */}
         <button
           type="button"
-          title="Embed YouTube or Vimeo video"
+          title="Embed a YouTube or Vimeo video, or an Instagram post"
           className={styles.mdBtn}
           onMouseDown={(e) => {
             e.preventDefault()
-            const link = window.prompt('Paste a YouTube or Vimeo link')?.trim()
+            const link = window.prompt('Paste a YouTube, Vimeo or Instagram link')?.trim()
             if (!link) return
-            if (!embedUrl(link)) { alert('That link is not a YouTube or Vimeo video.'); return }
+            if (instagramEmbed(link)) { insertAtCursor(`\n![Instagram post](${link})\n`); return }
+            if (!embedUrl(link)) { alert('That link is not a YouTube or Vimeo video or an Instagram post.'); return }
             insertAtCursor(`\n![video](${link})\n`)
           }}
         >

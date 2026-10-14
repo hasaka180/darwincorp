@@ -26,5 +26,21 @@ function yt(id: string | null): string | null {
   return id && /^[\w-]{6,}$/.test(id) ? `https://www.youtube-nocookie.com/embed/${id}` : null
 }
 
+/**
+ * Turns an Instagram post, reel or IGTV link into its embed page. Kept apart
+ * from embedUrl because a post is not a 16:9 player: it needs a frame that
+ * grows to whatever height Instagram reports (see InstagramEmbed).
+ */
+export function instagramEmbed(src: string): string | null {
+  let u: URL
+  try { u = new URL(src) } catch { return null }
+  if (!/^(www\.)?(instagram\.com|instagr\.am)$/.test(u.hostname)) return null
+  // Also accepts the newer /{username}/p/{code}/ form.
+  const m = /^\/(?:[\w.]+\/)?(p|reels?|tv)\/([\w-]+)/.exec(u.pathname)
+  if (!m) return null
+  const kind = m[1] === 'reels' ? 'reel' : m[1]
+  return `https://www.instagram.com/${kind}/${m[2]}/embed/captioned/?cr=1&v=14`
+}
+
 /** A file the <video> element can actually play. */
 export const VIDEO_FILE = /\.(mp4|webm|mov|m4v|ogv)(?:[?#]|$)/i

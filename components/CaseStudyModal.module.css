@@ -455,20 +455,23 @@
 .prose :global(blockquote p) {
   opacity: 0.74;
 }
-.prose :global(img) {
+.prose :global(img),
+.body :global(img) {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
-.prose :global(.md-video) {
+.prose :global(.md-video),
+.body :global(.md-video) {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 10px;
   background: #000;
 }
-.prose :global(.md-embed) {
+.prose :global(.md-embed),
+.body :global(.md-embed) {
   display: block;
   position: relative;
   aspect-ratio: 16 / 9;
@@ -476,12 +479,28 @@
   overflow: hidden;
   background: #000;
 }
-.prose :global(.md-embed iframe) {
+.prose :global(.md-embed iframe),
+.body :global(.md-embed iframe) {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   border: 0;
+}
+/* Instagram's own embed width range; the height follows the post. */
+.prose :global(.md-instagram),
+.body :global(.md-instagram) {
+  display: block;
+  max-width: 540px;
+  margin-inline: auto;
+}
+.prose :global(.md-instagram iframe),
+.body :global(.md-instagram iframe) {
+  display: block;
+  width: 100%;
+  border: 1px solid #dbdbdb;
+  border-radius: 10px;
+  background: #fff;
 }
 .prose :global(hr) {
   border: 0;
