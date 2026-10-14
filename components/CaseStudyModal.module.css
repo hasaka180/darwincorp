@@ -197,6 +197,14 @@
   color: currentColor;
   opacity: 0.78;
 }
+/* Opacity fades everything inside, images included, so a body holding media
+   dims its text blocks instead and leaves the media at full colour. */
+.body:has(img, video, iframe) {
+  opacity: 1;
+}
+.body:has(img, video, iframe) > :not(:has(img, video, iframe)) {
+  opacity: 0.78;
+}
 /* Text-section bodies are Markdown, so space out the blocks it produces. */
 .body > :global(* + *) {
   margin-top: 0.9em;
@@ -410,6 +418,10 @@
   font-size: clamp(16px, 1.15vw, 18px);
   line-height: 1.72;
   opacity: 0.86;
+}
+/* Markdown puts images and embeds inside a <p>; keep them at full colour. */
+.prose :global(p:has(img, video, iframe)) {
+  opacity: 1;
 }
 .prose :global(h2) {
   font-size: clamp(22px, 2.1vw, 30px);
