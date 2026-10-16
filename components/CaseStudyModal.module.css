@@ -499,17 +499,26 @@
   height: 100%;
   border: 0;
 }
-/* Instagram's own embed width range; the height follows the post. */
-.prose :global(.md-instagram),
-.body :global(.md-instagram) {
+/* Instagram and X posts at their own embed widths; the height follows the post. */
+.prose :global(.md-post),
+.body :global(.md-post) {
   display: block;
-  max-width: 540px;
+  max-width: 550px;
   margin-inline: auto;
 }
-.prose :global(.md-instagram iframe),
-.body :global(.md-instagram iframe) {
+.prose :global(.md-post iframe),
+.body :global(.md-post iframe) {
   display: block;
   width: 100%;
+  border: 0;
+}
+.prose :global(.md-post--instagram),
+.body :global(.md-post--instagram) {
+  max-width: 540px;
+}
+/* X draws its own card; Instagram's page needs one. */
+.prose :global(.md-post--instagram iframe),
+.body :global(.md-post--instagram iframe) {
   border: 1px solid #dbdbdb;
   border-radius: 10px;
   background: #fff;

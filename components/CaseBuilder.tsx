@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import MarkdownBody from './MarkdownBody'
 import styles from './CaseBuilder.module.css'
-import { VIDEO_FILE, embedUrl, instagramEmbed } from '@/lib/embed'
+import { VIDEO_FILE, embedUrl, instagramEmbed, tweetEmbed } from '@/lib/embed'
 import type { CaseStudy, JournalPost, Section, ContentItem, ContentType } from '@/lib/cases'
 
 /* ── HTML clipboard → Markdown converter (for rich paste) ── */
@@ -191,17 +191,18 @@ function MarkdownEditor({ value, onChange, folder = 'journal' }: { value: string
             }}
           />
         </label>
-        {/* YouTube / Vimeo / Instagram embed */}
+        {/* YouTube / Vimeo / Instagram / X embed */}
         <button
           type="button"
-          title="Embed a YouTube or Vimeo video, or an Instagram post"
+          title="Embed a YouTube or Vimeo video, or an Instagram or X post"
           className={styles.mdBtn}
           onMouseDown={(e) => {
             e.preventDefault()
-            const link = window.prompt('Paste a YouTube, Vimeo or Instagram link')?.trim()
+            const link = window.prompt('Paste a YouTube, Vimeo, Instagram or X link')?.trim()
             if (!link) return
             if (instagramEmbed(link)) { insertAtCursor(`\n![Instagram post](${link})\n`); return }
-            if (!embedUrl(link)) { alert('That link is not a YouTube or Vimeo video or an Instagram post.'); return }
+            if (tweetEmbed(link)) { insertAtCursor(`\n![Post on X](${link})\n`); return }
+            if (!embedUrl(link)) { alert('That link is not a YouTube or Vimeo video, or an Instagram or X post.'); return }
             insertAtCursor(`\n![video](${link})\n`)
           }}
         >

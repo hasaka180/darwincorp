@@ -1,18 +1,20 @@
 import ReactMarkdown, { type Components } from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { VIDEO_FILE, embedUrl, instagramEmbed } from '@/lib/embed'
-import InstagramEmbed from './InstagramEmbed'
+import { VIDEO_FILE, embedUrl, instagramEmbed, tweetEmbed } from '@/lib/embed'
+import PostEmbed from './PostEmbed'
 
 // Markdown has no video syntax, so `![caption](url)` doubles as one: a video
 // file renders as a player, a YouTube/Vimeo link as an embed and an Instagram
-// link as the post. Wrappers are spans because react-markdown places images
-// inside a <p>.
+// or X link as the post. Wrappers are spans because react-markdown places
+// images inside a <p>.
 const components: Components = {
   img({ src, alt }) {
     const url = typeof src === 'string' ? src : ''
     const label = alt && alt !== 'video' ? alt : undefined
     const ig = instagramEmbed(url)
-    if (ig) return <InstagramEmbed src={ig} title={label} />
+    if (ig) return <PostEmbed provider="instagram" src={ig} title={label} />
+    const tweet = tweetEmbed(url)
+    if (tweet) return <PostEmbed provider="x" src={tweet} title={label} />
     const embed = embedUrl(url)
     if (embed) {
       return (
