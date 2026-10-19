@@ -481,3 +481,22 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Scope badge beside a role title — states what the engagement covers, so it
+   doesn't have to be a question on the form. */
+.roleLabel {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 12px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(11, 11, 13, 0.16);
+  background: rgba(11, 11, 13, 0.04);
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: rgba(11, 11, 13, 0.62);
+}

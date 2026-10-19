@@ -41,10 +41,12 @@ export type Role = {
   /** Portfolio is a hard requirement, not an optional extra, on this role. */
   requiresPortfolio?: boolean
   /**
-   * Ask the applicant for their rate and what it covers. For freelance roles
-   * priced per project or per day, that is the thing we actually need to know.
+   * Ask the applicant for their rate. For freelance roles priced per project
+   * or per day, that is the thing we actually need to know.
    */
   asksQuote?: boolean
+  /** Scope badge shown beside the title, e.g. the deliverables a role covers. */
+  titleLabel?: string
 }
 
 export const ROLES: Role[] = [
@@ -152,6 +154,7 @@ export const ROLES: Role[] = [
     location: 'Dubai, UAE',
     requiresPortfolio: true,
     asksQuote: true,
+    titleLabel: 'Shooting + Editing',
     blurb:
       'Shoot brand films, campaign content and social cutdowns across Dubai - project by project, kit in hand.',
     about:
@@ -160,7 +163,8 @@ export const ROLES: Role[] = [
       'Shoot brand films, interviews, product and event content on location across the UAE.',
       'Plan the shoot with us: shot list, locations, lighting and sound requirements.',
       'Own your kit - camera, lenses, lighting and audio - and arrive ready to work.',
-      'Deliver organised, clearly labelled footage with proxies where needed.',
+      'Edit the footage into the final cut, to brief and to length.',
+      'Deliver organised, clearly labelled footage and project files.',
       'Work alongside our designers and motion team through to final delivery.',
     ],
     requirements: [
@@ -168,10 +172,11 @@ export const ROLES: Role[] = [
       'Your own professional camera, lens and audio kit.',
       'Confident with lighting and location sound, not just the camera body.',
       'Based in or around Dubai and able to travel to shoots across the UAE.',
-      'A rate you can stand behind, and clarity on what it includes.',
+      'Editing - this role covers the cut, not just the shoot. Quote for both.',
+      'A rate you can stand behind.',
     ],
     niceToHave: [
-      'Editing and colour grading in-house, so a project can go start to finish with you.',
+      'Colour grading and finishing to broadcast standard.',
       'Gimbal, drone or FPV work (with the relevant UAE permits).',
       'Experience directing non-professional talent on camera.',
     ],

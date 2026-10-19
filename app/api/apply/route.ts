@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
  * Careers application capture.
  *
  * POST multipart/form-data { role, name, email, cc, phone, country, mode,
- *   engagement, portfolio?, rate?, editing?, cover?, resume?, website? }
+ *   engagement, portfolio?, rate?, cover?, resume?, website? }
  *   `website` is a honeypot — real users never fill it, bots do.
  *
  * The CV is emailed as an attachment rather than written to R2: that bucket is
@@ -50,7 +50,6 @@ export async function POST(req: Request) {
   const engagement = str("engagement", 20);
   const portfolio = str("portfolio", 500);
   const rate = str("rate", 120);
-  const editing = str("editing", 60);
   const cover = String(form.get("cover") ?? "").trim().slice(0, 6000);
 
   // Honeypot: pretend everything went fine, send nothing.
@@ -149,7 +148,6 @@ export async function POST(req: Request) {
         ${row("Engagement", esc(engagement))}
         ${portfolio ? row("Portfolio", `<a href="${esc(portfolio)}">${esc(portfolio)}</a>`) : ""}
         ${rate ? row("Rate", `<strong>${esc(rate)}</strong>`) : ""}
-        ${editing ? row("Includes", esc(editing)) : ""}
         ${row("CV", esc(resumeNote))}
         ${row("Time", `${esc(when)} (Dubai)`)}
       </table>
@@ -177,7 +175,6 @@ export async function POST(req: Request) {
     `Engagement: ${engagement}`,
     ...(portfolio ? [`Portfolio:  ${portfolio}`] : []),
     ...(rate ? [`Rate:       ${rate}`] : []),
-    ...(editing ? [`Includes:   ${editing}`] : []),
     `CV:         ${resumeNote}`,
     `Time:       ${when} (Dubai)`,
     ...(cover ? ["", "Cover letter:", cover] : []),

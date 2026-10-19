@@ -8,14 +8,6 @@ import type { EngagementType, Role, WorkMode } from '@/lib/careers'
 
 const MODES: WorkMode[] = ['Onsite', 'Remote', 'Hybrid']
 const ENGAGEMENTS: EngagementType[] = ['Full-time', 'Freelance', 'Project-based']
-/** What a videographer's quote covers. Asked wherever a role has asksQuote. */
-const EDITING_OPTIONS = [
-  'Shooting only',
-  'Shooting + editing',
-  'Shooting + editing + grade',
-] as const
-type EditingOption = (typeof EDITING_OPTIONS)[number]
-
 const MAX_RESUME = 4 * 1024 * 1024
 
 /* ───────────────────────── Application form ───────────────────────── */
@@ -29,7 +21,6 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
   const [country, setCountry] = useState('United Arab Emirates')
   const [mode, setMode] = useState<WorkMode>(role.modes[0])
   const [engagement, setEngagement] = useState<EngagementType>(role.types[0])
-  const [editing, setEditing] = useState<EditingOption>(EDITING_OPTIONS[0])
   const [name, setName] = useState('')
   const formRef = useRef<HTMLFormElement>(null)
   const titleId = useId()
@@ -277,43 +268,20 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
             </label>
 
             {role.asksQuote && (
-              <>
-                <label className={styles.field}>
-                  <span className={styles.label}>Your rate *</span>
-                  <input
-                    className={styles.input}
-                    type="text"
-                    name="rate"
-                    required
-                    placeholder="e.g. AED 1,500 / day or AED 4,000 per project"
-                  />
-                  <p className={styles.hint}>
-                    Day rate or project rate, whichever you work to. Say if it
-                    changes with the shoot.
-                  </p>
-                </label>
-
-                <fieldset className={styles.fieldset}>
-                  <legend className={styles.label}>Is editing included? *</legend>
-                  <div className={styles.chips}>
-                    {EDITING_OPTIONS.map((o) => (
-                      <label key={o} className={styles.chip} data-on={editing === o}>
-                        <input
-                          type="radio"
-                          name="editing-choice"
-                          value={o}
-                          checked={editing === o}
-                          onChange={() => setEditing(o)}
-                        />
-                        {o}
-                      </label>
-                    ))}
-                  </div>
-                  <p className={styles.hint}>
-                    Whether your rate covers the edit and grade, or shooting only.
-                  </p>
-                </fieldset>
-              </>
+              <label className={styles.field}>
+                <span className={styles.label}>Your rate *</span>
+                <input
+                  className={styles.input}
+                  type="text"
+                  name="rate"
+                  required
+                  placeholder="e.g. AED 1,500 / day or AED 4,000 per project"
+                />
+                <p className={styles.hint}>
+                  Day rate or project rate, whichever you work to. Quote for
+                  shooting and editing together.
+                </p>
+              </label>
             )}
 
             <div className={styles.field}>
@@ -347,8 +315,6 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
                 placeholder="Why this role, and what you'd bring to it."
               />
             </label>
-
-            {role.asksQuote && <input type="hidden" name="editing" value={editing} />}
 
             {/* honeypot — hidden from humans, catches bots */}
             <input
@@ -388,7 +354,12 @@ function RoleCard({ role, onApply }: { role: Role; onApply: () => void }) {
       <div className={styles.roleTop}>
         <div className={styles.roleHead}>
           <span className={styles.roleTeam}>{role.team}</span>
-          <h2 className={styles.roleTitle}>{role.title}</h2>
+          <h2 className={styles.roleTitle}>
+            {role.title}
+            {role.titleLabel && (
+              <span className={styles.roleLabel}>{role.titleLabel}</span>
+            )}
+          </h2>
           <p className={styles.roleBlurb}>{role.blurb}</p>
           <ul className={styles.roleMeta}>
             <li>{role.location}</li>
