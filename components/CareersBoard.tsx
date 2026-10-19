@@ -280,11 +280,11 @@ export function ApplyModal({ role, onClose }: { role: Role; onClose: () => void 
                   type="text"
                   name="rate"
                   required
-                  placeholder="e.g. AED 1,500 / day or AED 4,000 per project"
+                  placeholder="e.g. AED 1,200 per session"
                 />
                 <p className={styles.hint}>
-                  Day rate or project rate, whichever you work to. Quote for
-                  shooting and editing together.
+                  What you charge for one session, covering the shoot and the
+                  edit. Say if it changes with the length of the day.
                 </p>
               </label>
             )}

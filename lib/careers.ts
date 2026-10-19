@@ -149,22 +149,22 @@ export const ROLES: Role[] = [
     slug: 'freelance-videographer',
     title: 'Freelance Videographer',
     team: 'Production',
-    types: ['Freelance', 'Project-based'],
+    types: ['Freelance'],
     modes: ['Onsite'],
     location: 'Dubai, UAE',
     requiresPortfolio: true,
     asksQuote: true,
     titleLabel: 'Shooting + Editing',
     blurb:
-      'Shoot brand films, campaign content and social cutdowns across Dubai - project by project, kit in hand.',
+      'Shoot brand films, campaign content and social cutdowns across Dubai - booked by the session, kit in hand.',
     about:
-      'We bring in videographers per project, not per month. Some shoots are a single interview setup in a boardroom; others are a two-day brand film with talent, locations and a crew around you. We want people we can call again, so we care more about how you handle a changing brief on the day than about the logo on your camera.',
+      'We book videographers by the session, not by the month or the project. A session might be a single interview setup in a boardroom or a half-day of product coverage; bigger jobs are simply more sessions. We want people we can call again, so we care more about how you handle a changing brief on the day than about the logo on your camera.',
     responsibilities: [
       'Shoot brand films, interviews, product and event content on location across the UAE.',
       'Plan the shoot with us: shot list, locations, lighting and sound requirements.',
       'Own your kit - camera, lenses, lighting and audio - and arrive ready to work.',
       'Edit the footage into the final cut, to brief and to length.',
-      'Deliver organised, clearly labelled footage and project files.',
+      'Deliver organised, clearly labelled footage and working files.',
       'Work alongside our designers and motion team through to final delivery.',
     ],
     requirements: [
@@ -172,8 +172,8 @@ export const ROLES: Role[] = [
       'Your own professional camera, lens and audio kit.',
       'Confident with lighting and location sound, not just the camera body.',
       'Based in or around Dubai and able to travel to shoots across the UAE.',
-      'Editing - this role covers the cut, not just the shoot. Quote for both.',
-      'A rate you can stand behind.',
+      'Editing - a session covers the cut, not just the shoot. Quote for both.',
+      'A per-session rate you can stand behind.',
     ],
     niceToHave: [
       'Colour grading and finishing to broadcast standard.',
