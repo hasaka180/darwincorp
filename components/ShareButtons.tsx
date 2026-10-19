@@ -6,8 +6,8 @@ import styles from './ShareButtons.module.css'
 type Props = { url: string; title: string }
 
 /**
- * Social share row. X / LinkedIn / Facebook / WhatsApp use each network's
- * web share intent. Instagram has no web share endpoint, so that button uses
+ * Social share row. X / LinkedIn / Facebook / Reddit / WhatsApp use each
+ * network's web share intent. Instagram has no web share endpoint, so that button uses
  * the native Web Share sheet on mobile (which lists Instagram) and falls back
  * to copying the link on desktop. The link's preview (thumbnail, title,
  * description) comes from the page's OpenGraph tags, not these buttons.
@@ -21,6 +21,7 @@ export default function ShareButtons({ url, title }: Props) {
     { key: 'x', label: 'X', href: `https://x.com/intent/tweet?url=${u}&text=${t}`, icon: <XIcon /> },
     { key: 'linkedin', label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`, icon: <LinkedInIcon /> },
     { key: 'facebook', label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${u}`, icon: <FacebookIcon /> },
+    { key: 'reddit', label: 'Reddit', href: `https://www.reddit.com/submit?url=${u}&title=${t}`, icon: <RedditIcon /> },
     { key: 'whatsapp', label: 'WhatsApp', href: `https://wa.me/?text=${t}%20${u}`, icon: <WhatsAppIcon /> },
   ]
 
@@ -93,6 +94,13 @@ function FacebookIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07c0 6.02 4.39 11.01 10.13 11.93v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.97h-1.52c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.08 24 18.09 24 12.07z" />
+    </svg>
+  )
+}
+function RedditIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M24 11.78a2.57 2.57 0 0 0-4.35-1.84 12.6 12.6 0 0 0-6.87-2.2l1.17-5.5 3.82.81a1.83 1.83 0 1 0 .2-1.1L13.6.05a.55.55 0 0 0-.65.42l-1.3 6.14a12.62 12.62 0 0 0-6.96 2.2 2.57 2.57 0 1 0-2.84 4.2 5.07 5.07 0 0 0-.06.8c0 4.06 4.73 7.36 10.56 7.36s10.56-3.3 10.56-7.36a5.07 5.07 0 0 0-.06-.8A2.57 2.57 0 0 0 24 11.78zM6.33 13.6a1.83 1.83 0 1 1 3.66 0 1.83 1.83 0 0 1-3.66 0zm10.2 4.84a6.9 6.9 0 0 1-4.55 1.4 6.9 6.9 0 0 1-4.54-1.4.5.5 0 0 1 .7-.72 5.97 5.97 0 0 0 3.84 1.12 5.97 5.97 0 0 0 3.85-1.13.5.5 0 1 1 .7.73zm-.35-3a1.83 1.83 0 1 1 0-3.67 1.83 1.83 0 0 1 0 3.66z" />
     </svg>
   )
 }
