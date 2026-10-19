@@ -150,7 +150,7 @@ export const ROLES: Role[] = [
     title: 'Freelance Videographer',
     team: 'Production',
     types: ['Freelance', 'Project-based'],
-    modes: ['Onsite', 'Hybrid'],
+    modes: ['Onsite'],
     location: 'Dubai, UAE',
     requiresPortfolio: true,
     asksQuote: true,

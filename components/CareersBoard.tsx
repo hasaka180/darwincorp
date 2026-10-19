@@ -198,29 +198,33 @@ function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
               </select>
             </label>
 
-            <fieldset className={styles.fieldset}>
-              <legend className={styles.label}>How would you work?</legend>
-              <div className={styles.options}>
-                {MODES.map((m) => (
-                  <label key={m} className={styles.chip} data-on={mode === m}>
-                    <input
-                      type="radio"
-                      name="mode-choice"
-                      value={m}
-                      checked={mode === m}
-                      onChange={() => setMode(m)}
-                    />
-                    {m}
-                  </label>
-                ))}
-              </div>
-              {!role.modes.includes(mode) && (
-                <p className={styles.hint}>
-                  This role is normally {role.modes.join(' or ').toLowerCase()}, so tell us in
-                  your note why {mode.toLowerCase()} would work.
-                </p>
-              )}
-            </fieldset>
+            {/* A role with one possible answer isn't asking a question. The
+                mode still submits from state, set to the role's own. */}
+            {role.modes.length > 1 && (
+              <fieldset className={styles.fieldset}>
+                <legend className={styles.label}>How would you work?</legend>
+                <div className={styles.options}>
+                  {MODES.map((m) => (
+                    <label key={m} className={styles.chip} data-on={mode === m}>
+                      <input
+                        type="radio"
+                        name="mode-choice"
+                        value={m}
+                        checked={mode === m}
+                        onChange={() => setMode(m)}
+                      />
+                      {m}
+                    </label>
+                  ))}
+                </div>
+                {!role.modes.includes(mode) && (
+                  <p className={styles.hint}>
+                    This role is normally {role.modes.join(' or ').toLowerCase()}, so tell us in
+                    your note why {mode.toLowerCase()} would work.
+                  </p>
+                )}
+              </fieldset>
+            )}
 
             <fieldset className={styles.fieldset}>
               <legend className={styles.label}>Engagement</legend>
