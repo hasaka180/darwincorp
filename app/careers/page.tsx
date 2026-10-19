@@ -44,15 +44,21 @@ export default function CareersPage() {
         "@type": "Place",
         address: STUDIO_ADDRESS,
       },
-      baseSalary: {
-        "@type": "MonetaryAmount",
-        currency: "AED",
-        value: {
-          "@type": "QuantitativeValue",
-          value: role.salaryAedPerMonth,
-          unitText: "MONTH",
-        },
-      },
+      // Only published where we are actually offering a figure. On roles the
+      // applicant quotes for, a baseSalary would be an invented number.
+      ...(role.salaryAedPerMonth
+        ? {
+            baseSalary: {
+              "@type": "MonetaryAmount",
+              currency: "AED",
+              value: {
+                "@type": "QuantitativeValue",
+                value: role.salaryAedPerMonth,
+                unitText: "MONTH",
+              },
+            },
+          }
+        : {}),
       // Google rejects TELECOMMUTE unless it is paired with the countries an
       // applicant may work from, so the two are always emitted together.
       ...(remote

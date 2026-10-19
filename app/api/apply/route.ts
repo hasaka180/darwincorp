@@ -9,7 +9,7 @@ export const dynamic = "force-dynamic";
  * Careers application capture.
  *
  * POST multipart/form-data { role, name, email, cc, phone, country, mode,
- *   engagement, portfolio?, cover?, resume?, website? }
+ *   engagement, portfolio?, rate?, editing?, cover?, resume?, website? }
  *   `website` is a honeypot — real users never fill it, bots do.
  *
  * The CV is emailed as an attachment rather than written to R2: that bucket is
@@ -49,6 +49,8 @@ export async function POST(req: Request) {
   const mode = str("mode", 20);
   const engagement = str("engagement", 20);
   const portfolio = str("portfolio", 500);
+  const rate = str("rate", 120);
+  const editing = str("editing", 60);
   const cover = String(form.get("cover") ?? "").trim().slice(0, 6000);
 
   // Honeypot: pretend everything went fine, send nothing.
@@ -73,6 +75,10 @@ export async function POST(req: Request) {
     );
   }
 
+  // Resolve against the real openings so the subject line can't be spoofed.
+  const known = ROLES.find((r) => r.title === role || r.slug === role);
+  const roleLabel = known?.title ?? "General application";
+
   if (throttle(clientIp(req))) {
     return NextResponse.json(
       { ok: false, error: "Too many applications. Try again in a few minutes." },
@@ -80,9 +86,20 @@ export async function POST(req: Request) {
     );
   }
 
-  // Resolve against the real openings so the subject line can't be spoofed.
-  const known = ROLES.find((r) => r.title === role || r.slug === role);
-  const roleLabel = known?.title ?? "General application";
+  // The form marks these required, but markup is trivially bypassed and a
+  // videographer application without a reel is not worth receiving.
+  if (known?.requiresPortfolio && !portfolio) {
+    return NextResponse.json(
+      { ok: false, error: "A portfolio or showreel link is required for this role." },
+      { status: 400 }
+    );
+  }
+  if (known?.asksQuote && !rate) {
+    return NextResponse.json(
+      { ok: false, error: "Please tell us your rate." },
+      { status: 400 }
+    );
+  }
 
   const resume = form.get("resume");
   const attachments = [];
@@ -131,6 +148,8 @@ export async function POST(req: Request) {
         ${row("Work mode", esc(mode))}
         ${row("Engagement", esc(engagement))}
         ${portfolio ? row("Portfolio", `<a href="${esc(portfolio)}">${esc(portfolio)}</a>`) : ""}
+        ${rate ? row("Rate", `<strong>${esc(rate)}</strong>`) : ""}
+        ${editing ? row("Includes", esc(editing)) : ""}
         ${row("CV", esc(resumeNote))}
         ${row("Time", `${esc(when)} (Dubai)`)}
       </table>
@@ -157,6 +176,8 @@ export async function POST(req: Request) {
     `Work mode:  ${mode}`,
     `Engagement: ${engagement}`,
     ...(portfolio ? [`Portfolio:  ${portfolio}`] : []),
+    ...(rate ? [`Rate:       ${rate}`] : []),
+    ...(editing ? [`Includes:   ${editing}`] : []),
     `CV:         ${resumeNote}`,
     `Time:       ${when} (Dubai)`,
     ...(cover ? ["", "Cover letter:", cover] : []),

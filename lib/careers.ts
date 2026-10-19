@@ -32,8 +32,19 @@ export type Role = {
    * ignored for onsite-only roles.
    */
   applicantCountries?: string[]
-  /** Gross monthly base salary in AED, published in the JobPosting schema. */
-  salaryAedPerMonth: number
+  /**
+   * Gross monthly base salary in AED, published in the JobPosting schema.
+   * Omitted on roles where the applicant quotes their own rate — publishing a
+   * figure we are not actually offering would be worse than publishing none.
+   */
+  salaryAedPerMonth?: number
+  /** Portfolio is a hard requirement, not an optional extra, on this role. */
+  requiresPortfolio?: boolean
+  /**
+   * Ask the applicant for their rate and what it covers. For freelance roles
+   * priced per project or per day, that is the thing we actually need to know.
+   */
+  asksQuote?: boolean
 }
 
 export const ROLES: Role[] = [
@@ -131,6 +142,41 @@ export const ROLES: Role[] = [
     ],
     posted: '2026-09-22',
     validThrough: '2027-03-31',
+  },
+  {
+    slug: 'freelance-videographer',
+    title: 'Freelance Videographer',
+    team: 'Production',
+    types: ['Freelance', 'Project-based'],
+    modes: ['Onsite', 'Hybrid'],
+    location: 'Dubai, UAE',
+    requiresPortfolio: true,
+    asksQuote: true,
+    blurb:
+      'Shoot brand films, campaign content and social cutdowns across Dubai - project by project, kit in hand.',
+    about:
+      'We bring in videographers per project, not per month. Some shoots are a single interview setup in a boardroom; others are a two-day brand film with talent, locations and a crew around you. We want people we can call again, so we care more about how you handle a changing brief on the day than about the logo on your camera.',
+    responsibilities: [
+      'Shoot brand films, interviews, product and event content on location across the UAE.',
+      'Plan the shoot with us: shot list, locations, lighting and sound requirements.',
+      'Own your kit - camera, lenses, lighting and audio - and arrive ready to work.',
+      'Deliver organised, clearly labelled footage with proxies where needed.',
+      'Work alongside our designers and motion team through to final delivery.',
+    ],
+    requirements: [
+      'A showreel or portfolio of work you personally shot. This is mandatory - applications without one are not reviewed.',
+      'Your own professional camera, lens and audio kit.',
+      'Confident with lighting and location sound, not just the camera body.',
+      'Based in or around Dubai and able to travel to shoots across the UAE.',
+      'A rate you can stand behind, and clarity on what it includes.',
+    ],
+    niceToHave: [
+      'Editing and colour grading in-house, so a project can go start to finish with you.',
+      'Gimbal, drone or FPV work (with the relevant UAE permits).',
+      'Experience directing non-professional talent on camera.',
+    ],
+    posted: '2026-10-19',
+    validThrough: '2027-06-30',
   },
   {
     slug: 'vibe-coder',
