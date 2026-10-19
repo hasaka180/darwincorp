@@ -7,6 +7,7 @@ import { INDUSTRY_PAGES } from "@/lib/content/industries";
 import { LOCATION_PAGES } from "@/lib/content/locations";
 import { PRICING_PAGES, RESOURCE_PAGES } from "@/lib/content/resources";
 import { JOURNAL_CATEGORIES } from "@/lib/content/journal";
+import { ROLES } from "@/lib/careers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
@@ -15,6 +16,13 @@ export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+
+  const roleRoutes: MetadataRoute.Sitemap = ROLES.map((role) => ({
+    url: `${SITE_URL}/careers/${role.slug}`,
+    lastModified: new Date(role.posted),
+    changeFrequency: "weekly" as const,
+    priority: 0.6,
+  }));
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -64,5 +72,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...JOURNAL_CATEGORIES.map(p => `/journal/category/${p.slug}`),
   ];
   const addedRoutes: MetadataRoute.Sitemap = newPaths.map(path => ({ url: `${SITE_URL}${path}`, changeFrequency: "monthly", priority: 0.7 }));
-  return [...new Map([...staticRoutes, ...serviceRoutes, ...addedRoutes, ...contentRoutes].map(route => [route.url, route])).values()];
+  return [...new Map([...staticRoutes, ...roleRoutes, ...serviceRoutes, ...addedRoutes, ...contentRoutes].map(route => [route.url, route])).values()];
 }

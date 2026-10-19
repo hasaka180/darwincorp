@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import Link from 'next/link'
 import styles from './Careers.module.css'
 import { COUNTRIES, DIAL_CODES } from '@/lib/countries'
 import type { EngagementType, Role, WorkMode } from '@/lib/careers'
@@ -12,7 +13,7 @@ const MAX_RESUME = 4 * 1024 * 1024
 
 /* ───────────────────────── Application form ───────────────────────── */
 
-function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
+export function ApplyModal({ role, onClose }: { role: Role; onClose: () => void }) {
   const [mounted, setMounted] = useState(false)
   const [state, setState] = useState<'idle' | 'sending' | 'done'>('idle')
   const [error, setError] = useState('')
@@ -359,7 +360,9 @@ function RoleCard({ role, onApply }: { role: Role; onApply: () => void }) {
         <div className={styles.roleHead}>
           <span className={styles.roleTeam}>{role.team}</span>
           <h2 className={styles.roleTitle}>
-            {role.title}
+            <Link href={`/careers/${role.slug}`} className={styles.roleLink}>
+              {role.title}
+            </Link>
             {role.titleLabel && (
               <span className={styles.roleLabel}>{role.titleLabel}</span>
             )}

@@ -1,85 +1,18 @@
 import ContactFooter from "@/components/ContactFooter";
 import CareersBoard from "@/components/CareersBoard";
 import { ROLES } from "@/lib/careers";
-import { STUDIO_ADDRESS } from "@/lib/seo";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
 export const metadata = {
   title: "Careers",
-  description:
-    "Open roles at Darwin Corp, a creative studio in Dubai. We're hiring a project manager, motion designer, junior graphic designer and a vibe coder.",
+  description: `Open roles at Darwin Corp, a creative studio in Dubai. We're hiring ${ROLES.map((r) => r.title.toLowerCase()).join(", ")}.`,
   alternates: { canonical: "/careers" },
 };
 
-const EMPLOYMENT_TYPES: Record<string, string> = {
-  "Full-time": "FULL_TIME",
-  Freelance: "CONTRACTOR",
-  "Project-based": "CONTRACTOR",
-};
-
 export default function CareersPage() {
-  // One JobPosting per opening, so the roles can surface in job search results.
-  const jsonLd = ROLES.map((role) => {
-    const remote = role.modes.includes("Remote");
-    return {
-      "@context": "https://schema.org",
-      "@type": "JobPosting",
-      title: role.title,
-      description: `${role.about} Responsibilities: ${role.responsibilities.join(" ")} Requirements: ${role.requirements.join(" ")}`,
-      datePosted: role.posted,
-      validThrough: role.validThrough,
-      employmentType: [...new Set(role.types.map((t) => EMPLOYMENT_TYPES[t]))],
-      hiringOrganization: {
-        "@type": "Organization",
-        name: "Darwin Corp",
-        sameAs: SITE_URL,
-      },
-      identifier: {
-        "@type": "PropertyValue",
-        name: "Darwin Corp",
-        value: role.slug,
-      },
-      jobLocation: {
-        "@type": "Place",
-        address: STUDIO_ADDRESS,
-      },
-      // Only published where we are actually offering a figure. On roles the
-      // applicant quotes for, a baseSalary would be an invented number.
-      ...(role.salaryAedPerMonth
-        ? {
-            baseSalary: {
-              "@type": "MonetaryAmount",
-              currency: "AED",
-              value: {
-                "@type": "QuantitativeValue",
-                value: role.salaryAedPerMonth,
-                unitText: "MONTH",
-              },
-            },
-          }
-        : {}),
-      // Google rejects TELECOMMUTE unless it is paired with the countries an
-      // applicant may work from, so the two are always emitted together.
-      ...(remote
-        ? {
-            jobLocationType: "TELECOMMUTE",
-            applicantLocationRequirements: (role.applicantCountries ?? ["AE"]).map(
-              (country) => ({ "@type": "Country", name: country }),
-            ),
-          }
-        : {}),
-      directApply: true,
-      url: `${SITE_URL}/careers#${role.slug}`,
-    };
-  });
-
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <section className="subpage" data-theme="light">
         <header className="subpage__head reveal-up">
           <span className="subpage__eyebrow">Careers</span>

@@ -221,3 +221,61 @@ export const ROLES: Role[] = [
 ]
 
 export const getRole = (slug: string) => ROLES.find((r) => r.slug === slug)
+
+const EMPLOYMENT_TYPES: Record<EngagementType, string> = {
+  'Full-time': 'FULL_TIME',
+  Freelance: 'CONTRACTOR',
+  'Project-based': 'CONTRACTOR',
+}
+
+/**
+ * JobPosting schema for one role.
+ *
+ * Google wants a posting to live on its own page, so the per-role page emits
+ * this and the listing does not: the same job marked up at two URLs reads as
+ * two jobs. `url` therefore points at the role's own page, which is also what
+ * the share buttons link to.
+ */
+export function jobPostingSchema(role: Role, siteUrl: string, address: unknown) {
+  const remote = role.modes.includes('Remote')
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'JobPosting',
+    title: role.title,
+    description: `${role.about} Responsibilities: ${role.responsibilities.join(' ')} Requirements: ${role.requirements.join(' ')}`,
+    datePosted: role.posted,
+    validThrough: role.validThrough,
+    employmentType: [...new Set(role.types.map((t) => EMPLOYMENT_TYPES[t]))],
+    hiringOrganization: { '@type': 'Organization', name: 'Darwin Corp', sameAs: siteUrl },
+    identifier: { '@type': 'PropertyValue', name: 'Darwin Corp', value: role.slug },
+    jobLocation: { '@type': 'Place', address },
+    // Only published where we are actually offering a figure. On roles the
+    // applicant quotes for, a baseSalary would be an invented number.
+    ...(role.salaryAedPerMonth
+      ? {
+          baseSalary: {
+            '@type': 'MonetaryAmount',
+            currency: 'AED',
+            value: {
+              '@type': 'QuantitativeValue',
+              value: role.salaryAedPerMonth,
+              unitText: 'MONTH',
+            },
+          },
+        }
+      : {}),
+    // Google rejects TELECOMMUTE unless it is paired with the countries an
+    // applicant may work from, so the two are always emitted together.
+    ...(remote
+      ? {
+          jobLocationType: 'TELECOMMUTE',
+          applicantLocationRequirements: (role.applicantCountries ?? ['AE']).map((country) => ({
+            '@type': 'Country',
+            name: country,
+          })),
+        }
+      : {}),
+    directApply: true,
+    url: `${siteUrl}/careers/${role.slug}`,
+  }
+}
