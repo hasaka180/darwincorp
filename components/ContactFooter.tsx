@@ -34,6 +34,7 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "Industries", href: "/industries" },
       { label: "Locations", href: "/locations" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Free tools", href: "/tools" },
       { label: "Our process", href: "/process" },
       { label: "Technologies", href: "/technologies" },
       { label: "FAQs", href: "/faq" },

@@ -8,6 +8,7 @@ import { LOCATION_PAGES } from "@/lib/content/locations";
 import { PRICING_PAGES, RESOURCE_PAGES } from "@/lib/content/resources";
 import { JOURNAL_CATEGORIES } from "@/lib/content/journal";
 import { ROLES } from "@/lib/careers";
+import { TOOLS } from "@/lib/tools";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
@@ -64,7 +65,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     contentRoutes = [];
   }
 
-  const newPaths = ["/industries", "/locations", "/pricing", "/start-a-project",
+  const newPaths = ["/industries", "/locations", "/pricing", "/start-a-project", "/tools",
+    ...TOOLS.map(t => t.href),
     ...RESOURCE_PAGES.map(p => `/${p.slug}`),
     ...INDUSTRY_PAGES.map(p => `/industries/${p.slug}`),
     ...LOCATION_PAGES.map(p => `/locations/${p.slug}`),
