@@ -4,7 +4,7 @@ import ContactFooter from "@/components/ContactFooter";
 export const metadata = {
   title: "Contact",
   description:
-    "Start a branding, website or AI creative project with Darwin Corp in Dubai. We reply within one business day.",
+    "Start a branding, website or AI creative project with Darwin Corp, based in Dubai and working worldwide. We reply within one business day.",
   alternates: { canonical: "/contact" },
 };
 

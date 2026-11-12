@@ -9,7 +9,7 @@ import CookieConsent from "@/components/CookieConsent";
 import AdSense from "@/components/AdSense";
 import PromoPopup from "@/components/PromoPopup";
 import StructuredData from "@/components/StructuredData";
-import { organizationData } from "@/lib/seo";
+import { SITE_DESCRIPTION, organizationData } from "@/lib/seo";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -36,13 +36,17 @@ const inter = Inter({
 // URLs point at www to avoid sending crawlers through a redirect.
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
-const DESCRIPTION =
-  "Darwin Corp is a Dubai studio creating brands, digital experiences and stories designed to evolve with people, culture and technology.";
+const DESCRIPTION = SITE_DESCRIPTION;
+
+// Dubai stays in the title: the UAE converts best of any market (5% CTR vs
+// 1.3% in the US), and dropping it would trade that for nothing. "Worldwide"
+// stops the homepage reading as local-only.
+const TITLE = "Darwin Corp - Motion-Driven Creative Studio | Dubai & Worldwide";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Darwin Corp - Motion Driven Creative Agency in Dubai",
+    default: TITLE,
     template: "%s - Darwin Corp",
   },
   description: DESCRIPTION,
@@ -54,13 +58,13 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Darwin Corp",
     url: SITE_URL,
-    title: "Darwin Corp - Motion Driven Creative Agency in Dubai",
+    title: TITLE,
     description: DESCRIPTION,
     locale: "en_AE",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Darwin Corp - Motion Driven Creative Agency in Dubai",
+    title: TITLE,
     description: DESCRIPTION,
   },
   // Verifies the site for AdSense without loading the ad script (see AdSense.tsx).

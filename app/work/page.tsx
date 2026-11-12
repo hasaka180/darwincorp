@@ -6,7 +6,7 @@ import { type ContentItem } from "@/lib/cases";
 export const metadata = {
   title: "Work",
   description:
-    "Selected branding, web and AI creative projects by Darwin Corp, a creative studio in Dubai.",
+    "Selected branding, web and AI creative projects by Darwin Corp, a creative studio based in Dubai and working worldwide.",
   alternates: { canonical: "/work" },
 };
 export const dynamic = "force-dynamic";

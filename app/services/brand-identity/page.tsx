@@ -6,7 +6,7 @@ import { breadcrumbData } from "@/lib/seo";
 import { LinkCards } from "@/components/ExplorePage";
 
 export const metadata = {
-  title: "Brand Identity Design in Dubai",
+  title: "Brand Identity Design | Dubai & Worldwide",
   description:
     "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.",
   alternates: { canonical: "/services/brand-identity" },

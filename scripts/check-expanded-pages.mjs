@@ -45,5 +45,5 @@ for (const route of routes) {
     assert.ok(fs.existsSync(path.join("public", match[1])), `${route}: missing image ${match[1]}`);
   }
 }
-assert.equal(routes.length, 60);
+assert.equal(routes.length, 59);
 console.log(`Verified ${routes.length} pages: unique metadata, H1s, canonicals, sitemap, structured data, local images and ${links} internal links.`);

@@ -10,6 +10,7 @@ import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
 import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
+import { KNOWS_ABOUT, SAME_AS, SITE_DESCRIPTION } from "@/lib/seo";
 
 export const revalidate = 600;
 
@@ -28,8 +29,7 @@ const ORG_LD = {
   url: SITE_URL,
   logo: `${SITE_URL}/icon.png`,
   image: `${SITE_URL}/opengraph-image.jpg`,
-  description:
-    "Darwin Corp is a Dubai studio creating brands, digital experiences and stories designed to evolve with people, culture and technology.",
+  description: SITE_DESCRIPTION,
   email: "hello@thedarwin.co",
   telephone: "+971555355897",
   address: {
@@ -38,14 +38,9 @@ const ORG_LD = {
     addressCountry: "AE",
   },
   areaServed: "Worldwide",
-  // sameAs ties this domain to the same entity Google already knows from the
-  // verified Business Profile (Knowledge Graph id /g/11zwvrt4_b).
-  sameAs: [
-    "https://www.instagram.com/thedarwin_co/",
-    "https://www.facebook.com/thedarwincorp",
-    "https://www.linkedin.com/company/darwinco/",
-    "https://share.google/TFMGbkBayNXfyVpkP",
-  ],
+  knowsAbout: KNOWS_ABOUT,
+  // Shared with the site-wide Organization schema so the two can't drift.
+  sameAs: SAME_AS,
   hasOfferCatalog: {
     "@type": "OfferCatalog",
     name: "Services",
@@ -72,7 +67,7 @@ const PAGE_LD = {
   "@type": "WebPage",
   "@id": `${SITE_URL}/#webpage`,
   url: SITE_URL,
-  name: "Darwin Corp - Motion Driven Creative Agency in Dubai",
+  name: "Darwin Corp - Motion-Driven Creative Studio | Dubai & Worldwide",
   about: { "@id": `${SITE_URL}/#organization` },
   primaryImageOfPage: {
     "@type": "ImageObject",

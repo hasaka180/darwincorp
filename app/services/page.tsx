@@ -6,7 +6,7 @@ import ExpertiseCards from "@/components/ExpertiseCards";
 export const metadata = {
   title: "Services",
   description:
-    "Brand identity, website development and AI creative production from Darwin Corp, a creative studio in Dubai.",
+    "Brand identity, website development and AI creative production from Darwin Corp, a creative studio based in Dubai and working worldwide.",
   alternates: { canonical: "/services" },
 };
 

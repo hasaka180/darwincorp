@@ -3,7 +3,7 @@ import type { LandingPage } from "./types";
 export const SERVICE_PAGES: LandingPage[] = [
   {
     slug: "custom-web-development", title: "Custom Website Development", heading: "A website built around your business.", eyebrow: "Websites · Custom development",
-    description: "Custom website design and development from our Dubai studio. A considered user experience, distinctive design and a codebase built for your next chapter.",
+    description: "Custom website design and development for clients worldwide, from our Dubai studio. Considered UX, distinctive design and a codebase built to grow.",
     image: "/video/website.jpg", imageAlt: "Darwin website design and development artwork",
     intro: "Your website should make a complex business easy to understand. We connect content, design and development so visitors know what you do and how to take the next step.",
     sections: [
@@ -17,7 +17,7 @@ export const SERVICE_PAGES: LandingPage[] = [
   },
   {
     slug: "interactive-web-design", title: "Interactive Website Design", heading: "Digital experiences that feel different.", eyebrow: "Websites · Interaction",
-    description: "Interactive website design that brings your brand to life through thoughtful motion, creative coding and clear journeys, built by Darwin Corp in Dubai.", image: "/assets/motion/botanical.webp", imageAlt: "Botanical artwork from Darwin’s animation repository",
+    description: "Interactive website design that brings your brand to life through motion, creative coding and clear user journeys. Built by Darwin Corp for brands worldwide.", image: "/assets/motion/botanical.webp", imageAlt: "Botanical artwork from Darwin’s animation repository",
     intro: "Interaction should help someone understand, explore or decide. We design motion around the story your business needs to tell, with a readable experience underneath it.",
     sections: [
       { title: "An idea visitors can explore", body: "Scroll sequences, product reveals and interactive storytelling can explain relationships a static image cannot. We prototype the central interaction first to test whether it adds clarity." },
@@ -57,7 +57,7 @@ export const SERVICE_PAGES: LandingPage[] = [
   },
   {
     slug: "logo-visual-identity", title: "Logo & Visual Identity", heading: "A recognisable mark. A coherent visual world.", eyebrow: "Branding · Visual identity",
-    description: "Logo and visual identity design from Darwin Corp in Dubai. Distinctive marks, typography and colour systems that work across your everyday brand touchpoints.", image: "/video/brand-identity.png", imageAlt: "Darwin brand identity artwork",
+    description: "Logo and visual identity design from Darwin Corp, for brands worldwide. Distinctive marks, typography and colour systems that work across every touchpoint.", image: "/video/brand-identity.png", imageAlt: "Darwin brand identity artwork",
     intro: "A logo needs to work at the scale of an app icon and on a presentation cover. The visual system around it makes that recognition consistent.",
     sections: [{ title: "A mark with a reason", body: "We explore logo directions against your audience, positioning and intended use. Each direction is presented in context so the decision is about more than a standalone symbol." }, { title: "A shared visual language", body: "Type, colour, composition and supporting graphic elements turn a mark into an identity. The system is demonstrated on the applications your team actually needs." }, { title: "Files ready for use", body: "Your handover includes agreed logo variations, export formats and usage guidance. Clear specifications help collaborators reproduce the identity consistently." }],
     scope: { title: "The essentials, designed as a system.", body: "For naming, positioning and a broader messaging framework, we can expand the engagement into a full brand identity project.", items: ["Visual brief and reference review", "Logo concept exploration", "Colour, typography and applications", "Final artwork and usage guide"] },
