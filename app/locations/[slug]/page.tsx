@@ -3,7 +3,8 @@ import ExplorePage from "@/components/ExplorePage";
 import { LOCATION_PAGES } from "@/lib/content/locations";
 import { pageMetadata } from "@/lib/seo";
 export const dynamicParams = false;
-export function generateStaticParams() { return LOCATION_PAGES.map(p => ({ slug: p.slug })); }
+// worldwide has its own bespoke page (app/locations/worldwide)
+export function generateStaticParams() { return LOCATION_PAGES.filter(p => p.slug !== "worldwide").map(p => ({ slug: p.slug })); }
 type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props) {
  const { slug } = await params;
