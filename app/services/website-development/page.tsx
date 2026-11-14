@@ -3,7 +3,7 @@ import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import StructuredData from "@/components/StructuredData";
 import { CtaPanel, Deliverables, FaqBlock, MediaHero, Mix, ProcessPanel, Tag, WorkGrid, pad, type WorkItem } from "@/components/ww/Kit";
-import PixelBuildScene from "@/components/ww/PixelBuildScene";
+import PixelScene from "@/components/ww/PixelScene";
 import portfolio from "@/lib/content/portfolio.json";
 import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 
@@ -101,7 +101,7 @@ export default function WebsiteDevelopmentPage() {
         display="to be chosen."
         sub="Design and development from Dubai, for businesses worldwide."
         body="We plan, design and build websites that earn trust quickly, explain what you do clearly and make the next step easy, on a codebase that stays fast as your business grows."
-        scene={<PixelBuildScene />}
+        scene={<PixelScene variant="web" />}
         secondary={{ label: "See website work", href: "#work" }}
       />
 

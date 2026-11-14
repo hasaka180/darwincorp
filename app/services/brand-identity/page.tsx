@@ -3,6 +3,7 @@ import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import StructuredData from "@/components/StructuredData";
 import { CtaPanel, Deliverables, FaqBlock, MediaHero, Mix, ProcessPanel, Tag, WorkGrid, pad, type WorkItem } from "@/components/ww/Kit";
+import PixelScene from "@/components/ww/PixelScene";
 import portfolio from "@/lib/content/portfolio.json";
 import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 
@@ -132,7 +133,7 @@ export default function BrandIdentityPage() {
         display="people remember."
         sub="From first impression to every touchpoint."
         body="A brand is more than a logo. We build distinctive identities from the ground up, combining strategy, positioning, visual identity and creative direction into one cohesive system."
-        media={{ video: "/video/brand-identity.mp4", poster: "/video/brand-identity.png", alt: "Brand identity artwork by Darwin Corp" }}
+        scene={<PixelScene variant="brand" />}
         secondary={{ label: "See brand work", href: "#work" }}
       />
 
