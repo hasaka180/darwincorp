@@ -8,11 +8,18 @@ const GTM_ID = "GTM-MQL5CFSF";
 declare global {
   interface Window {
     dataLayer?: unknown[];
+    gtag?: (...args: unknown[]) => void;
   }
 }
 
+function gtag(..._args: unknown[]) {
+  window.dataLayer = window.dataLayer || [];
+  // Google recognizes gtag commands as Arguments objects, not plain arrays.
+  window.dataLayer.push(arguments);
+}
+
 function updateGoogleConsent(consent: Consent) {
-  window.dataLayer?.push([
+  window.gtag?.(
     "consent",
     "update",
     {
@@ -21,7 +28,7 @@ function updateGoogleConsent(consent: Consent) {
       ad_user_data: consent.marketing ? "granted" : "denied",
       ad_personalization: consent.marketing ? "granted" : "denied",
     },
-  ]);
+  );
 }
 
 function loadGoogleTagManager(consent: Consent) {
@@ -31,7 +38,8 @@ function loadGoogleTagManager(consent: Consent) {
   }
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push([
+  window.gtag = window.gtag || gtag;
+  window.gtag(
     "consent",
     "default",
     {
@@ -40,7 +48,7 @@ function loadGoogleTagManager(consent: Consent) {
       ad_user_data: "denied",
       ad_personalization: "denied",
     },
-  ]);
+  );
   updateGoogleConsent(consent);
   window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
 
