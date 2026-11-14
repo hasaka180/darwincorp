@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { CSSProperties } from "react";
 import ContactFooter from "@/components/ContactFooter";
 import StructuredData from "@/components/StructuredData";
 import WorldHero from "@/components/worldwide/WorldHero";
 import TimeBar from "@/components/worldwide/TimeBar";
-import { AudiencePreview, LocalTime, ScrollProgress, TiltCard } from "@/components/worldwide/Interactive";
+import { AudiencePreview, LocalTime, ScrollProgress } from "@/components/worldwide/Interactive";
+import { MarkAi, MarkBrand, MarkInteractive, MarkMotion, MarkProduct, MarkWeb } from "@/components/worldwide/Marks";
 import { MARKETS, STUDIO } from "@/components/worldwide/markets";
 import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 import "./worldwide.css";
@@ -24,14 +24,13 @@ const base = pageMetadata(TITLE, DESCRIPTION, PATH);
 // Absolute so the layout's "%s - Darwin Corp" template doesn't add the brand twice.
 export const metadata: Metadata = { ...base, title: { absolute: TITLE } };
 
-// Each card gets its own pair from the homepage palette for its gradient field.
 const CAPABILITIES = [
-  { title: "Website design & development", href: "/services/custom-web-development", tag: "Web · UX · Build", a: "#b24d93", b: "#9867b3", body: "Websites designed to establish credibility, communicate value and turn visitors into customers. From premium corporate websites to complex digital platforms, we combine thoughtful UX, distinctive visual design and reliable development." },
-  { title: "Brand identity & creative direction", href: "/services/brand-identity", tag: "Identity · Systems", a: "#ff5b3a", b: "#9a2535", body: "Distinctive brand identities built around a clear purpose. We develop visual systems, logos, typography, colour languages and creative direction that help businesses build recognition across every touchpoint." },
-  { title: "Interactive digital experiences", href: "/services/interactive-web-design", tag: "WebGL · Motion", a: "#9867b3", b: "#674158", body: "Digital experiences that invite people to explore, engage and connect. We use interaction, motion and thoughtful storytelling to make websites more memorable and meaningful." },
-  { title: "UI/UX & digital product design", href: "/services/ui-ux-design", tag: "Product · Prototypes", a: "#5d68b0", b: "#9867b3", body: "Intuitive interfaces and user journeys shaped around real business objectives. From early concepts and wireframes to detailed prototypes and design systems, we make digital products easier to understand and use." },
-  { title: "Motion design & digital storytelling", href: "/services/motion-design", tag: "Motion · Narrative", a: "#c64f65", b: "#b24d93", body: "Motion-led creative that gives brands a distinctive voice. We develop visual narratives, animated identities and digital content that communicate ideas with clarity and character." },
-  { title: "AI-powered creative production", href: "/services/ai-creative-production", tag: "Generative · Art direction", a: "#cf7466", b: "#9a2535", body: "New creative possibilities through the considered use of generative technologies. We combine human art direction with emerging tools to produce original visual content and explore new ways of communicating." },
+  { title: "Website design & development", href: "/services/custom-web-development", art: "web", Mark: MarkWeb, line: "Websites that earn trust and turn visitors into customers.", tag: "Web · UX · Build", body: "Websites designed to establish credibility, communicate value and turn visitors into customers. From premium corporate websites to complex digital platforms, we combine thoughtful UX, distinctive visual design and reliable development." },
+  { title: "Brand identity & creative direction", href: "/services/brand-identity", art: "brand", Mark: MarkBrand, line: "Identities and visual systems built around a clear purpose.", tag: "Identity · Systems", body: "Distinctive brand identities built around a clear purpose. We develop visual systems, logos, typography, colour languages and creative direction that help businesses build recognition across every touchpoint." },
+  { title: "Interactive digital experiences", href: "/services/interactive-web-design", art: "interactive", Mark: MarkInteractive, line: "Experiences people want to explore, not just scroll past.", tag: "WebGL · Motion", body: "Digital experiences that invite people to explore, engage and connect. We use interaction, motion and thoughtful storytelling to make websites more memorable and meaningful." },
+  { title: "UI/UX & digital product design", href: "/services/ui-ux-design", art: "product", Mark: MarkProduct, line: "Interfaces and journeys shaped around real objectives.", tag: "Product · Prototypes", body: "Intuitive interfaces and user journeys shaped around real business objectives. From early concepts and wireframes to detailed prototypes and design systems, we make digital products easier to understand and use." },
+  { title: "Motion design & digital storytelling", href: "/services/motion-design", art: "motion", Mark: MarkMotion, line: "Motion that gives a brand a voice of its own.", tag: "Motion · Narrative", body: "Motion-led creative that gives brands a distinctive voice. We develop visual narratives, animated identities and digital content that communicate ideas with clarity and character." },
+  { title: "AI-powered creative production", href: "/services/ai-creative-production", art: "ai", Mark: MarkAi, line: "Original visual content, directed by people.", tag: "Generative · Art direction", body: "New creative possibilities through the considered use of generative technologies. We combine human art direction with emerging tools to produce original visual content and explore new ways of communicating." },
 ];
 
 const STEPS = [
@@ -123,10 +122,9 @@ export default function WorldwidePage() {
 
       {/* 01 Perspective */}
       <section className="ww-sec ww-split" data-theme="light">
-        <span className="ww-aura ww-aura--a" aria-hidden="true" />
         <header className="reveal-up">
           <Tag>01 / Perspective</Tag>
-          <h2 className="ww-title">Creative thinking.<br /><span className="ww-grad">Global perspective.</span></h2>
+          <h2 className="ww-title ww-mix"><span className="ww-mix__serif">Creative thinking.</span><span className="ww-mix__pixel">Global perspective.</span></h2>
           <p className="ww-serif">Great digital work shouldn&apos;t be limited by geography.</p>
         </header>
         <div className="ww-prose reveal-up">
@@ -142,27 +140,24 @@ export default function WorldwidePage() {
         <header className="ww-head reveal-up">
           <div>
             <Tag>02 / Capabilities</Tag>
-            <h2 className="ww-title">What we create for<br />businesses worldwide</h2>
+            <h2 className="ww-title ww-mix"><span className="ww-mix__serif">What we create for</span><span className="ww-mix__pixel">businesses worldwide</span></h2>
           </div>
           <p className="ww-body">We bring creative and technical capabilities together under one roof, giving businesses a connected partner from concept to delivery.</p>
         </header>
         <ul className="ww-cards">
-          {CAPABILITIES.map((c, i) => (
-            <li key={c.title} className="reveal-up">
-              <TiltCard href={c.href} className="ww-card--neon">
-                <span className="ww-card__field" style={{ "--a": c.a, "--b": c.b } as CSSProperties} aria-hidden="true">
-                  <span className="ww-card__scan" />
-                </span>
-                <span className="ww-card__top">
-                  <span className="ww-card__n">{pad(i + 1)}</span>
-                  <span className="ww-card__chip">{c.tag}</span>
-                </span>
-                <span className="ww-card__copy">
-                  <h3 className="ww-card__title">{c.title}</h3>
-                  <p className="ww-card__body">{c.body}</p>
-                </span>
+          {CAPABILITIES.map((c) => (
+            <li key={c.title} className="ww-cap reveal-up">
+              <Link href={c.href} className="ww-card">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img className="ww-card__art" src={`/assets/worldwide/cards/${c.art}.webp`} alt="" width={720} height={900} loading="lazy" decoding="async" />
+                <c.Mark className="ww-card__mark" />
                 <span className="ww-card__go" aria-hidden="true">↗</span>
-              </TiltCard>
+                <span className="ww-card__cap">
+                  <h3 className="ww-card__title">{c.title}</h3>
+                  <span className="ww-card__line">{c.line}</span>
+                </span>
+              </Link>
+              <p className="ww-cap__body">{c.body}</p>
             </li>
           ))}
         </ul>
@@ -172,14 +167,14 @@ export default function WorldwidePage() {
       </section>
 
       {/* 03 How we work */}
-      <section className="ww-sec" data-theme="light">
-        <div className="ww-panel" data-theme="dark">
+      <section className="ww-sec ww-sec--bleed">
+        <div className="ww-panel ww-panel--bleed" data-theme="dark">
           <span className="ww-panel__floor" aria-hidden="true" />
           <span className="ww-panel__glow" aria-hidden="true" />
           <header className="ww-head ww-head--dark reveal-up">
             <div>
               <Tag>03 / How we work</Tag>
-              <h2 className="ww-title">Working across borders,<br /><span className="ww-grad ww-grad--neon">without the complexity.</span></h2>
+              <h2 className="ww-title ww-mix"><span className="ww-mix__serif">Working across borders,</span><span className="ww-mix__pixel">without the complexity.</span></h2>
             </div>
             <div className="ww-stack">
               <p className="ww-body">A successful international project needs more than video calls. It needs clear communication, an organised process and a shared understanding of the outcome.</p>
@@ -206,10 +201,9 @@ export default function WorldwidePage() {
 
       {/* 04 Audience */}
       <section className="ww-sec ww-split" data-theme="light">
-        <span className="ww-aura ww-aura--b" aria-hidden="true" />
         <header className="reveal-up">
           <Tag>04 / Built around your audience</Tag>
-          <h2 className="ww-title">Designed for different markets.<br /><span className="ww-grad">Built around your audience.</span></h2>
+          <h2 className="ww-title ww-mix"><span className="ww-mix__serif">Designed for different markets.</span><span className="ww-mix__pixel">Built around your audience.</span></h2>
           <AudiencePreview />
         </header>
         <div className="ww-prose reveal-up">
@@ -225,7 +219,7 @@ export default function WorldwidePage() {
         <header className="ww-head reveal-up">
           <div>
             <Tag>05 / Our reach</Tag>
-            <h2 className="ww-title">Based in Dubai.<br /><span className="ww-grad">Connected to the world.</span></h2>
+            <h2 className="ww-title ww-mix"><span className="ww-mix__serif">Based in Dubai.</span><span className="ww-mix__pixel">Connected to the world.</span></h2>
           </div>
           <p className="ww-body">Dubai is our home and the foundation of our international perspective. We work with businesses across established and emerging markets through remote collaboration and clearly defined project delivery.</p>
         </header>
@@ -254,7 +248,7 @@ export default function WorldwidePage() {
         <div className="ww-split ww-split--flush">
           <header className="reveal-up">
             <Tag>06 / Connected by design</Tag>
-            <h2 className="ww-title">One creative partner.<br /><span className="ww-grad">Connected capabilities.</span></h2>
+            <h2 className="ww-title ww-mix"><span className="ww-mix__serif">One creative partner.</span><span className="ww-mix__pixel">Connected capabilities.</span></h2>
           </header>
           <div className="ww-prose reveal-up">
             <p>Businesses often work with separate providers for branding, design, development and motion. That can create disconnected experiences and unnecessary complexity.</p>
@@ -281,7 +275,7 @@ export default function WorldwidePage() {
       <section className="ww-sec ww-faq" data-theme="light">
         <header className="reveal-up">
           <Tag>07 / Good to know</Tag>
-          <h2 className="ww-title">Frequently<br />asked questions</h2>
+          <h2 className="ww-title ww-mix"><span className="ww-mix__serif">Frequently</span><span className="ww-mix__pixel">asked questions</span></h2>
           <a href="mailto:hello@thedarwin.co" className="ww-mail">hello@thedarwin.co <span aria-hidden="true">↗</span></a>
         </header>
         <div className="ww-qa reveal-up">
@@ -305,7 +299,7 @@ export default function WorldwidePage() {
           <span className="ww-panel__floor" aria-hidden="true" />
           <div className="ww-cta__inner">
             <Tag>Wherever you are, let&apos;s begin.</Tag>
-            <h2 className="ww-cta__title reveal-up">Your next idea could<br /><span className="ww-grad ww-grad--neon">come from anywhere.</span></h2>
+            <h2 className="ww-cta__title ww-mix reveal-up"><span className="ww-mix__serif">Your next idea could</span><span className="ww-mix__pixel">come from anywhere.</span></h2>
             <div className="ww-cta__row">
               <div className="reveal-up">
                 <p className="ww-serif ww-serif--light">Let&apos;s make something worth choosing.</p>

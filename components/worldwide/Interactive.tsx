@@ -1,32 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const reduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-/** A card that tilts toward the pointer in 3D. */
-export function TiltCard({ href, className = "", children }: { href: string; className?: string; children: ReactNode }) {
-  const ref = useRef<HTMLAnchorElement>(null);
-  const onMove = (e: React.PointerEvent) => {
-    const el = ref.current;
-    if (!el || e.pointerType !== "mouse" || reduced()) return;
-    const r = el.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width;
-    const y = (e.clientY - r.top) / r.height;
-    el.style.setProperty("--rx", `${(0.5 - y) * 10}deg`);
-    el.style.setProperty("--ry", `${(x - 0.5) * 12}deg`);
-  };
-  const onLeave = () => {
-    ref.current?.style.setProperty("--rx", "0deg");
-    ref.current?.style.setProperty("--ry", "0deg");
-  };
-  return (
-    <Link ref={ref} href={href} className={`ww-card ${className}`} onPointerMove={onMove} onPointerLeave={onLeave}>
-      {children}
-    </Link>
-  );
-}
 
 /**
  * Sets --p (0 to 1) on its element as it scrolls through the viewport, so the

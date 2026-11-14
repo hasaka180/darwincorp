@@ -42,19 +42,21 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
-.ww-grad {
-  background: var(--ww-grad);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: ww-shift 8s ease-in-out infinite alternate;
+/* Mixed headings, as on the homepage hero ("THE MIRROR OF / IMAGINATION"):
+   an Instrument Serif line over a Handjet line, both in capitals. */
+.ww-mix { display: flex; flex-direction: column; text-transform: uppercase; }
+.ww-mix__serif {
+  font-family: var(--ww-serif);
+  font-weight: 400;
+  line-height: 1.06;
+  letter-spacing: 0.5px;
 }
-.ww-grad--neon {
-  background-image: linear-gradient(100deg, #f7f8fa 0%, #e4cfed 28%, #cf7466 62%, #c64f65 100%);
-  filter: drop-shadow(0 0 18px rgba(178, 77, 147, 0.35));
+.ww-mix__pixel {
+  font-family: var(--title-font);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: 2px;
 }
-@keyframes ww-shift { from { background-position: 0% 0; } to { background-position: 100% 0; } }
 .ww-serif {
   margin-top: 26px;
   font-family: var(--ww-serif);
@@ -238,22 +240,20 @@
   font-family: var(--ww-serif);
   font-weight: 400;
   font-size: var(--title-size);
-  line-height: 1.04;
+  line-height: 1.06;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 .ww-hero__display {
   font-family: var(--title-font);
   font-weight: 500;
-  font-size: calc(var(--title-size) * 1.32);
-  line-height: 0.98;
-  letter-spacing: 0.02em;
+  font-size: var(--title-size);
+  line-height: 1.02;
+  letter-spacing: 2px;
+  margin-top: 2px;
   text-transform: uppercase;
-  background: linear-gradient(100deg, #f7f8fa 0%, #e4cfed 30%, #cf7466 65%, #c64f65 100%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 0 22px rgba(178, 77, 147, 0.45));
-  animation: blurIn 1.7s 0.28s var(--ww-ease) both, ww-shift 7s ease-in-out infinite alternate;
+  color: #fff;
+  animation: blurIn 1.7s 0.28s var(--ww-ease) both;
 }
 .ww-hero__sub {
   margin-top: 22px;
@@ -352,9 +352,7 @@
 .ww-sec {
   position: relative;
   padding: clamp(64px, 8vw, 120px) var(--page-gutter);
-  /* Transparent so a section's aura fades into its neighbours instead of
-     being cut off by the next section's background. */
-  background: transparent;
+  background: #fff;
 }
 .ww-split {
   display: grid;
@@ -377,116 +375,113 @@
 .ww-stack { display: grid; gap: 12px; }
 .ww-foot { margin-top: clamp(32px, 4vw, 48px); }
 
-/* Soft neon light pooled behind a section, kept faint on white. */
-.ww-aura {
-  position: absolute;
-  z-index: 0;
-  width: min(60vw, 760px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.22;
-  pointer-events: none;
-  animation: ww-drift 14s ease-in-out infinite alternate;
-}
-.ww-aura--a { right: -12%; top: -10%; background: radial-gradient(circle at 35% 40%, var(--ww-orchid), transparent 60%), radial-gradient(circle at 70% 60%, var(--ww-lilac), transparent 55%); }
-.ww-aura--b { left: -16%; bottom: -20%; background: radial-gradient(circle at 40% 40%, var(--ww-purple), transparent 60%), radial-gradient(circle at 70% 70%, var(--ww-coral), transparent 55%); }
-@keyframes ww-drift { to { transform: translate(6%, 8%) scale(1.1); } }
 
-/* ---------- Capability cards ---------- */
+/* ---------- Capability cards ----------
+   Portrait art cards: a generated texture (scripts/build-card-art.py), one
+   white mark, and a short caption. The full description sits below. */
 .ww-cards {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(16px, 1.6vw, 28px);
+  gap: clamp(26px, 2.6vw, 40px) clamp(14px, 1.4vw, 22px);
 }
 .ww-card {
-  --rx: 0deg;
-  --ry: 0deg;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 460px;
-  padding: 22px;
-  border-radius: 22px;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: 18px;
   overflow: hidden;
   isolation: isolate;
   background: #1b1026;
   color: #fff;
-  box-shadow: 0 30px 60px -36px rgba(33, 16, 36, 0.55);
-  transform: perspective(1000px) rotateX(var(--rx)) rotateY(var(--ry));
-  transition: transform 0.6s var(--ww-ease), box-shadow 0.4s ease;
-  will-change: transform;
+  box-shadow: 0 24px 44px -30px rgba(33, 16, 36, 0.55);
+  transition: box-shadow 0.45s ease, translate 0.45s var(--ww-ease);
 }
-.ww-card:hover { transition: transform 0.12s linear, box-shadow 0.4s ease; box-shadow: 0 40px 70px -30px rgba(178, 77, 147, 0.45); }
-.ww-card__field {
+.ww-card:hover { translate: 0 -4px; box-shadow: 0 34px 60px -30px rgba(33, 16, 36, 0.7); }
+.ww-card__art {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale 0.9s var(--ww-ease);
+}
+.ww-card:hover .ww-card__art { scale: 1.06; }
+.ww-card::after {
+  /* Keeps the caption readable on any texture. */
+  content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background:
-    radial-gradient(70% 55% at 80% 10%, var(--a), transparent 70%),
-    radial-gradient(60% 50% at 10% 40%, var(--b), transparent 70%),
-    linear-gradient(180deg, transparent 35%, #1b1026 72%);
-  opacity: 0.85;
-  transition: opacity 0.4s ease;
+  background: linear-gradient(180deg, transparent 52%, rgba(22, 11, 37, 0.62) 100%);
 }
-.ww-card__field::before {
-  /* Perspective grid floor inside every card */
-  content: "";
+.ww-card__mark {
   position: absolute;
-  left: -40%;
-  right: -40%;
-  top: 34%;
-  height: 40%;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px) 0 0 / 34px 34px,
-    linear-gradient(0deg, rgba(255, 255, 255, 0.22) 1px, transparent 1px) 0 0 / 34px 34px;
-  transform: perspective(240px) rotateX(64deg);
-  transform-origin: 50% 0;
-  -webkit-mask: linear-gradient(180deg, transparent, #000 30%, transparent);
-  mask: linear-gradient(180deg, transparent, #000 30%, transparent);
-  animation: ww-floor-sm 2.4s linear infinite;
+  left: 50%;
+  top: 45%;
+  width: 30%;
+  height: auto;
+  translate: -50% -50%;
+  filter: drop-shadow(0 6px 18px rgba(22, 11, 37, 0.35));
+  transition: translate 0.6s var(--ww-ease), scale 0.6s var(--ww-ease);
 }
-@keyframes ww-floor-sm { to { background-position: 0 34px, 0 34px; } }
-@keyframes ww-bob { 50% { translate: 0 -10px; } }
-.ww-card__scan {
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 3px);
-  mix-blend-mode: overlay;
-}
-.ww-card__top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
-.ww-card__n { font-family: var(--ww-mono); font-size: 1.3rem; letter-spacing: 0.08em; }
-.ww-card__chip {
-  padding: 5px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.ww-card__copy { margin-top: auto; padding-right: 48px; }
-.ww-card__title { font-family: var(--ww-serif); font-weight: 400; font-size: clamp(1.55rem, 2vw, 1.9rem); line-height: 1.05; }
-.ww-card__body { margin-top: 12px; font-size: 0.82rem; line-height: 1.55; color: rgba(255, 255, 255, 0.68); }
+.ww-card:hover .ww-card__mark { translate: -50% -56%; scale: 1.06; }
 .ww-card__go {
   position: absolute;
-  right: 20px;
-  bottom: 22px;
+  top: 16px;
+  right: 16px;
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  font-size: 1.05rem;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.45s var(--ww-ease);
+  background: rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: 0.95rem;
+  opacity: 0;
+  translate: -4px 4px;
+  transition: opacity 0.35s ease, translate 0.45s var(--ww-ease);
 }
-.ww-card:hover .ww-card__go { background: #fff; color: var(--ww-ink); transform: rotate(45deg); }
+.ww-card:hover .ww-card__go,
+.ww-card:focus-visible .ww-card__go { opacity: 1; translate: 0 0; }
+.ww-card__cap { position: absolute; left: 20px; right: 20px; bottom: 18px; display: grid; gap: 4px; }
+.ww-card__title { font-family: var(--font-body); font-weight: 500; font-size: 1rem; line-height: 1.3; }
+.ww-card__line { font-size: 0.8rem; line-height: 1.45; color: rgba(255, 255, 255, 0.72); }
+/* Subtle motion: textures drift, each mark has its own small loop. */
+.ww-card__art { animation: ww-art-drift 24s ease-in-out infinite alternate; }
+.ww-cap:nth-child(2) .ww-card__art { animation-duration: 28s; animation-delay: -9s; }
+.ww-cap:nth-child(3) .ww-card__art { animation-duration: 21s; animation-delay: -4s; }
+.ww-cap:nth-child(4) .ww-card__art { animation-duration: 26s; animation-delay: -14s; }
+.ww-cap:nth-child(5) .ww-card__art { animation-duration: 23s; animation-delay: -6s; }
+.ww-cap:nth-child(6) .ww-card__art { animation-duration: 30s; animation-delay: -18s; }
+@keyframes ww-art-drift {
+  from { transform: scale(1.05) translate(-1.6%, 1.2%); }
+  to { transform: scale(1.11) translate(1.6%, -1.4%); }
+}
+.ww-card__mark * { transform-box: fill-box; transform-origin: center; }
+.mk-web-l { animation: mk-web-l 3.6s ease-in-out infinite; }
+.mk-web-r { animation: mk-web-r 3.6s ease-in-out infinite; }
+@keyframes mk-web-l { 50% { transform: translateX(-4px); } }
+@keyframes mk-web-r { 50% { transform: translateX(4px); } }
+.mk-burst { animation: mk-spin 36s linear infinite; }
+@keyframes mk-spin { to { transform: rotate(360deg); } }
+.mk-dot { animation: mk-ripple 2.8s ease-in-out infinite; animation-delay: calc(var(--ring) * 0.32s); }
+@keyframes mk-ripple { 0%, 100% { opacity: 0.45; } 30% { opacity: 1; } }
+.mk-toggle { animation: mk-toggle 4.2s ease-in-out infinite; }
+@keyframes mk-toggle { 0%, 40%, 100% { transform: scale(1); } 55% { transform: scale(0.8); } 70% { transform: scale(1.04); } }
+.mk-trail { animation: mk-trail 3.2s ease-in-out infinite alternate; }
+.mk-trail-2 { animation: mk-fade 3.2s ease-in-out infinite alternate; }
+.mk-trail-3 { animation: mk-fade 3.2s ease-in-out -0.4s infinite alternate; }
+@keyframes mk-trail { from { transform: translateX(-4px); } to { transform: translateX(4px); } }
+@keyframes mk-fade { from { opacity: 0.25; } to { opacity: 0.8; } }
+.mk-spark { animation: mk-sway 6s ease-in-out infinite; }
+.mk-twinkle { animation: mk-twinkle 2.6s ease-in-out infinite; }
+@keyframes mk-sway { 50% { transform: rotate(9deg) scale(0.96); } }
+@keyframes mk-twinkle { 0%, 100% { transform: scale(0.55); opacity: 0.55; } 45% { transform: scale(1.1); opacity: 1; } }
+
+.ww-cap__body { margin-top: 14px; max-width: 42ch; font-size: 0.84rem; line-height: 1.6; color: var(--ww-muted); }
 
 /* ---------- Dark framed panel (process) ---------- */
 .ww-panel {
@@ -497,6 +492,13 @@
   border-radius: clamp(20px, 2vw, 32px);
   background: radial-gradient(120% 80% at 80% 0%, #674158 0%, #211024 45%, #160b25 100%);
   color: #fff;
+}
+/* Full-width version: the background spans the page, the content keeps the
+   same column as every other section. */
+.ww-sec--bleed { padding: 0; }
+.ww-panel--bleed {
+  border-radius: 0;
+  padding: clamp(72px, 8vw, 120px) var(--page-gutter);
 }
 .ww-panel__floor { height: 55%; opacity: 0.55; z-index: -1; }
 .ww-panel__glow {
@@ -713,7 +715,7 @@
 .ww-connect__t { margin-top: 8px; font-family: var(--title-font); font-size: clamp(1.8rem, 2.6vw, 2.5rem); line-height: 1; letter-spacing: 0.02em; text-transform: uppercase; }
 
 /* ---------- FAQ ---------- */
-.ww-faq { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(36px, 5vw, 80px); }
+.ww-faq { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr); gap: clamp(36px, 5vw, 80px); }
 .ww-mail {
   display: inline-flex;
   gap: 8px;
@@ -764,9 +766,9 @@
 .ww-cta__sun {
   position: absolute;
   z-index: -1;
-  right: 12%;
-  top: 12%;
-  width: min(14vw, 170px);
+  right: 6%;
+  top: 9%;
+  width: min(10vw, 130px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle at 38% 34%, #ffffff 0%, #f7f8fa 38%, #e4cfed 78%, #c4a5cf 100%);
@@ -778,7 +780,8 @@
   margin-top: 16px;
   font-family: var(--title-font);
   font-weight: 500;
-  font-size: clamp(2.8rem, 6.4vw, 6rem);
+  font-size: clamp(2.6rem, 5.4vw, 5rem);
+  max-width: 82%;
   line-height: 0.98;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -802,11 +805,24 @@
   .ww-hud__rule, .ww-hud__cap, .ww-hud__table { display: none; }
 }
 @media (max-width: 640px) {
-  .ww-cards,
+  .ww-cta__title { max-width: none; }
   .ww-markets,
   .ww-steps ol,
   .ww-connect ol { grid-template-columns: 1fr; }
-  .ww-card { min-height: 420px; }
+  /* Cards become a swipeable row, as in a portfolio carousel. */
+  .ww-cards {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    margin: 0 calc(var(--page-gutter) * -1);
+    padding: 0 var(--page-gutter) 6px;
+    scroll-padding: 0 var(--page-gutter);
+    scrollbar-width: none;
+  }
+  .ww-cards::-webkit-scrollbar { display: none; }
+  .ww-cap { scroll-snap-align: start; }
   .ww-hud--tr { top: 76px; }
   .ww-tag.is-minor { display: none; }
   .ww-hud__clock { font-size: 1.6rem; }
@@ -822,15 +838,16 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ww-grad,
   .ww-hero__display,
   .ww-panel__floor,
-  .ww-card__field::before,
   .ww-ticker__track,
-  .ww-aura,
   .ww-aud__card,
   .ww-cta__sun,
   .ww-hud__live i,
   .ww-time i.is-on { animation: none !important; }
-  .ww-card { transform: none; }
+  .ww-card,
+  .ww-card__art,
+  .ww-card__mark { transition: none; }
+  .ww-card__art,
+  .ww-card__mark * { animation: none !important; }
 }
