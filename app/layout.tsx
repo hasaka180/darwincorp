@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import ScrollReveal from "@/components/ScrollReveal";
 import CookieConsent from "@/components/CookieConsent";
 import AdSense from "@/components/AdSense";
+import GoogleTagManager from "@/components/GoogleTagManager";
 import PromoPopup from "@/components/PromoPopup";
 import StructuredData from "@/components/StructuredData";
 import { SITE_DESCRIPTION, organizationData } from "@/lib/seo";
@@ -82,6 +83,7 @@ export default function RootLayout({
       className={`${instrument.variable} ${handjet.variable} ${inter.variable}`}
     >
       <body>
+        <GoogleTagManager />
         <StructuredData data={organizationData} />
         <SmoothScroll />
         <ScrollReveal />
