@@ -1,16 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
-import Faq, { type QA } from "@/components/Faq";
 import StructuredData from "@/components/StructuredData";
-import { breadcrumbData } from "@/lib/seo";
-import { LinkCards } from "@/components/ExplorePage";
+import { CtaPanel, Deliverables, FaqBlock, MediaHero, Mix, ProcessPanel, Tag, WorkGrid, pad, type WorkItem } from "@/components/ww/Kit";
+import portfolio from "@/lib/content/portfolio.json";
+import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 
-export const metadata = {
-  title: "Brand Identity Design | Dubai & Worldwide",
-  description:
-    "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.",
-  alternates: { canonical: "/services/brand-identity" },
-};
+// Bespoke page: excluded from app/services/[slug]. Visual language follows
+// the homepage and /locations/worldwide (components/ww/Kit).
+
+const TITLE = "Brand Identity Design | Dubai & Worldwide";
+const DESCRIPTION =
+  "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.";
+const PATH = "/services/brand-identity";
+
+export const metadata: Metadata = pageMetadata(TITLE, DESCRIPTION, PATH, "/video/brand-identity.png");
+
+type QA = { q: string; a: string };
 
 const BUILD = [
   {
@@ -82,13 +88,20 @@ const FAQ: QA[] = [
   { q: "Can you apply the new identity to our website and social media?", a: "Yes. Brand identity can be extended into digital experiences, social media, campaigns, presentations and other brand touchpoints." },
 ];
 
+// Every Darwin project with brand identity in its scope, strongest first.
+const WORK: WorkItem[] = ["nexera-robotics", "realpha", "summa-forte", "the-cooking-guild", "nadz-home-healthcare"]
+  .map((slug) => portfolio.find((p) => p.slug === slug))
+  .filter((p): p is (typeof portfolio)[number] => Boolean(p));
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
       "@type": "Service",
       name: "Brand Identity Design",
-      provider: { "@type": "Organization", name: "Darwin Corp", url: "https://thedarwin.co" },
+      serviceType: "Brand identity design",
+      url: `${SITE_URL}${PATH}`,
+      provider: { "@id": `${SITE_URL}/#organization` },
       areaServed: "Worldwide",
       description:
         "Strategy-led brand identity design, brand strategy, naming, logo design, visual identity, guidelines and applications.",
@@ -104,183 +117,154 @@ const jsonLd = {
   ],
 };
 
+const CRUMBS = [{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Brand identity", href: PATH }];
+
 export default function BrandIdentityPage() {
   return (
-    <main className="bi">
-      <StructuredData data={breadcrumbData([{ label: "Home", href: "/" }, { label: "Services", href: "/services" }, { label: "Brand identity", href: "/services/brand-identity" }])} />
+    <main className="ww">
+      <StructuredData data={breadcrumbData(CRUMBS)} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* Hero */}
-      <section className="bi-hero" data-theme="light">
-        <Link href="/services" className="bi-back">← Services</Link>
-        <span className="bi-hero__eyebrow">01 · Brand Identity</span>
-        <h1 className="bi-hero__title">Build a brand people remember.</h1>
-        <p className="bi-hero__lead">
-          A brand is more than a logo. It is the idea people take away, the feeling
-          they associate with you, and the consistency they experience every time
-          they meet your business. At Darwin, we build distinctive brand identities
-          from the ground up, combining strategy, positioning, visual identity and
-          creative direction into one cohesive system.
-        </p>
-        <p className="bi-hero__note">
-          From first impression to every touchpoint, we design brands built to evolve.
-        </p>
-        <div className="bi-hero__cta">
-          <Link href="/contact" className="bi-btn bi-btn--dark">Start a project</Link>
-          <Link href="/work" className="bi-btn bi-btn--ghost">See our work</Link>
-        </div>
-      </section>
+      <MediaHero
+        crumbs={CRUMBS}
+        tag="Services / Brand identity"
+        serif="Build a brand"
+        display="people remember."
+        sub="From first impression to every touchpoint."
+        body="A brand is more than a logo. We build distinctive identities from the ground up, combining strategy, positioning, visual identity and creative direction into one cohesive system."
+        media={{ video: "/video/brand-identity.mp4", poster: "/video/brand-identity.png", alt: "Brand identity artwork by Darwin Corp" }}
+        secondary={{ label: "See brand work", href: "#work" }}
+      />
 
-      <div className="bi-cover reveal-up" data-theme="light">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/video/brand-identity.png" alt="Brand identity by Darwin Corp" />
-      </div>
-
-      {/* More than a logo */}
-      <section className="bi-section bi-section--intro" data-theme="light">
-        <div className="bi-split reveal-up">
-          <h2 className="bi-h2">More than a logo.</h2>
-          <div className="bi-split__body">
-            <p>A strong identity gives your business a clear point of view. We uncover what makes your brand different, define how it should be perceived, and translate that thinking into a visual language that feels unmistakably yours.</p>
-            <p>Whether you&apos;re launching something new, repositioning an existing business, or taking an established brand into its next chapter, we create identities that are built for real-world use, not just a presentation screen.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* What we build */}
-      <section className="bi-section" data-theme="light">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">Capabilities</span>
-          <h2 className="bi-h2">What we build</h2>
+      {/* 01 More than a logo */}
+      <section className="ww-sec ww-split" data-theme="light">
+        <header className="reveal-up">
+          <Tag>01 / Perspective</Tag>
+          <Mix serif="More than" pixel="a logo." />
+          <p className="ww-serif">A strong identity gives your business a clear point of view.</p>
         </header>
-        <div className="bi-build">
-          {BUILD.map((b) => (
-            <div key={b.title} className="bi-build__card reveal-up">
-              <h3>{b.title}</h3>
-              <p>{b.sub}</p>
-              <ul>
-                {b.items.map((it) => (
-                  <li key={it}>{it}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="ww-prose reveal-up">
+          <p className="ww-lead">We uncover what makes your brand different, define how it should be perceived, and translate that thinking into a visual language that feels unmistakably yours.</p>
+          <p>Whether you&apos;re launching something new, repositioning an existing business, or taking an established brand into its next chapter, we create identities that are built for real-world use, not just a presentation screen.</p>
         </div>
       </section>
 
-      {/* Approach */}
-      <section className="bi-section bi-section--dark" data-theme="dark">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">Process</span>
-          <h2 className="bi-h2">Our approach</h2>
-        </header>
-        <div className="bi-steps">
-          {APPROACH.map((s) => (
-            <div key={s.n} className="bi-step reveal-up">
-              <span className="bi-step__n">{s.n}</span>
-              <div className="bi-step__main">
-                <h3>{s.title}</h3>
-                <p className="bi-step__sub">{s.sub}</p>
-                <p className="bi-step__body">{s.body}</p>
-                <p className="bi-step__result"><strong>The result:</strong> {s.result}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Brand system */}
-      <section className="bi-section" data-theme="light">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">The Darwin Brand System</span>
-          <h2 className="bi-h2">Four layers, one connected brand.</h2>
-        </header>
-        <div className="bi-system">
-          {SYSTEM.map((p, i) => (
-            <div key={p.title} className="bi-system__card reveal-up">
-              <span className="bi-system__n">0{i + 1}</span>
-              <h3>{p.title}</h3>
-              <p className="bi-system__tag">{p.tag}</p>
-              <p>{p.body}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* What you receive */}
-      <section className="bi-section bi-section--receive" data-theme="light">
-        <div className="bi-split reveal-up">
+      {/* 02 What we build */}
+      <section className="ww-sec" data-theme="light">
+        <header className="ww-head reveal-up">
           <div>
-            <span className="bi-eyebrow">Deliverables</span>
-            <h2 className="bi-h2">What you receive</h2>
-            <p className="bi-receive__note">Everything organised. Everything ready to use.</p>
+            <Tag>02 / Capabilities</Tag>
+            <Mix serif="What" pixel="we build" />
           </div>
-          <ul className="bi-receive__list">
-            {RECEIVE.map((r) => (
-              <li key={r}>{r}</li>
-            ))}
-          </ul>
-        </div>
+          <p className="ww-body">Five connected disciplines. Most projects use several of them; every one is scoped to what your brand needs now.</p>
+        </header>
+        <ul className="ww-markets">
+          {BUILD.map((b, i) => (
+            <li key={b.title} className="ww-market reveal-up">
+              <span className="svx-market-n">{pad(i + 1)}</span>
+              <h3 className="ww-market__name">{b.title}</h3>
+              <p>{b.sub}</p>
+              <ul className="svx-chips">{b.items.map((it) => <li key={it}>{it}</li>)}</ul>
+            </li>
+          ))}
+        </ul>
       </section>
 
-      {/* Built for */}
-      <section className="bi-section" data-theme="light">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">Built for where you&apos;re going</span>
-          <h2 className="bi-h2">Wherever your brand is right now.</h2>
+      {/* 03 Approach */}
+      <ProcessPanel
+        tag="03 / Our approach"
+        serif="Strategy first."
+        pixel="Then the identity."
+        intro={["Every stage ends with a clear result, so the creative work always has a strategic reason behind it."]}
+        steps={APPROACH.map((s) => ({ title: s.title, body: s.body, result: s.result }))}
+      />
+
+      {/* 04 Brand system */}
+      <section className="ww-sec" data-theme="light">
+        <header className="ww-head reveal-up">
+          <div>
+            <Tag>04 / The Darwin brand system</Tag>
+            <Mix serif="Four layers," pixel="one connected brand." />
+          </div>
         </header>
-        <div className="bi-builtfor">
+        <ul className="ww-markets svx-grid-4">
+          {SYSTEM.map((p, i) => (
+            <li key={p.title} className="ww-market reveal-up">
+              <span className="svx-market-n">{pad(i + 1)}</span>
+              <h3 className="ww-market__name">{p.title}</h3>
+              <span className="ww-market__k" style={{ marginTop: 10 }}>{p.tag}</span>
+              <p>{p.body}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 05 Work */}
+      <section className="ww-sec" data-theme="light" id="work">
+        <header className="ww-head reveal-up">
+          <div>
+            <Tag>05 / Selected work</Tag>
+            <Mix serif="Brands we've" pixel="built." />
+          </div>
+          <p className="ww-body">Identities, packaging and brand systems from deep tech to healthcare.</p>
+        </header>
+        <WorkGrid items={WORK} />
+        <div className="ww-foot"><Link href="/work" className="ww-link">Explore all work <span aria-hidden="true">→</span></Link></div>
+      </section>
+
+      {/* 06 Deliverables */}
+      <section className="ww-sec ww-split" data-theme="light">
+        <header className="reveal-up">
+          <Tag>06 / Deliverables</Tag>
+          <Mix serif="What you" pixel="receive." />
+          <p className="ww-serif">Everything organised. Everything ready to use.</p>
+          <div className="ww-foot"><Link href="/pricing/branding" className="ww-link">Branding pricing <span aria-hidden="true">→</span></Link></div>
+        </header>
+        <div className="reveal-up"><Deliverables items={RECEIVE} /></div>
+      </section>
+
+      {/* 07 Built for */}
+      <section className="ww-sec" data-theme="light">
+        <header className="ww-head reveal-up">
+          <div>
+            <Tag>07 / Built for where you&apos;re going</Tag>
+            <Mix serif="Wherever your brand" pixel="is right now." />
+          </div>
+        </header>
+        <ul className="ww-markets svx-grid-4">
           {BUILT_FOR.map((b) => (
-            <div key={b.title} className="bi-builtfor__card reveal-up">
-              <h3>{b.title}</h3>
+            <li key={b.title} className="ww-market reveal-up">
+              <h3 className="ww-market__name">{b.title}</h3>
               <p>{b.body}</p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      {/* Why Darwin */}
-      <section className="bi-section bi-section--dark" data-theme="dark">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">Why Darwin</span>
-          <h2 className="bi-h2">A brand should do more than look good.</h2>
-          <p className="bi-head__lead">It should make your business easier to recognise, easier to understand, easier to remember, and easier to choose.</p>
+      {/* 08 Why Darwin */}
+      <section className="ww-sec ww-split" data-theme="light">
+        <header className="reveal-up">
+          <Tag>08 / Why Darwin</Tag>
+          <Mix serif="A brand should do" pixel="more than look good." />
+          <p className="ww-serif">It should make your business easier to recognise, understand, remember and choose.</p>
         </header>
-        <div className="bi-why">
-          {WHY.map((w, i) => (
-            <div key={w.title} className="bi-why__row reveal-up">
-              <span className="bi-why__n">0{i + 1}</span>
-              <h3>{w.title}</h3>
-              <p>{w.body}</p>
-            </div>
-          ))}
-        </div>
+        <ol className="svx-rows reveal-up">
+          {WHY.map((w, i) => <li key={w.title}><span>{pad(i + 1)}</span><h3>{w.title}</h3><p>{w.body}</p></li>)}
+        </ol>
       </section>
 
-      {/* FAQ */}
-      <section className="bi-section bi-section--faq" data-theme="light">
-        <header className="bi-head reveal-up">
-          <span className="bi-eyebrow">FAQ</span>
-          <h2 className="bi-h2">Frequently asked questions</h2>
-        </header>
-        <div className="reveal-up">
-          <Faq items={FAQ} />
-        </div>
-      </section>
+      <FaqBlock tag="09 / Good to know" items={FAQ} />
 
-      {/* Final CTA */}
-      <section className="bi-cta" data-theme="dark">
-        <span className="bi-cta__eyebrow">Ready to evolve?</span>
-        <h2 className="bi-cta__title">Your next chapter deserves more than a new logo.</h2>
-        <p className="bi-cta__lead">Let&apos;s build a brand with a point of view, a system with purpose, and an identity designed to grow with you.</p>
-        <Link href="/contact" className="bi-btn bi-btn--light">Start a project →</Link>
-        <p className="bi-cta__sign">Darwin Corp - <em>Designed to Evolve.</em></p>
-      </section>
+      <CtaPanel
+        track="service_cta"
+        tag="Ready to evolve?"
+        serif="Your next chapter deserves"
+        pixel="more than a new logo."
+        line="Darwin Corp. Designed to evolve."
+        body={["Let's build a brand with a point of view, a system with purpose, and an identity designed to grow with you."]}
+        links={[{ label: "Logo & visual identity", href: "/services/logo-visual-identity" }, { label: "Brand identity vs logo", href: "/journal/brand-identity-vs-logo-design" }]}
+      />
 
-      <section className="bi-section" data-theme="light">
-        <h2 className="bi-h2">Explore the next step.</h2>
-        <LinkCards links={[{ label: "Branding pricing", href: "/pricing/branding" }, { label: "Logo and visual identity", href: "/services/logo-visual-identity" }, { label: "Brand identity vs logo", href: "/journal/brand-identity-vs-logo-design" }]} />
-      </section>
       <ContactFooter hideCta />
     </main>
   );

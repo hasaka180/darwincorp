@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@/lib/analytics";
 
 const SERVICES = [
   "Brand Identity",
@@ -109,6 +110,7 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
         return;
       }
       setState("done");
+      track("generate_lead", { form_source: projectBrief ? "start a project page" : "contact page", service: service || undefined });
     } catch {
       setError("Network error. Please check your connection and try again.");
       setState("idle");
@@ -125,7 +127,7 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
             {projectBrief ? "Share what you are building, what needs to change and any requirements you already know. A short brief is enough to start the conversation." : "Tell us about your project, brand, web, or AI creative. We reply within a day."}
           </p>
 
-          <div className="contactp__details">
+          <div className="contactp__details" data-track="contact_page">
             <a className="contactp__detail" href="mailto:hello@thedarwin.co">
               <span className="contactp__detail-label">Email</span>
               hello@thedarwin.co

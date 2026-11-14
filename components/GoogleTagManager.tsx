@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { CONSENT_EVENT, readConsent, type Consent } from "@/lib/consent";
+import { trackContactClicks } from "@/lib/analytics";
 
 const GTM_ID = "GTM-MQL5CFSF";
 
@@ -75,7 +76,11 @@ export default function GoogleTagManager() {
 
     syncConsent();
     window.addEventListener(CONSENT_EVENT, syncConsent);
-    return () => window.removeEventListener(CONSENT_EVENT, syncConsent);
+    const stopClicks = trackContactClicks();
+    return () => {
+      window.removeEventListener(CONSENT_EVENT, syncConsent);
+      stopClicks();
+    };
   }, []);
 
   return null;

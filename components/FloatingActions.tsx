@@ -17,7 +17,7 @@ export default function FloatingActions() {
   return (
     // The widget rests as the message button alone; this flag reveals the
     // WhatsApp and email buttons above it.
-    <div className={`fab ${chatOpen ? "is-open" : ""}`}>
+    <div className={`fab ${chatOpen ? "is-open" : ""}`} data-track="floating_button">
       <a
         className="fab__btn fab__btn--wa"
         href={`https://wa.me/${WHATSAPP}`}

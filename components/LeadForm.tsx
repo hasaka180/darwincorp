@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { track } from "@/lib/analytics";
 
 /** Country dial codes — UAE first, then the rest of the usual traffic. */
 const CODES = [
@@ -82,6 +83,7 @@ export default function LeadForm({
         return;
       }
       setState("done");
+      track("generate_lead", { form_source: source });
       onDone?.();
     } catch {
       setError("Network error. Please check your connection and try again.");

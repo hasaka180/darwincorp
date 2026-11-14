@@ -1,0 +1,128 @@
+/* ================= WW KIT =================
+   Additions to the worldwide (homepage-language) system for service pages and
+   case-study enquiry blocks. Prefixed svx-; tokens come from .ww in
+   app/locations/worldwide/worldwide.css. */
+
+/* ---------- Media hero ---------- */
+.svx-hero .ww-hero__frame {
+  background:
+    radial-gradient(70% 60% at 78% 45%, rgba(178, 77, 147, 0.32), transparent 70%),
+    radial-gradient(90% 70% at 80% 105%, rgba(154, 37, 53, 0.4), transparent 70%),
+    linear-gradient(180deg, #160b25, #1b1026 55%, #23102f);
+}
+.svx-hero__floor { height: 38%; opacity: 0.55; z-index: 0; }
+.svx-hero__glow {
+  position: absolute;
+  right: 8%;
+  top: 22%;
+  width: 40%;
+  height: 50%;
+  background: radial-gradient(closest-side, rgba(255, 91, 58, 0.28), transparent);
+  filter: blur(40px);
+  pointer-events: none;
+}
+.svx-crumbs {
+  position: absolute;
+  z-index: 3;
+  top: clamp(84px, 9vw, 110px);
+  left: clamp(22px, 5vw, 80px);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+.svx-crumbs ol { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+.svx-crumbs li + li::before { content: "/"; margin-right: 10px; color: rgba(255, 255, 255, 0.3); }
+.svx-crumbs a:hover { color: #fff; }
+.svx-crumbs [aria-current] { color: rgba(255, 255, 255, 0.82); }
+.svx-hero__media {
+  position: absolute;
+  z-index: 1;
+  right: clamp(22px, 5vw, 80px);
+  top: 50%;
+  translate: 0 -50%;
+  width: min(36vw, 540px);
+  aspect-ratio: 1;
+  margin: 0;
+  border-radius: clamp(16px, 1.6vw, 26px);
+  overflow: hidden;
+  background: #120a1d;
+  box-shadow: 0 50px 90px -40px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.08), 0 0 80px -20px rgba(178, 77, 147, 0.45);
+  animation-delay: 0.2s;
+}
+.svx-hero__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.svx-hero__copy { width: min(600px, calc(56% - 44px)); }
+
+/* ---------- Project cards ---------- */
+.svx-work { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(26px, 2.6vw, 40px) clamp(14px, 1.4vw, 22px); }
+.svx-work--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.svx-work__card { display: grid; gap: 8px; }
+.svx-work__img {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 10px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--ww-soft);
+  box-shadow: 0 24px 44px -30px rgba(33, 16, 36, 0.55);
+  transition: box-shadow 0.45s ease, translate 0.45s var(--ww-ease);
+}
+.svx-work__img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: scale 1.2s var(--ww-ease); }
+.svx-work__img .ww-card__go { color: #fff; background: rgba(11, 11, 13, 0.35); }
+.svx-work__card:hover .svx-work__img { translate: 0 -4px; box-shadow: 0 34px 60px -30px rgba(33, 16, 36, 0.7); }
+.svx-work__card:hover .svx-work__img img { scale: 1.05; }
+.svx-work__card:hover .ww-card__go,
+.svx-work__card:focus-visible .ww-card__go { opacity: 1; translate: 0 0; }
+.svx-work__title { font-family: var(--ww-serif); font-weight: 400; font-size: clamp(1.5rem, 1.9vw, 1.85rem); line-height: 1.05; }
+.svx-work__svc { font-size: 0.8rem; line-height: 1.5; color: var(--ww-muted); }
+
+/* ---------- Deliverables ---------- */
+.svx-list { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(20px, 3vw, 44px); border-top: 1px solid var(--ww-line); }
+.svx-list li { display: flex; align-items: baseline; gap: 16px; padding: 15px 0; border-bottom: 1px solid var(--ww-line); font-weight: 500; font-size: 0.92rem; }
+.svx-list span { font-family: var(--ww-mono); font-size: 1rem; background: var(--ww-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Capability cards with item chips ---------- */
+.svx-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.svx-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 18px; }
+.svx-chips li { padding: 6px 11px; border: 1px solid var(--ww-line); border-radius: 999px; font-weight: 600; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ww-ink); }
+.svx-market-link { display: flex; flex-direction: column; flex: 1; }
+.svx-market-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.svx-market-link:focus-visible { outline: none; }
+.ww-market:has(.svx-market-link:focus-visible) { outline: 2px solid var(--ww-purple); outline-offset: 4px; }
+.svx-market-n { font-family: var(--ww-mono); font-size: 1.1rem; letter-spacing: 0.1em; background: var(--ww-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ---------- Numbered rows (why Darwin) ---------- */
+.svx-rows { list-style: none; border-top: 1px solid var(--ww-line); }
+.svx-rows li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 4px 10px; padding: 20px 0; border-bottom: 1px solid var(--ww-line); }
+.svx-rows span { grid-row: span 2; font-family: var(--ww-mono); font-size: 1.1rem; color: var(--ww-muted); }
+.svx-rows h3 { font-weight: 600; font-size: clamp(0.98rem, 1.3vw, 1.12rem); }
+.svx-rows p { font-size: 0.88rem; line-height: 1.6; color: var(--ww-muted); }
+
+.svx-steps__result { padding-top: 12px; border-top: 1px dashed rgba(255, 255, 255, 0.16); color: rgba(255, 255, 255, 0.82) !important; }
+
+/* ---------- CTA panel links ---------- */
+.svx-cta-links { list-style: none; display: flex; flex-wrap: wrap; gap: 14px 28px; margin-top: 14px; }
+
+/* ---------- Case-study enquiry block ---------- */
+.svx-case { background: #fff; padding-top: clamp(40px, 5vw, 72px); }
+
+@media (max-width: 1100px) {
+  .svx-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .svx-work { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  /* Stack the hero: media card, then copy, both in the flow. */
+  .svx-hero { height: auto; max-height: none; min-height: 0; }
+  .svx-hero .ww-hero__frame { display: flex; flex-direction: column; gap: 30px; height: auto; padding: 120px clamp(22px, 5vw, 48px) 36px; }
+  .svx-crumbs { top: 82px; left: clamp(22px, 5vw, 48px); }
+  .svx-hero__media { position: relative; right: auto; top: auto; translate: none; width: min(100%, 420px); align-self: center; }
+  .svx-hero .ww-hero__copy { position: relative; left: auto; bottom: auto; width: 100%; }
+}
+@media (max-width: 640px) {
+  .svx-work, .svx-work--2, .svx-grid-4, .svx-list { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .svx-work__img, .svx-work__img img { transition: none; }
+}

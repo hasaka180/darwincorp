@@ -8,8 +8,9 @@ import StructuredData from "@/components/StructuredData";
 import { pageMetadata, breadcrumbData, SITE_URL } from "@/lib/seo";
 
 export function generateStaticParams() {
-  // brand-identity has its own bespoke page (app/services/brand-identity)
-  return [...SERVICES.filter((s) => s.slug !== "brand-identity"), ...SERVICE_PAGES].map((s) => ({
+  // brand-identity and website-development have their own bespoke pages.
+  const BESPOKE = ["brand-identity", "website-development"];
+  return [...SERVICES.filter((s) => !BESPOKE.includes(s.slug)), ...SERVICE_PAGES].map((s) => ({
     slug: s.slug,
   }));
 }

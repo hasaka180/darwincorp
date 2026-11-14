@@ -7,8 +7,8 @@ import ModalCloseButton from '@/components/ModalCloseButton'
 import styles from '@/components/CaseStudyModal.module.css'
 import StructuredData from '@/components/StructuredData'
 import { breadcrumbData } from '@/lib/seo'
-import { PROJECT_CONTEXT } from '@/lib/content/project-links'
-import { LinkCards } from '@/components/ExplorePage'
+import { DEFAULT_CASE_LINKS, PROJECT_CONTEXT } from '@/lib/content/project-links'
+import { CtaPanel } from '@/components/ww/Kit'
 
 export const revalidate = 600
 
@@ -65,6 +65,9 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
   const c = data as CaseStudy
   const back = c.type === 'work' ? '/work' : '/cases'
   const shareUrl = `${SITE_URL}/cases/${c.slug}`
+  const ctx = PROJECT_CONTEXT[c.slug]
+  // Darwin's own projects vs. studies of other brands' work.
+  const own = c.type === 'work'
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -104,10 +107,20 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: c.jsonLd }} />
       )}
       <ModalCloseButton className={styles.close} fallback={back} />
-      <CaseStudyView data={c} shareUrl={shareUrl} heading={PROJECT_CONTEXT[c.slug]?.heading} />
-      {PROJECT_CONTEXT[c.slug] && <section className="subpage" data-theme="light" style={{ minHeight: 0, paddingTop: 60, paddingBottom: 80 }}>
-        <h2>Explore the related expertise.</h2><LinkCards links={PROJECT_CONTEXT[c.slug].links} />
-      </section>}
+      <CaseStudyView data={c} shareUrl={shareUrl} heading={ctx?.heading} />
+      <div className="ww svx-case">
+        <CtaPanel
+          track="case_cta"
+          tag={own ? 'Your brand next' : 'Related expertise'}
+          serif={ctx?.cta?.serif ?? (own ? 'Your brand could be' : 'Want this level of craft')}
+          pixel={ctx?.cta?.pixel ?? (own ? 'the next case study.' : 'for your brand?')}
+          line="Let's make something worth choosing."
+          body={[own
+            ? 'Darwin Corp is a Dubai studio working with brands worldwide on identity, websites and motion. Tell us what you are building.'
+            : 'Darwin Corp is a Dubai studio working with brands worldwide. We bring the same strategic thinking to brand identity, websites and motion for businesses of every size.']}
+          links={ctx?.links ?? DEFAULT_CASE_LINKS}
+        />
+      </div>
     </div>
   )
 }
