@@ -58,7 +58,7 @@ export default function LeadForm({
 }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [cc, setCc] = useState("+971");
+  const [cc, setCc] = useState("+31");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
@@ -165,7 +165,7 @@ export default function LeadForm({
             name="phone"
             autoComplete="tel-national"
             inputMode="tel"
-            placeholder="50 123 4567"
+            placeholder="6 1234 5678"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
