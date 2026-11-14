@@ -1,0 +1,544 @@
+{
+ "palms": [
+  {
+   "trunk": "Palm trunk",
+   "crown": "Palm crown"
+  },
+  {
+   "trunk": "Palm trunk.001",
+   "crown": "Palm crown.001"
+  },
+  {
+   "trunk": "Palm trunk.002",
+   "crown": "Palm crown.002"
+  },
+  {
+   "trunk": "Palm trunk.003",
+   "crown": "Palm crown.003"
+  },
+  {
+   "trunk": "Palm trunk.004",
+   "crown": "Palm crown.004"
+  },
+  {
+   "trunk": "Palm trunk.005",
+   "crown": "Palm crown.005"
+  },
+  {
+   "trunk": "Palm trunk.006",
+   "crown": "Palm crown.006"
+  },
+  {
+   "trunk": "Palm trunk.007",
+   "crown": "Palm crown.007"
+  },
+  {
+   "trunk": "Palm trunk.008",
+   "crown": "Palm crown.008"
+  },
+  {
+   "trunk": "Palm trunk.009",
+   "crown": "Palm crown.009"
+  }
+ ],
+ "boats": [
+  "Sailboat A",
+  "Sailboat B",
+  "Sailboat C",
+  "Sailboat D",
+  "Motor yacht"
+ ],
+ "gull": "Gull 0",
+ "lawn": "Ground grass (scatter only)",
+ "beds": [
+  "Planting bed 0",
+  "Planting bed 1",
+  "Planting bed 2",
+  "Planting bed 3",
+  "Planting bed 4",
+  "Planting bed 5",
+  "Planting bed 6",
+  "Planting bed 7"
+ ],
+ "templates": {
+  "grass_medium_01": [
+   "grass_medium_01/grass_medium_01_large_a_LOD0",
+   "grass_medium_01/grass_medium_01_large_b_LOD0",
+   "grass_medium_01/grass_medium_01_large_c_LOD0",
+   "grass_medium_01/grass_medium_01_mid_a_LOD0",
+   "grass_medium_01/grass_medium_01_mid_b_LOD0",
+   "grass_medium_01/grass_medium_01_mid_c_LOD0",
+   "grass_medium_01/grass_medium_01_small_a_LOD0",
+   "grass_medium_01/grass_medium_01_small_b_LOD0",
+   "grass_medium_01/grass_medium_01_tall_a_LOD0",
+   "grass_medium_01/grass_medium_01_tall_b_LOD0",
+   "grass_medium_01/grass_medium_01_tall_c_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_a_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_b_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_c_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_d_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_e_LOD0",
+   "grass_medium_01/grass_medium_01_tiny_f_LOD0"
+  ],
+  "crystalline_iceplant": [
+   "crystalline_iceplant/crystalline_iceplant_a_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_b_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_c_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_d_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_e_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_f_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_g_LOD0",
+   "crystalline_iceplant/crystalline_iceplant_h_LOD0"
+  ],
+  "wild_rooibos_bush": [
+   "wild_rooibos_bush/wild_rooibos_bush_a",
+   "wild_rooibos_bush/wild_rooibos_bush_b",
+   "wild_rooibos_bush/wild_rooibos_bush_c",
+   "wild_rooibos_bush/wild_rooibos_bush_d",
+   "wild_rooibos_bush/wild_rooibos_bush_e"
+  ]
+ },
+ "plan": [
+  [
+   "Terrace wall / lower",
+   0.35,
+   0.7,
+   "grow",
+   0
+  ],
+  [
+   "Terrace wall / upper",
+   0.65,
+   0.7,
+   "grow",
+   0
+  ],
+  [
+   "Planting bed",
+   1.0,
+   0.35,
+   "grow",
+   0.04
+  ],
+  [
+   "Plinth",
+   0.95,
+   0.55,
+   "grow",
+   0.06
+  ],
+  [
+   "Deck",
+   1.35,
+   0.3,
+   "grow",
+   0.04
+  ],
+  [
+   "Garden step",
+   1.45,
+   0.25,
+   "grow",
+   0.05
+  ],
+  [
+   "Pool wall",
+   1.45,
+   0.45,
+   "grow",
+   0.05
+  ],
+  [
+   "Pool floor",
+   1.45,
+   0.3,
+   "grow",
+   0
+  ],
+  [
+   "Pool water",
+   1.95,
+   0.9,
+   "grow",
+   0
+  ],
+  [
+   "Pool overflow",
+   2.75,
+   0.3,
+   "grow",
+   0
+  ],
+  [
+   "GF / floor",
+   1.8,
+   0.2,
+   "grow",
+   0
+  ],
+  [
+   "GF / back wall",
+   1.85,
+   0.5,
+   "grow",
+   0
+  ],
+  [
+   "Cladding wall",
+   1.9,
+   1.4,
+   "grow",
+   0
+  ],
+  [
+   "Column",
+   1.95,
+   0.5,
+   "grow",
+   0.05
+  ],
+  [
+   "GF / ceiling",
+   2.3,
+   0.2,
+   "grow",
+   0
+  ],
+  [
+   "GF / glazing",
+   2.1,
+   0.6,
+   "grow",
+   0.05
+  ],
+  [
+   "GF / mullion",
+   2.2,
+   0.4,
+   "grow",
+   0.03
+  ],
+  [
+   "GF / timber slat",
+   2.5,
+   0.5,
+   "grow",
+   0.012
+  ],
+  [
+   "GF / sofa",
+   2.35,
+   0.3,
+   "pop",
+   0.03
+  ],
+  [
+   "GF / coffee",
+   2.4,
+   0.3,
+   "pop",
+   0
+  ],
+  [
+   "GF / dining",
+   2.4,
+   0.3,
+   "pop",
+   0.03
+  ],
+  [
+   "GF / kitchen",
+   2.45,
+   0.3,
+   "pop",
+   0.03
+  ],
+  [
+   "GF / island",
+   2.5,
+   0.3,
+   "pop",
+   0
+  ],
+  [
+   "GF / chair",
+   2.5,
+   0.25,
+   "pop",
+   0.02
+  ],
+  [
+   "GF / pendant",
+   2.6,
+   0.25,
+   "pop",
+   0.03
+  ],
+  [
+   "Slab / second floor",
+   2.65,
+   0.5,
+   "drop",
+   0
+  ],
+  [
+   "Soffit LED / second",
+   2.65,
+   0.5,
+   "drop",
+   0
+  ],
+  [
+   "Soffit / terrace",
+   2.65,
+   0.5,
+   "drop",
+   0
+  ],
+  [
+   "Downlight / terrace",
+   2.65,
+   0.5,
+   "drop",
+   0
+  ],
+  [
+   "GF / lounge",
+   2.45,
+   0.3,
+   "pop",
+   0.05
+  ],
+  [
+   "GF / plant",
+   2.55,
+   0.3,
+   "pop",
+   0
+  ],
+  [
+   "Curtain / GF",
+   2.6,
+   0.5,
+   "grow",
+   0.05
+  ],
+  [
+   "Pool coping",
+   1.9,
+   0.3,
+   "grow",
+   0.04
+  ],
+  [
+   "FF / floor",
+   3.0,
+   0.2,
+   "grow",
+   0
+  ],
+  [
+   "FF / back wall",
+   3.0,
+   0.5,
+   "grow",
+   0
+  ],
+  [
+   "FF / partition",
+   3.05,
+   0.45,
+   "grow",
+   0
+  ],
+  [
+   "FF / glazing",
+   3.1,
+   0.6,
+   "grow",
+   0.05
+  ],
+  [
+   "FF / mullion",
+   3.2,
+   0.4,
+   "grow",
+   0.03
+  ],
+  [
+   "FF / timber slat",
+   3.35,
+   0.5,
+   "grow",
+   0.012
+  ],
+  [
+   "FF / bed",
+   3.3,
+   0.3,
+   "pop",
+   0.05
+  ],
+  [
+   "FF / headboard",
+   3.35,
+   0.3,
+   "pop",
+   0.05
+  ],
+  [
+   "FF / lamp",
+   3.4,
+   0.25,
+   "pop",
+   0.05
+  ],
+  [
+   "FF / lounge",
+   3.4,
+   0.3,
+   "pop",
+   0
+  ],
+  [
+   "FF / ceiling",
+   3.6,
+   0.2,
+   "grow",
+   0
+  ],
+  [
+   "Balustrade",
+   3.5,
+   0.45,
+   "grow",
+   0.05
+  ],
+  [
+   "Slab / roof",
+   3.8,
+   0.55,
+   "drop",
+   0
+  ],
+  [
+   "Soffit LED / roof",
+   3.8,
+   0.55,
+   "drop",
+   0
+  ],
+  [
+   "Soffit / balcony",
+   3.8,
+   0.55,
+   "drop",
+   0
+  ],
+  [
+   "Downlight / balcony",
+   3.8,
+   0.55,
+   "drop",
+   0
+  ],
+  [
+   "FF / plant",
+   3.45,
+   0.3,
+   "pop",
+   0
+  ],
+  [
+   "Curtain / FF",
+   3.5,
+   0.5,
+   "grow",
+   0.05
+  ],
+  [
+   "Bollard",
+   4.3,
+   0.3,
+   "pop",
+   0.02
+  ],
+  [
+   "Lounger",
+   4.1,
+   0.35,
+   "pop",
+   0.05
+  ],
+  [
+   "Lounge /",
+   4.2,
+   0.35,
+   "pop",
+   0.03
+  ],
+  [
+   "Fire pit",
+   4.3,
+   0.3,
+   "pop",
+   0.03
+  ],
+  [
+   "Dining /",
+   4.3,
+   0.3,
+   "pop",
+   0.02
+  ],
+  [
+   "Planter",
+   4.3,
+   0.3,
+   "pop",
+   0.05
+  ],
+  [
+   "Agave",
+   4.35,
+   0.4,
+   "pop",
+   0.012
+  ],
+  [
+   "Shrub",
+   4.35,
+   0.45,
+   "pop",
+   0.012
+  ],
+  [
+   "Tree trunk",
+   4.5,
+   0.5,
+   "pop",
+   0.02
+  ],
+  [
+   "Tree canopy",
+   4.6,
+   0.6,
+   "pop",
+   0.07
+  ],
+  [
+   "Palm trunk",
+   4.6,
+   0.8,
+   "pop",
+   0.08
+  ],
+  [
+   "Ground grass",
+   4.4,
+   1.1,
+   "grow",
+   0
+  ]
+ ]
+}

@@ -3,7 +3,8 @@ import ExplorePage from "@/components/ExplorePage";
 import { INDUSTRY_PAGES } from "@/lib/content/industries";
 import { pageMetadata } from "@/lib/seo";
 export const dynamicParams = false;
-export function generateStaticParams() { return INDUSTRY_PAGES.map(p => ({ slug: p.slug })); }
+// real-estate has its own bespoke page (app/industries/real-estate)
+export function generateStaticParams() { return INDUSTRY_PAGES.filter(p => p.slug !== "real-estate").map(p => ({ slug: p.slug })); }
 type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props) {
  const { slug } = await params;
