@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Placeholder from "./Placeholder";
+import Photo from "./Photo";
 
 // Concept profiles for the demonstration. These are not real people.
 const AGENTS = [
@@ -17,7 +17,7 @@ export default function Agents() {
       {AGENTS.map((a, i) => (
         <article key={a.name} className={`re-agent ${open === i ? "is-open" : ""}`}>
           <button type="button" className="re-agent__head" aria-expanded={open === i} onClick={() => setOpen(open === i ? -1 : i)}>
-            <Placeholder label="Agent portrait" tone={(["stone", "sand", "dusk"] as const)[i]} className="re-agent__photo" />
+            <Photo src={`agent-${"abc"[i]}`} alt="" tone={(["stone", "sand", "dusk"] as const)[i]} className="re-agent__photo" />
             <span className="re-agent__id">
               <strong>{a.name}</strong>
               <span>{a.role}</span>

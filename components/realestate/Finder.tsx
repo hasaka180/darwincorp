@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Placeholder from "./Placeholder";
+import Photo from "./Photo";
 
 type Kind = "Villa" | "Apartment" | "Penthouse";
 type Property = { name: string; area: string; beds: number; kind: Kind; price: string; tone: "dusk" | "sand" | "stone" | "night" | "sea" };
@@ -59,7 +59,7 @@ export default function Finder() {
       <ul className="re-finder__grid">
         {PROPERTIES.map(p => (
           <li key={p.name} className={`re-card ${shown.has(p.name) ? "" : "is-hidden"}`} aria-hidden={!shown.has(p.name)}>
-            <Placeholder label={`${p.kind} exterior: ${p.name}`} tone={p.tone} />
+            <Photo src={`prop-${p.name.toLowerCase().replace(/ /g, "-")}`} alt={`${p.kind} exterior: ${p.name}, ${p.area}`} tone={p.tone} />
             <div className="re-card__body">
               <h4>{p.name}</h4>
               <p>{p.area} · {p.beds} {p.beds === 1 ? "Bed" : "Beds"} · {p.kind}</p>

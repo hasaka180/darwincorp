@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import VillaScene3D from "./VillaScene3D";
+import VillaScene3D, { VillaPoster } from "./VillaScene3D";
 
-// The cinematic opener. A live 3D villa builds itself, then cycles through the
-// seasons; scrolling pushes the camera in and fades the copy, handing over to
-// the demo. Scroll progress is shared with the scene through a ref and written
+// The opener. A still render of the villa loads with the page; the live 3D
+// scene (and its ~17 MB of models) loads only when the visitor presses play.
+// Once live, the villa builds itself and cycles through the seasons, and
+// scrolling pushes the camera in. Scrolling always fades the copy. Scroll progress is shared with the scene through a ref and written
 // to a CSS variable in one rAF loop.
 // Staggered entrance for the hero copy (CSS only, so it runs from the first paint).
 const delay = (seconds: number) => ({ "--d": `${seconds}s` }) as React.CSSProperties;
@@ -14,6 +15,7 @@ const delay = (seconds: number) => ({ "--d": `${seconds}s` }) as React.CSSProper
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const progress = useRef(0);
+  const [live, setLive] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -33,7 +35,13 @@ export default function Hero() {
   return (
     <section ref={ref} className="re-hero" data-theme="dark">
       <div className="re-hero__stage">
-        <VillaScene3D progress={progress} />
+        {live ? <VillaScene3D progress={progress} /> : <div className="re-villa re-live"><VillaPoster /></div>}
+        {!live && (
+          <button type="button" className="re-play" onClick={() => setLive(true)}>
+            <span className="re-play__icon" aria-hidden="true" />
+            <span className="re-play__label">Explore the villa in 3D</span>
+          </button>
+        )}
         <div className="re-hero__veil" aria-hidden="true" />
         <div className="re-hero__copy">
           <nav className="re-crumbs re-intro" style={delay(0.15)} aria-label="Breadcrumb">

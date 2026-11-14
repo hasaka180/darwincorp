@@ -8,6 +8,18 @@ import { SEASONS } from "@/lib/villa3d/timeline";
 // until the scene is ready, and stays if WebGL is unavailable. Drag to orbit;
 // pinch, ctrl+wheel or the +/− buttons to zoom. Season buttons hold a season;
 // Auto runs the one-minute cycle; ↺ replays the construction.
+// The Blender render of the villa. The hero shows it on its own until the
+// visitor asks for the 3D scene, and the scene keeps it up while it loads.
+export function VillaPoster() {
+  return (
+    <picture className="re-live__poster">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/assets/villa/pano/spring-morning.webp" srcSet="/assets/villa/pano/spring-morning.webp 1920w, /assets/villa/pano/spring-morning-hd.webp 3200w"
+        sizes="100vw" alt="" fetchPriority="high" />
+    </picture>
+  );
+}
+
 export default function VillaScene3D({ progress }: { progress: { current: number } }) {
   const mount = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
@@ -48,12 +60,7 @@ export default function VillaScene3D({ progress }: { progress: { current: number
 
   return (
     <div className={`re-villa re-live ${ready && !failed ? "is-ready" : ""}`}>
-      <picture className="re-live__poster">
-        <source media="(max-aspect-ratio: 9/10)" srcSet="/assets/villa/pano/spring-morning.webp" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/assets/villa/pano/spring-morning.webp" srcSet="/assets/villa/pano/spring-morning.webp 1920w, /assets/villa/pano/spring-morning-hd.webp 3200w"
-          sizes="100vw" alt="" fetchPriority="high" />
-      </picture>
+      <VillaPoster />
       <div ref={mount} className="re-live__canvas" role="img" aria-label="Live 3D model of the villa. Drag to orbit; use the zoom buttons to zoom." />
       {!failed && (
         <div className="re-villa__ui" role="group" aria-label="Villa scene controls">

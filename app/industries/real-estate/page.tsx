@@ -9,7 +9,7 @@ import Finder from "@/components/realestate/Finder";
 import DetailStory from "@/components/realestate/DetailStory";
 import Agents from "@/components/realestate/Agents";
 import Lens from "@/components/realestate/Lens";
-import Placeholder from "@/components/realestate/Placeholder";
+import Photo from "@/components/realestate/Photo";
 import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 import "./real-estate.css";
 
@@ -143,7 +143,7 @@ export default function RealEstatePage() {
 
         {/* 05 The reveal */}
         <section className="re-reveal" data-theme="dark">
-          <div className="re-reveal__media" aria-hidden="true"><Placeholder label="Abstract architectural form, Darwin motion language" tone="night" /></div>
+          <div className="re-reveal__media" aria-hidden="true"><Photo src="reveal" alt="" tone="night" /></div>
           <div className="re-reveal__copy reveal-up">
             <span className="re-eyebrow">The experience behind the experience</span>
             <h2 className="re-reveal__title">You just experienced what your real estate website could feel like.</h2>
@@ -221,7 +221,7 @@ export default function RealEstatePage() {
           {SERIES.map(s => (
             <li key={s.n} className="reveal-up">
               <Link href={s.href} aria-current={s.href === "/industries/real-estate" ? "page" : undefined}>
-                <Placeholder label={`${s.label} cover image`} tone={s.tone} />
+                <Photo src={`series-${s.label.toLowerCase().replace(/ /g, "-")}`} alt="" tone={s.tone} />
                 <span className="re-series__n">{s.n} / {s.label}</span>
                 <span className="re-series__line">{s.line}</span>
               </Link>

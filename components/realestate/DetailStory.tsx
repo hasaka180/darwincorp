@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import Placeholder from "./Placeholder";
+import Photo from "./Photo";
 
 const STEPS = [
   { k: "Exterior", title: "The first view.", body: "The property introduces itself through its architecture, before any number appears on screen." },
@@ -32,8 +32,8 @@ export default function DetailStory() {
     <div className="re-detail">
       <div className="re-detail__stage" aria-hidden="true">
         <div className="re-detail__frame">
-          <div className={`re-detail__layer ${active === 0 ? "is-on" : ""}`}><Placeholder label="Exterior: Coastal Residence facade" tone="sea" /></div>
-          <div className={`re-detail__layer ${active === 1 ? "is-on" : ""}`}><Placeholder label="Interior: double-height living room" tone="sand" /></div>
+          <div className={`re-detail__layer ${active === 0 ? "is-on" : ""}`}><Photo src="detail-exterior" alt="" tone="sea" /></div>
+          <div className={`re-detail__layer ${active === 1 ? "is-on" : ""}`}><Photo src="detail-interior" alt="" tone="sand" /></div>
           <div className={`re-detail__layer re-detail__layer--plan ${active === 2 ? "is-on" : ""}`}>
             <svg viewBox="0 0 400 260" className="re-plan">
               <rect x="20" y="20" width="360" height="220" />
