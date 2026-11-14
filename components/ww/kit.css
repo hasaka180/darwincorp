@@ -54,6 +54,23 @@
 .svx-hero__media video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .svx-hero__copy { width: min(600px, calc(56% - 44px)); }
 
+/* Scene variant: the homepage dream sky, with a dot-matrix canvas over it. */
+.svx-hero--scene .ww-hero__frame {
+  background:
+    radial-gradient(45% 40% at 71% 58%, rgba(152, 103, 179, 0.28), transparent 70%),
+    radial-gradient(70% 45% at 72% 100%, rgba(207, 116, 102, 0.26), transparent 70%),
+    radial-gradient(40% 35% at 28% 22%, rgba(101, 40, 120, 0.22), transparent 70%),
+    linear-gradient(180deg, #12061f 0%, #1a0924 42%, #2b1130 74%, #44203a 100%);
+}
+.svx-scene { position: absolute; inset: 0; z-index: 0; }
+.svx-scene canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s var(--ww-ease); }
+.svx-scene.is-live canvas { opacity: 1; }
+.svx-hero__scrim {
+  background:
+    linear-gradient(90deg, rgba(12, 6, 22, 0.6) 0%, rgba(12, 6, 22, 0.2) 34%, transparent 48%),
+    linear-gradient(0deg, rgba(12, 6, 22, 0.55) 0%, transparent 38%);
+}
+
 /* ---------- Project cards ---------- */
 .svx-work { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(26px, 2.6vw, 40px) clamp(14px, 1.4vw, 22px); }
 .svx-work--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -119,6 +136,16 @@
   .svx-crumbs { top: 82px; left: clamp(22px, 5vw, 48px); }
   .svx-hero__media { position: relative; right: auto; top: auto; translate: none; width: min(100%, 420px); align-self: center; }
   .svx-hero .ww-hero__copy { position: relative; left: auto; bottom: auto; width: 100%; }
+  .svx-hero--scene .ww-hero__frame { gap: 8px; }
+  .svx-scene {
+    position: relative;
+    inset: auto;
+    height: min(96vw, 420px);
+    margin: 0 calc(clamp(22px, 5vw, 48px) * -1);
+    -webkit-mask-image: linear-gradient(180deg, #000 78%, transparent);
+    mask-image: linear-gradient(180deg, #000 78%, transparent);
+  }
+  .svx-hero--scene .svx-hero__scrim { display: none; }
 }
 @media (max-width: 640px) {
   .svx-work, .svx-work--2, .svx-grid-4, .svx-list { grid-template-columns: 1fr; }

@@ -40,23 +40,30 @@ export function CtaButton({ href, children }: { href: string; children: ReactNod
 }
 
 /** Framed dark hero like the home and worldwide heroes, with a media card in place of the 3D scene. */
-export function MediaHero({ crumbs, tag, serif, display, sub, body, media, secondary }: {
+export function MediaHero({ crumbs, tag, serif, display, sub, body, media, scene, secondary }: {
   crumbs: { label: string; href: string }[];
   tag: string; serif: string; display: string; sub: string; body: string;
-  media: { video: string; poster: string; alt: string };
+  /** A media card on the right, or */
+  media?: { video: string; poster: string; alt: string };
+  /** a full-frame animated scene behind the copy. */
+  scene?: ReactNode;
   secondary: { label: string; href: string };
 }) {
   return (
-    <section className="ww-hero svx-hero">
+    <section className={`ww-hero svx-hero ${scene ? "svx-hero--scene" : ""}`}>
       <div className="ww-hero__frame">
-        <span className="ww-panel__floor svx-hero__floor" aria-hidden="true" />
-        <span className="svx-hero__glow" aria-hidden="true" />
+        {scene ? <>{scene}<div className="ww-hero__scrim svx-hero__scrim" aria-hidden="true" /></> : <>
+          <span className="ww-panel__floor svx-hero__floor" aria-hidden="true" />
+          <span className="svx-hero__glow" aria-hidden="true" />
+        </>}
         <nav className="svx-crumbs" aria-label="Breadcrumb">
           <ol>{crumbs.map((c, i) => <li key={c.href}>{i === crumbs.length - 1 ? <span aria-current="page">{c.label}</span> : <Link href={c.href}>{c.label}</Link>}</li>)}</ol>
         </nav>
-        <figure className="svx-hero__media blur-in">
-          <HeroVideo src={media.video} poster={media.poster} label={media.alt} />
-        </figure>
+        {media && !scene && (
+          <figure className="svx-hero__media blur-in">
+            <HeroVideo src={media.video} poster={media.poster} label={media.alt} />
+          </figure>
+        )}
         <div className="ww-hero__copy svx-hero__copy">
           <Tag>{tag}</Tag>
           <h1 className="ww-hero__title">
