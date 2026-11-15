@@ -1,0 +1,41 @@
+/* Light base, framed plum-dusk card — the homepage dream scene's palette. */
+.page { background: #f0eeee; color: #211b23; min-height: 100vh; }
+.wrap { padding: 140px var(--page-gutter) 100px; }
+
+.label { display: block; font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: .15em; color: #6d626d; margin-bottom: 22px; }
+.title { font-family: var(--title-font); font-size: var(--title-size); font-weight: 400; line-height: 1; letter-spacing: -.01em; margin: 0 0 18px; }
+.lead { font-size: clamp(15px, 1.2vw, 17px); line-height: 1.75; max-width: 620px; color: #665c65; }
+
+.card {
+  margin-top: 48px;
+  max-width: 720px;
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 48px);
+  color: #f6eff5;
+  /* Plum zenith → dusk horizon, crimson dune glow low right, lilac moon haze top left. */
+  background:
+    radial-gradient(60% 70% at 18% 8%, rgba(214, 186, 232, .22), transparent 70%),
+    radial-gradient(70% 80% at 100% 100%, rgba(196, 62, 66, .45), transparent 65%),
+    linear-gradient(160deg, #160725 0%, #2b0f2a 50%, #66334a 100%);
+  box-shadow: 0 30px 70px rgba(43, 15, 42, .28);
+}
+.product { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; flex-wrap: wrap; padding-bottom: 26px; border-bottom: 1px solid rgba(246, 239, 245, .18); }
+.product h2 { font-size: clamp(20px, 2vw, 26px); font-weight: 400; letter-spacing: -.02em; margin: 0; }
+.product p { width: 100%; font-size: 14px; line-height: 1.7; color: #d8c9d6; margin: 6px 0 0; }
+.amount { font-family: var(--title-font); font-size: clamp(32px, 4vw, 48px); line-height: 1; color: #ffb3a1; }
+
+.form { margin: 0; }
+.form button { border: 0; background: none; cursor: pointer; }
+.form button:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.fine { margin-top: 22px; font-size: 12px; line-height: 1.7; color: #cdb8c9; }
+
+.notice { max-width: 720px; margin-top: 32px; padding: 16px 20px; border-radius: 16px; font-size: 14px; line-height: 1.6; background: #ece2ea; border: 1px solid #d9c6d5; color: #4a3247; }
+.notice.error { background: #f6e3e0; border-color: #e5b9b1; color: #7a2b23; }
+
+.textLink { display: inline-block; margin-top: 36px; font-size: 13px; text-decoration: underline; text-underline-offset: 6px; }
+.page a:focus-visible, .page button:focus-visible { outline: 2px solid #ad71a0; outline-offset: 5px; }
+
+@media (max-width: 700px) {
+  .wrap { padding-top: 110px; padding-bottom: 60px; }
+  .card { border-radius: 22px; }
+}
