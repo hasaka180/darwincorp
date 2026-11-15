@@ -6,6 +6,7 @@ import type { NextRequest } from 'next/server'
  * - /studio (the builder UI) always requires the password.
  * - /api/cases write requests (POST/PUT/DELETE) require it too.
  * - /api/upload requires it.
+ * - /api/payment-links (creating client payment links) requires it.
  * - GET /api/cases stays public so the site can read content.
  * - /api/health is public but only answers with a bare liveness result unless
  *   the caller authenticates; the scheduled keep-alive ping has to reach it
@@ -19,7 +20,8 @@ export function middleware(req: NextRequest) {
   const isStudio = pathname.startsWith('/studio')
   const isWrite = pathname.startsWith('/api/cases') && req.method !== 'GET'
   const isUpload = pathname.startsWith('/api/upload')
-  if (!isStudio && !isWrite && !isUpload) return NextResponse.next()
+  const isPayments = pathname.startsWith('/api/payment-links')
+  if (!isStudio && !isWrite && !isUpload && !isPayments) return NextResponse.next()
 
   const password = process.env.STUDIO_PASSWORD
   if (!password) {
@@ -46,5 +48,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/studio/:path*', '/api/cases', '/api/cases/:path*', '/api/upload'],
+  matcher: ['/studio/:path*', '/api/cases', '/api/cases/:path*', '/api/upload', '/api/payment-links'],
 }

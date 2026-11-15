@@ -1,19 +1,16 @@
 import { createHmac, timingSafeEqual } from "node:crypto"
-import { SITE_URL } from "@/lib/seo"
 
 /**
  * Stripe over its REST API — no SDK, just fetch, like the Resend mailer.
  * Configure:
  *   STRIPE_SECRET_KEY      → Dashboard → Developers → API keys (sk_test_… / sk_live_…)
- *   STRIPE_PRICE_ID        → Product catalog → the product → its one-time price (price_…)
  *   STRIPE_WEBHOOK_SECRET  → Developers → Webhooks → the /api/stripe/webhook endpoint (whsec_…)
  */
 
 /** Pinned so a dashboard upgrade can't change the response shapes under us. */
 const STRIPE_VERSION = "2026-10-28.endive"
 
-export const stripeConfigured = () =>
-  Boolean(process.env.STRIPE_SECRET_KEY && process.env.STRIPE_PRICE_ID)
+export const stripeConfigured = () => Boolean(process.env.STRIPE_SECRET_KEY)
 
 type Params = Record<string, unknown>
 
@@ -70,14 +67,6 @@ export async function stripe<T = Record<string, unknown>>(
   return data as T
 }
 
-export type StripePrice = {
-  id: string
-  unit_amount: number | null
-  currency: string
-  type: "one_time" | "recurring"
-  product: { name: string; description: string | null; images: string[] }
-}
-
 export type CheckoutSession = {
   id: string
   url: string | null
@@ -88,10 +77,31 @@ export type CheckoutSession = {
   livemode: boolean
   payment_intent: string | null
   customer_details: { email: string | null; name: string | null } | null
+  payment_link: string | null
 }
 
-export const getPrice = () =>
-  stripe<StripePrice>("GET", `/prices/${process.env.STRIPE_PRICE_ID}`, { expand: ["product"] })
+/** What we store on each link, so the studio list and the order email can describe it. */
+export type LinkMeta = { description: string; client?: string; email?: string; amount: string; currency: string }
+
+export type PaymentLink = {
+  id: string
+  url: string
+  active: boolean
+  created?: number
+  metadata: Partial<LinkMeta>
+  restrictions: { completed_sessions: { count: number; limit: number } } | null
+}
+
+/** Currencies offered in the studio. All two-decimal, so amounts are ×100. */
+export const CURRENCIES = ["aed", "usd", "eur", "gbp", "sar"] as const
+
+/** "2,500.50" → 250050, or null if it isn't a positive amount with ≤ 2 decimals. */
+export function toMinorUnits(input: string) {
+  const clean = input.replace(/[,\s]/g, "")
+  if (!/^\d+(\.\d{1,2})?$/.test(clean)) return null
+  const minor = Math.round(Number(clean) * 100)
+  return minor > 0 && minor <= 99_999_999 ? minor : null
+}
 
 // Currencies Stripe counts in whole units rather than cents.
 const ZERO_DECIMAL = new Set([
@@ -102,14 +112,6 @@ export function formatAmount(amount: number | null, currency: string | null) {
   if (amount == null || !currency) return ""
   const value = ZERO_DECIMAL.has(currency.toLowerCase()) ? amount : amount / 100
   return new Intl.NumberFormat("en-AE", { style: "currency", currency: currency.toUpperCase() }).format(value)
-}
-
-/**
- * Where Stripe sends people back to. The production domain in production;
- * the dev server's own origin locally so a test payment lands back on it.
- */
-export function returnOrigin(req: Request) {
-  return process.env.NODE_ENV === "production" ? SITE_URL : new URL(req.url).origin
 }
 
 /**

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import { escapeHtml, sendMail } from "@/lib/mailer"
-import { formatAmount, verifyWebhook, type CheckoutSession } from "@/lib/stripe"
+import { formatAmount, stripe, verifyWebhook, type CheckoutSession, type PaymentLink } from "@/lib/stripe"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
@@ -47,7 +47,20 @@ export async function POST(req: Request) {
   return NextResponse.json({ received: true })
 }
 
+/** The studio stores what the link was for on the link itself. */
+async function linkDetails(session: CheckoutSession) {
+  if (!session.payment_link) return null
+  try {
+    return (await stripe<PaymentLink>("GET", `/payment_links/${session.payment_link}`)).metadata
+  } catch (err) {
+    console.error(`[stripe-webhook] could not load ${session.payment_link}:`, err)
+    return null
+  }
+}
+
 async function notify(session: CheckoutSession, heading: string) {
+  const link = await linkDetails(session)
+  const forWhat = [link?.description, link?.client].filter(Boolean).join(" — ")
   const amount = formatAmount(session.amount_total, session.currency)
   const email = session.customer_details?.email || "(no email)"
   const name = session.customer_details?.name || ""
@@ -57,16 +70,16 @@ async function notify(session: CheckoutSession, heading: string) {
   const result = await sendMail({
     tag: "stripe-webhook",
     replyTo: session.customer_details?.email || undefined,
-    subject: `${heading}: ${amount} from ${name || email}${session.livemode ? "" : " [TEST]"}`,
+    subject: `${heading}: ${amount} from ${name || email}${forWhat ? ` (${forWhat})` : ""}${session.livemode ? "" : " [TEST]"}`,
     html: `
       <div style="font-family:Inter,Helvetica,Arial,sans-serif;font-size:15px;color:#111">
         <h2 style="margin:0 0 16px;font-size:18px">${escapeHtml(heading)}${session.livemode ? "" : " (test mode)"}</h2>
-        <p style="margin:0 0 8px"><strong>${escapeHtml(amount)}</strong></p>
+        <p style="margin:0 0 8px"><strong>${escapeHtml(amount)}</strong>${forWhat ? ` for ${escapeHtml(forWhat)}` : ""}</p>
         <p style="margin:0 0 8px">${escapeHtml(name)} &lt;${escapeHtml(email)}&gt;</p>
         <p style="margin:0 0 8px"><a href="${escapeHtml(dashboard)}">View in Stripe</a></p>
         <p style="margin:0;color:#666">${escapeHtml(session.id)} · ${escapeHtml(when)} (Dubai)</p>
       </div>`,
-    text: [heading, `Amount:  ${amount}`, `Name:    ${name}`, `Email:   ${email}`, `Stripe:  ${dashboard}`, `Session: ${session.id}`].join("\n"),
+    text: [heading, `Amount:  ${amount}`, `For:     ${forWhat || "-"}`, `Name:    ${name}`, `Email:   ${email}`, `Stripe:  ${dashboard}`, `Session: ${session.id}`].join("\n"),
   })
   if (!result.ok) console.error(`[stripe-webhook] email failed for ${session.id}: ${result.error}`)
 }
