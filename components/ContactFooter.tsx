@@ -50,6 +50,17 @@ const LINKS: { title: string; items: Item[] }[] = [
     ],
   },
   {
+    title: "Find us on",
+    items: [
+      { label: "Behance", href: "https://www.behance.net/darwincorp", ext: true },
+      { label: "Clutch", href: "https://clutch.co/profile/darwin-corp", ext: true },
+      { label: "Sortlist", href: "https://www.sortlist.com/agency/darwin-corp-llcfz", ext: true },
+      { label: "GoodFirms", href: "https://www.goodfirms.co/company/darwin-corp-llcfz", ext: true },
+      { label: "DesignRush", href: "https://www.designrush.com/agency/profile/darwin-corp-llcfz", ext: true },
+      { label: "TechBehemoths", href: "https://techbehemoths.com/company/darwin-corp-llcfz", ext: true },
+    ],
+  },
+  {
     title: "Contact",
     items: [
       { label: "hello@thedarwin.co", href: "mailto:hello@thedarwin.co", ext: true },

@@ -64,6 +64,15 @@ export const SOCIALS = [
       </svg>
     ),
   },
+  {
+    name: "Behance",
+    href: "https://www.behance.net/darwincorp",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M8.2 11.3c.9-.4 1.5-1.2 1.5-2.4C9.7 6.6 8 6 6 6H1v12h5.2c2.1 0 4.1-1 4.1-3.4 0-1.5-.7-2.7-2.1-3.3ZM3.4 8h2.2c.8 0 1.6.2 1.6 1.2 0 .9-.6 1.3-1.4 1.3H3.4V8Zm2.4 7.9H3.4v-3.3h2.5c1 0 1.7.4 1.7 1.6 0 1.2-.8 1.7-1.8 1.7ZM15.1 7h5.3v1.4h-5.3V7Zm2.7 2.8c-2.6 0-4.4 1.9-4.4 4.5 0 2.7 1.7 4.5 4.4 4.5 2 0 3.4-.9 4-2.9h-2.1c-.2.7-1.1 1.1-1.8 1.1-1.3 0-2-.8-2-2.1H22c.2-2.7-1.3-5.1-4.2-5.1Zm-2 3.6c.1-1.1.8-1.8 1.9-1.8 1.2 0 1.7.7 1.8 1.8h-3.7Z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function ContactSection({ projectBrief = false }: { projectBrief?: boolean }) {
