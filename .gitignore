@@ -11,3 +11,6 @@ next-env.d.ts
 
 # redundant local splinecode originals (copies live in public/)
 /*.splinecode
+
+# Local Netlify folder
+.netlify
