@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { ExploreIndex } from "@/components/ExplorePage";
-import { JOURNAL_CATEGORIES } from "@/lib/content/journal";
+import { JOURNAL_CATEGORIES, byPostedDate } from "@/lib/content/journal";
 import { getPublishedItems } from "@/lib/published-content";
 import { pageMetadata } from "@/lib/seo";
 import type { JournalPost } from "@/lib/cases";
@@ -19,7 +19,7 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const category = JOURNAL_CATEGORIES.find(c => c.slug === slug);
   if (!category) notFound();
-  const items = (await getPublishedItems("journal") as JournalPost[]).filter(p => p.category?.toLowerCase() === category.title.toLowerCase());
+  const items = (await getPublishedItems("journal") as JournalPost[]).filter(p => p.category?.toLowerCase() === category.title.toLowerCase()).sort(byPostedDate);
   return <ExploreIndex title={category.title} heading={category.title} description={category.description} path={`/journal/category/${slug}`}
     links={items.map(p => ({ label: p.title, description: p.excerpt, href: `/journal/${p.slug}` }))} />;
 }

@@ -15,3 +15,8 @@ export const EDITORIAL_POSTS: JournalPost[] = guides.map(guide => ({
   cover: ({ branding: "/video/brand-identity.png", "brand-intelligence": "/assets/motion/botanical.webp", "design-technology": "/video/ai-generative.jpg", "website-design": "/video/website.jpg" } as Record<string, string>)[guide.category],
   body: `${guide.body}\n\n## Explore with Darwin\n\n${guide.related.map(([label, href]) => `- [${label}](${href})`).join("\n")}`,
 }));
+
+// Newest first by posted date. The date is free text in the studio, so parse it
+// rather than compare strings; posts without a readable date go last.
+const postedAt = (p: Pick<JournalPost, "date">) => { const t = Date.parse(p.date ?? ""); return Number.isNaN(t) ? -Infinity : t; };
+export const byPostedDate = (a: Pick<JournalPost, "date">, b: Pick<JournalPost, "date">) => postedAt(b) - postedAt(a);

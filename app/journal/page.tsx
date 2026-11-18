@@ -1,6 +1,7 @@
 import ContentGrid from "@/components/ContentGrid";
 import ContactFooter from "@/components/ContactFooter";
 import { getItems, type JournalPost } from "@/lib/cases";
+import { byPostedDate } from "@/lib/content/journal";
 
 export const metadata = {
   title: "Journal",
@@ -14,10 +15,7 @@ export default async function JournalPage() {
   let items: JournalPost[] = [];
   try {
     items = (await getItems("journal")) as JournalPost[];
-    items.sort((a, b) => {
-      if (!!a.featured !== !!b.featured) return a.featured ? -1 : 1;
-      return (b.date ?? "").localeCompare(a.date ?? "");
-    });
+    items.sort(byPostedDate);
   } catch {
     items = [];
   }
