@@ -137,8 +137,11 @@ async function readAll(): Promise<ContentItem[]> {
       const res = await tables.listRows({ databaseId: AW.db!, tableId: AW.col!, queries: [Query.limit(200)] })
       return res.rows.map((r) => parseRow(r as Record<string, unknown>))
     } catch (e) {
-      // Appwrite unreachable/misconfigured — don't crash the build or the API;
-      // fall back to the bundled seed file so the site stays readable.
+      // Appwrite unreachable/misconfigured. During the build, fall back to the
+      // bundled seed file so the deploy still succeeds. At runtime pages are
+      // cached and rebuilt in the background, so throw instead: the rebuild
+      // fails and the last good page stays up rather than seed content.
+      if (process.env.NEXT_PHASE !== 'phase-production-build') throw e
       console.error('Appwrite read failed, falling back to data/cases.json:', e)
       return (await readFileStore()).cases
     }

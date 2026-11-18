@@ -8,7 +8,7 @@ import styles from '@/components/CaseStudyModal.module.css'
 import StructuredData from '@/components/StructuredData'
 import { breadcrumbData } from '@/lib/seo'
 
-export const revalidate = 600
+export const revalidate = 86400
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 

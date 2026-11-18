@@ -13,7 +13,7 @@ import { TOOLS } from "@/lib/tools";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
 // Re-read content hourly so new cases and journal posts appear without a deploy.
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

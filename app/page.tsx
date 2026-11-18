@@ -12,7 +12,7 @@ import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/case
 import { SERVICES } from "@/lib/services";
 import { KNOWS_ABOUT, SAME_AS, SITE_DESCRIPTION } from "@/lib/seo";
 
-export const revalidate = 600;
+export const revalidate = 86400;
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 

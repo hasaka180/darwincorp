@@ -9,16 +9,11 @@ export const metadata = {
     "Blogs from Darwin Corp on brands, design, technology and the digital world.",
   alternates: { canonical: "/journal" },
 };
-export const dynamic = "force-dynamic";
+export const revalidate = 86400; // studio saves refresh it immediately
 
 export default async function JournalPage() {
-  let items: JournalPost[] = [];
-  try {
-    items = (await getItems("journal")) as JournalPost[];
-    items.sort(byPostedDate);
-  } catch {
-    items = [];
-  }
+  const items = (await getItems("journal")) as JournalPost[];
+  items.sort(byPostedDate);
 
   return (
     <main>

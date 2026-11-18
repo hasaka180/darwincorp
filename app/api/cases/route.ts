@@ -2,9 +2,10 @@ import { NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { getItems, upsertItem, type ContentItem, type ContentType } from '@/lib/cases'
 
-// refresh the server-rendered content pages after a write
+// Pages are cached until something changes, so a studio write refreshes all
+// of them: listings, the homepage, and every case and journal page.
 function revalidateContent() {
-  for (const p of ['/', '/work', '/cases', '/journal']) revalidatePath(p)
+  revalidatePath('/', 'layout')
 }
 
 export const runtime = 'nodejs'

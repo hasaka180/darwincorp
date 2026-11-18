@@ -9,11 +9,10 @@ export const metadata = {
     "Selected branding, web and AI creative projects by Darwin Corp, a creative studio based in Dubai and working worldwide.",
   alternates: { canonical: "/work" },
 };
-export const dynamic = "force-dynamic";
+export const revalidate = 86400; // studio saves refresh it immediately
 
 export default async function WorkPage() {
-  let items: ContentItem[] = [];
-  try { items = await getItems("work"); } catch { items = []; }
+  const items: ContentItem[] = await getItems("work");
   return (
     <main>
       <section className="subpage" data-theme="light">

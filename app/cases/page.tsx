@@ -9,11 +9,10 @@ export const metadata = {
     "In-depth case studies on brand identity, website development and AI creative work by Darwin Corp, Dubai.",
   alternates: { canonical: "/cases" },
 };
-export const dynamic = "force-dynamic";
+export const revalidate = 86400; // studio saves refresh it immediately
 
 export default async function CasesPage() {
-  let items: ContentItem[] = [];
-  try { items = await getItems("case"); } catch { items = []; }
+  const items: ContentItem[] = await getItems("case");
 
   return (
     <main>

@@ -10,7 +10,7 @@ import { breadcrumbData } from '@/lib/seo'
 import { DEFAULT_CASE_LINKS, PROJECT_CONTEXT } from '@/lib/content/project-links'
 import { CtaPanel } from '@/components/ww/Kit'
 
-export const revalidate = 600
+export const revalidate = 86400
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 

@@ -5,7 +5,7 @@ import { getPublishedItems } from "@/lib/published-content";
 import { pageMetadata } from "@/lib/seo";
 import type { JournalPost } from "@/lib/cases";
 
-export const revalidate = 600;
+export const revalidate = 86400;
 export const dynamicParams = false;
 export function generateStaticParams() { return JOURNAL_CATEGORIES.map(c => ({ slug: c.slug })); }
 type Props = { params: Promise<{ slug: string }> };
