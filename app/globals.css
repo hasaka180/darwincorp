@@ -4467,16 +4467,34 @@ a.contactp__detail:hover {
   transform: translateY(-3px);
   border-color: transparent;
 }
+.footer__badges {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
 .footer__badge {
   display: inline-block;
-  margin-top: 20px;
   border-radius: 12px;
   transition: transform 0.25s ease;
 }
+/* Both badges share a height so they read as one row. */
 .footer__badge img {
   display: block;
-  width: 180px;
-  height: auto;
+  height: 44px;
+  width: auto;
+}
+/* TechBehemoths' logo is transparent with dark text, which disappears on the
+   dark footer, so it sits on a white card like the Marketing Dubai badge. */
+.footer__badge--card {
+  height: 44px;
+  padding: 7px 12px;
+  background: #fff;
+  border: 1px solid #e4e4e7;
+}
+.footer__badge--card img {
+  height: 100%;
 }
 .footer__badge:hover {
   transform: translateY(-3px);
