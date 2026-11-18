@@ -4467,6 +4467,20 @@ a.contactp__detail:hover {
   transform: translateY(-3px);
   border-color: transparent;
 }
+.footer__badge {
+  display: inline-block;
+  margin-top: 20px;
+  border-radius: 12px;
+  transition: transform 0.25s ease;
+}
+.footer__badge img {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+.footer__badge:hover {
+  transform: translateY(-3px);
+}
 
 /* ---- FAQ accordion ---- */
 .faq {

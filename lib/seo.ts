@@ -45,6 +45,7 @@ export const SAME_AS = [
   "https://www.goodfirms.co/company/darwin-corp-llcfz",
   "https://www.designrush.com/agency/profile/darwin-corp-llcfz",
   "https://techbehemoths.com/company/darwin-corp-llcfz",
+  "https://marketingdubai.ae/agencies/darwin-corp",
   // Verified Google Business Profile (Knowledge Graph id /g/11zwvrt4_b).
   "https://share.google/TFMGbkBayNXfyVpkP",
 ];

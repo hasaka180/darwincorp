@@ -192,6 +192,24 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
               </a>
             ))}
           </div>
+          {/* Marketing Dubai's badge, kept as their embed code (their link and
+              hosted image) so they can see it on the site. Followed link. */}
+          <a
+            className="footer__badge"
+            href="https://marketingdubai.ae/agencies/darwin-corp"
+            title="Darwin Corp on Marketing Dubai"
+            target="_blank"
+            rel="noopener"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://marketingdubai.ae/badge/darwin-corp.svg"
+              alt="Listed on Marketing Dubai"
+              width={220}
+              height={60}
+              loading="lazy"
+            />
+          </a>
         </div>
 
         <div className="footer__cols">
