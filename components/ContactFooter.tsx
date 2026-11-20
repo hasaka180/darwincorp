@@ -58,6 +58,7 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "GoodFirms", href: "https://www.goodfirms.co/company/darwin-corp-llcfz", ext: true },
       { label: "DesignRush", href: "https://www.designrush.com/agency/profile/darwin-corp-llcfz", ext: true },
       { label: "TechBehemoths", href: "https://techbehemoths.com/company/darwin-corp-llcfz", ext: true },
+      { label: "Invest Emirates", href: "https://invest-emirates.ae/directory/advertising-and-marketing/darwin-corp-llcfz", ext: true },
     ],
   },
   {
@@ -194,7 +195,7 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
           </div>
           {/* Directory badges, kept as each directory's embed code (their link,
               hosted image and any data attribute) so their checks can find
-              them. Both are followed links, which both directories require. */}
+              them. All are followed links, which the directories require. */}
           <div className="footer__badges">
             <a
               className="footer__badge"
@@ -223,6 +224,22 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
               <img
                 src="https://cdn.techbehemoths.com/public/static/validation/tb-verified-logo.svg"
                 alt="TechBehemoths Verification"
+                loading="lazy"
+              />
+            </a>
+            <a
+              className="footer__badge footer__badge--card"
+              href="https://invest-emirates.ae/directory/advertising-and-marketing/darwin-corp-llcfz"
+              title="Darwin Corp on Invest Emirates"
+              target="_blank"
+              rel="noopener"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/badges/invest-emirates.svg"
+                alt="Listed on Invest Emirates"
+                width={759}
+                height={112}
                 loading="lazy"
               />
             </a>

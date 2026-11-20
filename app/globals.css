@@ -4479,14 +4479,15 @@ a.contactp__detail:hover {
   border-radius: 12px;
   transition: transform 0.25s ease;
 }
-/* Both badges share a height so they read as one row. */
+/* All badges share a height so they read as one row. */
 .footer__badge img {
   display: block;
   height: 44px;
   width: auto;
 }
-/* TechBehemoths' logo is transparent with dark text, which disappears on the
-   dark footer, so it sits on a white card like the Marketing Dubai badge. */
+/* TechBehemoths' and Invest Emirates' logos are transparent with dark parts,
+   which disappear on the dark footer, so they sit on a white card like the
+   Marketing Dubai badge. */
 .footer__badge--card {
   height: 44px;
   padding: 7px 12px;
