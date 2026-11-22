@@ -39,6 +39,7 @@ export const SAME_AS = [
   "https://www.facebook.com/thedarwincorp",
   "https://www.linkedin.com/company/darwinco/",
   "https://www.behance.net/darwincorp",
+  "https://dribbble.com/darwin-corp",
   // Agency directory profiles.
   "https://clutch.co/profile/darwin-corp",
   "https://www.sortlist.com/agency/darwin-corp-llcfz",

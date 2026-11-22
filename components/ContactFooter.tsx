@@ -53,6 +53,7 @@ const LINKS: { title: string; items: Item[] }[] = [
     title: "Find us on",
     items: [
       { label: "Behance", href: "https://www.behance.net/darwincorp", ext: true },
+      { label: "Dribbble", href: "https://dribbble.com/darwin-corp", ext: true },
       { label: "Clutch", href: "https://clutch.co/profile/darwin-corp", ext: true },
       { label: "Sortlist", href: "https://www.sortlist.com/agency/darwin-corp-llcfz", ext: true },
       { label: "GoodFirms", href: "https://www.goodfirms.co/company/darwin-corp-llcfz", ext: true },
