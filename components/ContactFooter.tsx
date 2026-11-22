@@ -59,6 +59,7 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "DesignRush", href: "https://www.designrush.com/agency/profile/darwin-corp-llcfz", ext: true },
       { label: "TechBehemoths", href: "https://techbehemoths.com/company/darwin-corp-llcfz", ext: true },
       { label: "Invest Emirates", href: "https://invest-emirates.ae/directory/advertising-and-marketing/darwin-corp-llcfz", ext: true },
+      { label: "Get Listed UAE", href: "https://getlisteduae.com/listings/darwin-corp-llcfz", ext: true },
     ],
   },
   {
