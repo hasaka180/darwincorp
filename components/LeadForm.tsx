@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { track } from "@/lib/analytics";
+import { landingSummary } from "@/lib/attribution";
 
 /** Country dial codes — UAE first, then the rest of the usual traffic. */
 const CODES = [
@@ -74,7 +75,7 @@ export default function LeadForm({
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, cc, phone, website, source }),
+        body: JSON.stringify({ name, email, cc, phone, website, source, landing: landingSummary() }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) {
@@ -83,7 +84,7 @@ export default function LeadForm({
         return;
       }
       setState("done");
-      track("generate_lead", { form_source: source });
+      track("generate_lead", { form_source: source, lead_type: "callback", landing_page: landingSummary()?.landing_page });
       onDone?.();
     } catch {
       setError("Network error. Please check your connection and try again.");

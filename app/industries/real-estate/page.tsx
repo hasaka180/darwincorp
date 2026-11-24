@@ -233,7 +233,7 @@ export default function RealEstatePage() {
       <section className="re-sec" data-theme="light">
         <h2 className="re-h2">Explore the next step.</h2>
         <LinkCards links={[
-          { label: "Custom website development", href: "/services/custom-web-development" },
+          { label: "Website design & development", href: "/services/website-development" },
           { label: "UI/UX design", href: "/services/ui-ux-design" },
           { label: "Brand identity", href: "/services/brand-identity" },
           { label: "Architecture studios", href: "/industries/architecture" },

@@ -40,7 +40,11 @@ export function CtaButton({ href, children }: { href: string; children: ReactNod
 }
 
 /** Framed dark hero like the home and worldwide heroes, with a media card in place of the 3D scene. */
-export function MediaHero({ crumbs, tag, serif, display, sub, body, media, scene, secondary }: {
+/** The project brief, opened with a project type already chosen. */
+export const briefHref = (service?: string) =>
+  service ? `/start-a-project?service=${encodeURIComponent(service)}` : "/start-a-project";
+
+export function MediaHero({ crumbs, tag, serif, display, sub, body, media, scene, secondary, service }: {
   crumbs: { label: string; href: string }[];
   tag: string; serif: string; display: string; sub: string; body: string;
   /** A media card on the right, or */
@@ -48,6 +52,8 @@ export function MediaHero({ crumbs, tag, serif, display, sub, body, media, scene
   /** a full-frame animated scene behind the copy. */
   scene?: ReactNode;
   secondary: { label: string; href: string };
+  /** Pre-selects this project type on the brief form. */
+  service?: string;
 }) {
   return (
     <section className={`ww-hero svx-hero ${scene ? "svx-hero--scene" : ""}`}>
@@ -73,7 +79,7 @@ export function MediaHero({ crumbs, tag, serif, display, sub, body, media, scene
           <p className="ww-hero__sub blur-in">{sub}</p>
           <p className="ww-hero__body blur-in">{body}</p>
           <div className="ww-hero__actions blur-in">
-            <CtaButton href="/start-a-project">Start a project</CtaButton>
+            <CtaButton href={briefHref(service)}>Start a project</CtaButton>
             <Link href={secondary.href} className="ww-ghost">{secondary.label} <span aria-hidden="true">→</span></Link>
           </div>
         </div>
@@ -170,8 +176,10 @@ export function FaqBlock({ tag, items }: { tag: string; items: { q: string; a: s
 }
 
 /** The sunset "Start a project" panel that closes the worldwide page. */
-export function CtaPanel({ tag, serif, pixel, line, body, links, track }: {
+export function CtaPanel({ tag, serif, pixel, line, body, links, track, service }: {
   tag: string; serif: string; pixel: string; line: string; body: string[];
+  /** Pre-selects this project type on the brief form. */
+  service?: string;
   links?: { label: string; href: string }[];
   /** data-track value, so enquiry clicks from this panel can be told apart. */
   track?: string;
@@ -194,7 +202,7 @@ export function CtaPanel({ tag, serif, pixel, line, body, links, track }: {
                 </ul>
               )}
             </div>
-            <CtaButton href="/start-a-project">Start a project</CtaButton>
+            <CtaButton href={briefHref(service)}>Start a project</CtaButton>
           </div>
         </div>
       </div>

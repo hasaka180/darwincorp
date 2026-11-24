@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { CONSENT_EVENT, readConsent, type Consent } from "@/lib/consent";
 import { trackContactClicks } from "@/lib/analytics";
+import { captureLanding } from "@/lib/attribution";
 
 const GTM_ID = "GTM-MQL5CFSF";
 
@@ -62,6 +63,8 @@ function loadGoogleTagManager(consent: Consent) {
 
 export default function GoogleTagManager() {
   useEffect(() => {
+    // Not analytics: stays in this tab and only travels inside an enquiry.
+    captureLanding();
     const syncConsent = (event?: Event) => {
       const consent =
         (event as CustomEvent<Consent> | undefined)?.detail ?? readConsent();

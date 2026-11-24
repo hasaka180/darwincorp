@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: Props) {
  const { slug } = await params;
  const page = LOCATION_PAGES.find(p => p.slug === slug);
  if (!page) notFound();
- return pageMetadata(page.title, page.description, `/locations/${slug}`, page.image);
+ return pageMetadata(page.seoTitle ? { absolute: page.seoTitle } : page.title, page.description, `/locations/${slug}`, page.image);
 }
 export default async function Page({ params }: Props) {
  const { slug } = await params;

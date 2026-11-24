@@ -7,10 +7,13 @@ import {
   type CSSProperties,
   type ReactNode,
 } from "react";
+import Link from "next/link";
 
 type Service = {
   id: string;
   name: string;
+  /** The service's own page, linked from the cards' link row and the detail view. */
+  href: string;
   tagline: string;
   blurb: string;
   capabilities: string[];
@@ -67,6 +70,7 @@ const SERVICES: Service[] = [
   {
     id: "brand",
     name: "Brand Identity",
+    href: "/services/brand-identity",
     tagline: "Visual Systems · Logo Design · Brand Strategy",
     blurb:
       "We design brands, systems, and experiences that feel intentional from the first tap to the last interaction.",
@@ -87,6 +91,7 @@ const SERVICES: Service[] = [
   {
     id: "web",
     name: "Website Development",
+    href: "/services/website-development",
     tagline: "Web Design · Development · Webflow",
     blurb:
       "From concept to launch, we build fast, accessible sites and products engineered to scale with your brand.",
@@ -107,6 +112,7 @@ const SERVICES: Service[] = [
   {
     id: "ai",
     name: "AI Creatives",
+    href: "/services/ai-creatives",
     tagline: "AI Art Direction · Motion Design · Generative AI",
     blurb:
       "We blend art direction with generative tooling to produce striking, on-brand visuals at the speed of culture.",
@@ -216,6 +222,14 @@ function ServiceDetail({
                   </span>
                 ))}
               </div>
+              <div className="detail__links">
+                <Link href={service.href} className="detail__link">
+                  View {service.name.toLowerCase()} {Arrow}
+                </Link>
+                <Link href="/start-a-project" className="detail__link detail__link--ghost">
+                  Start a project
+                </Link>
+              </div>
             </div>
 
             <div className="detail__media">
@@ -323,6 +337,17 @@ export default function CoreServices() {
           </div>
         ))}
       </div>
+
+      {/* The cards open an in-page detail view, so these are the section's
+          real links: crawlable, and a direct route for keyboard and
+          screen-reader visitors to each service page. */}
+      <nav className="services__links reveal" style={{ transitionDelay: "0.45s" }} aria-label="Service pages">
+        {SERVICES.map((s) => (
+          <Link key={s.id} href={s.href} className="services__link">
+            {s.name} {Arrow}
+          </Link>
+        ))}
+      </nav>
 
       <div className="toolbox reveal" style={{ transitionDelay: "0.5s" }}>
         <div className="toolbox__intro">

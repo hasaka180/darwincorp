@@ -1,13 +1,9 @@
 import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 import { LEGAL } from "@/lib/legal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Terms of Service",
-  description:
-    "The terms that apply to Darwin Corp's branding, website and AI creative work, and to the use of thedarwin.co.",
-  alternates: { canonical: "/terms" },
-};
+export const metadata = pageMetadata("Terms of Service", "The terms that apply to Darwin Corp's branding, website and AI creative work, and to the use of thedarwin.co.", "/terms");
 
 const SECTIONS: LegalSection[] = [
   {

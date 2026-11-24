@@ -71,6 +71,8 @@
   color: var(--ww-muted);
 }
 .ww-prose { display: grid; gap: 1.05em; align-content: start; }
+.ww-prose p a { color: var(--ww-ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.ww-prose p a:hover { text-decoration-thickness: 2px; }
 .ww-lead { font-size: 1.02rem !important; color: var(--ww-ink) !important; }
 .ww-mini {
   font-family: var(--ww-mono);

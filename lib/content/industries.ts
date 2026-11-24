@@ -14,7 +14,7 @@ const briefs: IndustryBrief[] = [
     sections: [{ title: "Let projects tell a story", body: "We organise portfolios by useful distinctions such as residential, commercial or hospitality. Each project can pair full-room photography with details, context and the decisions behind the space." }, { title: "Make materials tangible", body: "Image sequences, considered crops and editorial captions bring texture and craft into the experience. We balance large imagery with mobile loading and a clear reading order." }, { title: "Turn interest into a brief", body: "A consultation enquiry can ask about property type, location, project stage and intended scope. The aim is to help a prospective client explain what they need before the first conversation." }],
     checklist: ["Project photography and publication permissions", "Project types, services and service areas", "Studio story and approach", "Consultation questions and enquiry destination"],
     question: "Can we add projects ourselves?", answer: "Yes. We can create an editable project template with galleries, project details and credits. We agree the fields and image guidance so future projects fit the original design.",
-    services: [["Custom website development", "custom-web-development"], ["Brand identity", "brand-identity"]], image: "/assets/motion/botanical.webp",
+    services: [["Website design & development", "website-development"], ["Brand identity", "brand-identity"]], image: "/assets/motion/botanical.webp",
   },
   {
     slug: "real-estate", title: "Website Design for Real Estate Companies", heading: "Make every property easier to explore.",
@@ -23,7 +23,7 @@ const briefs: IndustryBrief[] = [
     sections: [{ title: "Property information in context", body: "We design property pages around useful facts: location, layouts, imagery, amenities and availability. Information is structured so mobile visitors can make sense of a listing quickly." }, { title: "A clear enquiry path", body: "Calls to action can connect an enquiry with a specific property or project. We map form fields and routing to the way your sales team handles incoming interest." }, { title: "Integrations with a defined source", body: "Listing feeds, CRM connections and search tools are scoped against the actual provider. We establish where property data lives, how it updates and who is responsible for its accuracy." }],
     checklist: ["Property types and required listing fields", "Approved photography, floor plans and copy", "CRM or listing-feed documentation", "Sales team routing and enquiry requirements"],
     question: "Can you connect our property CRM?", answer: "We can assess the integration once you share the provider and its available API or feed. Data access, update frequency and licensing constraints affect feasibility and scope.",
-    services: [["UI/UX design", "ui-ux-design"], ["Custom website development", "custom-web-development"]], projects: ["realpha"],
+    services: [["UI/UX design", "ui-ux-design"], ["Website design & development", "website-development"]], projects: ["realpha"],
   },
   {
     slug: "personal-brands", title: "Personal Brand Website Design", heading: "A digital presence that feels like you.",
@@ -41,7 +41,7 @@ const briefs: IndustryBrief[] = [
     sections: [{ title: "An atmosphere with substance", body: "Photography, type and pacing convey the venue's character. Room or dining information adds the detail guests need to decide whether the experience fits their plans." }, { title: "Everyday information, easy to find", body: "Menus, opening hours, directions and contact details deserve clear mobile layouts. Editable content helps your team keep seasonal changes current." }, { title: "A considered booking handoff", body: "We map the journey into your reservation or booking provider. Embed options, external booking links and confirmation ownership are reviewed before implementation." }],
     checklist: ["Venue imagery and brand assets", "Menus, room information or experiences", "Booking provider details", "Opening hours, location and contact information"],
     question: "Will this replace our reservation system?", answer: "A website can connect to an existing booking system. Replacing the operational booking platform is a separate requirement that needs its own assessment.",
-    services: [["Website development", "custom-web-development"], ["Brand identity", "brand-identity"]],
+    services: [["Website design & development", "website-development"], ["Brand identity", "brand-identity"]],
   },
   {
     slug: "healthcare", title: "Website Design for Healthcare & Wellness", heading: "Care begins with clarity.",
@@ -77,7 +77,7 @@ const briefs: IndustryBrief[] = [
     sections: [{ title: "A mission people can understand", body: "We organise programmes, audiences and geography so visitors can see what the organisation does. Plain language helps explain the work without assuming prior knowledge." }, { title: "Evidence in context", body: "Reports, programme updates and documented outcomes need clear dates and attribution. We design editable formats for publishing the evidence your team can substantiate." }, { title: "Useful ways to participate", body: "Volunteer applications, partnership enquiries and donation-provider links can each have a distinct journey. We scope any payment integration against the provider you already use or approve." }],
     checklist: ["Mission and programme descriptions", "Approved reporting and impact evidence", "Donation or volunteer platform details", "Content ownership and publication permissions"],
     question: "Can the site collect donations?", answer: "We can assess integration with your approved donation or payment provider. Provider setup, fees, fundraising permissions and financial administration remain separate from the website design scope.",
-    services: [["Custom website development", "custom-web-development"], ["Brand identity", "brand-identity"]],
+    services: [["Website design & development", "website-development"], ["Brand identity", "brand-identity"]],
   },
   {
     slug: "education", title: "Website Design for Education & Training", heading: "Help learners find their next step.",

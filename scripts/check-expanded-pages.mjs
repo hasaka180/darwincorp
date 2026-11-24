@@ -28,9 +28,12 @@ for (const route of routes) {
   assert.equal(new URL(canonical).pathname, route, `${route}: canonical mismatch`);
   assert.ok(sitemap.includes(`<loc>${canonical}</loc>`), `${route}: absent from sitemap`);
   assert.ok(html.includes('property="og:title"'), `${route}: missing social metadata`);
-  const data = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map(m => JSON.parse(m[1]));
+  // Flatten @graph blocks: bespoke pages group their schema in one graph.
+  const data = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .flatMap(m => { const d = JSON.parse(m[1]); return d["@graph"] || [d]; });
   assert.ok(data.some(d => d["@type"] === "BreadcrumbList"), `${route}: missing breadcrumbs`);
-  if (route.startsWith("/services/") || route.startsWith("/industries/") || route.startsWith("/locations/")) {
+  // /locations/worldwide is a bespoke hub described as a WebPage, not a Service.
+  if ((route.startsWith("/services/") || route.startsWith("/industries/") || route.startsWith("/locations/")) && route !== "/locations/worldwide") {
     assert.ok(data.some(d => d["@type"] === "Service"), `${route}: missing Service schema`);
   }
   if (route.startsWith("/journal/") && !route.startsWith("/journal/category/")) {
@@ -47,3 +50,31 @@ for (const route of routes) {
 }
 assert.equal(routes.length, 59);
 console.log(`Verified ${routes.length} pages: unique metadata, H1s, canonicals, sitemap, structured data, local images and ${links} internal links.`);
+
+// One host everywhere. The server 301s every other host to this one, so a
+// canonical, og:url or sitemap entry on another host points at a redirect.
+const robots = fs.readFileSync(path.join(buildDir, "server/app/robots.txt.body"), "utf8");
+const origins = new Set([...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => new URL(m[1]).origin));
+assert.equal(origins.size, 1, `sitemap mixes hosts: ${[...origins]}`);
+const [origin] = origins;
+assert.ok(robots.includes(`Sitemap: ${origin}/sitemap.xml`), "robots.txt names a different sitemap host");
+
+const CORE = ["/", "/services", "/services/website-development", "/services/brand-identity", "/contact", "/journal", "/work", "/cases", "/careers"];
+const ldTypes = html => [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .flatMap(m => { const d = JSON.parse(m[1]); return (d["@graph"] || [d]).map(x => x["@type"]); });
+for (const route of [...CORE, ...routes]) {
+  const html = fs.readFileSync(path.join(buildDir, "server/app", route === "/" ? "index.html" : `${route.slice(1)}.html`), "utf8");
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+  const ogUrl = html.match(/<meta property="og:url" content="([^"]+)"/)?.[1];
+  assert.equal(new URL(canonical).origin, origin, `${route}: canonical on another host`);
+  // A page that inherits the layout's og:url tells social sites it is the homepage.
+  assert.equal(ogUrl && new URL(ogUrl).href.replace(/\/$/, ""), canonical.replace(/\/$/, ""), `${route}: og:url ${ogUrl} is not its canonical`);
+  assert.ok(ldTypes(html).filter(t => t === "FAQPage").length <= 1, `${route}: more than one FAQPage`);
+}
+
+// The homepage is the strongest page; it must link to the main service pages.
+const home = fs.readFileSync(path.join(buildDir, "server/app/index.html"), "utf8");
+for (const target of ["/services/website-development", "/services/brand-identity"]) {
+  assert.ok(home.includes(`href="${target}"`), `homepage does not link to ${target}`);
+}
+console.log(`Verified one host (${origin}) across sitemap, robots, canonicals and og:url on ${CORE.length + routes.length} pages.`);

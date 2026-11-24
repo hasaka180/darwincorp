@@ -4,9 +4,8 @@ import { notFound } from "next/navigation";
 import ContactFooter from "@/components/ContactFooter";
 import RoleDetail from "@/components/RoleDetail";
 import { ROLES, getRole, jobPostingSchema } from "@/lib/careers";
-import { STUDIO_ADDRESS } from "@/lib/seo";
+import { SITE_URL, STUDIO_ADDRESS } from "@/lib/seo";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
 /**
  * One page per opening.

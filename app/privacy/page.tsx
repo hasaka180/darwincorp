@@ -1,13 +1,9 @@
 import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 import { LEGAL } from "@/lib/legal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy",
-  description:
-    "How Darwin Corp, a creative studio in Dubai, collects, uses and protects personal data from enquiries, projects and this website.",
-  alternates: { canonical: "/privacy" },
-};
+export const metadata = pageMetadata("Privacy Policy", "How Darwin Corp, a creative studio in Dubai, collects, uses and protects personal data from enquiries, projects and this website.", "/privacy");
 
 const SECTIONS: LegalSection[] = [
   {
@@ -39,9 +35,15 @@ const SECTIONS: LegalSection[] = [
         <ul>
           <li>
             <strong>Enquiry details.</strong> Your name, email address, phone
-            number, the service you are interested in and whatever you write in
-            your message — submitted through our contact form, a campaign
-            landing page, email, WhatsApp or social media.
+            number, company, the service you are interested in, any budget or
+            timeline you choose to share and whatever you write in your message
+            — submitted through our contact or project forms, a campaign
+            landing page, email, WhatsApp or social media. When you send a form
+            on this site, it also tells us the first page you visited, the
+            website that referred you (its domain only) and any campaign tags
+            in the link you followed, so we know which pages help people find
+            us. This is kept in your browser for that visit only and is not
+            shared with analytics.
           </li>
           <li>
             <strong>Newsletter details.</strong> The email address you give us
@@ -282,6 +284,8 @@ export default function PrivacyPage() {
       eyebrow="Legal"
       title="Privacy Policy"
       lead="What we collect when you talk to us or use this site, why we collect it, and how to get it back or have it removed."
+      // Enquiry attribution added; Terms and Cookies keep the shared date.
+      updated="24 November 2026"
       sections={SECTIONS}
     />
   );

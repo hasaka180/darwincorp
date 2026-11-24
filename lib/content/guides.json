@@ -11,8 +11,8 @@
         "/pricing/websites"
       ],
       [
-        "Custom website development",
-        "/services/custom-web-development"
+        "Website design & development in Dubai",
+        "/services/website-development"
       ]
     ]
   },
@@ -24,8 +24,8 @@
     "body": "WordPress or custom is an incomplete question. WordPress can itself use custom design and code. A more useful comparison looks at the editing system, frontend implementation and maintenance model separately.\n\n## Start with the editorial workflow\n\nWordPress includes publishing tools and can be extended through themes and plugins. Review the actual requirements against the platform rather than assuming a plugin solves them without configuration. [WordPress describes its core features here](https://wordpress.org/about/features/).\n\n## Define what custom means\n\nA custom frontend gives the development team control over layout and behaviour. It still needs a plan for editing: a headless CMS, a limited set of editable fields or a developer-managed site. Ask to see that experience, not only the public pages.\n\nA bespoke frontend can also be connected to WordPress as a content source. This is why the conversation needs to separate where content is managed from how the visitor sees it.\n\n## Compare the ownership model\n\nFor either approach, somebody must maintain dependencies, hosting and integrations. Establish who changes content, who handles technical updates and what happens if you move to another provider. Request documentation of those responsibilities.\n\n## Choose against the brief\n\nFor a publishing-heavy business, editorial convenience may carry the most weight. For an unusual interactive experience, frontend flexibility may be central. Ask for a recommendation that names the tradeoffs and includes the continuing cost of ownership.\n\nA useful proposal explains the chosen architecture in terms your team can evaluate: what you can edit, what requires development and which services need an ongoing subscription.",
     "related": [
       [
-        "Website development",
-        "/services/custom-web-development"
+        "Website design & development",
+        "/services/website-development"
       ],
       [
         "Next.js vs WordPress",

@@ -1,14 +1,9 @@
 import ContactFooter from "@/components/ContactFooter";
 import CareersBoard from "@/components/CareersBoard";
 import { ROLES } from "@/lib/careers";
+import { SITE_URL, pageMetadata } from "@/lib/seo";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
-
-export const metadata = {
-  title: "Careers",
-  description: `Open roles at Darwin Corp, a creative studio in Dubai. We're hiring ${ROLES.map((r) => r.title.toLowerCase()).join(", ")}.`,
-  alternates: { canonical: "/careers" },
-};
+export const metadata = pageMetadata("Careers", `Open roles at Darwin Corp, a creative studio in Dubai. We're hiring ${ROLES.map((r) => r.title.toLowerCase()).join(", ")}.`, "/careers");
 
 export default function CareersPage() {
   return (

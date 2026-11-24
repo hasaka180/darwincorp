@@ -2,13 +2,9 @@ import { getPublishedItems as getItems } from "@/lib/published-content";
 import ContentGrid from "@/components/ContentGrid";
 import ContactFooter from "@/components/ContactFooter";
 import { type ContentItem } from "@/lib/cases";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Case Studies",
-  description:
-    "In-depth case studies on brand identity, website development and AI creative work by Darwin Corp, Dubai.",
-  alternates: { canonical: "/cases" },
-};
+export const metadata = pageMetadata("Case Studies", "In-depth case studies on brand identity, website development and AI creative work by Darwin Corp, Dubai.", "/cases");
 export const revalidate = 86400; // studio saves refresh it immediately
 
 export default async function CasesPage() {

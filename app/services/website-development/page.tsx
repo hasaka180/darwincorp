@@ -10,12 +10,15 @@ import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 // Bespoke page: excluded from app/services/[slug]. Visual language follows
 // the homepage and /locations/worldwide (components/ww/Kit).
 
-const TITLE = "Website Design & Development | Dubai & Worldwide";
+// Targets "website development company in dubai" / "web design company dubai"
+// / "website design & development services". Absolute, so the layout template
+// doesn't add the brand a second time. Keep the Service name below in step.
+const TITLE = "Website Design & Development Company in Dubai | Darwin Corp";
 const DESCRIPTION =
-  "Website design and development by Darwin Corp, a Dubai studio working worldwide. Strategy, UX, custom design, fast builds, a CMS your team can use and a clear enquiry path.";
+  "Custom website design and development from our Dubai studio: strategy, UX, bespoke design, fast builds, a CMS your team can edit and enquiry tracking from launch day.";
 const PATH = "/services/website-development";
 
-export const metadata: Metadata = pageMetadata(TITLE, DESCRIPTION, PATH, "/video/website.jpg");
+export const metadata: Metadata = pageMetadata({ absolute: TITLE }, DESCRIPTION, PATH, "/video/website.jpg");
 
 const BUILD = [
   { title: "Corporate & brand websites", href: "/services/custom-web-development", body: "A credible home for the business: clear positioning, service pages that answer real questions and an enquiry path on every page.", chips: ["Strategy", "Custom design", "CMS"] },
@@ -99,9 +102,10 @@ export default function WebsiteDevelopmentPage() {
         tag="Services / Website development"
         serif="Websites built"
         display="to be chosen."
-        sub="Design and development from Dubai, for businesses worldwide."
+        sub="A website design and development company in Dubai, building for businesses across the UAE and worldwide."
         body="We plan, design and build websites that earn trust quickly, explain what you do clearly and make the next step easy, on a codebase that stays fast as your business grows."
         scene={<PixelScene variant="web" />}
+        service="Website design & development"
         secondary={{ label: "See website work", href: "#work" }}
       />
 
@@ -116,6 +120,7 @@ export default function WebsiteDevelopmentPage() {
           <p className="ww-lead">Most visitors decide within a few pages whether to get in touch. We design those pages around what they need to know: what you do, who it&apos;s for, why you&apos;re credible and what happens next.</p>
           <p>Strategy, design and development happen in one studio. The person shaping the structure works with the person writing the code, so the site that launches is the site that was designed.</p>
           <p>We build for real devices and real connections. Motion and 3D are used when they explain something better than a still image, and always with a simpler path for visitors who need it.</p>
+          <p>For businesses in Dubai and across the UAE, that often means English and Arabic planned together from the start, right-to-left layouts that are designed rather than mirrored, and enquiries that reach your team by email or WhatsApp. If you are comparing agencies, our guide to <Link href="/journal/website-design-cost-dubai">website design costs in Dubai</Link> explains what drives a quote.</p>
         </div>
       </section>
 
@@ -196,7 +201,8 @@ export default function WebsiteDevelopmentPage() {
         pixel="starts with a brief."
         line="Let's make something worth choosing."
         body={["Tell us what you're building, what needs to change and when you'd like to launch. A short brief is enough to start the conversation."]}
-        links={[{ label: "Website cost calculator", href: "/tools/website-cost-calculator" }, { label: "Custom web development", href: "/services/custom-web-development" }]}
+        service="Website design & development"
+        links={[{ label: "Website cost calculator", href: "/tools/website-cost-calculator" }, { label: "Website pricing", href: "/pricing/websites" }, { label: "Website redesign", href: "/services/website-redesign" }]}
       />
 
       <ContactFooter hideCta />

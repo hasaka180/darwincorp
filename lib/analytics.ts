@@ -6,7 +6,10 @@
  * so without consent these pushes just sit in an array that nothing reads.
  *
  * Events, each mapped to a GA4 event tag in GTM:
- *   generate_lead       a form submission the server accepted (form_source)
+ *   generate_lead       a form submission the server accepted. Primary
+ *                       conversion. Params: form_source, lead_type
+ *                       (project_brief | contact | callback | email_only),
+ *                       service, landing_page. Never anything the visitor typed.
  *   whatsapp_click      any wa.me / WhatsApp link
  *   email_click         any mailto: link
  *   phone_click         any tel: link

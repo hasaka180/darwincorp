@@ -138,8 +138,8 @@ export default function Hero() {
 
       <div className="hero__pitch blur-in">
         <p className="hero__pitch-text">
-          Creating brands, digital experiences, and stories designed to evolve
-          with people, culture, and technology.
+          A creative agency in Dubai, creating brands, websites and digital
+          experiences designed to evolve with people, culture and technology.
         </p>
 
         <div className="hero__stats">
@@ -163,7 +163,9 @@ export default function Hero() {
           </div>
         </div>
 
-        <Link className="cta-btn" href="/contact">
+        {/* The project brief (budget, timeline) rather than the general
+            contact form, like every other "start" CTA on the site. */}
+        <Link className="cta-btn" href="/start-a-project">
           <span className="cta-btn__fluid" aria-hidden="true" />
           <span className="cta-btn__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

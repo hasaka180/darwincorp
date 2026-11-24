@@ -2,13 +2,9 @@ import Link from "next/link";
 import LegalPage, { type LegalSection } from "@/components/LegalPage";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
 import { LEGAL } from "@/lib/legal";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Cookie Policy",
-  description:
-    "Which cookies and local storage thedarwin.co uses, what each one is for, and how to change your choice at any time.",
-  alternates: { canonical: "/cookies" },
-};
+export const metadata = pageMetadata("Cookie Policy", "Which cookies and local storage thedarwin.co uses, what each one is for, and how to change your choice at any time.", "/cookies");
 
 type Row = { name: string; purpose: string; type: string; life: string };
 

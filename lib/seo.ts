@@ -1,12 +1,31 @@
 import type { Metadata } from "next";
 
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co").replace(/\/$/, "");
+/**
+ * The one canonical origin for the whole site: canonical tags, og:url, the
+ * sitemap, robots.txt and every JSON-LD @id are built from it.
+ *
+ * It is the apex because that is the host Netlify serves: since the move from
+ * Vercel (Nov 2026) www.thedarwin.co 301s to thedarwin.co. The old default was
+ * www, which left every canonical and sitemap URL pointing at a redirect.
+ * If the primary domain is ever switched back to www in Netlify, set
+ * NEXT_PUBLIC_SITE_URL to match rather than editing this line.
+ */
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://thedarwin.co").replace(/\/$/, "");
+export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const absoluteUrl = (path: string) => new URL(path, `${SITE_URL}/`).href;
-export function pageMetadata(title: string, description: string, path: string, image = "/opengraph-image.jpg"): Metadata {
+
+/**
+ * Page metadata. Pass `{ absolute }` for a title that already names the brand,
+ * so the layout template doesn't append " - Darwin Corp" a second time.
+ */
+export function pageMetadata(title: string | { absolute: string }, description: string, path: string, image = "/opengraph-image.jpg"): Metadata {
+  // Social cards get the same text as <title>: the layout's template adds the
+  // brand to plain titles, but it doesn't apply to og:title / twitter:title.
+  const text = typeof title === "string" ? `${title} - Darwin Corp` : title.absolute;
   return {
     title, description, alternates: { canonical: path },
-    openGraph: { type: "website", title, description, url: path, images: [{ url: image }] },
-    twitter: { card: "summary_large_image", title, description, images: [image] },
+    openGraph: { type: "website", siteName: "Darwin Corp", locale: "en_AE", title: text, description, url: path, images: [{ url: image }] },
+    twitter: { card: "summary_large_image", title: text, description, images: [image] },
   };
 }
 export function breadcrumbData(items: { label: string; href: string }[]) {
@@ -20,7 +39,6 @@ export const STUDIO_ADDRESS = {
   streetAddress: "6th Floor, Al Meydan Road, Nad Al Sheba 1, Nad Al Sheba",
   addressLocality: "Dubai",
   addressRegion: "Dubai",
-  postalCode: "00000",
   addressCountry: "AE",
 } as const;
 
@@ -69,8 +87,10 @@ export const KNOWS_ABOUT = [
  * profiles — two partial definitions of one entity.
  */
 export const organizationData = {
-  "@context": "https://schema.org", "@type": "Organization", "@id": `${SITE_URL}/#organization`,
-  name: "Darwin Corp", url: SITE_URL, logo: absoluteUrl("/darwin_black.svg"),
+  "@context": "https://schema.org", "@type": "Organization", "@id": ORGANIZATION_ID,
+  // Raster and square: Google's logo guidelines want a format Google Images
+  // indexes, at least 112px. Matches the homepage ProfessionalService.
+  name: "Darwin Corp", url: SITE_URL, logo: absoluteUrl("/icon.png"),
   description: SITE_DESCRIPTION,
   email: "hello@thedarwin.co", telephone: "+971555355897",
   address: STUDIO_ADDRESS,

@@ -6,13 +6,12 @@ import CaseStudyView from '@/components/CaseStudyView'
 import ModalCloseButton from '@/components/ModalCloseButton'
 import styles from '@/components/CaseStudyModal.module.css'
 import StructuredData from '@/components/StructuredData'
-import { breadcrumbData } from '@/lib/seo'
+import { breadcrumbData, ORGANIZATION_ID, SITE_URL } from '@/lib/seo'
 import { DEFAULT_CASE_LINKS, PROJECT_CONTEXT } from '@/lib/content/project-links'
 import { CtaPanel } from '@/components/ww/Kit'
 
 export const revalidate = 86400
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 
 const abs = (src?: string) =>
   !src ? undefined : src.startsWith('http') ? src : `${SITE_URL}${src.startsWith('/') ? '' : '/'}${src}`
@@ -75,16 +74,28 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
     description: c.intro || `${c.title}, a case study by Darwin Corp.`,
     image: abs(c.cover) ? [abs(c.cover)] : undefined,
     datePublished: datePublished(c.year),
-    author: { '@type': 'Organization', name: 'Darwin Corp' },
-    publisher: { '@type': 'Organization', name: 'Darwin Corp', url: SITE_URL },
+    author: { '@id': ORGANIZATION_ID },
+    publisher: { '@id': ORGANIZATION_ID },
     url: shareUrl,
     mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
     about: c.client || undefined,
   }
 
-  // FAQPage JSON-LD (AEO) when the case has FAQs.
+  // JSON-LD written in the studio. Parsed here so a typo can't ship invalid
+  // markup, and re-serialised so a stray "</script>" can't break the page.
+  let studioLd: string | null = null
+  if (c.jsonLd && c.jsonLd.trim()) {
+    try {
+      studioLd = JSON.stringify(JSON.parse(c.jsonLd)).replace(/</g, '\\u003c')
+    } catch {
+      studioLd = null
+    }
+  }
+
+  // FAQPage JSON-LD when the case has FAQs, unless the studio JSON-LD already
+  // carries one: two FAQPage blocks on one URL is a Search Console error.
   const faqLd =
-    c.faqs && c.faqs.length > 0
+    c.faqs && c.faqs.length > 0 && !studioLd?.includes('"FAQPage"')
       ? {
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
@@ -103,8 +114,8 @@ export default async function CasePage({ params }: { params: Promise<{ slug: str
       {faqLd && (
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }} />
       )}
-      {c.jsonLd && c.jsonLd.trim() && (
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: c.jsonLd }} />
+      {studioLd && (
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: studioLd }} />
       )}
       <ModalCloseButton className={styles.close} fallback={back} />
       <CaseStudyView data={c} shareUrl={shareUrl} heading={ctx?.heading} />

@@ -6,11 +6,10 @@ import JournalView from '@/components/JournalView'
 import ModalCloseButton from '@/components/ModalCloseButton'
 import styles from '@/components/CaseStudyModal.module.css'
 import StructuredData from '@/components/StructuredData'
-import { breadcrumbData } from '@/lib/seo'
+import { breadcrumbData, ORGANIZATION_ID, SITE_URL } from '@/lib/seo'
 
 export const revalidate = 86400
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.thedarwin.co'
 
 const abs = (src?: string) =>
   !src ? undefined : src.startsWith('http') ? src : `${SITE_URL}${src.startsWith('/') ? '' : '/'}${src}`
@@ -70,7 +69,7 @@ export default async function JournalPostPage({ params }: { params: Promise<{ sl
     author: p.author
       ? { '@type': 'Person', name: p.author }
       : { '@type': 'Organization', name: 'Darwin Corp' },
-    publisher: { '@type': 'Organization', name: 'Darwin Corp', url: SITE_URL },
+    publisher: { '@id': ORGANIZATION_ID },
     url: shareUrl,
     mainEntityOfPage: { '@type': 'WebPage', '@id': shareUrl },
   }

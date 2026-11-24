@@ -10,7 +10,7 @@ import AdSense from "@/components/AdSense";
 import GoogleTagManager from "@/components/GoogleTagManager";
 import PromoPopup from "@/components/PromoPopup";
 import StructuredData from "@/components/StructuredData";
-import { SITE_DESCRIPTION, organizationData } from "@/lib/seo";
+import { SITE_DESCRIPTION, SITE_URL, organizationData } from "@/lib/seo";
 
 const instrument = Instrument_Serif({
   subsets: ["latin"],
@@ -33,9 +33,8 @@ const inter = Inter({
   display: "swap",
 });
 
-// The site answers on www; the apex redirects there, so canonical and share
-// URLs point at www to avoid sending crawlers through a redirect.
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
+// Canonical and share URLs come from lib/seo's SITE_URL, the host Netlify
+// actually serves, so crawlers are never sent through a redirect.
 
 const DESCRIPTION = SITE_DESCRIPTION;
 

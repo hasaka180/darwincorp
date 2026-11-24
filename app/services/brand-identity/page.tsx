@@ -10,12 +10,14 @@ import { breadcrumbData, pageMetadata, SITE_URL } from "@/lib/seo";
 // Bespoke page: excluded from app/services/[slug]. Visual language follows
 // the homepage and /locations/worldwide (components/ww/Kit).
 
-const TITLE = "Brand Identity Design | Dubai & Worldwide";
+// Targets "branding agency dubai" / "creative branding agency dubai" /
+// "brand identity design dubai". Absolute, so the brand isn't appended twice.
+const TITLE = "Branding Agency in Dubai | Brand Identity Design — Darwin Corp";
 const DESCRIPTION =
-  "Strategy-led brand identity design by Darwin Corp, Dubai. Brand strategy, naming, logo design, visual identity, guidelines and brand applications, distinctive brand systems built to evolve.";
+  "Strategy-led brand identity from a Dubai branding studio: positioning, naming, logo design, visual identity, bilingual guidelines and brand applications, built as one system.";
 const PATH = "/services/brand-identity";
 
-export const metadata: Metadata = pageMetadata(TITLE, DESCRIPTION, PATH, "/video/brand-identity.png");
+export const metadata: Metadata = pageMetadata({ absolute: TITLE }, DESCRIPTION, PATH, "/video/brand-identity.png");
 
 type QA = { q: string; a: string };
 
@@ -131,10 +133,11 @@ export default function BrandIdentityPage() {
         tag="Services / Brand identity"
         serif="Build a brand"
         display="people remember."
-        sub="From first impression to every touchpoint."
+        sub="A branding agency in Dubai, building identities for brands across the UAE and worldwide."
         body="A brand is more than a logo. We build distinctive identities from the ground up, combining strategy, positioning, visual identity and creative direction into one cohesive system."
         scene={<PixelScene variant="brand" />}
         secondary={{ label: "See brand work", href: "#work" }}
+        service="Brand identity"
       />
 
       {/* 01 More than a logo */}
@@ -147,6 +150,7 @@ export default function BrandIdentityPage() {
         <div className="ww-prose reveal-up">
           <p className="ww-lead">We uncover what makes your brand different, define how it should be perceived, and translate that thinking into a visual language that feels unmistakably yours.</p>
           <p>Whether you&apos;re launching something new, repositioning an existing business, or taking an established brand into its next chapter, we create identities that are built for real-world use, not just a presentation screen.</p>
+          <p>For brands in Dubai and the wider GCC, real-world use usually means English and Arabic from day one: wordmarks, type pairings and layouts that hold up in both scripts, on signage as well as on screens. If you are still weighing up studios, read <Link href="/journal/how-to-choose-a-branding-agency">how to choose a branding agency</Link> and <Link href="/journal/brand-identity-cost-dubai">what brand identity costs in Dubai</Link>.</p>
         </div>
       </section>
 
@@ -262,8 +266,9 @@ export default function BrandIdentityPage() {
         serif="Your next chapter deserves"
         pixel="more than a new logo."
         line="Darwin Corp. Designed to evolve."
+        service="Brand identity"
         body={["Let's build a brand with a point of view, a system with purpose, and an identity designed to grow with you."]}
-        links={[{ label: "Logo & visual identity", href: "/services/logo-visual-identity" }, { label: "Brand identity vs logo", href: "/journal/brand-identity-vs-logo-design" }]}
+        links={[{ label: "Logo & visual identity", href: "/services/logo-visual-identity" }, { label: "Branding pricing", href: "/pricing/branding" }, { label: "Website design & development", href: "/services/website-development" }]}
       />
 
       <ContactFooter hideCta />

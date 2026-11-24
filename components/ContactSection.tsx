@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 import { track } from "@/lib/analytics";
+import { BRIEF_EMAIL_KEY, landingSummary } from "@/lib/attribution";
 
+// Project types, matching the service pages. Service CTAs open the brief with
+// ?service=<one of these>, so the visitor doesn't have to choose again.
 const SERVICES = [
-  "Brand Identity",
-  "Website Development",
-  "AI Creatives",
+  "Website design & development",
+  "Brand identity",
+  "Website redesign",
+  "UI/UX design",
+  "Motion design",
+  "AI creatives",
   "Something else",
 ];
 
@@ -87,6 +94,7 @@ export const SOCIALS = [
 export default function ContactSection({ projectBrief = false }: { projectBrief?: boolean }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [company, setCompany] = useState("");
   const [service, setService] = useState(SERVICES[0]);
   const [cc, setCc] = useState("+971");
   const [phone, setPhone] = useState("");
@@ -97,6 +105,20 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
   const [error, setError] = useState("");
   // Honeypot: real people leave it empty, bots fill it in.
   const [website, setWebsite] = useState("");
+
+  // Read once after mount (not during render) so the server HTML and the
+  // first client render match.
+  useEffect(() => {
+    const wanted = new URLSearchParams(window.location.search).get("service");
+    const match = SERVICES.find((s) => s.toLowerCase() === wanted?.toLowerCase());
+    if (match) setService(match);
+    try {
+      const saved = window.sessionStorage.getItem(BRIEF_EMAIL_KEY);
+      if (saved) setEmail((current) => current || saved);
+    } catch {
+      /* storage blocked */
+    }
+  }, []);
 
   // Posts to the server rather than handing off to mailto: an enquiry should
   // not depend on the visitor having a mail client, and this way it is
@@ -113,12 +135,14 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
         body: JSON.stringify({
           name,
           email,
+          company,
           cc,
           phone,
           service,
           message: projectBrief ? `${message}\n\nBudget: ${budget || "To discuss"}\nTarget launch: ${timeline || "Flexible"}` : message,
           website,
           source: projectBrief ? "start a project page" : "contact page",
+          landing: landingSummary(),
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -128,7 +152,14 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
         return;
       }
       setState("done");
-      track("generate_lead", { form_source: projectBrief ? "start a project page" : "contact page", service: service || undefined });
+      // No personal data in analytics: the form, the project type and the
+      // page the visit started on, nothing the visitor typed.
+      track("generate_lead", {
+        form_source: projectBrief ? "start a project page" : "contact page",
+        lead_type: projectBrief ? "project_brief" : "contact",
+        service: service || undefined,
+        landing_page: landingSummary()?.landing_page,
+      });
     } catch {
       setError("Network error. Please check your connection and try again.");
       setState("idle");
@@ -179,16 +210,23 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
         <form className="contactp__form reveal-up" onSubmit={onSubmit}>
           <label className="field">
             <span>Name</span>
-            <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Your name" />
+            <input value={name} onChange={(e) => setName(e.target.value)} required placeholder="Your name" autoComplete="name" />
           </label>
 
           <label className="field">
             <span>Email</span>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="you@company.com" />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="you@company.com" autoComplete="email" />
           </label>
 
+          {projectBrief && (
+            <label className="field">
+              <span>Company (optional)</span>
+              <input value={company} onChange={(e) => setCompany(e.target.value)} placeholder="Company or brand name" autoComplete="organization" maxLength={120} />
+            </label>
+          )}
+
           <label className="field">
-            <span>Service</span>
+            <span>{projectBrief ? "Project type" : "Service"}</span>
             <select value={service} onChange={(e) => setService(e.target.value)}>
               {SERVICES.map((s) => (
                 <option key={s} value={s}>{s}</option>
@@ -196,7 +234,9 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
             </select>
           </label>
 
-          <label className="field">
+          {/* Full width on the brief, which has an odd number of half-width
+              fields once Company is added. */}
+          <label className={projectBrief ? "field field--full" : "field"}>
             <span>Contact number</span>
             <div className="field__phone">
               <select value={cc} onChange={(e) => setCc(e.target.value)} aria-label="Country code">
@@ -232,6 +272,11 @@ export default function ContactSection({ projectBrief = false }: { projectBrief?
           <button type="submit" className="contactp__submit" disabled={state !== "idle"}>
             {state === "done" ? "Enquiry sent ✓" : state === "sending" ? "Sending…" : "Send enquiry"}
           </button>
+
+          <p className="contactp__privacy">
+            We use these details only to reply to your enquiry. See our{" "}
+            <Link href="/privacy">privacy policy</Link>.
+          </p>
 
           {(error || state === "done") && (
             <p className="contactp__status" role={error ? "alert" : "status"}>

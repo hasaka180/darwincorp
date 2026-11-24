@@ -10,11 +10,10 @@ import BestOfWeek from "@/components/BestOfWeek";
 import ContactFooter from "@/components/ContactFooter";
 import { getItems, itemType, type CaseStudy, type JournalPost } from "@/lib/cases";
 import { SERVICES } from "@/lib/services";
-import { KNOWS_ABOUT, SAME_AS, SITE_DESCRIPTION } from "@/lib/seo";
+import { KNOWS_ABOUT, ORGANIZATION_ID, SAME_AS, SITE_DESCRIPTION, SITE_URL, STUDIO_ADDRESS } from "@/lib/seo";
 
 export const revalidate = 86400;
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
 /**
  * Organization schema for the homepage. Gives Google an explicit site name,
@@ -24,7 +23,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 const ORG_LD = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/#organization`,
+  "@id": ORGANIZATION_ID,
   name: "Darwin Corp",
   url: SITE_URL,
   logo: `${SITE_URL}/icon.png`,
@@ -32,11 +31,9 @@ const ORG_LD = {
   description: SITE_DESCRIPTION,
   email: "hello@thedarwin.co",
   telephone: "+971555355897",
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Dubai",
-    addressCountry: "AE",
-  },
+  // Same address as the site-wide Organization; two different addresses under
+  // one @id read as conflicting facts about the business.
+  address: STUDIO_ADDRESS,
   areaServed: "Worldwide",
   knowsAbout: KNOWS_ABOUT,
   // Shared with the site-wide Organization schema so the two can't drift.
@@ -68,7 +65,7 @@ const PAGE_LD = {
   "@id": `${SITE_URL}/#webpage`,
   url: SITE_URL,
   name: "Creative Agency in Dubai | Branding & Web Design — Darwin Corp",
-  about: { "@id": `${SITE_URL}/#organization` },
+  about: { "@id": ORGANIZATION_ID },
   primaryImageOfPage: {
     "@type": "ImageObject",
     url: `${SITE_URL}/assets/darwin_thumb.webp`,

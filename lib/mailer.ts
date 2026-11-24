@@ -104,3 +104,20 @@ export const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
 
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/
+
+/**
+ * The visit's attribution (lib/attribution), as label/value rows for a lead
+ * email. Only known keys are read, each trimmed, so a crafted body can't add
+ * arbitrary fields.
+ */
+export function attributionRows(raw: unknown): [string, string][] {
+  if (!raw || typeof raw !== "object") return [];
+  const r = raw as Record<string, unknown>;
+  const v = (k: string) => String(r[k] ?? "").trim().slice(0, 200);
+  const campaign = [v("utm_source"), v("utm_medium"), v("utm_campaign")].filter(Boolean).join(" / ");
+  const rows: [string, string][] = [];
+  if (v("landing_page")) rows.push(["Landing page", v("landing_page")]);
+  rows.push(["Referred by", v("referrer") || "Direct or unknown"]);
+  if (campaign) rows.push(["Campaign", campaign]);
+  return rows;
+}

@@ -22,14 +22,10 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const page = SERVICE_PAGES.find(p => p.slug === slug);
-  if (page) return pageMetadata(`${page.title} | Dubai & Worldwide`, page.description, `/services/${slug}`, page.image);
+  if (page) return pageMetadata(page.seoTitle ? { absolute: page.seoTitle } : `${page.title} | Dubai & Worldwide`, page.description, `/services/${slug}`, page.image);
   const svc = getService(slug);
   if (!svc) return { title: "Services" };
-  return {
-    title: `${svc.title} | Dubai & Worldwide`,
-    description: svc.summary,
-    alternates: { canonical: `/services/${slug}` },
-  };
+  return pageMetadata(`${svc.title} | Dubai & Worldwide`, svc.summary, `/services/${slug}`, svc.cover);
 }
 
 export default async function ServiceDetail({

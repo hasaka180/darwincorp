@@ -2,13 +2,10 @@ import Link from "next/link";
 import ContactFooter from "@/components/ContactFooter";
 import { SERVICES } from "@/lib/services";
 import ExpertiseCards from "@/components/ExpertiseCards";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Services",
-  description:
-    "Brand identity, website development and AI creative production from Darwin Corp, a creative studio based in Dubai and working worldwide.",
-  alternates: { canonical: "/services" },
-};
+// The hub for every service, so it names the market as well as the work.
+export const metadata = pageMetadata({ absolute: "Branding, Web Design & Creative Services in Dubai | Darwin Corp" }, "Brand identity, website development and AI creative production from Darwin Corp, a creative studio based in Dubai and working worldwide.", "/services");
 
 export default function ServicesPage() {
   return (

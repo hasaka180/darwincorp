@@ -1,17 +1,18 @@
 import { NextResponse } from "next/server"
-import { EMAIL_RE, clientIp, escapeHtml, makeThrottle, sendMail } from "@/lib/mailer"
+import { EMAIL_RE, attributionRows, clientIp, escapeHtml, makeThrottle, sendMail } from "@/lib/mailer"
 
 export const runtime = "nodejs"
 export const dynamic = "force-dynamic"
 
 /**
- * Newsletter signup.
+ * Email-only enquiry: the "Have a project in mind?" box in the site footer.
+ * (The route kept its old newsletter name so nothing that calls it breaks.)
  *
- * POST { email, website? }
+ * POST { email, source?, landing?, website? }
  *   `website` is a honeypot — real users never fill it, bots do.
  *
- * The address is emailed to LEAD_TO_EMAIL. There is no list integration yet,
- * so this is a record of the signup, not a subscription.
+ * The address is emailed to LEAD_TO_EMAIL as an enquiry to answer. There is
+ * no mailing-list integration.
  */
 
 const throttle = makeThrottle(5, 10 * 60 * 1000)
@@ -44,18 +45,22 @@ export async function POST(req: Request) {
   }
 
   const when = new Date().toLocaleString("en-GB", { timeZone: "Asia/Dubai" })
+  const origin = attributionRows(body.landing)
+  const originHtml = origin.map(([k, v]) => `<p style="margin:0 0 4px;color:#666">${escapeHtml(k)}: ${escapeHtml(v)}</p>`).join("")
   const safe = escapeHtml(email)
   const result = await sendMail({
     tag: "subscribe",
     replyTo: email,
-    subject: `Newsletter signup - ${email}`,
+    subject: `Footer enquiry (email only) - ${email}`,
     html: `
       <div style="font-family:Inter,Helvetica,Arial,sans-serif;font-size:15px;color:#111">
-        <h2 style="margin:0 0 16px;font-size:18px">New newsletter signup</h2>
+        <h2 style="margin:0 0 16px;font-size:18px">New enquiry from the footer</h2>
+        <p style="margin:0 0 12px">Left only an email under "Have a project in mind?". Reply to ask about the project.</p>
         <p style="margin:0 0 8px"><a href="mailto:${safe}">${safe}</a></p>
+        ${originHtml}
         <p style="margin:0;color:#666">${escapeHtml(when)} (Dubai)</p>
       </div>`,
-    text: ["New newsletter signup", `Email: ${email}`, `Time:  ${when} (Dubai)`].join("\n"),
+    text: ["New enquiry from the footer (email only)", `Email: ${email}`, ...origin.map(([k, v]) => `${k}: ${v}`), `Time:  ${when} (Dubai)`].join("\n"),
   })
 
   if (!result.ok) {

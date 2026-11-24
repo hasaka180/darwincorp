@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { EMAIL_RE, clientIp, escapeHtml as esc, makeThrottle, sendMail } from "@/lib/mailer";
+import { EMAIL_RE, attributionRows, clientIp, escapeHtml as esc, makeThrottle, sendMail } from "@/lib/mailer";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -7,7 +7,8 @@ export const dynamic = "force-dynamic";
 /**
  * Enquiry capture — the landing pages, the promo popup and the contact page.
  *
- * POST { name, email, cc, phone, service?, message?, source?, website? }
+ * POST { name, email, cc, phone, company?, service?, message?, source?, landing?, website? }
+ *   `landing` is the visit's attribution from lib/attribution.
  *   `website` is a honeypot — real users never fill it, bots do.
  *
  * Delivery and configuration live in lib/mailer.
@@ -30,6 +31,8 @@ export async function POST(req: Request) {
   const cc = str("cc");
   const phone = str("phone");
   const service = str("service");
+  const company = str("company");
+  const origin = attributionRows(body.landing);
   const message = String(body.message ?? "").trim().slice(0, 4000);
   const source = str("source") || "landing";
 
@@ -66,8 +69,10 @@ export async function POST(req: Request) {
         <tr><td style="padding:6px 16px 6px 0;color:#666">Name</td><td><strong>${esc(name)}</strong></td></tr>
         <tr><td style="padding:6px 16px 6px 0;color:#666">Email</td><td><a href="mailto:${esc(email)}">${esc(email)}</a></td></tr>
         <tr><td style="padding:6px 16px 6px 0;color:#666">Phone</td><td><a href="tel:${esc(fullPhone.replace(/\s+/g, ""))}">${esc(fullPhone)}</a></td></tr>
+        ${company ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Company</td><td>${esc(company)}</td></tr>` : ""}
         ${service ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Service</td><td>${esc(service)}</td></tr>` : ""}
         <tr><td style="padding:6px 16px 6px 0;color:#666">Source</td><td>${esc(source)}</td></tr>
+        ${origin.map(([k, v]) => `<tr><td style="padding:6px 16px 6px 0;color:#666">${esc(k)}</td><td>${esc(v)}</td></tr>`).join("")}
         <tr><td style="padding:6px 16px 6px 0;color:#666">Time</td><td>${esc(when)} (Dubai)</td></tr>
       </table>
       ${message ? `<p style="margin:18px 0 0;white-space:pre-wrap">${esc(message)}</p>` : ""}
@@ -84,8 +89,10 @@ export async function POST(req: Request) {
     `Name:   ${name}`,
     `Email:  ${email}`,
     `Phone:  ${fullPhone}`,
+    ...(company ? [`Company: ${company}`] : []),
     ...(service ? [`Service: ${service}`] : []),
     `Source: ${source}`,
+    ...origin.map(([k, v]) => `${k}: ${v}`),
     `Time:   ${when} (Dubai)`,
     ...(message ? ["", message] : []),
   ].join("\n");
@@ -93,7 +100,7 @@ export async function POST(req: Request) {
   const result = await sendMail({
     tag: "lead",
     replyTo: email,
-    subject: `New website enquiry - ${name}`,
+    subject: `New ${service ? `${service} ` : ""}enquiry - ${name}${company ? ` (${company})` : ""}`,
     html,
     text,
   });

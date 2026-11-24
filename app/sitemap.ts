@@ -10,7 +10,7 @@ import { JOURNAL_CATEGORIES } from "@/lib/content/journal";
 import { ROLES } from "@/lib/careers";
 import { TOOLS } from "@/lib/tools";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
+import { SITE_URL } from "@/lib/seo";
 
 // Re-read content hourly so new cases and journal posts appear without a deploy.
 export const revalidate = 86400;

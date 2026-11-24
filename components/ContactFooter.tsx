@@ -7,6 +7,8 @@ import Link from "next/link";
 import SceneBoundary from "@/components/SceneBoundary";
 import { SOCIALS } from "@/components/ContactSection";
 import CookieSettingsButton from "@/components/CookieSettingsButton";
+import { track } from "@/lib/analytics";
+import { BRIEF_EMAIL_KEY, landingSummary } from "@/lib/attribution";
 
 // Client-only, and behind a boundary: a footer must still render if the GPU
 // cannot give the scene a context.
@@ -41,12 +43,17 @@ const LINKS: { title: string; items: Item[] }[] = [
       { label: "Start a project", href: "/start-a-project" },
     ],
   },
+  // Was "Legal", which repeated the bottom bar's Privacy / Terms / Cookies.
+  // Every page now links straight to the main service pages instead.
   {
-    title: "Legal",
+    title: "Services",
     items: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
-      { label: "Cookie Policy", href: "/cookies" },
+      { label: "Website design & development", href: "/services/website-development" },
+      { label: "Brand identity", href: "/services/brand-identity" },
+      { label: "UI/UX design", href: "/services/ui-ux-design" },
+      { label: "Website redesign", href: "/services/website-redesign" },
+      { label: "Motion design", href: "/services/motion-design" },
+      { label: "AI creatives", href: "/services/ai-creatives" },
     ],
   },
   {
@@ -102,7 +109,7 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, website }),
+        body: JSON.stringify({ email, website, source: "footer", landing: landingSummary() }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok || !data.ok) {
@@ -111,6 +118,9 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
         return;
       }
       setState("done");
+      track("generate_lead", { form_source: "footer", lead_type: "email_only" });
+      // Lets the brief form start with this address already filled in.
+      try { window.sessionStorage.setItem(BRIEF_EMAIL_KEY, email.trim()); } catch { /* storage blocked */ }
     } catch {
       setError("Network error. Please check your connection and try again.");
       setState("idle");
@@ -154,14 +164,22 @@ export default function ContactFooter({ hideCta = false }: { hideCta?: boolean }
               onChange={(e) => setWebsite(e.target.value)}
             />
             <button type="submit" className="contact__btn" disabled={state !== "idle"}>
-              {state === "done" ? "Subscribed ✓" : state === "sending" ? "Sending…" : "Get in touch"}
+              {state === "done" ? "Sent ✓" : state === "sending" ? "Sending…" : "Get in touch"}
             </button>
           </form>
-          <p className="contact__note" role={error ? "alert" : undefined}>
+          {/* This form used to promise a newsletter that does not exist, so a
+              visitor with a project was told "you're on the list". It is now
+              what the heading says: the start of an enquiry. */}
+          <p className="contact__note" role={error ? "alert" : "status"}>
             {error ||
-              (state === "done"
-                ? "Thanks — you're on the list."
-                : "Join the newsletter, occasional notes on brand, motion, and craft. No spam.")}
+              (state === "done" ? (
+                <>
+                  Thanks, we&apos;ll reply within one business day.{" "}
+                  <Link href="/start-a-project" className="contact__note-link">Add project details</Link> for a faster, more useful answer.
+                </>
+              ) : (
+                "Leave your email and we’ll reply within one business day. No newsletters, no spam."
+              ))}
           </p>
         </div>
       )}
