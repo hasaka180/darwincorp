@@ -39,10 +39,12 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thedarwin.co";
 
 const DESCRIPTION = SITE_DESCRIPTION;
 
-// Dubai stays in the title: the UAE converts best of any market (5% CTR vs
-// 1.3% in the US), and dropping it would trade that for nothing. "Worldwide"
-// stops the homepage reading as local-only.
-const TITLE = "Darwin Corp - Motion-Driven Creative Studio | Dubai & Worldwide";
+// Leads with what businesses search for ("creative agency in Dubai", plus
+// branding and web design) and keeps the brand at the end. Dubai stays in the
+// title: the UAE converts best of any market (5% CTR vs 1.3% in the US).
+// app/page.tsx repeats this string as the WebPage name; keep them in step.
+const TITLE =
+  "Creative Agency in Dubai | Branding & Web Design — Darwin Corp";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

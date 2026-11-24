@@ -67,7 +67,7 @@ const PAGE_LD = {
   "@type": "WebPage",
   "@id": `${SITE_URL}/#webpage`,
   url: SITE_URL,
-  name: "Darwin Corp - Motion-Driven Creative Studio | Dubai & Worldwide",
+  name: "Creative Agency in Dubai | Branding & Web Design — Darwin Corp",
   about: { "@id": `${SITE_URL}/#organization` },
   primaryImageOfPage: {
     "@type": "ImageObject",
