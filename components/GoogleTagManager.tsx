@@ -7,9 +7,11 @@ import { captureLanding } from "@/lib/attribution";
 
 // The site's only Google tag. It loads the same gtm.js as Google's install
 // snippet, but only after the visitor allows analytics or marketing cookies,
-// rather than unconditionally in <head>. This container holds the GA4 tag
-// (G-WZVWZ7ZX44); GTM-5Q3NBJ38 was tried briefly in Nov 2026 but was empty.
-const GTM_ID = "GTM-MQL5CFSF";
+// rather than unconditionally in <head>. Container owned by
+// thedarwincorp1@gmail.com; it holds the GA4 Google tag (G-WZVWZ7ZX44) and
+// the lead/contact event tag. Its setup is in docs/gtm/. The old ID,
+// GTM-MQL5CFSF, was the GA4 property's own Google tag, not a GTM container.
+const GTM_ID = "GTM-5Q3NBJ38";
 
 declare global {
   interface Window {
