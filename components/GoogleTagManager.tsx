@@ -7,8 +7,9 @@ import { captureLanding } from "@/lib/attribution";
 
 // The site's only Google tag. It loads the same gtm.js as Google's install
 // snippet, but only after the visitor allows analytics or marketing cookies,
-// rather than unconditionally in <head>. Replaced GTM-MQL5CFSF (Nov 2026).
-const GTM_ID = "GTM-5Q3NBJ38";
+// rather than unconditionally in <head>. This container holds the GA4 tag
+// (G-WZVWZ7ZX44); GTM-5Q3NBJ38 was tried briefly in Nov 2026 but was empty.
+const GTM_ID = "GTM-MQL5CFSF";
 
 declare global {
   interface Window {
