@@ -5,7 +5,10 @@ import { CONSENT_EVENT, readConsent, type Consent } from "@/lib/consent";
 import { trackContactClicks } from "@/lib/analytics";
 import { captureLanding } from "@/lib/attribution";
 
-const GTM_ID = "GTM-MQL5CFSF";
+// The site's only Google tag. It loads the same gtm.js as Google's install
+// snippet, but only after the visitor allows analytics or marketing cookies,
+// rather than unconditionally in <head>. Replaced GTM-MQL5CFSF (Nov 2026).
+const GTM_ID = "GTM-5Q3NBJ38";
 
 declare global {
   interface Window {
